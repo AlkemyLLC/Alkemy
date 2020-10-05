@@ -162,7 +162,7 @@ function SEO({
             ></link>
 
             {/* Google Tag Manager */}
-            <script defer>{`
+            <script defer async>{`
               (function(w,d,s,l,i){
                 w[l]=w[l]||[];
                 w[l].push({
@@ -176,7 +176,7 @@ function SEO({
             `}</script>
             {/* End Google Tag Manager */}
 
-            <script defer type="application/ld+json">
+            <script defer async type="application/ld+json">
                 {`{
                 "@context":"https://schema.org",
                 "@type":"WebSite",
@@ -189,7 +189,7 @@ function SEO({
                 }
               }`}
             </script>
-            <script defer type="application/ld+json">
+            <script defer async type="application/ld+json">
                 {`{
             "@context":"https://schema.org",
             "@type":"Organization",
@@ -203,7 +203,7 @@ function SEO({
             ]
           }`}
             </script>
-            <script defer type="application/ld+json">{`
+            <script defer async type="application/ld+json">{`
           {
             "@context": "https://schema.org/", 
             "@type": "BreadcrumbList", 
@@ -256,7 +256,7 @@ function SEO({
           }
           `}</script>
             {author !== null ? (
-                <script defer type="application/ld+json">{`
+                <script defer async type="application/ld+json">{`
             {
               "@context": "https://schema.org",
               "@type": "Article",
