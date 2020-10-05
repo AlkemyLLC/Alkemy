@@ -163,46 +163,18 @@ function SEO({
 
             {/* Google Tag Manager */}
             <script defer>{`
-        (function(w,d,s,l,i){
-          w[l]=w[l]||[];
-          w[l].push({
-            'gtm.start':new Date().getTime(),event:'gtm.js'
-          });
-          var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-          j.async=true;
-          j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-          f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TRL98WJ');
-      `}</script>
+              (function(w,d,s,l,i){
+                w[l]=w[l]||[];
+                w[l].push({
+                  'gtm.start':new Date().getTime(),event:'gtm.js'
+                });
+                var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+                j.async=true;
+                j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-TRL98WJ');
+            `}</script>
             {/* End Google Tag Manager */}
-
-            {/* Global site tag (gtag.js) - Google Analytics */}
-            <script
-                defer
-                src="https://www.googletagmanager.com/gtag/js?id=UA-118149481-1"
-            />
-            <script defer>{`
-    	  window.dataLayer = window.dataLayer || [];
-    	  function gtag(){dataLayer.push(arguments);}
-    	  gtag('js', new Date());
-
-    	  gtag('config', 'UA-118149481-1');
-    	`}</script>
-
-            {/* Facebook Pixel Code */}
-            <script defer>{`
-    		!function(f,b,e,v,n,t,s)
-    		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    		n.queue=[];t=b.createElement(e);t.async=!0;
-    		t.src=v;s=b.getElementsByTagName(e)[0];
-    		s.parentNode.insertBefore(t,s)}(window, document,'script',
-    		'https://connect.facebook.net/en_US/fbevents.js');
-    		fbq('init', '225639351519270');
-    		fbq('track', 'PageView');
-    	`}</script>
-            {/* End Facebook Pixel Code */}
 
             <script defer type="application/ld+json">
                 {`{
@@ -258,21 +230,26 @@ function SEO({
             },{
               "@type": "ListItem", 
               "position": 5, 
+              "name": "Wordpress Care Plans",
+              "item": "${siteAddress}/wordpress-care-plans"  
+            },{
+              "@type": "ListItem", 
+              "position": 6, 
               "name": "Digital Marketing",
               "item": "${siteAddress}/digital-marketing"  
             },{
               "@type": "ListItem", 
-              "position": 6, 
+              "position": 7, 
               "name": "About Alkemy",
               "item": "${siteAddress}/about-alkemy"  
             },{
               "@type": "ListItem", 
-              "position": 7, 
+              "position": 8, 
               "name": "Alkemy Blog",
               "item": "${siteAddress}/alkemy-blog"  
             },{
               "@type": "ListItem", 
-              "position": 8, 
+              "position": 9, 
               "name": "Contact Alkemy",
               "item": "${siteAddress}/contact-alkemy"  
             }]
@@ -299,7 +276,7 @@ function SEO({
 
 SEO.defaultProps = {
     meta: [],
-    keywords: `Software Development, Web Design, eCommerce Design, Digital Marketing, React, PHP, HTML, Python, Django, Gatsby, GraphQL, Wordpress Design, 3dcart, Shopify, WooCommerce, SEM, Search Engine Marketing, SEO, Search Engine Optimization, Social Media Marketing, Web Strategy`,
+    keywords: `Software Development, Web Design, eCommerce Design, Digital Marketing, React, PHP, HTML, Python, Django, Gatsby, GraphQL, Wordpress Design, 3dcart, Shopify, WooCommerce, SEM, Search Engine Marketing, SEO, Search Engine Optimization, Social Media Marketing, Marketing Strategy, Web Strategy`,
 };
 
 SEO.propTypes = {

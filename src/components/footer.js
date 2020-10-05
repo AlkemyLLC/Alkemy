@@ -82,11 +82,13 @@ const Footer = () => (
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://upcity.com/profiles/alkemy"
+                aria-label="Alkemy, LLC Upcity Profile"
             >
                 <img
                     src="https://app.upcity.com/images/badges/tla.png"
                     width="200px"
                     height="50px"
+                    alt="Alkemy, LLC Upcity Badge"
                 />
             </a>
         </Row>
