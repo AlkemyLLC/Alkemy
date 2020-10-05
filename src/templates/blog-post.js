@@ -211,7 +211,7 @@ class BlogPostTemplate extends React.Component {
                                                     author.name.toLowerCase() ===
                                                     "alkemy"
                                                         ? "contain"
-                                                        : "cover"
+                                                        : "cover",
                                             }}
                                             alt={"Photo of " + author.name}
                                         />
@@ -231,7 +231,7 @@ class BlogPostTemplate extends React.Component {
                                 className="mb-5 mb-lg-0 order-first order-lg-last"
                             >
                                 <Img
-                                    className="h-100"
+                                    className="h-100 blog-cover-image"
                                     fluid={
                                         post.frontmatter.cover.childImageSharp
                                             .fluid
