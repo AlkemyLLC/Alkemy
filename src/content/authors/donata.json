@@ -1,0 +1,39 @@
+{
+    "name":"Donata Kalnenaite",
+    "slug":"/dkalnenaite",
+    "position": "President",
+    "company": "Termageddon, LLC",
+    "bio": "Donata Kalnenaite is a licensed attorney focusing on privacy and technology law. She is a Certified Information Privacy Professional and the President of Termageddon, LLC, a company that generates Privacy Policies, Terms of Service, and more for small business websites. Donata is the Vice-Chair of the American Bar Association's ePrivacy Committee and the Chair of the Chicago Chapter of the International Association of Privacy Professionals.",
+    "website": "https://termageddon.com/",
+    "photo": "../../assets/images/authors/donata-headshot-zendesk.jpg",
+    "skills": [
+        {
+            "name": "United States privacy law",
+            "level": 100
+        },
+        {
+            "name": "European Union privacy law",
+            "level": 100
+        },
+        {
+            "name": "Canadian privacy law",
+            "level": 100
+        },
+        {
+            "name": "Drafting contracts",
+            "level": 100
+        },
+        {
+            "name": "Beekeeping",
+            "level": 45
+        },
+        {
+            "name": "Hunting for morels",
+            "level": 70
+        },
+        {
+            "name": "Gardening",
+            "level": 80
+        }
+    ]
+}
