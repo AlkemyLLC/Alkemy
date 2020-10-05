@@ -181,7 +181,7 @@ const AlkemyBlog = ({
                                     className="mb-5 mb-lg-0 order-first order-lg-last"
                                 >
                                     <Img
-                                        className="h-100"
+                                        className="h-100 featured-blog-cover-image"
                                         fluid={
                                             blogs[0].node.frontmatter.cover
                                                 .childImageSharp.fluid
