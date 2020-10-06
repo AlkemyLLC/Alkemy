@@ -16,18 +16,10 @@ import {
     ModalHeader,
 } from "reactstrap";
 import ThankYou from "./thankYou.jsx";
-import ReCAPTCHA from "react-google-recaptcha";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import loadable from "@loadable/component";
 
-// eslint-disable-next-line no-undef
-const RECAPTCHA_KEY = process.env.SITE_RECAPTCHA_KEY;
-if (typeof window !== "undefined") {
-    // eslint-disable-next-line no-undef
-    window.recaptchaOptions = {
-        useRecaptchaNet: false,
-        removeOnUnmount: false,
-    };
-}
+const ReCAPTCHA = loadable(() => import("./recaptcha.jsx"));
 
 export default class CarePlanEnrollment extends React.Component {
     constructor(props) {
@@ -508,8 +500,7 @@ export default class CarePlanEnrollment extends React.Component {
                                 <FormGroup>
                                     <ReCAPTCHA
                                         className="recaptcha"
-                                        sitekey={RECAPTCHA_KEY}
-                                        onChange={this.handleRecaptcha}
+                                        handlechange={this.handleRecaptcha}
                                     />
                                     <FormText
                                         color="danger"

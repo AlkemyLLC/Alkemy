@@ -15,17 +15,9 @@ import {
 import IntlTelInput from "react-intl-tel-input";
 import "react-intl-tel-input/dist/main.css";
 import ThankYou from "./thankYou.jsx";
-import ReCAPTCHA from "react-google-recaptcha";
+import loadable from "@loadable/component";
 
-// eslint-disable-next-line no-undef
-const RECAPTCHA_KEY = process.env.SITE_RECAPTCHA_KEY;
-if (typeof window !== "undefined") {
-    // eslint-disable-next-line no-undef
-    window.recaptchaOptions = {
-        useRecaptchaNet: true,
-        removeOnUnmount: false,
-    };
-}
+const ReCAPTCHA = loadable(() => import("./recaptcha.jsx"));
 
 // @todo Figure out what is causing the contactForm to not submit properly in production
 // @body For some reason, the form submits, but Netlify is not seeing the result.
@@ -455,8 +447,7 @@ export default class ContactForm extends React.Component {
                                     <FormGroup>
                                         <ReCAPTCHA
                                             className="recaptcha"
-                                            sitekey={RECAPTCHA_KEY}
-                                            onChange={this.handleRecaptcha}
+                                            handleChange={this.handleRecaptcha}
                                         />
                                         <FormText
                                             color="danger"

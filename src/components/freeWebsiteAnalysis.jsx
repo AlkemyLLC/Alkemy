@@ -212,10 +212,10 @@ export default class FreeWebsiteAnalysis extends React.Component {
                         <div className="container">
                             <p>
                                 Are you interested in a completely FREE analysis
-                                of your website and its current SEO
-                                issues? Please provide us with your name, email
-                                address, and website&lsquo;s URL and we&lsquo;ll
-                                handle the rest!
+                                of your website and its current SEO issues?
+                                Please provide us with your name, email address,
+                                and website&lsquo;s URL and we&lsquo;ll handle
+                                the rest!
                             </p>
                             <Form
                                 name="freeWebsiteAnalysis"
@@ -343,12 +343,10 @@ export default class FreeWebsiteAnalysis extends React.Component {
                                         for="authCheck"
                                         id="authCheck"
                                         className="text-left"
-                                        onClick={e =>
-                                            this.handleFieldChange(e)
-                                        }
+                                        onClick={e => this.handleFieldChange(e)}
                                     >
-                                        I authorize Alkemy to contact me
-                                        via email so that I may recieve my free
+                                        I authorize Alkemy to contact me via
+                                        email so that I may recieve my free
                                         website analysis.
                                     </Label>
                                     <FormFeedback className="text-center mb-4">
@@ -357,6 +355,7 @@ export default class FreeWebsiteAnalysis extends React.Component {
                                 </FormGroup>
                                 <FormGroup>
                                     <ReCAPTCHA
+                                        className="recaptcha"
                                         handleChange={this.handleRecaptcha}
                                     />
                                     <FormText
