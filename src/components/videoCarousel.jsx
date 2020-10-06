@@ -19,10 +19,13 @@ class VideoCarousel extends React.Component {
     }
 
     componentDidMount(){
+        let webp = document.querySelector('html').classList.contains('webp');
         this.setState({
             ...this.state,
-            slides: this.props.slides
+            slides: this.props.slides,
+            webp: webp
         })
+
     }
 
     handlePlay = () => {
@@ -90,11 +93,6 @@ class VideoCarousel extends React.Component {
                             onPlay={this.handlePlay}
                             onEnded={this.handleEnded}
                             className={this.state.vidClasses}
-                            src={
-                                this.props.slides[this.state.currentIndex]
-                                    .mp4 ||
-                                this.state.slides[this.state.currentIndex].mp4
-                            }
                             style={{
                                 objectFit: "cover",
                                 width: "100%",
@@ -102,14 +100,20 @@ class VideoCarousel extends React.Component {
                                 overflow: "hidden",
                             }}
                             poster={
-                                this.props.slides[this.state.currentIndex]
-                                    .img ||
-                                this.state.slides[this.state.currentIndex].img
+                                this.state.webp
+                                    ? this.props.slides[this.state.currentIndex]
+                                          .webp
+                                    : this.props.slides[this.state.currentIndex]
+                                          .img
                             }
                             ref={el => {
                                 this.video = el;
                             }}
-                        ></video>
+                        >
+                            <source src={this.props.slides[this.state.currentIndex].mp4} type="video/mp4"/>
+                            <source src={this.props.slides[this.state.currentIndex].webm} type="video/webm"/>
+                            Your browser does not support the video tag.
+                        </video>
                     ) : null}
                 </div>
             </div>

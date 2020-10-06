@@ -2,6 +2,7 @@ import Typography from "typography";
 
 const typography = new Typography({
     title: "Alkemy Typography",
+    fontDisplay: "swap",
     includeNormalize: true,
     baseFontSize: "16px",
     baseLineHeight: 1.666,
@@ -21,7 +22,7 @@ const typography = new Typography({
         "Helvetica",
         "Arial",
         "sans-serif",
-    ]
+    ],
 });
 
 export default typography;
