@@ -93,13 +93,6 @@ class VideoCarousel extends React.Component {
                             onPlay={this.handlePlay}
                             onEnded={this.handleEnded}
                             className={this.state.vidClasses}
-                            src={
-                                this.state.webp
-                                    ? this.props.slides[this.state.currentIndex]
-                                          .webm
-                                    : this.props.slides[this.state.currentIndex]
-                                          .mp4
-                            }
                             style={{
                                 objectFit: "cover",
                                 width: "100%",
@@ -116,7 +109,11 @@ class VideoCarousel extends React.Component {
                             ref={el => {
                                 this.video = el;
                             }}
-                        ></video>
+                        >
+                            <source src={this.props.slides[this.state.currentIndex].mp4} type="video/mp4"/>
+                            <source src={this.props.slides[this.state.currentIndex].webm} type="video/webm"/>
+                            Your browser does not support the video tag.
+                        </video>
                     ) : null}
                 </div>
             </div>
