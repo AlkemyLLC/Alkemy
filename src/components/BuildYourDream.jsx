@@ -14,15 +14,9 @@ import Stepper from "react-stepper-horizontal";
 import IntlTelInput from "react-intl-tel-input";
 import "react-intl-tel-input/dist/main.css";
 import ThankYou from "./thankYou.jsx";
-import ReCAPTCHA from "react-google-recaptcha";
+import loadable from "@loadable/component";
 
-const RECAPTCHA_KEY = process.env.SITE_RECAPTCHA_KEY;
-if (typeof window !== "undefined") {
-    window.recaptchaOptions = {
-        useRecaptchaNet: true,
-        removeOnUnmount: false,
-    };
-}
+const ReCAPTCHA = loadable(() => import("./recaptcha.jsx"));
 
 export default class BuildYourDream extends React.Component {
     constructor() {
@@ -497,8 +491,7 @@ export default class BuildYourDream extends React.Component {
                             <FormGroup>
                                 <ReCAPTCHA
                                     className="recaptcha"
-                                    sitekey={RECAPTCHA_KEY}
-                                    onChange={this.handleRecaptcha}
+                                    handleChange={this.handleRecaptcha}
                                 />
                                 <FormText
                                     color="danger"
