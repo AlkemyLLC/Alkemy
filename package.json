@@ -113,5 +113,7 @@
     "bb >= 10",
     "not dead"
   ],
-  "engines" : { "node" : "^12" }
+  "engines": {
+    "node": ">12.0.0"
+  }
 }
