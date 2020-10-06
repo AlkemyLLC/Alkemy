@@ -22,9 +22,14 @@ import BlogWidget from "../components/BlogWidget.jsx";
 import ReactCounter from "../components/counter.jsx";
 import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
 import SEO from "../components/seo";
+import loadable from "@loadable/component";
+
 
 // Carousel
-import VideoCarousel from "../components/videoCarousel";
+const LoadableVideoCarousel = loadable(() =>
+    import("../components/videoCarousel")
+);
+// import VideoCarousel from "../components/videoCarousel";
 
 /* Define Slide Array
 Each object(slide) in array should have 2 keys:
@@ -86,7 +91,7 @@ const HomePage = ({ data }) => {
                 <section className="homeHero d-flex justify-content-center">
                     <div className="container-fluid p-0 position-relative">
                         {/* Cover Video Slider */}
-                        <VideoCarousel
+                        <LoadableVideoCarousel
                             slides={slideArray}
                             showIndicators={false}
                         >
@@ -117,7 +122,7 @@ const HomePage = ({ data }) => {
                                     </div>
                                 </Col>
                             </Row>
-                        </VideoCarousel>
+                        </LoadableVideoCarousel>
                     </div>
                     {/* Caret */}
                     <FontAwesomeIcon

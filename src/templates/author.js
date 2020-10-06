@@ -4,7 +4,7 @@ import Img from "gatsby-image";
 import { Context } from "../store/appContext.js";
 import { addJS, fluidImageSmall } from "../utils/utils.js";
 import Layout from "../components/layout";
-import _ from "lodash";
+import {uniq} from "lodash";
 import SEO from "../components/seo";
 import SkillGraph from "../components/SkillGraph.jsx";
 import { FormGroup, Label, Col, Row, Container } from "reactstrap";
@@ -64,7 +64,7 @@ class AuthorProfile extends React.Component {
                 edges.map(e => {
                     return e.node.frontmatter.category;
                 });
-            categories = _.uniq(categories);
+            categories = uniq(categories);
 
             // aux array
             let categoryArray = [];

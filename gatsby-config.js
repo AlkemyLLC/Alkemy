@@ -43,6 +43,15 @@ module.exports = {
     },
     plugins: [
         {
+            resolve: `gatsby-plugin-loadable-components-ssr`,
+        },
+        {
+            resolve: `gatsby-plugin-minify`,
+            options: {
+                removeAttributeQuotes: true
+            }
+        },
+        {
             resolve: `gatsby-plugin-react-helmet`,
         },
         {
