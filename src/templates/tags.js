@@ -5,7 +5,7 @@ import Link from "gatsby-link";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { Button } from "reactstrap";
-import _ from "lodash";
+import {startCase} from "lodash";
 
 /*
 Layout props:
@@ -25,7 +25,7 @@ const Tags = ({ pageContext, data }, location) => {
     const tagHeader = `Found ${totalCount} article${
         totalCount === 1 ? "" : "s"
     } tagged with "${tag}"`;
-    const pageTitle = `Blog Tag: "${_.startCase(tag)}"`;
+    const pageTitle = `Blog Tag: "${startCase(tag)}"`;
     return (
         <Layout
             location={location}
@@ -37,7 +37,7 @@ const Tags = ({ pageContext, data }, location) => {
         >
             <SEO
                 title={pageTitle}
-                description={`List of all articles tagged with ${_.startCase(
+                description={`List of all articles tagged with ${startCase(
                     tag
                 )}`}
             />

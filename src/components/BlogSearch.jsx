@@ -39,7 +39,9 @@ export default class BlogSearch extends React.Component {
             console.log(this.state.actions);
             let search = getUrlParameter("s");
             this.searchHandler(null,this.state.actions,search);
-            this.setState(prev=>{count: prev.count++});
+            this.setState(prev=>{
+                count: prev.count++
+            });
         }
         
     }

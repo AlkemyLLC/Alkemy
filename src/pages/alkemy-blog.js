@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import _ from "lodash";
+import {uniq,isEqual,sortBy} from "lodash";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import { Context } from "../store/appContext.js";
@@ -87,7 +87,7 @@ const AlkemyBlog = ({
             edges.map(e => {
                 return e.node.frontmatter.category;
             });
-        categories = _.uniq(categories).sort((a, b) => a.localeCompare(b));
+        categories = uniq(categories).sort((a, b) => a.localeCompare(b));
 
         // aux array
         let categoryArray = [];
@@ -139,7 +139,7 @@ const AlkemyBlog = ({
         if (filterBySearch === false) {
             return (
                 <>
-                    {_.isEqual(_.sortBy(blogs), _.sortBy(edges)) ? (
+                    {isEqual(sortBy(blogs), sortBy(edges)) ? (
                         <section className="blog-featured position-relative alk-container">
                             <Row className="h-100 align-items-center">
                                 <Col xs={12} lg={6} className="h-100">
@@ -193,7 +193,7 @@ const AlkemyBlog = ({
                         </section>
                     ) : null}
 
-                    {_.isEqual(_.sortBy(blogs), _.sortBy(edges)) ? (
+                    {isEqual(sortBy(blogs), sortBy(edges)) ? (
                         <section className="py-4 blog-post-listing alk-container">
                             <Row>
                                 <Col xs={12} lg={9}>

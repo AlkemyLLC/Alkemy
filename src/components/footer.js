@@ -86,7 +86,6 @@ const Footer = () => (
             >
                 <img
                     src="https://app.upcity.com/images/badges/tla.png"
-                    width="200px"
                     height="50px"
                     alt="Alkemy, LLC Upcity Badge"
                 />

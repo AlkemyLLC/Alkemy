@@ -5,7 +5,7 @@ import Link from "gatsby-link";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { Button } from "reactstrap";
-import _ from "lodash";
+import {replace} from "lodash";
 
 /*
 Layout props:
@@ -43,9 +43,9 @@ const Tags = ({ pageContext, data }) => {
                         let sanitizedSlug = "";
                         console.log(slug, slug.includes("&"));
                         if (slug.includes("&")) {
-                            sanitizedSlug = _.replace(slug, " & ", "-");
+                            sanitizedSlug = replace(slug, " & ", "-");
                         } else if (slug.includes(" ")) {
-                            sanitizedSlug = _.replace(slug, " ", "-");
+                            sanitizedSlug = replace(slug, " ", "-");
                         } else {
                             sanitizedSlug = slug;
                         }

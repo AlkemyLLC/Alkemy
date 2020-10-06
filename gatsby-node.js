@@ -3,8 +3,8 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
+const { each, get, uniq, kebabCase } = require("lodash");
 
- const _ = require('lodash');
  const { createFilePath } = require(`gatsby-source-filesystem`);
  const path = require("path");
  var md = require('markdown-it');
@@ -188,13 +188,13 @@
             // Tag pages:
             let tags = []
             // Iterate through each post, putting all found tags into `tags`
-            _.each(posts, post => {
-                if (_.get(post, "node.frontmatter.tags")) {
+            each(posts, post => {
+                if (get(post, "node.frontmatter.tags")) {
                     tags = tags.concat(post.node.frontmatter.tags)
                 }
             })
             // Eliminate duplicate tags
-            tags = _.uniq(tags)
+            tags = uniq(tags)
 
             // Make Tag Index
             createPage({
@@ -208,7 +208,7 @@
             // Make individual tag pages
             tags.forEach(tag => {
                 createPage({
-                    path: `/tags/${_.kebabCase(tag)}/`,
+                    path: `/tags/${kebabCase(tag)}/`,
                     component: tagTemplate,
                     context: {
                         tag,
