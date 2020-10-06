@@ -36,14 +36,20 @@ let slideArray = [
     {
         img: require("../assets/video/home-work/home-work.jpg"),
         mp4: require("../assets/video/home-work/home-work.mp4"),
+        webp: require("../assets/video/home-work/home-work.webp"),
+        webm: require("../assets/video/home-work/home-work.webm"),
     },
     {
         img: require("../assets/video/aloha-mundo/aloha-mundo.jpg"),
         mp4: require("../assets/video/aloha-mundo/aloha-mundo.mp4"),
+        webp: require("../assets/video/aloha-mundo/aloha-mundo.webp"),
+        webm: require("../assets/video/aloha-mundo/aloha-mundo.webm"),
     },
     {
         img: require("../assets/video/office-day/office-day.jpg"),
         mp4: require("../assets/video/office-day/office-day.mp4"),
+        webp: require("../assets/video/office-day/office-day.webp"),
+        webm: require("../assets/video/office-day/office-day.webm"),
     },
 ];
 

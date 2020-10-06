@@ -19,10 +19,13 @@ class VideoCarousel extends React.Component {
     }
 
     componentDidMount(){
+        let webp = document.querySelector('html').classList.contains('webp');
         this.setState({
             ...this.state,
-            slides: this.props.slides
+            slides: this.props.slides,
+            webp: webp
         })
+
     }
 
     handlePlay = () => {
@@ -91,9 +94,11 @@ class VideoCarousel extends React.Component {
                             onEnded={this.handleEnded}
                             className={this.state.vidClasses}
                             src={
-                                this.props.slides[this.state.currentIndex]
-                                    .mp4 ||
-                                this.state.slides[this.state.currentIndex].mp4
+                                this.state.webp
+                                    ? this.props.slides[this.state.currentIndex]
+                                          .webm
+                                    : this.props.slides[this.state.currentIndex]
+                                          .mp4
                             }
                             style={{
                                 objectFit: "cover",
@@ -102,9 +107,11 @@ class VideoCarousel extends React.Component {
                                 overflow: "hidden",
                             }}
                             poster={
-                                this.props.slides[this.state.currentIndex]
-                                    .img ||
-                                this.state.slides[this.state.currentIndex].img
+                                this.state.webp
+                                    ? this.props.slides[this.state.currentIndex]
+                                          .webp
+                                    : this.props.slides[this.state.currentIndex]
+                                          .img
                             }
                             ref={el => {
                                 this.video = el;

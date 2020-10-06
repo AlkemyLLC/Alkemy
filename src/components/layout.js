@@ -115,7 +115,7 @@ const Layout = ({
                     {/* Google Tag Manager (noscript) */}
                     <noscript>
                         <iframe
-                            async
+                            defer
                             src="https://www.googletagmanager.com/ns.html?id=GTM-TRL98WJ"
                             height="0"
                             width="0"
