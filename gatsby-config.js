@@ -14,6 +14,12 @@ const {
 const isNetlifyProduction = NETLIFY_ENV === "production";
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 
+NODE_ENV === "production"
+    ? dynamicPlugins.push({
+          resolve: `gatsby-plugin-preact`,
+      })
+    : false;
+
 module.exports = {
     siteMetadata: {
         siteUrl,
@@ -44,9 +50,6 @@ module.exports = {
     plugins: [
         {
             resolve: `gatsby-plugin-loadable-components-ssr`,
-        },
-        {
-            resolve: NODE_ENV==="production" && `gatsby-plugin-preact`,
         },
         {
             resolve: `gatsby-plugin-minify`,
@@ -237,5 +240,5 @@ module.exports = {
                 },
             },
         },
-    ],
+    ].concat(dynamicPlugins),
 };
