@@ -20,6 +20,14 @@ const { each, get, uniq, kebabCase } = require("lodash");
 
  md().use(fa);
 
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+    actions.setWebpackConfig({
+        devtool: "eval-source-map",
+    });
+};
+
+
  exports.onPostBootstrap = (pages) => {
    if(!shell.test('-d', 'public/images')){
      shell.mkdir("public/images")
