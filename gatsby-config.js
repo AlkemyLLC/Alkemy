@@ -45,9 +45,9 @@ module.exports = {
         {
             resolve: `gatsby-plugin-loadable-components-ssr`,
         },
-        {
-            resolve: `gatsby-plugin-preact`,
-        },
+        // {
+        //     resolve: `gatsby-plugin-preact`,
+        // },
         {
             resolve: `gatsby-plugin-minify`,
             options: {
