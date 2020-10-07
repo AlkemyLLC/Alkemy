@@ -25,7 +25,6 @@ class VideoCarousel extends React.Component {
             slides: this.props.slides,
             webp: webp
         })
-
     }
 
     handlePlay = () => {

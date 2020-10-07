@@ -138,6 +138,13 @@ module.exports = {
         },
         {
             resolve: `gatsby-plugin-netlify`,
+            options: {
+                headers: {
+                    "/*": [
+                        "cache-control: max-age=31536000, public",
+                    ],
+                },
+            },
         },
         {
             resolve: `gatsby-plugin-manifest`,
