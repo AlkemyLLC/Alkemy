@@ -45,9 +45,9 @@ module.exports = {
         {
             resolve: `gatsby-plugin-loadable-components-ssr`,
         },
-        // {
-        //     resolve: `gatsby-plugin-preact`,
-        // },
+        {
+            resolve: NODE_ENV==="production" && `gatsby-plugin-preact`,
+        },
         {
             resolve: `gatsby-plugin-minify`,
             options: {
@@ -140,9 +140,7 @@ module.exports = {
             resolve: `gatsby-plugin-netlify`,
             options: {
                 headers: {
-                    "/*": [
-                        "cache-control: max-age=31536000, public",
-                    ],
+                    "/*": ["cache-control: max-age=31536000, public"],
                 },
             },
         },
