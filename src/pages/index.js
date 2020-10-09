@@ -29,7 +29,6 @@ import loadable from "@loadable/component";
 const LoadableVideoCarousel = loadable(() =>
     import("../components/videoCarousel")
 );
-// import VideoCarousel from "../components/videoCarousel";
 
 /* Define Slide Array
 Each object(slide) in array should have 2 keys:

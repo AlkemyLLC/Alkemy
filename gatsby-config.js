@@ -3,7 +3,6 @@ const { isNil } = require(`lodash`)
 const mapPagesUrls = {
     index: `/`,
 }
-const dynamicPlugins = [];
 
 const {
     NODE_ENV,
@@ -13,12 +12,6 @@ const {
 } = process.env;
 const isNetlifyProduction = NETLIFY_ENV === "production";
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
-
-NODE_ENV === "production"
-    ? dynamicPlugins.push({
-          resolve: `gatsby-plugin-preact`,
-      })
-    : false;
 
 module.exports = {
     siteMetadata: {
@@ -240,5 +233,5 @@ module.exports = {
                 },
             },
         },
-    ].concat(dynamicPlugins),
+    ],
 };
