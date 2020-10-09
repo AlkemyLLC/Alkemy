@@ -57,12 +57,12 @@ const AlkemyBlog = ({
     }, []); // pass empty array as second arg so it only runs on mount
 
     // addJS(position,inner script,source) - adds JS to document dynamically for AddThis Toolbar
-    addJS(
-        `body`,
-        null,
-        `//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ae21853f0b21631`,
-        `addThis`
-    );
+    // addJS(
+    //     `body`,
+    //     null,
+    //     `//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ae21853f0b21631`,
+    //     `addThis`
+    // );
 
     let createBlogArray = (arr, home = true) => {
         let blogArray = arr.map(e => e);
