@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Img from "gatsby-image";
+import Loading from "./loading.jsx";
 
 class VideoCarousel extends React.Component {
     constructor(props) {
@@ -87,11 +87,7 @@ class VideoCarousel extends React.Component {
                     )}
                     {this.props.children}
                     {this.state.loading ? (
-                        <Img
-                            className="h-100 w-100"
-                            fluid={this.props.fluid}
-                            alt={this.props.alt}
-                        />
+                        <Loading />
                     ) : (
                         <video
                             autoPlay={true}
@@ -137,8 +133,6 @@ VideoCarousel.propTypes = {
     slides: PropTypes.array,
     showIndicators: PropTypes.bool,
     children: PropTypes.object,
-    fluid: PropTypes.object,
-    alt: PropTypes.string
 };
 
 export default VideoCarousel;

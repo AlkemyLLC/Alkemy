@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
-import { fluidImageSmall,fluidImage } from "../utils/utils.js";
+import { fluidImageSmall } from "../utils/utils.js";
 import { trunc } from "../utils/utils.js";
 import {
     CardDeck,
@@ -93,11 +93,6 @@ const HomePage = ({ data }) => {
                         <LoadableVideoCarousel
                             slides={slideArray}
                             showIndicators={false}
-                            fluid={
-                                data.homeWorkImage &&
-                                data.homeWorkImage.childImageSharp.fluid
-                            }
-                            alt="your brand deserves the best"
                         >
                             <Row className="cover-text-row h-100 d-flex align-items-center">
                                 <Col xs={12} lg={6} className="bg-transparent">
@@ -512,9 +507,6 @@ export const query = graphql`
                            }
                        }
                    }
-               }
-               homeWorkImage: file(relativePath: { regex: "/home-work.jpg/" }) {
-                   ...fluidImage
                }
                webDesign: file(relativePath: { regex: "/responsive.png/" }) {
                    ...fluidImageSmall
