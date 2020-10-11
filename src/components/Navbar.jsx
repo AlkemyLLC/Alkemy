@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "gatsby";
 import Loading from "./loading.jsx";
+import Img from "gatsby-image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -19,8 +20,6 @@ import {
     ModalHeader,
     ModalBody,
 } from "reactstrap";
-
-import alkemyLogo from "../assets/images/alkemy_logo.png";
 
 export default class ReactNavbar extends React.Component {
     constructor(props) {
@@ -212,10 +211,14 @@ export default class ReactNavbar extends React.Component {
             <>
                 <Navbar fixed="top" expand="lg" dark>
                     <Link to="/" className="navbar-brand mr-lg-auto">
-                        <img
+                        <Img
                             className="my-auto"
-                            src={alkemyLogo}
+                            fluid={this.props.brand}
                             alt="Alkemy"
+                            style={{
+                                height: "auto",
+                                width: "200px"
+                            }}
                         />
                     </Link>
                     <NavbarToggler
@@ -297,4 +300,6 @@ export default class ReactNavbar extends React.Component {
 
 ReactNavbar.propTypes = {
     menuArray: PropTypes.array,
+    brand: PropTypes.object
 };
+

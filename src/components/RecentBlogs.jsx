@@ -55,7 +55,7 @@ const RecentBlogs = props => {
                                                     }
                                                 />
                                                 <CardBody>
-                                                    <CardTitle className="font-weight-bold">
+                                                    <CardTitle className="font-weight-bold" tag="h3">
                                                         {
                                                             blogData[1].node
                                                                 .frontmatter
@@ -191,7 +191,7 @@ const RecentBlogs = props => {
                                 alt={e.node.frontmatter.coverAlt}
                             />
                             <CardBody>
-                                <CardTitle className="text-bold">
+                                <CardTitle className="text-bold" tag="h3">
                                     {e.node.frontmatter.title}
                                 </CardTitle>
                                 <CardText>
@@ -234,7 +234,10 @@ const RecentBlogs = props => {
                                                 }
                                             />
                                             <CardBody>
-                                                <CardTitle className="text-bold">
+                                                <CardTitle
+                                                    className="text-bold"
+                                                    tag="h3"
+                                                >
                                                     {e.node.frontmatter.title}
                                                 </CardTitle>
                                                 <CardText>

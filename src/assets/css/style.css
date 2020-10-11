@@ -16385,7 +16385,7 @@ section.recentBlogPosts .card-deck .row .blogCard .card-body {
   text-overflow: ellipsis;
 }
 
-section.recentBlogPosts .card-deck .row .blogCard .card-body a h4.card-title {
+section.recentBlogPosts .card-deck .row .blogCard .card-body a h3.card-title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

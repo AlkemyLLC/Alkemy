@@ -4,6 +4,7 @@ import ReactNavbar from "./Navbar.jsx";
 import { Col, Row } from "reactstrap";
 import BlogSearch from "./BlogSearch.jsx";
 import PropTypes from "prop-types";
+import { fluidImageSmall } from "../utils/utils.js";
 
 /*
 _menuArray object details:
@@ -55,7 +56,7 @@ var _menuArray = [
     },
 ];
 
-const Header = ({ pageTitle, hideHeader, renderHeaderSolid, search}) => (
+const Header = ({ pageTitle, hideHeader, renderHeaderSolid, search }) => (
     <StaticQuery
         query={graphql`
             query HeaderBlogQuery {
@@ -71,6 +72,9 @@ const Header = ({ pageTitle, hideHeader, renderHeaderSolid, search}) => (
                         }
                     }
                 }
+                logo: file(relativePath: { regex: "/alkemy_logo.png/" }) {
+                    ...fluidImageSmall
+                }
             }
         `}
         render={data => (
@@ -82,7 +86,13 @@ const Header = ({ pageTitle, hideHeader, renderHeaderSolid, search}) => (
                             : "header fadeInDown position-fixed"
                     }
                 >
-                    <ReactNavbar menuArray={_menuArray} />
+                    {console.log(data.logo.childImageSharp.fluid)}
+                    {data.logo.childImageSharp && (
+                        <ReactNavbar
+                            menuArray={_menuArray}
+                            brand={data.logo.childImageSharp.fluid}
+                        />
+                    )}
                 </header>
                 {hideHeader === true ? (
                     <Row className="subHeader mx-0 alk-container">

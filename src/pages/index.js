@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
-import { fluidImageSmall } from "../utils/utils.js";
+import { fluidImageSmall,fluidImage } from "../utils/utils.js";
 import { trunc } from "../utils/utils.js";
 import {
     CardDeck,
@@ -93,6 +93,11 @@ const HomePage = ({ data }) => {
                         <LoadableVideoCarousel
                             slides={slideArray}
                             showIndicators={false}
+                            fluid={
+                                data.homeWorkImage &&
+                                data.homeWorkImage.childImageSharp.fluid
+                            }
+                            alt="your brand deserves the best"
                         >
                             <Row className="cover-text-row h-100 d-flex align-items-center">
                                 <Col xs={12} lg={6} className="bg-transparent">
@@ -171,7 +176,7 @@ const HomePage = ({ data }) => {
                                     )}
                                     <CardFooter>
                                         <CardTitle
-                                            tag="h5"
+                                            tag="h3"
                                             className="text-center"
                                         >
                                             {
@@ -223,7 +228,7 @@ const HomePage = ({ data }) => {
                                     )}
                                     <CardFooter className="d-flex align-items-end justify-content-center">
                                         <CardTitle
-                                            tag="h5"
+                                            tag="h3"
                                             className="text-center"
                                         >
                                             {
@@ -275,7 +280,7 @@ const HomePage = ({ data }) => {
                                     )}
                                     <CardFooter className="d-flex align-items-end justify-content-center">
                                         <CardTitle
-                                            tag="h5"
+                                            tag="h3"
                                             className="text-center"
                                         >
                                             {
@@ -327,7 +332,7 @@ const HomePage = ({ data }) => {
                                     )}
                                     <CardFooter className="d-flex align-items-end justify-content-center">
                                         <CardTitle
-                                            tag="h5"
+                                            tag="h3"
                                             className="text-center"
                                         >
                                             {
@@ -476,54 +481,61 @@ const handleScroll = () => {
 };
 
 export const query = graphql`
-    {
-        homepageJson {
-            sections {
-                id
-                blocks {
-                    heading
-                    content
-                }
-                heading
-                stats {
-                    title
-                    value
-                }
-            }
-        }
-        allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
-            edges {
-                node {
-                    id
-                    excerpt(pruneLength: 100)
-                    frontmatter {
-                        title
-                        path
-                        excerpt
-                        date(formatString: "MMMM DD, YYYY")
-                        cover {
-                            ...fluidImageSmall
-                        }
-                    }
-                }
-            }
-        }
-        webDesign: file(relativePath: { regex: "/responsive.png/" }) {
-            ...fluidImageSmall
-        }
-        webDevelopment: file(relativePath: { regex: "/development.png/" }) {
-            ...fluidImageSmall
-        }
-        eCommerce: file(relativePath: { regex: "/ecommerce.png/" }) {
-            ...fluidImageSmall
-        }
-        digitalMarketing: file(relativePath: { regex: "/marketing.png/" }) {
-            ...fluidImageSmall
-        }
-        ourPassion: file(relativePath: { regex: "/our-passion.jpg/" }) {
-            ...fluidImageSmall
-        }
-    }
-`;
+           {
+               homepageJson {
+                   sections {
+                       id
+                       blocks {
+                           heading
+                           content
+                       }
+                       heading
+                       stats {
+                           title
+                           value
+                       }
+                   }
+               }
+               allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
+                   edges {
+                       node {
+                           id
+                           excerpt(pruneLength: 100)
+                           frontmatter {
+                               title
+                               path
+                               excerpt
+                               date(formatString: "MMMM DD, YYYY")
+                               cover {
+                                   ...fluidImageSmall
+                               }
+                           }
+                       }
+                   }
+               }
+               homeWorkImage: file(relativePath: { regex: "/home-work.jpg/" }) {
+                   ...fluidImage
+               }
+               webDesign: file(relativePath: { regex: "/responsive.png/" }) {
+                   ...fluidImageSmall
+               }
+               webDevelopment: file(
+                   relativePath: { regex: "/development.png/" }
+               ) {
+                   ...fluidImageSmall
+               }
+               eCommerce: file(relativePath: { regex: "/ecommerce.png/" }) {
+                   ...fluidImageSmall
+               }
+               digitalMarketing: file(
+                   relativePath: { regex: "/marketing.png/" }
+               ) {
+                   ...fluidImageSmall
+               }
+               ourPassion: file(relativePath: { regex: "/our-passion.jpg/" }) {
+                   ...fluidImageSmall
+               }
+           }
+       `;
 
 export default HomePage;

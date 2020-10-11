@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Img from "gatsby-image";
 
 class VideoCarousel extends React.Component {
     constructor(props) {
@@ -9,7 +10,9 @@ class VideoCarousel extends React.Component {
             currentIndex: 0,
             vidClasses: "vc-video bg-transparent",
             containerClasses: "vc-wrap bg-transparent",
-            slides: []
+            slides: [],
+            webp: false,
+            loading: true
         };
 
         this.handleEnded = this.handleEnded.bind(this);
@@ -23,7 +26,8 @@ class VideoCarousel extends React.Component {
         this.setState({
             ...this.state,
             slides: this.props.slides,
-            webp: webp
+            webp: webp,
+            loading: false
         })
     }
 
@@ -82,7 +86,13 @@ class VideoCarousel extends React.Component {
                         ""
                     )}
                     {this.props.children}
-                    {typeof this.state.slides !== "undefined" ? (
+                    {this.state.loading ? (
+                        <Img
+                            className="h-100 w-100"
+                            fluid={this.props.fluid}
+                            alt={this.props.alt}
+                        />
+                    ) : (
                         <video
                             autoPlay={true}
                             muted={true}
@@ -96,7 +106,8 @@ class VideoCarousel extends React.Component {
                                 this.state.webp
                                     ? this.props.slides[this.state.currentIndex]
                                           .webm
-                                    : this.props.slides[this.state.currentIndex].mp4
+                                    : this.props.slides[this.state.currentIndex]
+                                          .mp4
                             }
                             style={{
                                 objectFit: "cover",
@@ -115,7 +126,7 @@ class VideoCarousel extends React.Component {
                                 this.video = el;
                             }}
                         />
-                    ) : null}
+                    )}
                 </div>
             </div>
         );
@@ -126,6 +137,10 @@ VideoCarousel.propTypes = {
     slides: PropTypes.array,
     showIndicators: PropTypes.bool,
     children: PropTypes.object,
+    fluid: PropTypes.object,
+    alt: PropTypes.string
 };
 
 export default VideoCarousel;
+
+
