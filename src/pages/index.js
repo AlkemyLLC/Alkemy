@@ -171,7 +171,7 @@ const HomePage = ({ data }) => {
                                     )}
                                     <CardFooter>
                                         <CardTitle
-                                            tag="h5"
+                                            tag="h3"
                                             className="text-center"
                                         >
                                             {
@@ -223,7 +223,7 @@ const HomePage = ({ data }) => {
                                     )}
                                     <CardFooter className="d-flex align-items-end justify-content-center">
                                         <CardTitle
-                                            tag="h5"
+                                            tag="h3"
                                             className="text-center"
                                         >
                                             {
@@ -275,7 +275,7 @@ const HomePage = ({ data }) => {
                                     )}
                                     <CardFooter className="d-flex align-items-end justify-content-center">
                                         <CardTitle
-                                            tag="h5"
+                                            tag="h3"
                                             className="text-center"
                                         >
                                             {
@@ -327,7 +327,7 @@ const HomePage = ({ data }) => {
                                     )}
                                     <CardFooter className="d-flex align-items-end justify-content-center">
                                         <CardTitle
-                                            tag="h5"
+                                            tag="h3"
                                             className="text-center"
                                         >
                                             {
@@ -476,54 +476,58 @@ const handleScroll = () => {
 };
 
 export const query = graphql`
-    {
-        homepageJson {
-            sections {
-                id
-                blocks {
-                    heading
-                    content
-                }
-                heading
-                stats {
-                    title
-                    value
-                }
-            }
-        }
-        allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
-            edges {
-                node {
-                    id
-                    excerpt(pruneLength: 100)
-                    frontmatter {
-                        title
-                        path
-                        excerpt
-                        date(formatString: "MMMM DD, YYYY")
-                        cover {
-                            ...fluidImageSmall
-                        }
-                    }
-                }
-            }
-        }
-        webDesign: file(relativePath: { regex: "/responsive.png/" }) {
-            ...fluidImageSmall
-        }
-        webDevelopment: file(relativePath: { regex: "/development.png/" }) {
-            ...fluidImageSmall
-        }
-        eCommerce: file(relativePath: { regex: "/ecommerce.png/" }) {
-            ...fluidImageSmall
-        }
-        digitalMarketing: file(relativePath: { regex: "/marketing.png/" }) {
-            ...fluidImageSmall
-        }
-        ourPassion: file(relativePath: { regex: "/our-passion.jpg/" }) {
-            ...fluidImageSmall
-        }
-    }
-`;
+           {
+               homepageJson {
+                   sections {
+                       id
+                       blocks {
+                           heading
+                           content
+                       }
+                       heading
+                       stats {
+                           title
+                           value
+                       }
+                   }
+               }
+               allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
+                   edges {
+                       node {
+                           id
+                           excerpt(pruneLength: 100)
+                           frontmatter {
+                               title
+                               path
+                               excerpt
+                               date(formatString: "MMMM DD, YYYY")
+                               cover {
+                                   ...fluidImageSmall
+                               }
+                           }
+                       }
+                   }
+               }
+               webDesign: file(relativePath: { regex: "/responsive.png/" }) {
+                   ...fluidImageSmall
+               }
+               webDevelopment: file(
+                   relativePath: { regex: "/development.png/" }
+               ) {
+                   ...fluidImageSmall
+               }
+               eCommerce: file(relativePath: { regex: "/ecommerce.png/" }) {
+                   ...fluidImageSmall
+               }
+               digitalMarketing: file(
+                   relativePath: { regex: "/marketing.png/" }
+               ) {
+                   ...fluidImageSmall
+               }
+               ourPassion: file(relativePath: { regex: "/our-passion.jpg/" }) {
+                   ...fluidImageSmall
+               }
+           }
+       `;
 
 export default HomePage;

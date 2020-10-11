@@ -87,6 +87,7 @@ const Footer = () => (
                 <img
                     src="https://app.upcity.com/images/badges/tla.png"
                     height="50px"
+                    width="185px"
                     alt="Alkemy, LLC Upcity Badge"
                 />
             </a>
@@ -98,7 +99,7 @@ const renderLinkAreas = menu => {
     return menu.map(item => {
         return (
             <Col xs={12} md={6} lg={3} key={item.id}>
-                <h4>{item.name}</h4>
+                <h2 style={{fontSize:"1.6rem"}}>{item.name}</h2>
                 <ul className="list-unstyled ml-0 mb-5">
                     {item.links.map(link => {
                         return (

@@ -44,7 +44,7 @@ const BlogWidget = props => {
                         </Link>
                         <CardBody>
                             <Link to={edge.node.frontmatter.path}>
-                                <CardTitle tag="h4">
+                                <CardTitle tag="h3">
                                     {edge.node.frontmatter.title}
                                 </CardTitle>
                             </Link>
