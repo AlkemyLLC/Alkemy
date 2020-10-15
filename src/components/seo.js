@@ -156,11 +156,6 @@ function SEO({
                 "@type":"WebSite",
                 "url":"${siteAddress}",
                 "name":"Alkemy",
-                "potentialAction": {
-                  "@type": "SearchAction",
-                  "target": "${siteAddress}/alkemy-blog/?s={search_term_string}",
-                  "query-input": "required name=search_term_string"
-                }
               }`}
             </script>
             <script defer type="application/ld+json">
