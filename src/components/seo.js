@@ -224,7 +224,7 @@ function SEO({
             }]
           }
           `}</script>
-            {author !== null ? (
+            {author !== null && (
                 <script defer type="application/ld+json">{`
             {
               "@context": "https://schema.org",
@@ -237,7 +237,7 @@ function SEO({
               "datePublished": "${articleDate}"
             }
             `}</script>
-            ) : null}
+            )}
             {children}
         </Helmet>
     );
