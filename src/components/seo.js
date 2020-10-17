@@ -11,6 +11,8 @@ import Helmet from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 import { TypographyStyle, GoogleFont } from "react-typography";
 import typography from "../utils/typography";
+// typography.toString();
+// typography.injectStyles();
 
 import logo from "../assets/images/alkemy-logo-vertical.png";
 import screenshot from "../assets/images/alkemy-website-screenshot.png";
@@ -90,6 +92,9 @@ function SEO({
             ].concat(meta)}
         >
             <html lang={lang ? lang : "en"} />
+            <TypographyStyle typography={typography} />
+            <GoogleFont typography={typography} />
+
             <meta
                 name="msvalidate.01"
                 content="304B53089DF131D38A8031F5232E9FB1"
@@ -147,8 +152,6 @@ function SEO({
                 href="https://fonts.googleapis.com/css?family=Calligraffitti|Raleway:500&display=swap"
                 rel="stylesheet"
             />
-            <TypographyStyle typography={typography} />
-            <GoogleFont typography={typography} />
 
             <script defer type="application/ld+json">
                 {`{

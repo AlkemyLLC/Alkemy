@@ -25,7 +25,7 @@ const BlogCategoryBar = (props) => {
             </NavItem>
         ));
 
-    return <Nav pills>{getPills}</Nav>;
+    return <Nav pills className="mx-0">{getPills}</Nav>;
 };
 
 BlogCategoryBar.propTypes = {

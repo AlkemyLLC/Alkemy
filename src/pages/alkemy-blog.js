@@ -94,17 +94,69 @@ const AlkemyBlog = ({
         actions.searchTitle("");
     };
 
-    const renderView = ()=>{
-        return (
-            <Row>
-                <Col xs={6}>
-                    test
+    const renderFeatured = () =>
+        edges && (
+            <Row className="alk-container pr-0 blog-featured">
+                <Col
+                    xs={6}
+                    className="d-flex flex-column justify-content-center"
+                >
+                    <h2>{edges[0].node.frontmatter.title}</h2>
+                    <p className="my-4 blog-featured-excerpt">{edges[0].node.frontmatter.excerpt}</p>
                 </Col>
                 <Col xs={6}>
-                    test2
+                    {edges[0].node.frontmatter.cover.childImageSharp.fluid && (
+                        <Img
+                            imgStyle={{ objectFit: "cover" }}
+                            className="h-100 featured-blog-cover-image"
+                            fluid={
+                                edges[0].node.frontmatter.cover.childImageSharp
+                                    .fluid
+                            }
+                            alt={edges[0].node.frontmatter.coverAlt}
+                        />
+                    )}
                 </Col>
             </Row>
-        )
+        );
+
+    const renderView = (store)=>{
+        let blogs = edges.map(e => e);
+
+        if (store.searchResults.length > 0) {
+            let results = store.searchResults;
+            blogs = blogs.filter(e => {
+                for (let item in results) {
+                    if (results[item].path === e.node.frontmatter.path)
+                        return e;
+                }
+            });
+
+            setFilter(true);
+            setSearchResults(blogs.length);
+        }
+
+        if (filterBySearch === false) {
+            return (
+                <>
+                    {isEqual(sortBy(blogs), sortBy(edges))
+                        ? renderFeatured()
+                        : null}
+
+                    <RecentBlogs blogdata={blogs.slice(1,4)} layout="home" />
+                </>
+            );
+        } else {
+            return (
+                <section className="py-4 blog-post-listing alk-container">
+                    <Row>
+                        <Col xs={12}>
+                            <RecentBlogs blogdata={blogs} layout="alt" />
+                        </Col>
+                    </Row>
+                </section>
+            );
+        }
     }
 
     return (
@@ -116,7 +168,7 @@ const AlkemyBlog = ({
                 bodyClasses="blog"
             >
                 <SEO title={pageTitle.name} />
-                <Row>
+                <Row className="alk-container py-4 my-3" noGutters>
                     <Col xs={12}>
                         <BlogCategoryBar
                             defaultSelected={category}
