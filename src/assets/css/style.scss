@@ -941,76 +941,69 @@ section.ourPassion{
   }
 }
 
-// recent blogs on home page
+// recent blogs widget on home page
 section.recentBlogPosts{
   background: $alkemy_dark_blue;
   color: white;
   
   .card-deck{
-    position: relative;
-    .row{
-      .blogCard {
-        border-radius: 0;
-        border: none;
-        
-        a {
-          height: 100%;
-        }  
+    .blogCard {
+      border-radius: 0;
+      border: none;
+      height: 350px;  
 
-        .card-img-top{
-          border-radius: 0;
-          height: 100%;
-        }
-        
-        .card-img-overlay{
-          .card-footer {
-            position: absolute;
-            bottom: 0;
-          }
-        }
-  
-        .card-body{
-          background: rgba(black,.9);
+      .card-img-top{
+        border-radius: 0;
+        height: 100%;
+      }
+
+      a{height: 100%;}
+      
+
+      .card-body{
+        background: rgba(black,.9);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        a h3.card-title{
+          white-space: nowrap; 
           overflow: hidden;
           text-overflow: ellipsis;
-          a h3.card-title{
-            white-space: nowrap; 
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: white;
-            font-size: 1.2em;
-            font-weight: 300 !important;
-          }
+          color: white;
+          font-size: 1.2em;
+          font-weight: 300 !important;
         }
-        
-        .card-img-overlay{
-          .card-body{
-            background: unset;
-          }
+      }
+      
+      .card-img-overlay{
+        .card-body{
+          background: unset;
           position: relative;
-          transition: .3s linear;
-          padding: 0;
-          border: 1px solid $alkemy_blue;
-          height: 100%;
-          overflow: hidden;
-  
-          @media only screen and (min-width: 992px){
-            min-height: fit-content;
-            position: absolute;
-            opacity: 0;
-          }
+          a{height: auto; max-width: 200px;}
         }
-  
-        &:hover{
-          @media only screen and (min-width: 992px) {
-            .card-img-overlay {
-              opacity: 1;
-              color: white;
-              background: rgba(0,0,0,.90);
-              height: 100%;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
+        position: relative;
+        transition: .3s linear;
+        padding: 0;
+        border: 1px solid $alkemy_blue;
+        // height: 100%;
+        overflow: hidden;
+
+        @media only screen and (min-width: 992px){
+          min-height: fit-content;
+          position: absolute;
+          opacity: 0;
+        }
+      }
+
+      &:hover{
+        @media only screen and (min-width: 992px) {
+          .card-img-overlay {
+            opacity: 1;
+            color: white;
+            background: rgba(0,0,0,.5);
           }
         }
       }

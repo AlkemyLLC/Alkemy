@@ -16352,36 +16352,32 @@ section.recentBlogPosts {
   color: white;
 }
 
-section.recentBlogPosts .card-deck {
-  position: relative;
-}
-
-section.recentBlogPosts .card-deck .row .blogCard {
+section.recentBlogPosts .card-deck .blogCard {
   border-radius: 0;
   border: none;
+  height: 350px;
 }
 
-section.recentBlogPosts .card-deck .row .blogCard a {
-  height: 100%;
-}
-
-section.recentBlogPosts .card-deck .row .blogCard .card-img-top {
+section.recentBlogPosts .card-deck .blogCard .card-img-top {
   border-radius: 0;
   height: 100%;
 }
 
-section.recentBlogPosts .card-deck .row .blogCard .card-img-overlay .card-footer {
-  position: absolute;
-  bottom: 0;
+section.recentBlogPosts .card-deck .blogCard a {
+  height: 100%;
 }
 
-section.recentBlogPosts .card-deck .row .blogCard .card-body {
+section.recentBlogPosts .card-deck .blogCard .card-body {
   background: rgba(0, 0, 0, 0.9);
   overflow: hidden;
   text-overflow: ellipsis;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-section.recentBlogPosts .card-deck .row .blogCard .card-body a h3.card-title {
+section.recentBlogPosts .card-deck .blogCard .card-body a h3.card-title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -16390,21 +16386,26 @@ section.recentBlogPosts .card-deck .row .blogCard .card-body a h3.card-title {
   font-weight: 300 !important;
 }
 
-section.recentBlogPosts .card-deck .row .blogCard .card-img-overlay {
+section.recentBlogPosts .card-deck .blogCard .card-img-overlay {
   position: relative;
   transition: .3s linear;
   padding: 0;
   border: 1px solid #2bb3e5;
-  height: 100%;
   overflow: hidden;
 }
 
-section.recentBlogPosts .card-deck .row .blogCard .card-img-overlay .card-body {
+section.recentBlogPosts .card-deck .blogCard .card-img-overlay .card-body {
   background: unset;
+  position: relative;
+}
+
+section.recentBlogPosts .card-deck .blogCard .card-img-overlay .card-body a {
+  height: auto;
+  max-width: 200px;
 }
 
 @media only screen and (min-width: 992px) {
-  section.recentBlogPosts .card-deck .row .blogCard .card-img-overlay {
+  section.recentBlogPosts .card-deck .blogCard .card-img-overlay {
     min-height: fit-content;
     position: absolute;
     opacity: 0;
@@ -16412,13 +16413,10 @@ section.recentBlogPosts .card-deck .row .blogCard .card-img-overlay .card-body {
 }
 
 @media only screen and (min-width: 992px) {
-  section.recentBlogPosts .card-deck .row .blogCard:hover .card-img-overlay {
+  section.recentBlogPosts .card-deck .blogCard:hover .card-img-overlay {
     opacity: 1;
     color: white;
-    background: rgba(0, 0, 0, 0.9);
-    height: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    background: rgba(0, 0, 0, 0.5);
   }
 }
 
