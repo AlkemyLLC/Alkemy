@@ -1401,6 +1401,19 @@ div.spinContainer{
   }
 }
 
+.blog-category-bar{
+  white-space: nowrap;
+  display:flex;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  li{
+    display: inline-flex;
+  }
+}
+
 .blog-category-filter{
   select.custom-select{
     border-color: $alkemy_blue;
@@ -1480,12 +1493,13 @@ div.spinContainer{
 .recent-blogs{
   @extend .recentBlogPosts,.blogCard,.card-img-top;
   .blog-card{
-    min-height: 500px;
+    min-height: 450px;
 
     a,a:hover{color: white; text-decoration: none;}
     a,.card-img-top{height: 100%;}
 
     .card-body{
+      min-height: 150px;
       background: rgba(0,0,0,.5);
       position: absolute;
       bottom: 0;
@@ -1493,7 +1507,8 @@ div.spinContainer{
       left: 0; 
 
       .card-title{
-        @extend .h3,.line-clamp;
+        @extend .h4,.line-clamp;
+        font-weight: normal;
       }
     }
   }

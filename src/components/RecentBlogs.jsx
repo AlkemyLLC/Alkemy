@@ -26,39 +26,43 @@ const RecentBlogs = props => {
 
     const renderBlogHome = () => {
         if (blogData.length > 1)
-            return <CardDeck>{renderCards()}</CardDeck>;
+            return <Row>{renderCards()}</Row>;
         else renderAlternate();
     };
 
     const renderCards = () => {
         return blogData.map((e, index) => {
             return (
-                <Card className="blog-card" key={index}>
-                    <Link to={e.node.frontmatter.path}>
-                        <Img
-                            className="card-img-top"
-                            style={{
-                                position: "unset"
-                            }}
-                            fluid={
-                                e.node.frontmatter.cover.childImageSharp
-                                    .fluid
-                            }
-                            alt={e.node.frontmatter.coverAlt}
-                        />
-                        <CardBody>
-                            <CardTitle className="text-bold" tag="h2">
-                                {e.node.frontmatter.title}
-                            </CardTitle>
-                            <BlogInfoBar
-                                category={e.node.frontmatter.category}
-                                time={e.node.frontmatter.readingTime}
-                                layout="horizontal"
-                                className="mt-2"
-                            />
-                        </CardBody>
-                    </Link>
-                </Card>
+                <Col xs={12} sm={6} md={4} key={index}>
+                    <CardDeck>
+                        <Card className="blog-card">
+                            <Link to={e.node.frontmatter.path}>
+                                <Img
+                                    className="card-img-top"
+                                    style={{
+                                        position: "unset",
+                                    }}
+                                    fluid={
+                                        e.node.frontmatter.cover.childImageSharp
+                                            .fluid
+                                    }
+                                    alt={e.node.frontmatter.coverAlt}
+                                />
+                                <CardBody>
+                                    <CardTitle className="text-bold" tag="h2">
+                                        {e.node.frontmatter.title}
+                                    </CardTitle>
+                                    <BlogInfoBar
+                                        category={e.node.frontmatter.category}
+                                        time={e.node.frontmatter.readingTime}
+                                        layout="horizontal"
+                                        className="mt-2"
+                                    />
+                                </CardBody>
+                            </Link>
+                        </Card>
+                    </CardDeck>
+                </Col>
             );
         });
     };

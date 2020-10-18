@@ -9,7 +9,7 @@ const BlogInfoBar = props => {
     const renderHorizontal = () => {
         return (
             <>
-                <Col xs={props.author?null:4}>
+                <Col xs={6} sm={props.author ? 3 : "auto"}>
                     <Badge
                         color="primary"
                         className="mb-md-0 blog-info-category"
@@ -17,7 +17,11 @@ const BlogInfoBar = props => {
                         {props.category}
                     </Badge>
                 </Col>
-                <Col className="d-flex align-items-center blog-info-time mb-md-0">
+                <Col
+                    xs={6}
+                    sm={props.author ? 4 : "auto"}
+                    className="d-flex align-items-center blog-info-time mb-md-0"
+                >
                     <FontAwesomeIcon
                         icon={["far", "clock"]}
                         size="sm"
@@ -27,7 +31,11 @@ const BlogInfoBar = props => {
                     {props.time} Read
                 </Col>
                 {props.author && props.author.length > 0 ? (
-                    <Col className="d-flex align-items-center justify-content-lg-end mb-md-0">
+                    <Col
+                        xs={6}
+                        sm={props.author ? 5 : null}
+                        className="d-flex align-items-center justify-content-lg-end mb-md-0"
+                    >
                         <FontAwesomeIcon
                             icon={["far", "user"]}
                             size="sm"

@@ -3,7 +3,7 @@ import {uniq,isEqual,sortBy} from "lodash";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import { Context } from "../store/appContext.js";
-import { fluidImageSmall } from "../utils/utils.js";
+import { fluidImageSmall, useWindowSize } from "../utils/utils.js";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
 import { Button, Col, Row, Label, FormGroup } from "reactstrap";
@@ -38,7 +38,7 @@ const AlkemyBlog = ({
 }) => {
     // pageTitle: SEO friendly title for the title bar
     const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
-
+    const size = useWindowSize();
     // define state hooks
     const [category, setCategory] = useState("featured");
     const [filterBySearch, setFilter] = useState(false);
@@ -96,10 +96,11 @@ const AlkemyBlog = ({
 
     const renderFeatured = () =>
         edges && (
-            <Row className="alk-container pr-0 blog-featured">
+            <Row className="alk-container pr-sm-0 blog-featured">
                 <Col
-                    xs={6}
-                    className="d-flex flex-column justify-content-center"
+                    xs={12}
+                    sm={6}
+                    className="d-flex flex-column justify-content-center order-2 order-sm-1"
                 >
                     <h2>{edges[0].node.frontmatter.title}</h2>
                     <p className="my-4 blog-featured-excerpt">
@@ -113,7 +114,7 @@ const AlkemyBlog = ({
                         className="my-2"
                     />
                 </Col>
-                <Col xs={6}>
+                <Col xs={12} sm={6} className="order-1 order-sm-2 mb-5 mb-sm-0">
                     {edges[0].node.frontmatter.cover.childImageSharp.fluid && (
                         <Img
                             imgStyle={{ objectFit: "cover" }}
@@ -177,7 +178,14 @@ const AlkemyBlog = ({
                 bodyClasses="blog"
             >
                 <SEO title={pageTitle.name} />
-                <Row className="alk-container py-4 my-3" noGutters>
+                <Row
+                    className={
+                        size.width > 760
+                            ? "alk-container py-4 my-3"
+                            : "alk-container pr-0 py-4 my-3"
+                    }
+                    noGutters
+                >
                     <Col xs={12}>
                         <BlogCategoryBar
                             defaultSelected={category}
