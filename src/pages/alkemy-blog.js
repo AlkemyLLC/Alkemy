@@ -102,7 +102,16 @@ const AlkemyBlog = ({
                     className="d-flex flex-column justify-content-center"
                 >
                     <h2>{edges[0].node.frontmatter.title}</h2>
-                    <p className="my-4 blog-featured-excerpt">{edges[0].node.frontmatter.excerpt}</p>
+                    <p className="my-4 blog-featured-excerpt">
+                        {edges[0].node.frontmatter.excerpt}
+                    </p>
+                    <BlogInfoBar
+                        category={edges[0].node.frontmatter.category}
+                        time={edges[0].node.frontmatter.readingTime}
+                        author={edges[0].node.frontmatter.author}
+                        layout="horizontal"
+                        className="my-2"
+                    />
                 </Col>
                 <Col xs={6}>
                     {edges[0].node.frontmatter.cover.childImageSharp.fluid && (

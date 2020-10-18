@@ -37,6 +37,9 @@ const RecentBlogs = props => {
                     <Link to={e.node.frontmatter.path}>
                         <Img
                             className="card-img-top"
+                            style={{
+                                position: "unset"
+                            }}
                             fluid={
                                 e.node.frontmatter.cover.childImageSharp
                                     .fluid
@@ -44,18 +47,14 @@ const RecentBlogs = props => {
                             alt={e.node.frontmatter.coverAlt}
                         />
                         <CardBody>
-                            <CardTitle className="text-bold" tag="h3">
+                            <CardTitle className="text-bold" tag="h2">
                                 {e.node.frontmatter.title}
                             </CardTitle>
-                            <CardText>
-                                {trunc(e.node.frontmatter.excerpt)}
-                            </CardText>
                             <BlogInfoBar
                                 category={e.node.frontmatter.category}
                                 time={e.node.frontmatter.readingTime}
-                                author={e.node.frontmatter.author}
-                                layout="vertical"
-                                className="my-2"
+                                layout="horizontal"
+                                className="mt-2"
                             />
                         </CardBody>
                     </Link>
@@ -129,7 +128,14 @@ const RecentBlogs = props => {
 
     return (
         // eslint-disable-next-line react/prop-types
-        <div {...other} className={props.className?props.className+" my-5":"recent-blogs my-5"}>
+        <div
+            {...other}
+            className={
+                props.className
+                    ? props.className + " recent-blogs my-5"
+                    : "recent-blogs my-5"
+            }
+        >
             {props.layout.toLowerCase() === "home"
                 ? renderBlogHome()
                 : renderAlternate()}
@@ -138,6 +144,7 @@ const RecentBlogs = props => {
 };
 
 RecentBlogs.propTypes = {
+    className: PropTypes.string,
     layout: PropTypes.string, // How to render
     blogdata: PropTypes.array, // Blog data from allMarkdownRemark
 };

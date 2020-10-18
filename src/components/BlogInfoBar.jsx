@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Row, Col } from "reactstrap";
+import { Row, Col,Badge } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const BlogInfoBar = props => {
@@ -9,42 +9,35 @@ const BlogInfoBar = props => {
     const renderHorizontal = () => {
         return (
             <>
-                <Col>
-                    <p className="d-flex align-items-center mb-md-0 blog-info-category">
-                        <FontAwesomeIcon
-                            icon={["far", "list-alt"]}
-                            size="sm"
-                            color={props.iconColor || "black"}
-                            className="mr-2 mb-md-0"
-                        />
+                <Col xs={props.author?null:4}>
+                    <Badge
+                        color="primary"
+                        className="mb-md-0 blog-info-category"
+                    >
                         {props.category}
-                    </p>
+                    </Badge>
                 </Col>
-                <Col>
-                    <p className="d-flex align-items-center blog-info-time mb-md-0">
-                        <FontAwesomeIcon
-                            icon={["far", "clock"]}
-                            size="sm"
-                            color={props.iconColor || "black"}
-                            className="mr-2 mb-md-0"
-                        />
-                        {props.time} Read
-                    </p>
+                <Col className="d-flex align-items-center blog-info-time mb-md-0">
+                    <FontAwesomeIcon
+                        icon={["far", "clock"]}
+                        size="sm"
+                        color={props.iconColor || "black"}
+                        className="mr-2 mb-md-0"
+                    />
+                    {props.time} Read
                 </Col>
                 {props.author && props.author.length > 0 ? (
-                    <Col>
-                        <p className="d-flex align-items-center justify-content-lg-end mb-md-0">
-                            <FontAwesomeIcon
-                                icon={["far", "user"]}
-                                size="sm"
-                                color={props.iconColor || "black"}
-                                className="mr-2 mb-md-0"
-                            />
+                    <Col className="d-flex align-items-center justify-content-lg-end mb-md-0">
+                        <FontAwesomeIcon
+                            icon={["far", "user"]}
+                            size="sm"
+                            color={props.iconColor || "black"}
+                            className="mr-2 mb-md-0"
+                        />
 
-                            {props.author && props.author.length > 0
-                                ? props.author
-                                : null}
-                        </p>
+                        {props.author && props.author.length > 0
+                            ? props.author
+                            : null}
                     </Col>
                 ) : null}
             </>
@@ -55,15 +48,12 @@ const BlogInfoBar = props => {
         return (
             <>
                 <Col xs={12}>
-                    <p className="d-flex align-items-center mb-0">
-                        <FontAwesomeIcon
-                            icon={["far", "list-alt"]}
-                            size="sm"
-                            color={props.iconColor || "black"}
-                            className="mr-2"
-                        />
+                    <Badge
+                        color="primary"
+                        className="mb-0"
+                    >
                         {props.category}
-                    </p>
+                    </Badge>
                 </Col>
                 <Col xs={12}>
                     <p className="d-flex align-items-center mb-0">

@@ -1437,17 +1437,10 @@ div.spinContainer{
   }
 }
 
-// .blogSearch.row {
-//   padding: .5rem;
-// }
-
 .blog-featured{
   min-height: $half_viewport;
   .heroChevron{
     margin-top: 2rem;
-  }
-  .blog-featured-excerpt{
-
   }
 }
 .featured-blog-cover-image{  
@@ -1461,9 +1454,6 @@ div.spinContainer{
   .card{
     border: none;
     border-radius: 0;
-    // .card-body{
-    //   font-size: 18px;
-    // }
   }
 }
 
@@ -1481,27 +1471,44 @@ div.spinContainer{
   }
 }
 
-.blogCard{
-  height: 100%;
-  background: $alkemy_light_blue;
-  &.alt{
-    @media screen and (min-width: 768px){
-      -ms-flex: 0 0 25%;
-      flex: 0 0 25%;
-    }
-  }
-  .card-body{
-    padding: 1.25rem;
-  }
-  .card-footer{
-    bottom: 0;
-  }
-}
-
 .blogCard,.categoryCard{
   a:hover {
     text-decoration: none;
   }
+}
+
+.recent-blogs{
+  @extend .recentBlogPosts,.blogCard,.card-img-top;
+  .blog-card{
+    min-height: 500px;
+
+    a,a:hover{color: white; text-decoration: none;}
+    a,.card-img-top{height: 100%;}
+
+    .card-body{
+      background: rgba(0,0,0,.5);
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0; 
+
+      .card-title{
+        @extend .h3,.line-clamp;
+      }
+    }
+  }
+}
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical; 
+  /* autoprefixer: on */
+  overflow: hidden;
+}
+
+.card-deck .blog-card .blog-info-time svg{
+  color: white;
 }
 
 .blog-title-bar{
@@ -1519,14 +1526,17 @@ div.spinContainer{
   }
 }
 
-.blog-title-bar{
-  .blog-info-category{
-    @media screen and (min-width:1024px) {
-      -webkit-justify-content: flex-end !important;
-      justify-content: flex-end !important;
-    }
+.badge.badge-primary, .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+  background-color: $alkemy_blue
+}
+
+.nav-pills .nav-link{
+  color: $alkemy_blue;
+  &:not(.active):hover{
+    color: $alkemy_dark_blue;
   }
 }
+
 .blog-info-category{
   @media screen and (min-width:1024px){
     -webkit-justify-content: flex-start !important;
@@ -1535,14 +1545,8 @@ div.spinContainer{
   -webkit-justify-content: flex-end !important;
   justify-content: flex-end !important;
 }
-.blog-info-time{
-  @media screen and (min-width:1024px){
-    -webkit-justify-content: flex-end !important;
-    justify-content: flex-end !important;
-  }
-  -webkit-justify-content: flex-start !important;
-  justify-content: flex-start !important;
-}
+
+
 
 .blog,.blog-single-page{
   #bodyWrap{

@@ -6171,7 +6171,7 @@ template {
 }
 
 h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+.h1, .h2, .h3, .recent-blogs .blog-card .card-body .card-title, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
@@ -6185,7 +6185,7 @@ h2, .h2 {
   font-size: 2rem;
 }
 
-h3, .h3 {
+h3, .h3, .recent-blogs .blog-card .card-body .card-title {
   font-size: 1.75rem;
 }
 
@@ -10332,13 +10332,15 @@ input[type="button"].btn-block {
 
 .card-img,
 .card-img-top,
+.recent-blogs,
 .card-img-bottom {
   flex-shrink: 0;
   width: 100%;
 }
 
 .card-img,
-.card-img-top {
+.card-img-top,
+.recent-blogs {
   border-top-left-radius: calc(0.25rem - 1px);
   border-top-right-radius: calc(0.25rem - 1px);
 }
@@ -10389,7 +10391,7 @@ input[type="button"].btn-block {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
-  .card-group > .card:not(:last-child) .card-img-top,
+  .card-group > .card:not(:last-child) .card-img-top, .card-group > .card:not(:last-child) .recent-blogs,
   .card-group > .card:not(:last-child) .card-header {
     border-top-right-radius: 0;
   }
@@ -10401,7 +10403,7 @@ input[type="button"].btn-block {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
-  .card-group > .card:not(:first-child) .card-img-top,
+  .card-group > .card:not(:first-child) .card-img-top, .card-group > .card:not(:first-child) .recent-blogs,
   .card-group > .card:not(:first-child) .card-header {
     border-top-left-radius: 0;
   }
@@ -15567,7 +15569,7 @@ body.blog section.blog-post-container {
 }
 
 /* Bootstrap Override */
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+.h1, .h2, .h3, .recent-blogs .blog-card .card-body .card-title, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
@@ -16268,7 +16270,7 @@ button:focus {
   padding: 0;
 }
 
-.servicesHome .card .image-services.card-img-top {
+.servicesHome .card .image-services.card-img-top, .servicesHome .card .image-services.recent-blogs {
   max-width: auto !important;
   max-height: 25vh;
   object-fit: contain;
@@ -16347,27 +16349,27 @@ section.ourPassion .ourPassionImg {
   object-fit: cover;
 }
 
-section.recentBlogPosts {
+section.recentBlogPosts, section.recent-blogs {
   background: #0B3C5D;
   color: white;
 }
 
-section.recentBlogPosts .card-deck .blogCard {
+section.recentBlogPosts .card-deck .blogCard, section.recent-blogs .card-deck .blogCard, section.recentBlogPosts .card-deck .recent-blogs, section.recent-blogs .card-deck .recent-blogs {
   border-radius: 0;
   border: none;
   height: 350px;
 }
 
-section.recentBlogPosts .card-deck .blogCard .card-img-top {
+section.recentBlogPosts .card-deck .blogCard .card-img-top, section.recent-blogs .card-deck .blogCard .card-img-top, section.recentBlogPosts .card-deck .recent-blogs .card-img-top, section.recent-blogs .card-deck .recent-blogs .card-img-top, section.recentBlogPosts .card-deck .blogCard .recent-blogs, section.recent-blogs .card-deck .blogCard .recent-blogs, section.recentBlogPosts .card-deck .recent-blogs .recent-blogs, section.recent-blogs .card-deck .recent-blogs .recent-blogs {
   border-radius: 0;
   height: 100%;
 }
 
-section.recentBlogPosts .card-deck .blogCard a {
+section.recentBlogPosts .card-deck .blogCard a, section.recent-blogs .card-deck .blogCard a, section.recentBlogPosts .card-deck .recent-blogs a, section.recent-blogs .card-deck .recent-blogs a {
   height: 100%;
 }
 
-section.recentBlogPosts .card-deck .blogCard .card-body {
+section.recentBlogPosts .card-deck .blogCard .card-body, section.recent-blogs .card-deck .blogCard .card-body, section.recentBlogPosts .card-deck .recent-blogs .card-body, section.recent-blogs .card-deck .recent-blogs .card-body {
   background: rgba(0, 0, 0, 0.9);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -16377,7 +16379,7 @@ section.recentBlogPosts .card-deck .blogCard .card-body {
   right: 0;
 }
 
-section.recentBlogPosts .card-deck .blogCard .card-body a h3.card-title {
+section.recentBlogPosts .card-deck .blogCard .card-body a h3.card-title, section.recent-blogs .card-deck .blogCard .card-body a h3.card-title, section.recentBlogPosts .card-deck .recent-blogs .card-body a h3.card-title, section.recent-blogs .card-deck .recent-blogs .card-body a h3.card-title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -16386,7 +16388,7 @@ section.recentBlogPosts .card-deck .blogCard .card-body a h3.card-title {
   font-weight: 300 !important;
 }
 
-section.recentBlogPosts .card-deck .blogCard .card-img-overlay {
+section.recentBlogPosts .card-deck .blogCard .card-img-overlay, section.recent-blogs .card-deck .blogCard .card-img-overlay, section.recentBlogPosts .card-deck .recent-blogs .card-img-overlay, section.recent-blogs .card-deck .recent-blogs .card-img-overlay {
   position: relative;
   transition: .3s linear;
   padding: 0;
@@ -16394,18 +16396,18 @@ section.recentBlogPosts .card-deck .blogCard .card-img-overlay {
   overflow: hidden;
 }
 
-section.recentBlogPosts .card-deck .blogCard .card-img-overlay .card-body {
+section.recentBlogPosts .card-deck .blogCard .card-img-overlay .card-body, section.recent-blogs .card-deck .blogCard .card-img-overlay .card-body, section.recentBlogPosts .card-deck .recent-blogs .card-img-overlay .card-body, section.recent-blogs .card-deck .recent-blogs .card-img-overlay .card-body {
   background: unset;
   position: relative;
 }
 
-section.recentBlogPosts .card-deck .blogCard .card-img-overlay .card-body a {
+section.recentBlogPosts .card-deck .blogCard .card-img-overlay .card-body a, section.recent-blogs .card-deck .blogCard .card-img-overlay .card-body a, section.recentBlogPosts .card-deck .recent-blogs .card-img-overlay .card-body a, section.recent-blogs .card-deck .recent-blogs .card-img-overlay .card-body a {
   height: auto;
   max-width: 200px;
 }
 
 @media only screen and (min-width: 992px) {
-  section.recentBlogPosts .card-deck .blogCard .card-img-overlay {
+  section.recentBlogPosts .card-deck .blogCard .card-img-overlay, section.recent-blogs .card-deck .blogCard .card-img-overlay, section.recentBlogPosts .card-deck .recent-blogs .card-img-overlay, section.recent-blogs .card-deck .recent-blogs .card-img-overlay {
     min-height: fit-content;
     position: absolute;
     opacity: 0;
@@ -16413,7 +16415,7 @@ section.recentBlogPosts .card-deck .blogCard .card-img-overlay .card-body a {
 }
 
 @media only screen and (min-width: 992px) {
-  section.recentBlogPosts .card-deck .blogCard:hover .card-img-overlay {
+  section.recentBlogPosts .card-deck .blogCard:hover .card-img-overlay, section.recent-blogs .card-deck .blogCard:hover .card-img-overlay, section.recentBlogPosts .card-deck .recent-blogs:hover .card-img-overlay, section.recent-blogs .card-deck .recent-blogs:hover .card-img-overlay {
     opacity: 1;
     color: white;
     background: rgba(0, 0, 0, 0.5);
@@ -16893,7 +16895,7 @@ div.spinContainer {
   border: none;
 }
 
-.latestFromCategory .card .card-img-top {
+.latestFromCategory .card .card-img-top, .latestFromCategory .card .recent-blogs {
   max-height: 160px;
 }
 
@@ -16901,27 +16903,42 @@ div.spinContainer {
   padding: 1.25rem 0;
 }
 
-.blogCard {
-  height: 100%;
-  background: rgba(43, 179, 229, 0.1);
-}
-
-@media screen and (min-width: 768px) {
-  .blogCard.alt {
-    flex: 0 0 25%;
-  }
-}
-
-.blogCard .card-body {
-  padding: 1.25rem;
-}
-
-.blogCard .card-footer {
-  bottom: 0;
-}
-
-.blogCard a:hover, .categoryCard a:hover {
+.blogCard a:hover, .recent-blogs a:hover, .categoryCard a:hover {
   text-decoration: none;
+}
+
+.recent-blogs .blog-card {
+  min-height: 500px;
+}
+
+.recent-blogs .blog-card a, .recent-blogs .blog-card a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.recent-blogs .blog-card a, .recent-blogs .blog-card .card-img-top, .recent-blogs .blog-card .recent-blogs {
+  height: 100%;
+}
+
+.recent-blogs .blog-card .card-body {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.line-clamp, .recent-blogs .blog-card .card-body .card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+  overflow: hidden;
+}
+
+.card-deck .blog-card .blog-info-time svg {
+  color: white;
 }
 
 .blog-title-bar {
@@ -16943,10 +16960,16 @@ div.spinContainer {
   height: 65px;
 }
 
-@media screen and (min-width: 1024px) {
-  .blog-title-bar .blog-info-category {
-    justify-content: flex-end !important;
-  }
+.badge.badge-primary, .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: #2bb3e5;
+}
+
+.nav-pills .nav-link {
+  color: #2bb3e5;
+}
+
+.nav-pills .nav-link:not(.active):hover {
+  color: #0B3C5D;
 }
 
 .blog-info-category {
@@ -16956,16 +16979,6 @@ div.spinContainer {
 @media screen and (min-width: 1024px) {
   .blog-info-category {
     justify-content: flex-start !important;
-  }
-}
-
-.blog-info-time {
-  justify-content: flex-start !important;
-}
-
-@media screen and (min-width: 1024px) {
-  .blog-info-time {
-    justify-content: flex-end !important;
   }
 }
 
