@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {uniq,isEqual,sortBy} from "lodash";
+import {uniq,isEqual,sortBy, get} from "lodash";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import { Context } from "../store/appContext.js";
@@ -44,11 +44,23 @@ const AlkemyBlog = ({
     const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
     const size = useWindowSize();
     // define state hooks
-    const [category, setCategory] = useState("featured");
+    const [category, setCategory] = useState("all");
     const [filterBySearch, setFilter] = useState(false);
     const [searchResults, setSearchResults] = useState(0);
     const [pages, setPages] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const getBlogData = ()=>edges.filter(e=>{
+            if (
+                (category !== "all" &&
+                    e.node.frontmatter.category.toLowerCase() ===
+                        category.toLowerCase()) ||
+                (category !== "all" &&
+                    e.node.frontmatter.tags.includes(category)) ||
+                category === "all"
+            ) {
+                return e;
+            }
+        });
 
     useEffect(() => {
         buildPages();
@@ -56,11 +68,11 @@ const AlkemyBlog = ({
 
     useEffect(() => {
         buildPages();
-    },[searchResults]); 
+    },[searchResults,category]); 
 
     const buildPages = ()=>{
         let aux = [];
-        let data = filterBySearch?searchResults:edges.length;
+        let data = filterBySearch?searchResults:getBlogData().length;
         let size = filterBySearch ? 8 : 6;
         let count = ((data - 4) / size )+ 1;
 
@@ -72,7 +84,10 @@ const AlkemyBlog = ({
     }
 
     const pagination = (
-        <Pagination aria-label="Page navigation example">
+        <Pagination
+            aria-label="blog pages"
+            listClassName="align-items-center justify-content-center"
+        >
             <PaginationItem disabled={currentPage < 2}>
                 <PaginationLink
                     first
@@ -90,7 +105,7 @@ const AlkemyBlog = ({
             {pages.map((page, index) => (
                 <PaginationItem active={currentPage === index + 1} key={index}>
                     <PaginationLink
-                        to="#"
+                        href="#"
                         onClick={e => setCurrentPage(index + 1)}
                     >
                         {index + 1}
@@ -127,7 +142,7 @@ const AlkemyBlog = ({
         let categoryArray = [];
 
         // if it's the Jump to menu, push in a home case
-        categoryArray.push({ label: "Featured", value: "featured" });
+        categoryArray.push({ label: "All", value: "all" });
 
         // loop the category array and push in pairs to aux
         for (let i in categories) {
@@ -147,36 +162,36 @@ const AlkemyBlog = ({
         actions.searchTitle("");
     };
 
-    const renderFeatured = () =>
-        edges && (
+    const renderFeatured = data =>
+        data && (
             <Row className="alk-container pr-sm-0 blog-featured">
                 <Col
                     xs={12}
                     sm={6}
                     className="d-flex flex-column justify-content-center order-2 order-sm-1"
                 >
-                    <h2>{edges[0].node.frontmatter.title}</h2>
+                    <h2>{data[0].node.frontmatter.title}</h2>
                     <p className="my-4 blog-featured-excerpt">
-                        {edges[0].node.frontmatter.excerpt}
+                        {data[0].node.frontmatter.excerpt}
                     </p>
                     <BlogInfoBar
-                        category={edges[0].node.frontmatter.category}
-                        time={edges[0].node.frontmatter.readingTime}
-                        author={edges[0].node.frontmatter.author}
+                        category={data[0].node.frontmatter.category}
+                        time={data[0].node.frontmatter.readingTime}
+                        author={data[0].node.frontmatter.author}
                         layout="horizontal"
                         className="my-2"
                     />
                 </Col>
                 <Col xs={12} sm={6} className="order-1 order-sm-2 mb-5 mb-sm-0">
-                    {edges[0].node.frontmatter.cover.childImageSharp.fluid && (
+                    {data[0].node.frontmatter.cover.childImageSharp.fluid && (
                         <Img
                             imgStyle={{ objectFit: "cover" }}
                             className="h-100 featured-blog-cover-image"
                             fluid={
-                                edges[0].node.frontmatter.cover.childImageSharp
+                                data[0].node.frontmatter.cover.childImageSharp
                                     .fluid
                             }
-                            alt={edges[0].node.frontmatter.coverAlt}
+                            alt={data[0].node.frontmatter.coverAlt}
                         />
                     )}
                 </Col>
@@ -184,13 +199,11 @@ const AlkemyBlog = ({
         );
 
     const renderView = (store)=>{
-        let blogs = edges.map(e => e);
-
-        // if(store && store.searchResults) setSearchResults(store.searchResults);
+        let blogs = getBlogData();
 
         if (store.searchResults.length > 0) {
             let results = store.searchResults;
-            blogs = blogs.filter(e => {
+            blogs = edges.filter(e => {
                 for (let item in results) {
                     if (results[item].path === e.node.frontmatter.path)
                         return e;
@@ -200,18 +213,18 @@ const AlkemyBlog = ({
             setFilter(true);
             setSearchResults(blogs.length);
         }
-
+        console.log('blogs',blogs)
         if (filterBySearch === false) {
             return currentPage === 1 ? (
                 <>
-                    {renderFeatured()}
+                    {renderFeatured(blogs)}
                     <RecentBlogs blogdata={blogs.slice(1, 4)} layout="home" />
                 </>
             ) : (
                 <>
                     <RecentBlogs
                         blogdata={blogs.slice(4, blogs.length)}
-                        layout="home"
+                        layout="search"
                     />
                 </>
             );
@@ -230,6 +243,12 @@ const AlkemyBlog = ({
         }
     }
 
+    const handleCategorySelect = (data,actions)=>{
+        resetSearch(actions);
+        setCurrentPage(1);
+        setCategory(data);
+    }
+
     return (
         <ScrollWrapper onWindowScroll={handleScroll}>
             <Layout
@@ -239,23 +258,28 @@ const AlkemyBlog = ({
                 bodyClasses="blog"
             >
                 <SEO title={pageTitle.name} />
-                <Row
-                    className={
-                        size.width > 760
-                            ? "alk-container py-4 my-3"
-                            : "alk-container pr-0 py-4 my-3"
-                    }
-                    noGutters
-                >
-                    <Col xs={12}>
-                        <BlogCategoryBar
-                            defaultSelected={category}
-                            categories={blogCategories()}
-                            onSelectCategory={setCategory}
-                        />
-                    </Col>
-                </Row>
-
+                <Context.Consumer>
+                    {({ store, actions }) => {
+                        return(<Row
+                            className={
+                                size.width > 760
+                                    ? "alk-container py-4 my-3"
+                                    : "alk-container pr-0 py-4 my-3"
+                            }
+                            noGutters
+                        >
+                            <Col xs={12}>
+                                <BlogCategoryBar
+                                    defaultSelected={category}
+                                    categories={blogCategories()}
+                                    onSelectCategory={e =>
+                                        handleCategorySelect(e, actions)
+                                    }
+                                />
+                            </Col>
+                        </Row>)
+                    }}
+                </Context.Consumer>
                 <Context.Consumer>
                     {({ store }) => {
                         filterBySearch === true ? (
@@ -273,8 +297,8 @@ const AlkemyBlog = ({
                 <Context.Consumer>
                     {({ store }) => renderView(store)}
                 </Context.Consumer>
-                
-                {pages.length>4 && pagination}
+
+                {pagination}
                 <section ref={dreamForm}>
                     <FreeWebsiteAnalysis />
                 </section>
@@ -307,6 +331,7 @@ export const query = graphql`
                         category
                         readingTime
                         excerpt
+                        tags
                         cover {
                             ...fluidImageSmall
                         }

@@ -135,7 +135,7 @@ const RecentBlogs = props => {
             className={
                 props.className
                     ? props.className + " recent-blogs my-5"
-                    : "recent-blogs my-5"
+                    : "recent-blogs mb-5"
             }
         >
             {props.layout.toLowerCase() === "home"
