@@ -16844,41 +16844,6 @@ div.spinContainer {
   display: inline-flex;
 }
 
-.blog-category-filter select.custom-select {
-  border-color: #2bb3e5;
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%232bb3e5'><polygon points='0,0 100,0 50,50'/></svg>") no-repeat;
-  background-size: 16px;
-  background-position: calc(100% - 20px) 20px;
-  background-repeat: no-repeat;
-}
-
-.blog-category-filter select.custom-select .dropdown-menu {
-  background: black;
-}
-
-.category-select .select__control {
-  border-color: #2bb3e5;
-  border-radius: 0;
-}
-
-.category-select .select__control:hover, .category-select .select__control.select__control--is--focused {
-  border-color: #2bb3e5;
-}
-
-.category-select .select__menu,
-.category-select .select__menu-list,
-.category-select .select__menu-option {
-  background: white;
-}
-
-.category-select .select__menu-option {
-  color: black;
-}
-
-.category-select .select__menu-option:hover {
-  background: #2bb3e5;
-}
-
 .blog-post-listing .blog-featured .blog-card {
   min-height: 50vh;
 }

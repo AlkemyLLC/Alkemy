@@ -1,10 +1,14 @@
-import React from "react";
+import React,{createRef,useState} from "react";
 import { Link, graphql, navigate } from "gatsby";
 import {MDXRenderer} from "gatsby-plugin-mdx";
 import { MDXProvider } from "@mdx-js/react";
 import Img from "gatsby-image";
 import { Context } from "../store/appContext.js";
-import { addJS, fluidImageSmall, fluidImageXS } from "../utils/utils.js";
+import {
+    fluidImageSmall,
+    fluidImageXS,
+    useWindowSize,
+} from "../utils/utils.js";
 import Layout from "../components/layout";
 import {uniq} from "lodash";
 import SEO from "../components/seo";
@@ -16,6 +20,7 @@ import BlogInfoBar from "../components/BlogInfoBar.jsx";
 import FloatingTitleBar from "../components/FloatingTitleBar.js";
 import SocialLinks from "../components/SocialLinks.jsx";
 import PropTypes from "prop-types";
+import BlogCategoryBar from "../components/BlogCategoryBar.jsx";
 
 /*
 Layout props:
@@ -38,259 +43,190 @@ const components = {
     SocialLinks,
 };
 
-class BlogPostTemplate extends React.Component {
-    constructor(props) {
-        super(props);
+const BlogPostTemplate = (props) => {
+    const size = useWindowSize();
+    const data = props.data
+    const post = data.mdx;
+    const siteTitle = data.site.siteMetadata.title;
+    const { previous, next } = props.pageContext;
+    const [category, setCategory] = useState("all");
+    const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
+    const edges = data.allMdx.edges;
+    const author =
+        data.allAuthorsJson.edges[0] && data.allAuthorsJson.edges[0].node;
 
-        this.state = {
-            dropdown: "",
-        };
+    const blogCategories = () => {
+        // create a categories array
+        let categories =
+            edges &&
+            edges.map(e => {
+                return e.node.frontmatter.category;
+            });
+        categories = uniq(categories).sort((a, b) => a.localeCompare(b));
 
-        this.categorySelect = React.createRef();
-        this.contentSection = React.createRef();
-    }
+        // aux array
+        let categoryArray = [];
 
-    handleDropdownChange = (value, actions) => {
-        this.setState({ dropdown: value });
+        // if it's the Jump to menu, push in a home case
+        categoryArray.push({ label: "All", value: "all" });
 
-        // reset the search in store
-        actions.search("");
-        actions.searchTitle("");
-
-        // redirect user to /alkemy-blog/ or /alkemy-blog/?cat=<:name> if other than home
-        if (value.label.toLowerCase() === "blog home") {
-            navigate("/alkemy-blog/");
-        } else {
-            // let category = value.label.replace(/\s/g, "+") // sanitize the name for use in url
-            navigate(`/alkemy-blog/`, { state: { value } });
-            // navigate(`/alkemy-blog/?cat=${category}`,{queryParam: category})
+        // loop the category array and push in pairs to aux
+        for (let i in categories) {
+            categoryArray.push({
+                label: categories[i],
+                value: categories[i].toLowerCase(),
+            });
         }
+
+        return categoryArray;
     };
 
-    render() {
-        const data = this.props.data;
-        const post = data.mdx;
-        const siteTitle = data.site.siteMetadata.title;
-        const siteUrl = data.site.siteMetadata.siteUrl;
-        const { previous, next } = this.props.pageContext;
-
-        const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
-        const edges = data.allMdx.edges;
-        const author =
-            data.allAuthorsJson.edges[0] && data.allAuthorsJson.edges[0].node;
-
-        let blogCategories = (jump = false) => {
-            // create a categories array
-            let categories =
-                edges &&
-                edges.map(e => {
-                    return e.node.frontmatter.category;
-                });
-            categories = uniq(categories);
-
-            // aux array
-            let categoryArray = [];
-
-            // if it's the Jump to menu, push in a home case
-            jump &&
-                categoryArray.push({ label: "Blog Home", value: "Blog Home" });
-
-            // loop the category array and push in pairs to aux
-            for (let i in categories) {
-                categoryArray.push({
-                    label: categories[i],
-                    value: categories[i],
-                });
-            }
-
-            return categoryArray;
-        };
-
-        // addJS(position,inner script,source) - adds JS to document dynamically for AddThis Toolbar
-        addJS(
-            `body`,
-            null,
-            `//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ae21853f0b21631`
-        );
-
-        
-        return (
-            <Layout
-                location={this.props.location}
-                title={siteTitle}
-                headerTitle={[true, pageTitle]}
-                search={true}
-                bodyClasses="blog-single-page"
-                renderHeaderSolid={true}
-            >
-                <SEO
-                    coverImage={
-                        post.frontmatter.cover.childImageSharp.fluid.src
-                    }
-                    coverDescription={post.frontmatter.coverAlt}
-                    title={post.frontmatter.title}
-                    description={post.frontmatter.description || post.excerpt}
-                    date={post.frontmatter.date}
-                    author={post.frontmatter.author}
-                />
-                <div className="alk-container blog-single mb-5">
-                    <section className="blog-category-filter my-3">
-                        <Row className="align-items-center h-100">
-                            <Col
-                                xs={12}
-                                sm={{ size: 10, offset: 2 }}
-                                md={{ size: 8, offset: 4 }}
-                                lg={{ size: 6, offset: 6 }}
-                                xl={{ size: 4, offset: 8 }}
-                            >
-                                {/* Category Dropdown */}
-                                <FormGroup row className="align-items-center">
-                                    <Label
-                                        for="categories"
-                                        xs={12}
-                                        sm={3}
-                                        className="text-sm-right text-muted"
-                                    >
-                                        Jump to:
-                                    </Label>
-                                    <Col xs={12} sm={9}>
-                                        <Context.Consumer>
-                                            {({ actions }) => (
-                                                <Select
-                                                    className="category-select"
-                                                    classNamePrefix="select"
-                                                    placeholder="Select a value..."
-                                                    name="categories"
-                                                    options={blogCategories(
-                                                        true
-                                                    )}
-                                                    ref={this.categorySelect}
-                                                    value={this.state.dropdown}
-                                                    onChange={value =>
-                                                        this.handleDropdownChange(
-                                                            value,
-                                                            actions
-                                                        )
-                                                    }
-                                                />
-                                            )}
-                                        </Context.Consumer>
-                                    </Col>
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                    </section>
-                    <section className="blog-single-post-info">
-                        <Row>
-                            <Col xs={12} lg={6}>
-                                <h2>{post.frontmatter.title}</h2>
-                                <Row className="my-4">
-                                    <Col xs={12} lg={12}>
-                                        <BlogInfoBar
-                                            category={post.frontmatter.category}
-                                            time={post.frontmatter.readingTime}
-                                            layout="horizontal"
-                                        />
-                                    </Col>
-                                </Row>
-
-                                <Row>
-                                    <Col
-                                        xs={12}
-                                        lg={4}
-                                        className="mb-5 mb-lg-0"
-                                    >
-                                        <Img
-                                            className="h-100"
-                                            fluid={
-                                                author.photo.childImageSharp
-                                                    .fluid
-                                            }
-                                            imgStyle={{
-                                                objectFit:
-                                                    author.name.toLowerCase() ===
-                                                    "alkemy"
-                                                        ? "contain"
-                                                        : "cover",
-                                            }}
-                                            alt={"Photo of " + author.name}
-                                        />
-                                        <Link to={"/author" + author.slug}>
-                                            View My Profile...
-                                        </Link>
-                                    </Col>
-                                    <Col xs={12} lg={8}>
-                                        <h3>{author.name}</h3>
-                                        <p>{author.bio}</p>
-                                    </Col>
-                                </Row>
-                            </Col>
-                            <Col
-                                xs={12}
-                                lg={6}
-                                className="mb-5 mb-lg-0 order-first order-lg-last"
-                            >
-                                <Img
-                                    className="h-100 blog-cover-image"
-                                    fluid={
-                                        post.frontmatter.cover.childImageSharp
-                                            .fluid
+    return (
+        <Layout
+            location={props.location}
+            title={siteTitle}
+            headerTitle={[true, pageTitle]}
+            search={true}
+            bodyClasses="blog-single-page"
+            renderHeaderSolid={true}
+        >
+            <SEO
+                coverImage={post.frontmatter.cover.childImageSharp.fluid.src}
+                coverDescription={post.frontmatter.coverAlt}
+                title={post.frontmatter.title}
+                description={post.frontmatter.description || post.excerpt}
+                date={post.frontmatter.date}
+                author={post.frontmatter.author}
+            />
+            <Context.Consumer>
+                {({ store, actions }) => {
+                    return (
+                        <Row
+                            className={
+                                size.width > 760
+                                    ? "alk-container py-4 my-3"
+                                    : "alk-container pr-0 py-4 my-3"
+                            }
+                            noGutters
+                        >
+                            <Col xs={12}>
+                                <BlogCategoryBar
+                                    defaultSelected={category}
+                                    categories={blogCategories()}
+                                    onSelectCategory={e =>
+                                        handleCategorySelect(e, actions)
                                     }
-                                    alt={post.frontmatter.coverAlt}
                                 />
                             </Col>
                         </Row>
-                    </section>
-                </div>
+                    );
+                }}
+            </Context.Consumer>
+            <div className="alk-container blog-single mb-5">
+                <section className="blog-single-post-info">
+                    <Row>
+                        <Col xs={12} lg={6}>
+                            <h2>{post.frontmatter.title}</h2>
+                            <Row className="my-4">
+                                <Col xs={12} lg={12}>
+                                    <BlogInfoBar
+                                        category={post.frontmatter.category}
+                                        time={post.frontmatter.readingTime}
+                                        layout="horizontal"
+                                    />
+                                </Col>
+                            </Row>
 
-                <FloatingTitleBar
-                    title={post.frontmatter.title}
-                    category={post.frontmatter.category}
-                    time={post.frontmatter.readingTime}
-                />
+                            <Row>
+                                <Col xs={12} lg={4} className="mb-5 mb-lg-0">
+                                    <Img
+                                        className="h-100"
+                                        fluid={
+                                            author.photo.childImageSharp.fluid
+                                        }
+                                        imgStyle={{
+                                            objectFit:
+                                                author.name.toLowerCase() ===
+                                                "alkemy"
+                                                    ? "contain"
+                                                    : "cover",
+                                        }}
+                                        alt={"Photo of " + author.name}
+                                    />
+                                    <Link to={"/author" + author.slug}>
+                                        View My Profile...
+                                    </Link>
+                                </Col>
+                                <Col xs={12} lg={8}>
+                                    <h3>{author.name}</h3>
+                                    <p>{author.bio}</p>
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col
+                            xs={12}
+                            lg={6}
+                            className="mb-5 mb-lg-0 order-first order-lg-last"
+                        >
+                            <Img
+                                className="h-100 blog-cover-image"
+                                fluid={
+                                    post.frontmatter.cover.childImageSharp.fluid
+                                }
+                                alt={post.frontmatter.coverAlt}
+                            />
+                        </Col>
+                    </Row>
+                </section>
+            </div>
 
-                <div className="my-5 alk-container">
-                    <MDXProvider components={components}>
-                        <MDXRenderer>{post.body}</MDXRenderer>
-                    </MDXProvider>
-                </div>
-                <hr
+            <FloatingTitleBar
+                title={post.frontmatter.title}
+                category={post.frontmatter.category}
+                time={post.frontmatter.readingTime}
+            />
+
+            <div className="my-5 alk-container">
+                <MDXProvider components={components}>
+                    <MDXRenderer>{post.body}</MDXRenderer>
+                </MDXProvider>
+            </div>
+            <hr
+                style={{
+                    marginBottom: rhythm(1),
+                }}
+            />
+            <div className="blog-single-post-nav alk-container">
+                <ul
+                    className="blog-single-post-nav-ul ml-0"
                     style={{
-                        marginBottom: rhythm(1),
+                        display: `flex`,
+                        flexWrap: `wrap`,
+                        justifyContent: `space-between`,
+                        listStyle: `none`,
+                        padding: 0,
                     }}
-                />
-                <div className="blog-single-post-nav alk-container">
-                    <ul
-                        className="blog-single-post-nav-ul ml-0"
-                        style={{
-                            display: `flex`,
-                            flexWrap: `wrap`,
-                            justifyContent: `space-between`,
-                            listStyle: `none`,
-                            padding: 0,
-                        }}
-                    >
-                        <li className="blog-single-post-nav-previous">
-                            {previous && (
-                                <Link to={previous.fields.slug} rel="prev">
-                                    ← {previous.frontmatter.title}
-                                </Link>
-                            )}
-                        </li>
-                        <li className="blog-single-post-nav-next">
-                            {next && (
-                                <Link to={next.fields.slug} rel="next">
-                                    {next.frontmatter.title} →
-                                </Link>
-                            )}
-                        </li>
-                    </ul>
-                </div>
-                <FreeWebsiteAnalysis />
-            </Layout>
-        );
-    }
-}
+                >
+                    <li className="blog-single-post-nav-previous">
+                        {previous && (
+                            <Link to={previous.fields.slug} rel="prev">
+                                ← {previous.frontmatter.title}
+                            </Link>
+                        )}
+                    </li>
+                    <li className="blog-single-post-nav-next">
+                        {next && (
+                            <Link to={next.fields.slug} rel="next">
+                                {next.frontmatter.title} →
+                            </Link>
+                        )}
+                    </li>
+                </ul>
+            </div>
+            <FreeWebsiteAnalysis />
+        </Layout>
+    );
+};
 
 BlogPostTemplate.propTypes = {
     location: PropTypes.object,

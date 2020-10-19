@@ -1414,42 +1414,6 @@ div.spinContainer{
   }
 }
 
-.blog-category-filter{
-  select.custom-select{
-    border-color: $alkemy_blue;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%232bb3e5'><polygon points='0,0 100,0 50,50'/></svg>") no-repeat;
-    background-size: 16px;
-    background-position: calc(100% - 20px) 20px;
-    background-repeat: no-repeat;
-    .dropdown-menu{
-      background: black;
-    }
-  }
-}
-
-// Custom Select
-.category-select{
-  .select__control{
-    border-color: $alkemy_blue;
-    border-radius: 0;
-    &:hover, &.select__control--is--focused{
-      border-color: $alkemy_blue;
-    }
-  }
-
-  .select__menu,
-  .select__menu-list,
-  .select__menu-option{
-    background:white;
-  }
-  .select__menu-option{
-    color: black;
-    &:hover{
-      background: $alkemy_blue;
-    }
-  }
-}
-
 .blog-post-listing{
   .blog-featured{
     .blog-card{
