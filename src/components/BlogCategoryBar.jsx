@@ -1,7 +1,5 @@
 import React,{useState,useEffect} from "react";
-import { graphql } from "gatsby";
 import PropTypes from "prop-types";
-import { uniq } from "lodash";
 import { Nav, NavItem, NavLink } from "reactstrap";
 
 const BlogCategoryBar = (props) => {

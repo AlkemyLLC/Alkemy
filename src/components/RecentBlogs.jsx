@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "gatsby";
 import Img from "gatsby-image";
 import PropTypes from "prop-types";
@@ -9,9 +9,7 @@ import {
     Card,
     CardBody,
     CardTitle,
-    CardText,
     CardDeck,
-    CardFooter,
 } from "reactstrap";
 import BlogInfoBar from "./BlogInfoBar.jsx";
 

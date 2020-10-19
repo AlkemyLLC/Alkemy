@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {uniq,isEqual,sortBy, get} from "lodash";
+import {uniq} from "lodash";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import { Context } from "../store/appContext.js";
@@ -12,7 +12,9 @@ import {
     Pagination,
     PaginationItem,
     PaginationLink,
-    Card,CardBody,CardTitle, CardDeck
+    Card,CardBody,
+    CardTitle, 
+    CardDeck
 } from "reactstrap";
 import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
 import SEO from "../components/seo";
