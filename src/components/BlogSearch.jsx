@@ -73,6 +73,7 @@ export default class BlogSearch extends React.Component {
 
     searchHandler = (e, actions,search=null) => {
         const query = search!==null?search:this.searchRef.current.value;
+        
         this.index = this.getOrCreateIndex();
         let results = this.index
             .search(query, { expand: true, bool: "AND" })
@@ -83,6 +84,7 @@ export default class BlogSearch extends React.Component {
             // Query the index with search string to get an [] of IDs
             results: results,
         });
+        console.log("query", results);
         this.state.actions.search(results);
         this.state.actions.searchTitle(query);
         search===null?this.searchRef.current.value = "":null;

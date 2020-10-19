@@ -6,13 +6,17 @@ import { Context } from "../store/appContext.js";
 import { fluidImageSmall, useWindowSize } from "../utils/utils.js";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
-import { Button, Col, Row, Label, FormGroup } from "reactstrap";
+import {
+    Col,
+    Row,
+    Pagination,
+    PaginationItem,
+    PaginationLink,
+} from "reactstrap";
 import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
 import SEO from "../components/seo";
-import Select from "react-select";
 import BlogInfoBar from "../components/BlogInfoBar.jsx";
 import RecentBlogs from "../components/RecentBlogs.jsx";
-import LatestFromCategory from "../components/LatestFromCategory.jsx";
 import PropTypes from "prop-types";
 import BlogCategoryBar from "../components/BlogCategoryBar.jsx";
 
@@ -43,17 +47,71 @@ const AlkemyBlog = ({
     const [category, setCategory] = useState("featured");
     const [filterBySearch, setFilter] = useState(false);
     const [searchResults, setSearchResults] = useState(0);
+    const [pages, setPages] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    // useEffect hook to check if there is a state value and trigger it in the dropdown
     useEffect(() => {
-        if (location.state && location.state.value) {
-            // use location.state to get information from single post
-            let cat = location.state.value;
+        buildPages();
+    }, []); 
 
-            // set the dropdown parameters and reset the search
-            setCategory(cat);
+    useEffect(() => {
+        buildPages();
+    }, [filterBySearch]); 
+
+    const buildPages = ()=>{
+        let aux = [];
+        let data = filterBySearch?searchResults:edges.length;
+        let count = ((data-4)/6)+1;
+
+        for (let i = 0; i < count; i++) {
+            aux.push(i + 1);
         }
-    }, []); // pass empty array as second arg so it only runs on mount
+
+        setPages(aux);
+    }
+
+    const pagination = (
+        <Pagination aria-label="Page navigation example">
+            <PaginationItem disabled={currentPage < 2}>
+                <PaginationLink
+                    first
+                    href="#"
+                    onClick={e => setCurrentPage(1)}
+                />
+            </PaginationItem>
+            <PaginationItem disabled={currentPage < 2}>
+                <PaginationLink
+                    previous
+                    href="#"
+                    onClick={e => setCurrentPage(currentPage - 1)}
+                />
+            </PaginationItem>
+            {pages.map((page, index) => (
+                <PaginationItem active={currentPage === index + 1} key={index}>
+                    <PaginationLink
+                        to="#"
+                        onClick={e => setCurrentPage(index + 1)}
+                    >
+                        {index + 1}
+                    </PaginationLink>
+                </PaginationItem>
+            ))}
+            <PaginationItem disabled={currentPage > pages.length - 1}>
+                <PaginationLink
+                    next
+                    href="#"
+                    onClick={e => setCurrentPage(currentPage + 1)}
+                />
+            </PaginationItem>
+            <PaginationItem disabled={currentPage > pages.length - 1}>
+                <PaginationLink
+                    last
+                    href="#"
+                    onClick={e => setCurrentPage(pages.length)}
+                />
+            </PaginationItem>
+        </Pagination>
+    );
 
     const blogCategories = () => {
         // create a categories array
@@ -79,12 +137,6 @@ const AlkemyBlog = ({
         }
 
         return categoryArray;
-    };
-
-    let createBlogArray = (arr, home = true) => {
-        let blogArray = arr.map(e => e);
-        if (home && blogArray.length > 0) blogArray.shift();
-        return blogArray;
     };
 
     const resetSearch = actions => {
@@ -147,23 +199,26 @@ const AlkemyBlog = ({
         }
 
         if (filterBySearch === false) {
-            return (
+            return currentPage === 1 ? (
                 <>
-                    {isEqual(sortBy(blogs), sortBy(edges))
-                        ? renderFeatured()
-                        : null}
-
-                    <RecentBlogs blogdata={blogs.slice(1,4)} layout="home" />
+                    {renderFeatured()}
+                    <RecentBlogs blogdata={blogs.slice(1, 4)} layout="home" />
+                </>
+            ) : (
+                <>
+                    <RecentBlogs
+                        blogdata={blogs.slice(4, blogs.length)}
+                        layout="home"
+                    />
                 </>
             );
         } else {
             return (
                 <section className="py-4 blog-post-listing alk-container">
-                    <Row>
-                        <Col xs={12}>
-                            <RecentBlogs blogdata={blogs} layout="alt" />
-                        </Col>
-                    </Row>
+                    <RecentBlogs
+                        blogdata={blogs.slice(4, blogs.length)}
+                        layout="alt"
+                    />
                 </section>
             );
         }
@@ -212,6 +267,7 @@ const AlkemyBlog = ({
                 <Context.Consumer>
                     {({ store }) => renderView(store)}
                 </Context.Consumer>
+                {pagination}
                 <section ref={dreamForm}>
                     <FreeWebsiteAnalysis />
                 </section>
