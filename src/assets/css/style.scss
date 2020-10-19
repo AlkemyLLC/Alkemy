@@ -1450,6 +1450,28 @@ div.spinContainer{
   }
 }
 
+.blog-post-listing{
+  .blog-featured{
+    .blog-card{
+      min-height: $half_viewport;
+      a{
+        height: 100%;
+        .card-img-top{
+          height: 100%;
+        }
+        .card-body{
+          color: white;
+          svg{color: white;}
+          position: absolute;
+          bottom:0;
+          right:0;
+          left:0;
+          background: rgba(0,0,0,.5);
+        }
+      }
+    }
+  }
+}
 .blog-featured{
   min-height: $half_viewport;
   .heroChevron{

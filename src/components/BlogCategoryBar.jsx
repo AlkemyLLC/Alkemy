@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { graphql } from "gatsby";
 import PropTypes from "prop-types";
 import { uniq } from "lodash";
@@ -7,6 +7,10 @@ import { Nav, NavItem, NavLink } from "reactstrap";
 const BlogCategoryBar = (props) => {
     const { categories, onSelectCategory, defaultSelected } = props;
     const [selection, setSelection] = useState(defaultSelected);
+
+    useEffect(() => {
+        setSelection(defaultSelected);
+    }, [defaultSelected]);
 
     const getPills =
         categories &&
@@ -19,7 +23,7 @@ const BlogCategoryBar = (props) => {
                     onSelectCategory(item.value)
                 }}
             >
-                <NavLink href="#" active={item.value === selection}>
+                <NavLink href={"#"+item.value.replace(' ','-')} active={item.value === selection}>
                     {item.label}
                 </NavLink>
             </NavItem>

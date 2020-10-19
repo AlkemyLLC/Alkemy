@@ -12,6 +12,7 @@ import {
     Pagination,
     PaginationItem,
     PaginationLink,
+    Card,CardBody,CardTitle, CardDeck
 } from "reactstrap";
 import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
 import SEO from "../components/seo";
@@ -44,7 +45,7 @@ const AlkemyBlog = ({
     const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
     const size = useWindowSize();
     // define state hooks
-    const [category, setCategory] = useState("all");
+    const [category, setCategory] = useState('all');
     const [filterBySearch, setFilter] = useState(false);
     const [searchResults, setSearchResults] = useState(0);
     const [pages, setPages] = useState([]);
@@ -64,6 +65,10 @@ const AlkemyBlog = ({
 
     useEffect(() => {
         buildPages();
+        let hash = location.hash.replace("-", " ").replace("#", "");
+        if(typeof hash!=="undefined") {
+            setCategory(hash)
+        };
     }, []); 
 
     useEffect(() => {
@@ -163,7 +168,7 @@ const AlkemyBlog = ({
     };
 
     const renderFeatured = data =>
-        data && (
+        data && size.width >= 760 ? (
             <Row className="alk-container pr-sm-0 blog-featured">
                 <Col
                     xs={12}
@@ -196,6 +201,44 @@ const AlkemyBlog = ({
                     )}
                 </Col>
             </Row>
+        ) : (
+            <Row className="px-0 blog-featured">
+                <Col xs={12} sm={6} md={4}>
+                    <CardDeck>
+                        <Card className="blog-card">
+                            <Link to={data[0].node.frontmatter.path}>
+                                <Img
+                                    className="h-100 card-img-top"
+                                    imgStyle={{ objectFit: "cover" }}
+                                    style={{
+                                        position: "unset",
+                                    }}
+                                    fluid={
+                                        data[0].node.frontmatter.cover
+                                            .childImageSharp.fluid
+                                    }
+                                    alt={data[0].node.frontmatter.coverAlt}
+                                />
+                                <CardBody>
+                                    <CardTitle className="text-bold" tag="h2">
+                                        {data[0].node.frontmatter.title}
+                                    </CardTitle>
+                                    <BlogInfoBar
+                                        category={
+                                            data[0].node.frontmatter.category
+                                        }
+                                        time={
+                                            data[0].node.frontmatter.readingTime
+                                        }
+                                        layout="horizontal"
+                                        className="mt-2"
+                                    />
+                                </CardBody>
+                            </Link>
+                        </Card>
+                    </CardDeck>
+                </Col>
+            </Row>
         );
 
     const renderView = (store)=>{
@@ -216,14 +259,14 @@ const AlkemyBlog = ({
 
         if (filterBySearch === false) {
             return currentPage === 1 ? (
-                <>
+                <section className="blog-post-listing">
                     {renderFeatured(blogs)}
-                    <RecentBlogs
+                    {blogs.length>1 && <RecentBlogs
                         blogdata={blogs.slice(1, 4)}
                         layout="home"
                         className="mt-4 mb-5"
-                    />
-                </>
+                    />}
+                </section>
             ) : (
                 <section className="blog-post-listing">
                     <RecentBlogs

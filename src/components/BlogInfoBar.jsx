@@ -9,7 +9,7 @@ const BlogInfoBar = props => {
     const renderHorizontal = () => {
         return (
             <>
-                <Col xs={6} sm={props.author ? 3 : "auto"}>
+                <Col xs={6} md={6} lg={props.author ? 3 : "auto"} className="mb-3">
                     <Badge
                         color="primary"
                         className="mb-md-0 blog-info-category"
@@ -19,26 +19,28 @@ const BlogInfoBar = props => {
                 </Col>
                 <Col
                     xs={6}
-                    sm={props.author ? 4 : "auto"}
-                    className="d-flex align-items-center blog-info-time mb-md-0"
+                    md={6}
+                    lg={props.author ? 4 : "auto"}
+                    className="d-flex align-items-center blog-info-time mb-3 mb-lg-0"
                 >
                     <FontAwesomeIcon
                         icon={["far", "clock"]}
-                        size="sm"
+                        size="md"
                         color={props.iconColor || "black"}
                         className="mr-2 mb-md-0"
                     />
-                    {props.time} Read
+                    {props.time}
                 </Col>
                 {props.author && props.author.length > 0 ? (
                     <Col
                         xs={6}
-                        sm={props.author ? 5 : null}
+                        md={12}
+                        lg={5}
                         className="d-flex align-items-center justify-content-lg-end mb-md-0"
                     >
                         <FontAwesomeIcon
                             icon={["far", "user"]}
-                            size="sm"
+                            size="md"
                             color={props.iconColor || "black"}
                             className="mr-2 mb-md-0"
                         />
@@ -64,14 +66,14 @@ const BlogInfoBar = props => {
                     </Badge>
                 </Col>
                 <Col xs={12}>
-                    <p className="d-flex align-items-center mb-0">
+                    <p className="d-flex flex-column align-items-center mb-0">
                         <FontAwesomeIcon
                             icon={["far", "clock"]}
                             size="sm"
                             color={props.iconColor || "black"}
                             className="mr-2"
                         />
-                        {props.time} Read
+                        {props.time}
                     </p>
                 </Col>
             </>

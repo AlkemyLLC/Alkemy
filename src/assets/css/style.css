@@ -16879,6 +16879,31 @@ div.spinContainer {
   background: #2bb3e5;
 }
 
+.blog-post-listing .blog-featured .blog-card {
+  min-height: 50vh;
+}
+
+.blog-post-listing .blog-featured .blog-card a {
+  height: 100%;
+}
+
+.blog-post-listing .blog-featured .blog-card a .card-img-top, .blog-post-listing .blog-featured .blog-card a .recent-blogs {
+  height: 100%;
+}
+
+.blog-post-listing .blog-featured .blog-card a .card-body {
+  color: white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.blog-post-listing .blog-featured .blog-card a .card-body svg {
+  color: white;
+}
+
 .blog-featured {
   min-height: 50vh;
 }
