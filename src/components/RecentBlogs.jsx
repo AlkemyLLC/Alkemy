@@ -75,53 +75,51 @@ const RecentBlogs = props => {
                     <Row>
                         {segment.map((e, index) => {
                             return (
-                                <Col xs={12} md={4} lg={3} key={index}>
-                                    <Card className="blog-card alt">
-                                        <Link to={e.node.frontmatter.path}>
-                                            <Img
-                                                className="card-img-top"
-                                                fluid={
-                                                    e.node.frontmatter.cover
-                                                        .childImageSharp.fluid
-                                                }
-                                                alt={
-                                                    e.node.frontmatter.coverAlt
-                                                }
-                                            />
-                                            <CardBody>
-                                                <CardTitle
-                                                    className="text-bold"
-                                                    tag="h3"
-                                                >
-                                                    {e.node.frontmatter.title}
-                                                </CardTitle>
-                                                <CardText>
-                                                    {trunc(
-                                                        e.node.frontmatter
-                                                            .excerpt
-                                                    )}
-                                                </CardText>
-                                            </CardBody>
-                                            <CardFooter>
-                                                <BlogInfoBar
-                                                    category={
-                                                        e.node.frontmatter
-                                                            .category
+                                <Col xs={12} sm={6} md={4} key={index}>
+                                    <CardDeck>
+                                        <Card className="blog-card">
+                                            <Link to={e.node.frontmatter.path}>
+                                                <Img
+                                                    className="card-img-top"
+                                                    style={{
+                                                        position: "unset",
+                                                    }}
+                                                    fluid={
+                                                        e.node.frontmatter.cover
+                                                            .childImageSharp
+                                                            .fluid
                                                     }
-                                                    time={
+                                                    alt={
                                                         e.node.frontmatter
-                                                            .readingTime
+                                                            .coverAlt
                                                     }
-                                                    author={
-                                                        e.node.frontmatter
-                                                            .author
-                                                    }
-                                                    layout="vertical"
-                                                    className="my-4"
                                                 />
-                                            </CardFooter>
-                                        </Link>
-                                    </Card>
+                                                <CardBody>
+                                                    <CardTitle
+                                                        className="text-bold"
+                                                        tag="h2"
+                                                    >
+                                                        {
+                                                            e.node.frontmatter
+                                                                .title
+                                                        }
+                                                    </CardTitle>
+                                                    <BlogInfoBar
+                                                        category={
+                                                            e.node.frontmatter
+                                                                .category
+                                                        }
+                                                        time={
+                                                            e.node.frontmatter
+                                                                .readingTime
+                                                        }
+                                                        layout="horizontal"
+                                                        className="mt-2"
+                                                    />
+                                                </CardBody>
+                                            </Link>
+                                        </Card>
+                                    </CardDeck>
                                 </Col>
                             );
                         })}

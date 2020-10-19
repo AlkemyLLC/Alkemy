@@ -224,7 +224,7 @@ const AlkemyBlog = ({
 
             return (
                 <section className="blog-post-listing">
-                    <RecentBlogs blogdata={currentData} layout="home" />
+                    <RecentBlogs blogdata={currentData} layout="search" />
                 </section>
             );
         }
@@ -274,7 +274,7 @@ const AlkemyBlog = ({
                     {({ store }) => renderView(store)}
                 </Context.Consumer>
                 
-                {searchResults>4 && pagination}
+                {pages.length>4 && pagination}
                 <section ref={dreamForm}>
                     <FreeWebsiteAnalysis />
                 </section>
