@@ -213,20 +213,25 @@ const AlkemyBlog = ({
             setFilter(true);
             setSearchResults(blogs.length);
         }
-        console.log('blogs',blogs)
+
         if (filterBySearch === false) {
             return currentPage === 1 ? (
                 <>
                     {renderFeatured(blogs)}
-                    <RecentBlogs blogdata={blogs.slice(1, 4)} layout="home" />
+                    <RecentBlogs
+                        blogdata={blogs.slice(1, 4)}
+                        layout="home"
+                        className="mt-4 mb-5"
+                    />
                 </>
             ) : (
-                <>
+                <section className="blog-post-listing">
                     <RecentBlogs
                         blogdata={blogs.slice(4, blogs.length)}
                         layout="search"
+                        className="my-4"
                     />
-                </>
+                </section>
             );
         } else {
             let offset = currentPage!==1?((currentPage-1)*6):0

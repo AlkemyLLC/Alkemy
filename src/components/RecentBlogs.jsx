@@ -134,7 +134,7 @@ const RecentBlogs = props => {
             {...other}
             className={
                 props.className
-                    ? props.className + " recent-blogs my-5"
+                    ? props.className + " recent-blogs"
                     : "recent-blogs mb-5"
             }
         >
