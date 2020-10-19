@@ -56,12 +56,13 @@ const AlkemyBlog = ({
 
     useEffect(() => {
         buildPages();
-    }, [filterBySearch]); 
+    },[searchResults]); 
 
     const buildPages = ()=>{
         let aux = [];
         let data = filterBySearch?searchResults:edges.length;
-        let count = ((data-4)/6)+1;
+        let size = filterBySearch ? 8 : 6;
+        let count = ((data - 4) / size )+ 1;
 
         for (let i = 0; i < count; i++) {
             aux.push(i + 1);
@@ -185,6 +186,8 @@ const AlkemyBlog = ({
     const renderView = (store)=>{
         let blogs = edges.map(e => e);
 
+        // if(store && store.searchResults) setSearchResults(store.searchResults);
+
         if (store.searchResults.length > 0) {
             let results = store.searchResults;
             blogs = blogs.filter(e => {
@@ -213,12 +216,15 @@ const AlkemyBlog = ({
                 </>
             );
         } else {
+            let offset = currentPage!==1?((currentPage-1)*6):0
+            let end = blogs.length > offset+6 ? offset+6 : store.searchResults.length;
+
+            let currentData = blogs.slice(offset, end);
+            console.log("result",blogs,currentData,offset,end);
+
             return (
-                <section className="py-4 blog-post-listing alk-container">
-                    <RecentBlogs
-                        blogdata={blogs.slice(4, blogs.length)}
-                        layout="alt"
-                    />
+                <section className="blog-post-listing">
+                    <RecentBlogs blogdata={currentData} layout="home" />
                 </section>
             );
         }
@@ -267,7 +273,8 @@ const AlkemyBlog = ({
                 <Context.Consumer>
                     {({ store }) => renderView(store)}
                 </Context.Consumer>
-                {pagination}
+                
+                {searchResults>4 && pagination}
                 <section ref={dreamForm}>
                     <FreeWebsiteAnalysis />
                 </section>

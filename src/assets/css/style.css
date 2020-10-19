@@ -16895,9 +16895,17 @@ div.spinContainer {
   max-height: 500px;
 }
 
-.blog-post-listing .card {
-  border: none;
-  border-radius: 0;
+.blog-post-listing .recent-blogs {
+  margin: -3rem 0;
+}
+
+.blog-post-listing .card-deck {
+  height: 100%;
+}
+
+.blog-post-listing .card-deck .card {
+  max-height: 500px;
+  margin-bottom: 2rem;
 }
 
 .latestFromCategory {

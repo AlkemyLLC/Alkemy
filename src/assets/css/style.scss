@@ -1464,9 +1464,13 @@ div.spinContainer{
 }
 
 .blog-post-listing{
-  .card{
-    border: none;
-    border-radius: 0;
+  .recent-blogs{ margin:-3rem 0; }
+  .card-deck{
+    height: 100%;
+    .card{
+      max-height: 500px;
+      margin-bottom: 2rem;
+    }
   }
 }
 
