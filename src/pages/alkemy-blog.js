@@ -38,9 +38,7 @@ Layout props:
 */
 
 const AlkemyBlog = ({
-    data: {
-        allMdx: { edges },
-    },
+    data,
     location,
 }) => {
     // pageTitle: SEO friendly title for the title bar
@@ -51,7 +49,9 @@ const AlkemyBlog = ({
     const [searchResults, setSearchResults] = useState(0);
     const [pages, setPages] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const getBlogData = ()=>edges.filter(e=>{
+
+    const getFilteredBlogs = () =>
+        data.allMdx.edges.filter(e => {
             if (
                 (category !== "all" &&
                     e.node.frontmatter.category.toLowerCase() ===
@@ -67,9 +67,10 @@ const AlkemyBlog = ({
     useEffect(() => {
         buildPages();
         let hash = location.hash.replace("-", " ").replace("#", "");
-        if(typeof hash!=="undefined") {
-            setCategory(hash)
-        };
+
+        if(typeof hash!=="undefined" && hash!=="") {
+            setCategory(hash);
+        }
     }, []); 
 
     useEffect(() => {
@@ -78,10 +79,10 @@ const AlkemyBlog = ({
 
     const buildPages = ()=>{
         let aux = [];
-        let data = filterBySearch?searchResults:getBlogData().length;
+        let blogLength = getFilteredBlogs().length;
+        let data = filterBySearch ? searchResults : blogLength;
         let size = filterBySearch ? 8 : 6;
         let count = ((data - 4) / size )+ 1;
-
         for (let i = 0; i < count; i++) {
             aux.push(i + 1);
         }
@@ -138,8 +139,7 @@ const AlkemyBlog = ({
     const blogCategories = () => {
         // create a categories array
         let categories =
-            edges &&
-            edges.map(e => {
+            data && data.allMdx.edges.map(e => {
                 return e.node.frontmatter.category;
             });
         categories = uniq(categories).sort((a, b) => a.localeCompare(b));
@@ -169,26 +169,29 @@ const AlkemyBlog = ({
     };
 
     const renderFeatured = data =>
-        data && size.width >= 760 ? (
+        data && data.length > 0 && size.width >= 760 ? (
             <Row className="alk-container pr-sm-0 blog-featured">
                 <Col
                     xs={12}
                     sm={6}
                     className="d-flex flex-column justify-content-center order-2 order-sm-1"
                 >
-                    <h2>{data[0].node.frontmatter.title}</h2>
-                    <p className="my-4 blog-featured-excerpt">
-                        {data[0].node.frontmatter.excerpt}
-                    </p>
-                    <BlogInfoBar
-                        category={data[0].node.frontmatter.category}
-                        time={data[0].node.frontmatter.readingTime}
-                        author={data[0].node.frontmatter.author}
-                        layout="horizontal"
-                        className="my-2"
-                    />
+                    <Link to={data[0].node.frontmatter.path}>
+                        <h2>{data[0].node.frontmatter.title}</h2>
+                        <p className="my-4 blog-featured-excerpt">
+                            {data[0].node.frontmatter.excerpt}
+                        </p>
+                        <BlogInfoBar
+                            category={data[0].node.frontmatter.category}
+                            time={data[0].node.frontmatter.readingTime}
+                            author={data[0].node.frontmatter.author}
+                            layout="horizontal"
+                            className="my-2"
+                        />
+                    </Link>
                 </Col>
                 <Col xs={12} sm={6} className="order-1 order-sm-2 mb-5 mb-sm-0">
+                <Link to={data[0].node.frontmatter.path}>
                     {data[0].node.frontmatter.cover.childImageSharp.fluid && (
                         <Img
                             imgStyle={{ objectFit: "cover" }}
@@ -200,6 +203,7 @@ const AlkemyBlog = ({
                             alt={data[0].node.frontmatter.coverAlt}
                         />
                     )}
+                    </Link>
                 </Col>
             </Row>
         ) : (
@@ -243,11 +247,11 @@ const AlkemyBlog = ({
         );
 
     const renderView = (store)=>{
-        let blogs = getBlogData();
+        let blogs = getFilteredBlogs();
 
         if (store.searchResults.length > 0) {
             let results = store.searchResults;
-            blogs = edges.filter(e => {
+            blogs = data.allMdx.edges.filter(e => {
                 for (let item in results) {
                     if (results[item].path === e.node.frontmatter.path)
                         return e;
@@ -262,16 +266,18 @@ const AlkemyBlog = ({
             return currentPage === 1 ? (
                 <section className="blog-post-listing">
                     {renderFeatured(blogs)}
-                    {blogs.length>1 && <RecentBlogs
-                        blogdata={blogs.slice(1, 4)}
-                        layout="home"
-                        className="mt-4 mb-5"
-                    />}
+                    {blogs && blogs.length > 1 && (
+                        <RecentBlogs
+                            blogdata={blogs && blogs.slice(1, 4)}
+                            layout="home"
+                            className="mt-4 mb-5"
+                        />
+                    )}
                 </section>
             ) : (
                 <section className="blog-post-listing">
                     <RecentBlogs
-                        blogdata={blogs.slice(4, blogs.length)}
+                        blogdata={blogs && blogs.slice(4, blogs.length)}
                         layout="search"
                         className="my-4"
                     />
@@ -308,7 +314,7 @@ const AlkemyBlog = ({
             >
                 <SEO title={pageTitle.name} />
                 <Context.Consumer>
-                    {({ store, actions }) => {
+                    {({ actions }) => {
                         return(<Row
                             className={
                                 size.width > 760
@@ -357,40 +363,38 @@ const AlkemyBlog = ({
 };
 
 const dreamForm = React.createRef();
-const categorySelect = React.createRef();
 
 const handleScroll = () => {};
 
-export const query = graphql`
-    {
-        siteSearchIndex {
-            index
-        }
-        allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
-            edges {
-                node {
-                    fields {
-                        slug
+export const query = graphql`{
+    siteSearchIndex {
+        index
+    }
+    allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
+        edges {
+            node {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    path
+                    date
+                    title
+                    author
+                    category
+                    readingTime
+                    excerpt
+                    tags
+                    cover {
+                        ...fluidImageSmall
                     }
-                    frontmatter {
-                        path
-                        date
-                        title
-                        author
-                        category
-                        readingTime
-                        excerpt
-                        tags
-                        cover {
-                            ...fluidImageSmall
-                        }
-                        coverAlt
-                    }
+                    coverAlt
                 }
             }
         }
     }
-`;
+}`;
+
 AlkemyBlog.propTypes = {
     location: PropTypes.object,
 };

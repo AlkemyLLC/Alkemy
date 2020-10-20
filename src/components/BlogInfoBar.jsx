@@ -29,7 +29,7 @@ const BlogInfoBar = props => {
                 >
                     <FontAwesomeIcon
                         icon={["far", "clock"]}
-                        size="md"
+                        // size="md"
                         color={props.iconColor || "black"}
                         className="mr-2 mb-md-0"
                     />
@@ -44,7 +44,7 @@ const BlogInfoBar = props => {
                     >
                         <FontAwesomeIcon
                             icon={["far", "user"]}
-                            size="md"
+                            // size="md"
                             color={props.iconColor || "black"}
                             className="mr-2 mb-md-0"
                         />
