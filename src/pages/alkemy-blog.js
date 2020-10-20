@@ -65,7 +65,7 @@ const AlkemyBlog = ({
         });
 
     useEffect(() => {
-        let hash = location.state.hash
+        let hash = location.state && location.state.hash
             ? location.state.hash.replace("-", " ").replace("#", "")
             : location.hash.replace("-", " ").replace("#", "");
 
