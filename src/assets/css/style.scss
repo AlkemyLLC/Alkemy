@@ -91,6 +91,12 @@ body{
   }
 }
 
+
+.lead{
+  font-weight: 400;
+  line-height: 200%;
+}
+
 /* Colors */
 
 $alkemy_darkest_blue: darken(#2bb3e5,50%); //#141B22
@@ -175,6 +181,12 @@ body{
 /* Bootstrap Override */
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
   font-weight: 600;
+}
+
+.display-4{
+  font-weight: 400;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 575.98px) {
@@ -1445,9 +1457,24 @@ div.spinContainer{
 .featured-blog-cover-image{  
   max-height: 500px;
 }
-.blog-cover-image{  
-  max-height: 500px;
+.blog-cover-image{ 
+  margin-bottom: 2rem;
+  @media screen and (min-width: 960px){
+    max-height: 500px;
+    &:after{
+      z-index: 0;
+      background: linear-gradient(to right, black,transparent);
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  } 
 }
+
+
 
 .blog-post-listing{
   .recent-blogs{ margin:-3rem 0; }
@@ -1554,8 +1581,10 @@ div.spinContainer{
 
 
 .blog,.blog-single-page{
-  #bodyWrap{
-    overflow-x: unset;
+  .disqus{
+    margin: 0 auto;
+    max-width: 900px;
+    width: 100%;
   }
 }
 
@@ -1582,10 +1611,39 @@ div.spinContainer{
 
 .blog-single-page{
   #main:not(.footer){
+    h1, h2, h3,
+    h4, h5, h6 {
+      color: $alkemy_blue;
+    }
+
     a{
+      &.active{
+        color: white;
+      }
       color: $alkemy_blue;
       &:hover{
         color: $alkemy_dark_blue;
+      }
+    }
+  }
+
+  .blog-single.hero{
+    .hero-text{
+      @media screen and (min-width:960px){
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        h2{
+          color: white;
+          font-size: 3.5rem;
+        }
+      }
+      
+      h2{
+        font-size: 2.5rem;
       }
     }
   }
@@ -1833,6 +1891,7 @@ body{
   }
 
   section.contactForm{
+    h2{color: black}
     margin: 0;
   }
 

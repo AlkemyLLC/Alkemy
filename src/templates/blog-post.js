@@ -21,6 +21,8 @@ import FloatingTitleBar from "../components/FloatingTitleBar.js";
 import SocialLinks from "../components/SocialLinks.jsx";
 import PropTypes from "prop-types";
 import BlogCategoryBar from "../components/BlogCategoryBar.jsx";
+import BlogSharing from "../components/blogShare";
+import { Disqus, CommentCount } from "gatsby-plugin-disqus";
 
 /*
 Layout props:
@@ -45,15 +47,23 @@ const components = {
 
 const BlogPostTemplate = (props) => {
     const size = useWindowSize();
-    const data = props.data
+    const {data,location} = props;
     const post = data.mdx;
     const siteTitle = data.site.siteMetadata.title;
     const { previous, next } = props.pageContext;
     const [category, setCategory] = useState("all");
+    const [filterBySearch, setFilter] = useState(false);
+    const [searchResults, setSearchResults] = useState(0);
     const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
     const edges = data.allMdx.edges;
     const author =
         data.allAuthorsJson.edges[0] && data.allAuthorsJson.edges[0].node;
+
+    let disqusConfig = {
+        url: location.href,
+        identifier: post.id,
+        title: post.title,
+    };
 
     const blogCategories = () => {
         // create a categories array
@@ -79,6 +89,18 @@ const BlogPostTemplate = (props) => {
         }
 
         return categoryArray;
+    };
+
+    const resetSearch = actions => {
+        setFilter(false);
+        setSearchResults(0);
+        actions.search("");
+        actions.searchTitle("");
+    };
+
+    const handleCategorySelect = (data, actions) => {
+        resetSearch(actions);
+        setCategory(data);
     };
 
     return (
@@ -122,75 +144,66 @@ const BlogPostTemplate = (props) => {
                     );
                 }}
             </Context.Consumer>
-            <div className="alk-container blog-single mb-5">
-                <section className="blog-single-post-info">
-                    <Row>
-                        <Col xs={12} lg={6}>
-                            <h2>{post.frontmatter.title}</h2>
-                            <Row className="my-4">
-                                <Col xs={12} lg={12}>
-                                    <BlogInfoBar
-                                        category={post.frontmatter.category}
-                                        time={post.frontmatter.readingTime}
-                                        layout="horizontal"
-                                    />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col xs={12} lg={4} className="mb-5 mb-lg-0">
-                                    <Img
-                                        className="h-100"
-                                        fluid={
-                                            author.photo.childImageSharp.fluid
-                                        }
-                                        imgStyle={{
-                                            objectFit:
-                                                author.name.toLowerCase() ===
-                                                "alkemy"
-                                                    ? "contain"
-                                                    : "cover",
-                                        }}
-                                        alt={"Photo of " + author.name}
-                                    />
-                                    <Link to={"/author" + author.slug}>
-                                        View My Profile...
-                                    </Link>
-                                </Col>
-                                <Col xs={12} lg={8}>
-                                    <h3>{author.name}</h3>
-                                    <p>{author.bio}</p>
-                                </Col>
-                            </Row>
-                        </Col>
-                        <Col
-                            xs={12}
-                            lg={6}
-                            className="mb-5 mb-lg-0 order-first order-lg-last"
-                        >
-                            <Img
-                                className="h-100 blog-cover-image"
-                                fluid={
-                                    post.frontmatter.cover.childImageSharp.fluid
-                                }
-                                alt={post.frontmatter.coverAlt}
-                            />
+            <div className="blog-single hero mb-4">
+                <div className="position-relative">
+                    <Img
+                        className="h-100 blog-cover-image"
+                        fluid={post.frontmatter.cover.childImageSharp.fluid}
+                        alt={post.frontmatter.coverAlt}
+                    />
+                    <Row className="alk-container h-100 d-flex flex-column justify-content-center hero-text">
+                        <Col xs={12} md={6} className=" ">
+                            <h2 className="font-weight-normal">
+                                {post.frontmatter.title}
+                            </h2>
                         </Col>
                     </Row>
-                </section>
+                </div>
+
+                <Row className="my-4 alk-container">
+                    <Col xs={12} sm={{ size: 6, offset: 6 }}>
+                        <BlogInfoBar
+                            category={post.frontmatter.category}
+                            time={post.frontmatter.readingTime}
+                            author={post.frontmatter.author}
+                            layout="horizontal"
+                            type="single"
+                            className="mb-0"
+                        />
+                    </Col>
+                </Row>
             </div>
-
-            <FloatingTitleBar
-                title={post.frontmatter.title}
-                category={post.frontmatter.category}
-                time={post.frontmatter.readingTime}
-            />
-
-            <div className="my-5 alk-container">
+            <div className="my-4 alk-container">
                 <MDXProvider components={components}>
                     <MDXRenderer>{post.body}</MDXRenderer>
                 </MDXProvider>
             </div>
+            <BlogSharing location={location} className="alk-container mb-5" />
+            <Row className="alk-container my-4">
+                <Col xs={12} md={4} className="mb-5">
+                    <Img
+                        className="h-100 mb-3"
+                        fluid={author.photo.childImageSharp.fluid}
+                        imgStyle={{
+                            objectFit:
+                                author.name.toLowerCase() === "alkemy"
+                                    ? "contain"
+                                    : "cover",
+                        }}
+                        alt={"Photo of " + author.name}
+                    />
+                </Col>
+                <Col xs={12} md={8}>
+                    <h3>{author.name}</h3>
+                    <p>{author.bio}</p>
+                    <Link to={"/author" + author.slug}>View My Profile...</Link>
+                </Col>
+            </Row>
+
+            <div className="alk-container disqus">
+                <Disqus config={disqusConfig} />
+            </div>
+
             <hr
                 style={{
                     marginBottom: rhythm(1),

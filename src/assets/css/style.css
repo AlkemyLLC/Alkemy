@@ -15507,6 +15507,11 @@ body {
   }
 }
 
+.lead {
+  font-weight: 400;
+  line-height: 200%;
+}
+
 /* Colors */
 .text-gray {
   color: #666 !important;
@@ -15571,6 +15576,12 @@ body.blog section.blog-post-container {
 /* Bootstrap Override */
 .h1, .h2, .h3, .h4, .recent-blogs .blog-card .card-body .card-title, .h5, .h6, h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
+}
+
+.display-4 {
+  font-weight: 400;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 575.98px) {
@@ -16882,7 +16893,23 @@ div.spinContainer {
 }
 
 .blog-cover-image {
-  max-height: 500px;
+  margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 960px) {
+  .blog-cover-image {
+    max-height: 500px;
+  }
+  .blog-cover-image:after {
+    z-index: 0;
+    background: linear-gradient(to right, black, transparent);
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 }
 
 .blog-post-listing .recent-blogs {
@@ -16999,8 +17026,10 @@ div.spinContainer {
   }
 }
 
-.blog #bodyWrap, .blog-single-page #bodyWrap {
-  overflow-x: unset;
+.blog .disqus, .blog-single-page .disqus {
+  margin: 0 auto;
+  max-width: 900px;
+  width: 100%;
 }
 
 .shortSocialBar {
@@ -17019,12 +17048,40 @@ div.spinContainer {
   fill: #0099e8;
 }
 
+.blog-single-page #main:not(.footer) h1, .blog-single-page #main:not(.footer) h2, .blog-single-page #main:not(.footer) h3,
+.blog-single-page #main:not(.footer) h4, .blog-single-page #main:not(.footer) h5, .blog-single-page #main:not(.footer) h6 {
+  color: #2bb3e5;
+}
+
 .blog-single-page #main:not(.footer) a {
   color: #2bb3e5;
 }
 
+.blog-single-page #main:not(.footer) a.active {
+  color: white;
+}
+
 .blog-single-page #main:not(.footer) a:hover {
   color: #0B3C5D;
+}
+
+@media screen and (min-width: 960px) {
+  .blog-single-page .blog-single.hero .hero-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  .blog-single-page .blog-single.hero .hero-text h2 {
+    color: white;
+    font-size: 3.5rem;
+  }
+}
+
+.blog-single-page .blog-single.hero .hero-text h2 {
+  font-size: 2.5rem;
 }
 
 .height-fix {
@@ -17256,6 +17313,10 @@ body.blog .addthis-smartlayers, body.blog-single-page .addthis-smartlayers {
 
 .wordpressCarePlans section.contactForm {
   margin: 0;
+}
+
+.wordpressCarePlans section.contactForm h2 {
+  color: black;
 }
 
 .wordpressCarePlans .modal-dialog.careModal {

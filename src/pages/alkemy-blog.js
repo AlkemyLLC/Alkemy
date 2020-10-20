@@ -46,7 +46,6 @@ const AlkemyBlog = ({
     // pageTitle: SEO friendly title for the title bar
     const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
     const size = useWindowSize();
-    // define state hooks
     const [category, setCategory] = useState('all');
     const [filterBySearch, setFilter] = useState(false);
     const [searchResults, setSearchResults] = useState(0);

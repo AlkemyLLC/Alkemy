@@ -4,12 +4,16 @@ import { Row, Col,Badge } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const BlogInfoBar = props => {
-    const { ...other } = props;
+    const { type,...other } = props;
 
     const renderHorizontal = () => {
         return (
             <>
-                <Col xs={6} md={6} lg={props.author ? 3 : "auto"} className="mb-3">
+                <Col
+                    xs={6}
+                    md={6}
+                    lg={props.author && type !== "single" ? 3 : 4}
+                >
                     <Badge
                         color="primary"
                         className="mb-md-0 blog-info-category"
@@ -20,7 +24,7 @@ const BlogInfoBar = props => {
                 <Col
                     xs={6}
                     md={6}
-                    lg={props.author ? 4 : "auto"}
+                    lg={4}
                     className="d-flex align-items-center blog-info-time mb-3 mb-lg-0"
                 >
                     <FontAwesomeIcon
@@ -35,7 +39,7 @@ const BlogInfoBar = props => {
                     <Col
                         xs={6}
                         md={12}
-                        lg={5}
+                        lg={4}
                         className="d-flex align-items-center justify-content-lg-end mb-md-0"
                     >
                         <FontAwesomeIcon
@@ -90,12 +94,18 @@ const BlogInfoBar = props => {
     );
 };
 
+BlogInfoBar.defaultTypes = {
+    layout: "horizontal",
+    type: "index"
+}
+
 BlogInfoBar.propTypes = {
     category: PropTypes.string, // Category of the post
     time: PropTypes.string, // Reading time
     author: PropTypes.string, // Who Wrote the Post
     layout: PropTypes.string, // Horizontal or Vertical
     iconColor: PropTypes.string,
+    type: PropTypes.string,
 };
 
 export default BlogInfoBar;

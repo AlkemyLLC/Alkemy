@@ -208,7 +208,7 @@ export default class FreeWebsiteAnalysis extends React.Component {
                     <ThankYou />
                 ) : (
                     <section className="contactForm py-5 px-3">
-                        <h1 className="text-center">LET&lsquo;S GET STARTED</h1>
+                        <h2 className="h1 text-center mb-4">LET&lsquo;S GET STARTED</h2>
                         <div className="container">
                             <p>
                                 Are you interested in a completely FREE analysis
