@@ -1,17 +1,17 @@
-import React from "react";
-import { Link, graphql, navigate } from "gatsby";
+import React,{useState} from "react";
+import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import { Context } from "../store/appContext.js";
-import { addJS, fluidImageSmall } from "../utils/utils.js";
+import { useWindowSize, fluidImageSmall } from "../utils/utils.js";
 import Layout from "../components/layout";
 import {uniq} from "lodash";
 import SEO from "../components/seo";
 import SkillGraph from "../components/SkillGraph.jsx";
-import { FormGroup, Label, Col, Row, Container } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
-import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
+import BlogCategoryBar from "../components/BlogCategoryBar.jsx";
 
 /*
 Layout props:
@@ -24,76 +24,52 @@ Layout props:
   bodyClasses: additional classes to add to body tag
 */
 
-class AuthorProfile extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            dropdown: "",
-        };
-
-        this.categorySelect = React.createRef();
-    }
-
-    handleDropdownChange = (value, actions) => {
-        this.setState({ dropdown: value });
-
-        // reset the search in store
-        actions.search("");
-        actions.searchTitle("");
-
-        // redirect user to /alkemy-blog/ or /alkemy-blog/?cat=<:name> if other than home
-        if (value.label.toLowerCase() === "blog home") {
-            navigate("/alkemy-blog/");
-        } else {
-            // let category = value.label.replace(/\s/g, "+") // sanitize the name for use in url
-            navigate(`/alkemy-blog/`, { state: { value } });
-            // navigate(`/alkemy-blog/?cat=${category}`,{queryParam: category})
-        }
-    };
-
-    render() {
+const AuthorProfile = (props)=> {
+        const size = useWindowSize();
+        const { data, location } = props;
         const pageTitle = {url:`/alkemy-blog`,name:`Alkemy Blog`};
-        const edges = this.props.data.allMdx.edges;
-        const author = this.props.data.allAuthorsJson.edges[0].node;
+        const edges = data.allMdx.edges;
+        const author = data.allAuthorsJson.edges[0].node;
+        const [category, setCategory] = useState("all");
 
-        let blogCategories = (jump = false) => {
+        const blogCategories = () => {
             // create a categories array
             let categories =
                 edges &&
                 edges.map(e => {
                     return e.node.frontmatter.category;
                 });
-            categories = uniq(categories);
+            categories = uniq(categories).sort((a, b) => a.localeCompare(b));
 
             // aux array
             let categoryArray = [];
 
             // if it's the Jump to menu, push in a home case
-            jump &&
-                categoryArray.push({ label: "Blog Home", value: "Blog Home" });
+            categoryArray.push({ label: "All", value: "all" });
 
             // loop the category array and push in pairs to aux
             for (let i in categories) {
                 categoryArray.push({
                     label: categories[i],
-                    value: categories[i],
+                    value: categories[i].toLowerCase(),
                 });
             }
 
             return categoryArray;
         };
 
-        // addJS(position,inner script,source) - adds JS to document dynamically for AddThis Toolbar
-        addJS(
-            `body`,
-            null,
-            `//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ae21853f0b21631`
-        );
+        const resetSearch = actions => {
+            actions.search("");
+            actions.searchTitle("");
+        };
+
+        const handleCategorySelect = async (data, actions) => {
+            resetSearch(actions);
+        };
 
         return (
             <Layout
-                location={this.props.location}
+                location={location}
                 title={author.name}
                 headerTitle={[true, pageTitle]}
                 search={true}
@@ -105,51 +81,30 @@ class AuthorProfile extends React.Component {
                     description={author.name + "-" + author.bio}
                 />
                 <div className="alk-container blog-author pb-5">
-                    <section className="blog-category-filter my-3">
-                        <Row className="align-items-center h-100">
-                            <Col
-                                xs={12}
-                                sm={{ size: 10, offset: 2 }}
-                                md={{ size: 8, offset: 4 }}
-                                lg={{ size: 6, offset: 6 }}
-                                xl={{ size: 4, offset: 8 }}
+                    <Context.Consumer>
+                    {({ store, actions }) => {
+                        return (
+                            <Row
+                                className={
+                                    size.width > 760
+                                        ? "py-4 my-3"
+                                        : "pr-0 py-4 my-3"
+                                }
+                                noGutters
                             >
-                                {/* Category Dropdown */}
-                                <FormGroup row className="align-items-center">
-                                    <Label
-                                        for="categories"
-                                        xs={3}
-                                        className="text-right text-muted"
-                                    >
-                                        Jump to:
-                                    </Label>
-                                    <Col xs={9}>
-                                        <Context.Consumer>
-                                            {({ actions }) => (
-                                                <Select
-                                                    className="category-select"
-                                                    classNamePrefix="select"
-                                                    placeholder="Select a value..."
-                                                    name="categories"
-                                                    options={blogCategories(
-                                                        true
-                                                    )}
-                                                    ref={this.categorySelect}
-                                                    value={this.state.dropdown}
-                                                    onChange={value =>
-                                                        this.handleDropdownChange(
-                                                            value,
-                                                            actions
-                                                        )
-                                                    }
-                                                />
-                                            )}
-                                        </Context.Consumer>
-                                    </Col>
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                    </section>
+                                <Col xs={12}>
+                                    <BlogCategoryBar
+                                        defaultSelected={category}
+                                        categories={blogCategories()}
+                                        onSelectCategory={e =>
+                                            handleCategorySelect(e, actions)
+                                        }
+                                    />
+                                </Col>
+                            </Row>
+                        );
+                    }}
+                </Context.Consumer>
                     <section className="blog-author-profile my-5">
                         <Row className="h-100">
                             <Col xs={12} lg={4} className="h-100 mb-4">
@@ -198,7 +153,7 @@ class AuthorProfile extends React.Component {
                 <FreeWebsiteAnalysis />
             </Layout>
         );
-    }
+
 }
 
 AuthorProfile.propTypes = {

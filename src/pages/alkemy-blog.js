@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from "react";
-import {uniq,isEqual,sortBy} from "lodash";
+import {uniq} from "lodash";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import { Context } from "../store/appContext.js";
-import { addJS, fluidImageSmall } from "../utils/utils.js";
+import { fluidImageSmall, useWindowSize } from "../utils/utils.js";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
-import { Button, Col, Row, Label, FormGroup } from "reactstrap";
+import {
+    Col,
+    Row,
+    Pagination,
+    PaginationItem,
+    PaginationLink,
+    Card,CardBody,
+    CardTitle, 
+    CardDeck
+} from "reactstrap";
 import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
 import SEO from "../components/seo";
-import Select from "react-select";
 import BlogInfoBar from "../components/BlogInfoBar.jsx";
 import RecentBlogs from "../components/RecentBlogs.jsx";
-import LatestFromCategory from "../components/LatestFromCategory.jsx";
 import PropTypes from "prop-types";
-
-
+import BlogCategoryBar from "../components/BlogCategoryBar.jsx";
 
 /*
 Layout props:
@@ -32,59 +38,112 @@ Layout props:
 */
 
 const AlkemyBlog = ({
-    data: {
-        allMdx: { edges },
-    },
+    data,
     location,
 }) => {
     // pageTitle: SEO friendly title for the title bar
     const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
-
-    // define state hooks
-    const [dropdown, setDropdown] = useState("");
+    const size = useWindowSize();
+    const [category, setCategory] = useState("all");
     const [filterBySearch, setFilter] = useState(false);
     const [searchResults, setSearchResults] = useState(0);
+    const [pages, setPages] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    // useEffect hook to check if their is a state value and trigger it in the dropdown
+    const getFilteredBlogs = () =>
+        data.allMdx.edges.filter(e => {
+            if (
+                (category !== "all" &&
+                    e.node.frontmatter.category.toLowerCase() ===
+                        category.toLowerCase()) ||
+                (category !== "all" &&
+                    e.node.frontmatter.tags.includes(category)) ||
+                category === "all"
+            ) {
+                return e;
+            }
+        });
+
     useEffect(() => {
-        if (location.state && location.state.value) {
-            // use location.state to get information from single post
-            let cat = location.state.value;
+        let hash = location.state && location.state.hash
+            ? location.state.hash.replace("-", " ").replace("#", "")
+            : location.hash.replace("-", " ").replace("#", "");
 
-            // set the dropdown parameters and reset the search
-            setDropdown(cat);
+        if(location.state.hash!==null && typeof hash!=="undefined" && hash!=="") {
+            setCategory(hash);
+        }else{
+            buildPages();
         }
-    }, []); // pass empty array as second arg so it only runs on mount
+    }, []); 
 
-    // addJS(position,inner script,source) - adds JS to document dynamically for AddThis Toolbar
-    // addJS(
-    //     `body`,
-    //     null,
-    //     `//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ae21853f0b21631`,
-    //     `addThis`
-    // );
+    useEffect(() => {
+        console.log('location',location,location.state)
+        buildPages();
+    },[searchResults,category]); 
 
-    let createBlogArray = (arr, home = true) => {
-        let blogArray = arr.map(e => e);
-        if (home && blogArray.length > 0) blogArray.shift();
-        return blogArray;
-    };
+    const buildPages = ()=>{
+        let aux = [];
+        let blogLength = getFilteredBlogs().length;
+        let data = filterBySearch ? searchResults : blogLength;
+        let size = filterBySearch ? 8 : 6;
+        let count = ((data - 4) / size )+ 1;
+        for (let i = 0; i < count; i++) {
+            aux.push(i + 1);
+        }
 
-    const resetDropdown = () => {
-        setDropdown("");
-    };
-    const resetSearch = actions => {
-        setFilter(false);
-        setSearchResults(0);
-        actions.search("");
-        actions.searchTitle("");
-    };
+        setPages(aux);
+    }
 
-    const blogCategories = (jump = false) => {
+    const pagination = (
+        <Pagination
+            aria-label="blog pages"
+            listClassName="align-items-center justify-content-center"
+        >
+            <PaginationItem disabled={currentPage < 2}>
+                <PaginationLink
+                    first
+                    href="#"
+                    onClick={e => setCurrentPage(1)}
+                />
+            </PaginationItem>
+            <PaginationItem disabled={currentPage < 2}>
+                <PaginationLink
+                    previous
+                    href="#"
+                    onClick={e => setCurrentPage(currentPage - 1)}
+                />
+            </PaginationItem>
+            {pages.map((page, index) => (
+                <PaginationItem active={currentPage === index + 1} key={index}>
+                    <PaginationLink
+                        href="#"
+                        onClick={e => setCurrentPage(index + 1)}
+                    >
+                        {index + 1}
+                    </PaginationLink>
+                </PaginationItem>
+            ))}
+            <PaginationItem disabled={currentPage > pages.length - 1}>
+                <PaginationLink
+                    next
+                    href="#"
+                    onClick={e => setCurrentPage(currentPage + 1)}
+                />
+            </PaginationItem>
+            <PaginationItem disabled={currentPage > pages.length - 1}>
+                <PaginationLink
+                    last
+                    href="#"
+                    onClick={e => setCurrentPage(pages.length)}
+                />
+            </PaginationItem>
+        </Pagination>
+    );
+
+    const blogCategories = () => {
         // create a categories array
         let categories =
-            edges &&
-            edges.map(e => {
+            data && data.allMdx.edges.map(e => {
                 return e.node.frontmatter.category;
             });
         categories = uniq(categories).sort((a, b) => a.localeCompare(b));
@@ -93,27 +152,132 @@ const AlkemyBlog = ({
         let categoryArray = [];
 
         // if it's the Jump to menu, push in a home case
-        jump && categoryArray.push({ label: "Blog Home", value: "Blog Home" });
+        categoryArray.push({ label: "All", value: "all" });
 
         // loop the category array and push in pairs to aux
         for (let i in categories) {
-            categoryArray.push({ label: categories[i], value: categories[i] });
+            categoryArray.push({
+                label: categories[i],
+                value: categories[i].toLowerCase(),
+            });
         }
 
         return categoryArray;
     };
 
-    const handleDropdownChange = (value, actions) => {
-        setDropdown(value);
-        resetSearch(actions);
+    const resetSearch = actions => {
+        setFilter(false);
+        setSearchResults(0);
+        actions.search("");
+        actions.searchTitle("");
     };
 
-    const renderView = store => {
-        let blogs = edges.map(e => e);
+    const renderFeatured = data => {
+        console.log('featured',data[0],data.length,size.width);
+        if(data && data.length > 0 && size.width >= 760){
+            return (
+                <Row className="alk-container pr-sm-0 blog-featured">
+                    <Col
+                        xs={12}
+                        sm={6}
+                        className="d-flex flex-column justify-content-center order-2 order-sm-1"
+                    >
+                        <Link to={data[0].node.frontmatter.path}>
+                            <h2>{data[0].node.frontmatter.title}</h2>
+                            <p className="my-4 blog-featured-excerpt">
+                                {data[0].node.frontmatter.excerpt}
+                            </p>
+                            <BlogInfoBar
+                                category={data[0].node.frontmatter.category}
+                                time={data[0].node.frontmatter.readingTime}
+                                author={data[0].node.frontmatter.author}
+                                layout="horizontal"
+                                className="my-2"
+                            />
+                        </Link>
+                    </Col>
+                    <Col
+                        xs={12}
+                        sm={6}
+                        className="order-1 order-sm-2 mb-5 mb-sm-0"
+                    >
+                        <Link to={data[0].node.frontmatter.path}>
+                            {data[0].node.frontmatter.cover.childImageSharp
+                                .fluid && (
+                                <Img
+                                    style={{
+                                        minHeight: "500px",
+                                    }}
+                                    objectFit="cover"
+                                    className="h-100 featured-blog-cover-image"
+                                    fluid={
+                                        data[0].node.frontmatter.cover
+                                            .childImageSharp.fluid
+                                    }
+                                    alt={data[0].node.frontmatter.coverAlt}
+                                />
+                            )}
+                        </Link>
+                    </Col>
+                </Row>
+            );
+        }else {
+            return (
+                <Row className="px-0 blog-featured">
+                    <Col xs={12} sm={6} md={4}>
+                        <CardDeck>
+                            <Card className="blog-card">
+                                <Link to={data[0].node.frontmatter.path}>
+                                    <Img
+                                        className="h-100 card-img-top"
+                                        style={{
+                                            minHeight: "500px",
+                                            position: "unset",
+                                        }}
+                                        imgStyle={{
+                                            minHeight: "500px",
+                                        }}
+                                        fluid={
+                                            data[0].node.frontmatter.cover
+                                                .childImageSharp.fluid
+                                        }
+                                        alt={data[0].node.frontmatter.coverAlt}
+                                    />
+                                    <CardBody>
+                                        <CardTitle
+                                            className="text-bold"
+                                            tag="h2"
+                                        >
+                                            {data[0].node.frontmatter.title}
+                                        </CardTitle>
+                                        <BlogInfoBar
+                                            category={
+                                                data[0].node.frontmatter
+                                                    .category
+                                            }
+                                            time={
+                                                data[0].node.frontmatter
+                                                    .readingTime
+                                            }
+                                            layout="horizontal"
+                                            className="mt-2"
+                                        />
+                                    </CardBody>
+                                </Link>
+                            </Card>
+                        </CardDeck>
+                    </Col>
+                </Row>
+            );
+        }
+    }
+
+    const renderView = (store)=>{
+        let blogs = getFilteredBlogs();
 
         if (store.searchResults.length > 0) {
             let results = store.searchResults;
-            blogs = blogs.filter(e => {
+            blogs = data.allMdx.edges.filter(e => {
                 for (let item in results) {
                     if (results[item].path === e.node.frontmatter.path)
                         return e;
@@ -122,123 +286,50 @@ const AlkemyBlog = ({
 
             setFilter(true);
             setSearchResults(blogs.length);
-            resetDropdown();
-        } else if (
-            dropdown.value &&
-            dropdown.value.length > 0 &&
-            dropdown.value.toLowerCase() != "blog home"
-        ) {
-            blogs = blogs.filter(e => {
-                return e.node.frontmatter.category === dropdown.value;
-            });
-
-            setFilter(false);
-            setSearchResults(0);
         }
 
-        if (filterBySearch === false) {
-            return (
-                <>
-                    {isEqual(sortBy(blogs), sortBy(edges)) ? (
-                        <section className="blog-featured position-relative alk-container">
-                            <Row className="h-100 align-items-center">
-                                <Col xs={12} lg={6} className="h-100">
-                                    <h2>
-                                        {blogs &&
-                                            blogs[0].node.frontmatter.title}
-                                    </h2>
-                                    <p className="my-4">
-                                        {blogs &&
-                                            blogs[0].node.frontmatter.excerpt}
-                                    </p>
-                                    <BlogInfoBar
-                                        category={
-                                            blogs[0].node.frontmatter.category
-                                        }
-                                        time={
-                                            blogs[0].node.frontmatter
-                                                .readingTime
-                                        }
-                                        author={
-                                            blogs[0].node.frontmatter.author
-                                        }
-                                        layout="horizontal"
-                                        className="my-4"
-                                    />
-                                    <Button
-                                        to={blogs[0].node.frontmatter.path}
-                                        tag={Link}
-                                        color="primary"
-                                        className="my-4"
-                                        block
-                                    >
-                                        Read Full Post
-                                    </Button>
-                                </Col>
-                                <Col
-                                    xs={12}
-                                    lg={6}
-                                    className="mb-5 mb-lg-0 order-first order-lg-last"
-                                >
-                                    <Img
-                                        className="h-100 featured-blog-cover-image"
-                                        fluid={
-                                            blogs[0].node.frontmatter.cover
-                                                .childImageSharp.fluid
-                                        }
-                                        alt={blogs[0].node.frontmatter.coverAlt}
-                                    />
-                                </Col>
-                            </Row>
-                        </section>
-                    ) : null}
-
-                    {isEqual(sortBy(blogs), sortBy(edges)) ? (
-                        <section className="py-4 blog-post-listing alk-container">
-                            <Row>
-                                <Col xs={12} lg={9}>
-                                    <RecentBlogs
-                                        className=""
-                                        blogdata={
-                                            blogs && createBlogArray(blogs)
-                                        }
-                                        layout="home"
-                                    />
-                                </Col>
-                                <Col lg={3} className="d-none d-lg-block">
-                                    <LatestFromCategory
-                                        blogdata={blogs && blogs}
-                                        categories={blogs && blogCategories()}
-                                    />
-                                </Col>
-                            </Row>
-                        </section>
-                    ) : (
-                        <section className="py-4 blog-post-listing alk-container">
-                            <Row>
-                                <Col xs={12}>
-                                    <RecentBlogs
-                                        blogdata={createBlogArray(blogs, false)}
-                                        layout="alt"
-                                    />
-                                </Col>
-                            </Row>
-                        </section>
+        if (!filterBySearch) {
+            console.log('filtered by search',filterBySearch,currentPage)
+            return currentPage === 1 ? (
+                <section className="blog-post-listing">
+                    {renderFeatured(blogs)}
+                    {blogs && blogs.length > 1 && (
+                        <RecentBlogs
+                            blogdata={blogs && blogs.slice(1, 4)}
+                            layout="home"
+                            className="mt-4 mb-5"
+                        />
                     )}
-                </>
+                </section>
+            ) : (
+                <section className="blog-post-listing">
+                    <RecentBlogs
+                        blogdata={blogs && blogs.slice(4, blogs.length)}
+                        layout="search"
+                        className="my-4"
+                    />
+                </section>
             );
         } else {
+            let offset = currentPage!==1?((currentPage-1)*6):0
+            let end = blogs.length > offset+6 ? offset+6 : store.searchResults.length;
+
+            let currentData = blogs.slice(offset, end);
+            console.log("result",blogs,currentData,offset,end);
+
             return (
-                <section className="py-4 blog-post-listing alk-container">
-                    <Row>
-                        <Col xs={12}>
-                            <RecentBlogs blogdata={blogs} layout="alt" />
-                        </Col>
-                    </Row>
+                <section className="blog-post-listing">
+                    <RecentBlogs blogdata={currentData} layout="search" />
                 </section>
             );
         }
-    };
+    }
+
+    const handleCategorySelect = (data,actions)=>{
+        resetSearch(actions);
+        setCurrentPage(1);
+        setCategory(data);
+    }
 
     return (
         <ScrollWrapper onWindowScroll={handleScroll}>
@@ -251,58 +342,26 @@ const AlkemyBlog = ({
                 <SEO title={pageTitle.name} />
                 <Context.Consumer>
                     {({ actions }) => {
-                        return (
-                            <section className="blog-category-filter my-3">
-                                <Row className="align-items-center h-100 alk-container">
-                                    <Col 
-                                        xs={12} 
-                                        sm={{size: 10,offset:2}} 
-                                        md={{size:8,offset:4}} 
-                                        lg={{size:6,offset:6}} 
-                                        xl={{size:4,offset:8}} 
-                                        >
-
-                                        {/* Category Dropdown */}
-                                        <FormGroup
-                                            row
-                                            className="align-items-center"
-                                        >
-                                            <Label
-                                                for="categories"
-                                                xs={4}
-                                                className="text-right text-muted"
-                                            >
-                                                Jump to:
-                                            </Label>
-                                            <Col 
-                                                xs={8}
-                                                >
-                                                <Select
-                                                    className="category-select"
-                                                    classNamePrefix="select"
-                                                    placeholder="Select a value..."
-                                                    name="categories"
-                                                    options={blogCategories(
-                                                        true
-                                                    )}
-                                                    ref={categorySelect}
-                                                    value={dropdown}
-                                                    onChange={value =>
-                                                        handleDropdownChange(
-                                                            value,
-                                                            actions
-                                                        )
-                                                    }
-                                                />
-                                            </Col>
-                                        </FormGroup>
-                                    </Col>
-                                </Row>
-                            </section>
-                        );
+                        return(<Row
+                            className={
+                                size.width > 760
+                                    ? "alk-container py-4 my-3"
+                                    : "alk-container pr-0 py-4 my-3"
+                            }
+                            noGutters
+                        >
+                            <Col xs={12}>
+                                <BlogCategoryBar
+                                    defaultSelected={category}
+                                    categories={blogCategories()}
+                                    onSelectCategory={e =>
+                                        handleCategorySelect(e, actions)
+                                    }
+                                />
+                            </Col>
+                        </Row>)
                     }}
                 </Context.Consumer>
-
                 <Context.Consumer>
                     {({ store }) => {
                         filterBySearch === true ? (
@@ -320,6 +379,8 @@ const AlkemyBlog = ({
                 <Context.Consumer>
                     {({ store }) => renderView(store)}
                 </Context.Consumer>
+
+                {pagination}
                 <section ref={dreamForm}>
                     <FreeWebsiteAnalysis />
                 </section>
@@ -329,39 +390,38 @@ const AlkemyBlog = ({
 };
 
 const dreamForm = React.createRef();
-const categorySelect = React.createRef();
 
 const handleScroll = () => {};
 
-export const query = graphql`
-    {
-        siteSearchIndex {
-            index
-        }
-        allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
-            edges {
-                node {
-                    fields {
-                        slug
+export const query = graphql`{
+    siteSearchIndex {
+        index
+    }
+    allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
+        edges {
+            node {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    path
+                    date
+                    title
+                    author
+                    category
+                    readingTime
+                    excerpt
+                    tags
+                    cover {
+                        ...fluidImageSmall
                     }
-                    frontmatter {
-                        path
-                        date
-                        title
-                        author
-                        category
-                        readingTime
-                        excerpt
-                        cover {
-                            ...fluidImageSmall
-                        }
-                        coverAlt
-                    }
+                    coverAlt
                 }
             }
         }
     }
-`;
+}`;
+
 AlkemyBlog.propTypes = {
     location: PropTypes.object,
 };

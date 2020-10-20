@@ -42,6 +42,18 @@ module.exports = {
     },
     plugins: [
         {
+            resolve: "gatsby-plugin-google-tagmanager",
+            options: {
+                id: "GTM-TRL98WJ",
+                includeInDevelopment: false,
+                defaultDataLayer: { platform: "gatsby" },
+                routeChangeEventName: "gatsby-route-change",
+            },
+        },
+        {
+            resolve: `gatsby-plugin-preload-fonts`,
+        },
+        {
             resolve: `gatsby-plugin-loadable-components-ssr`,
         },
         {
@@ -158,6 +170,12 @@ module.exports = {
             resolve: `gatsby-plugin-sitemap`,
             options: {
                 sitemapSize: 5000,
+            },
+        },
+        {
+            resolve: `gatsby-plugin-disqus`,
+            options: {
+                shortname: `alkemy`,
             },
         },
         {

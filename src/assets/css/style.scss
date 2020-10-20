@@ -42,7 +42,11 @@ $container-max-widths: (
   xl: 1080px,
 );
 
+$font-family-base: 'Avenir Next','Helvetica Neue','Segoe UI','Helvetica','Arial',sans-serif;
+$line-height-base: 1.666;
+
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
 
 
 /* VH Conversion Function */
@@ -87,8 +91,14 @@ body{
   }
 }
 
-/* Colors */
 
+.lead{
+  font-weight: 400;
+  line-height: 200%;
+}
+
+/* Colors */
+$alkemy_black: #212529;
 $alkemy_darkest_blue: darken(#2bb3e5,50%); //#141B22
 $alkemy_blue: #2bb3e5;
 $alkemy_light_blue: rgba(43, 179, 229, 0.1); //#2bb3e5 10% opacity
@@ -173,8 +183,10 @@ body{
   font-weight: 600;
 }
 
-body{
-  font-family: unset;
+.display-4{
+  font-weight: 400;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 575.98px) {
@@ -464,7 +476,7 @@ a {
     transition:1000ms ease all;
     &:hover {
       svg path{
-        fill: #212529;
+        fill: $alkemy_black;
       }
     }
   }
@@ -941,75 +953,69 @@ section.ourPassion{
   }
 }
 
+// recent blogs widget on home page
 section.recentBlogPosts{
   background: $alkemy_dark_blue;
   color: white;
   
   .card-deck{
-    position: relative;
-    .row{
-      .blogCard {
-        border-radius: 0;
-        border: none;
-        
-        a {
-          height: 100%;
-        }  
+    .blogCard {
+      border-radius: 0;
+      border: none;
+      height: 350px;  
 
-        .card-img-top{
-          border-radius: 0;
-          height: 100%;
-        }
-        
-        .card-img-overlay{
-          .card-footer {
-            position: absolute;
-            bottom: 0;
-          }
-        }
-  
-        .card-body{
-          background: rgba(black,.9);
+      .card-img-top{
+        border-radius: 0;
+        height: 100%;
+      }
+
+      a{height: 100%;}
+      
+
+      .card-body{
+        background: rgba(black,.9);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        a h3.card-title{
+          white-space: nowrap; 
           overflow: hidden;
           text-overflow: ellipsis;
-          a h3.card-title{
-            white-space: nowrap; 
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: white;
-            font-size: 1.2em;
-            font-weight: 300 !important;
-          }
+          color: white;
+          font-size: 1.2em;
+          font-weight: 300 !important;
         }
-        
-        .card-img-overlay{
-          .card-body{
-            background: unset;
-          }
+      }
+      
+      .card-img-overlay{
+        .card-body{
+          background: unset;
           position: relative;
-          transition: .3s linear;
-          padding: 0;
-          border: 1px solid $alkemy_blue;
-          height: 100%;
-          overflow: hidden;
-  
-          @media only screen and (min-width: 992px){
-            min-height: fit-content;
-            position: absolute;
-            opacity: 0;
-          }
+          a{height: auto; max-width: 200px;}
         }
-  
-        &:hover{
-          @media only screen and (min-width: 992px) {
-            .card-img-overlay {
-              opacity: 1;
-              color: white;
-              background: rgba(0,0,0,.90);
-              height: 100%;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
+        position: relative;
+        transition: .3s linear;
+        padding: 0;
+        border: 1px solid $alkemy_blue;
+        // height: 100%;
+        overflow: hidden;
+
+        @media only screen and (min-width: 992px){
+          min-height: fit-content;
+          position: absolute;
+          opacity: 0;
+        }
+      }
+
+      &:hover{
+        @media only screen and (min-width: 992px) {
+          .card-img-overlay {
+            opacity: 1;
+            color: white;
+            background: rgba(0,0,0,.5);
           }
         }
       }
@@ -1407,46 +1413,54 @@ div.spinContainer{
   }
 }
 
-.blog-category-filter{
-  select.custom-select{
-    border-color: $alkemy_blue;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%232bb3e5'><polygon points='0,0 100,0 50,50'/></svg>") no-repeat;
-    background-size: 16px;
-    background-position: calc(100% - 20px) 20px;
-    background-repeat: no-repeat;
-    .dropdown-menu{
-      background: black;
+.blog-category-bar{
+  white-space: nowrap;
+  display:flex;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  li.nav-item{
+    display: inline-flex;
+    a.nav-link{
+      &.active{
+        &:hover{
+          color: white !important;
+        }
+      }
     }
   }
 }
 
-// Custom Select
-.category-select{
-  .select__control{
-    border-color: $alkemy_blue;
-    border-radius: 0;
-    &:hover, &.select__control--is--focused{
-      border-color: $alkemy_blue;
-    }
-  }
-
-  .select__menu,
-  .select__menu-list,
-  .select__menu-option{
-    background:white;
-  }
-  .select__menu-option{
-    color: black;
-    &:hover{
-      background: $alkemy_blue;
+.blog-post-listing{
+  .blog-featured{
+    .blog-card{
+      min-height: $half_viewport;
+      a{
+        height: 100%;
+        .card-img-top{
+          height: 100%;
+        }
+        .card-body{
+          color: white;
+          svg{color: white;}
+          position: absolute;
+          bottom:0;
+          right:0;
+          left:0;
+          background: rgba(0,0,0,.5);
+          @media screen and (min-width: 768px){
+            position: relative;
+            bottom: unset;
+            right: unset;
+            left: unset;
+          }
+        }
+      }
     }
   }
 }
-
-// .blogSearch.row {
-//   padding: .5rem;
-// }
-
 .blog-featured{
   min-height: $half_viewport;
   .heroChevron{
@@ -1454,50 +1468,35 @@ div.spinContainer{
   }
 }
 .featured-blog-cover-image{  
-  max-height: 400px;
-}
-.blog-cover-image{  
   max-height: 500px;
 }
+.blog-cover-image{ 
+  margin-bottom: 2rem;
+  @media screen and (min-width: 960px){
+    max-height: 500px;
+    &:after{
+      z-index: 0;
+      background: linear-gradient(to right, black,transparent);
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  } 
+}
+
+
 
 .blog-post-listing{
-  .card{
-    border: none;
-    border-radius: 0;
-    // .card-body{
-    //   font-size: 18px;
-    // }
-  }
-}
-
-.latestFromCategory{
-  background: $alkemy_light_blue;
-  .card{
-    background: transparent;
-    border: none;
-    .card-img-top{
-      max-height: 160px;
+  .recent-blogs{ margin:-3rem 0; }
+  .card-deck{
+    height: 100%;
+    .card{
+      max-height: 500px;
+      margin-bottom: 2rem;
     }
-    .card-body{
-      padding: 1.25rem 0;
-    }
-  }
-}
-
-.blogCard{
-  height: 100%;
-  background: $alkemy_light_blue;
-  &.alt{
-    @media screen and (min-width: 768px){
-      -ms-flex: 0 0 25%;
-      flex: 0 0 25%;
-    }
-  }
-  .card-body{
-    padding: 1.25rem;
-  }
-  .card-footer{
-    bottom: 0;
   }
 }
 
@@ -1505,6 +1504,42 @@ div.spinContainer{
   a:hover {
     text-decoration: none;
   }
+}
+
+.recent-blogs{
+  @extend .recentBlogPosts,.blogCard,.card-img-top;
+  .blog-card{
+    min-height: 450px;
+
+    a,a:hover{color: white; text-decoration: none;}
+    a,.card-img-top{height: 100%;}
+
+    .card-body{
+      min-height: 150px;
+      background: rgba(0,0,0,.5);
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0; 
+
+      .card-title{
+        @extend .h4,.line-clamp;
+        font-weight: normal;
+      }
+    }
+  }
+}
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical; 
+  /* autoprefixer: on */
+  overflow: hidden;
+}
+
+.card-deck .blog-card .blog-info-time svg{
+  color: white;
 }
 
 .blog-title-bar{
@@ -1522,14 +1557,18 @@ div.spinContainer{
   }
 }
 
-.blog-title-bar{
-  .blog-info-category{
-    @media screen and (min-width:1024px) {
-      -webkit-justify-content: flex-end !important;
-      justify-content: flex-end !important;
-    }
-  }
+.badge.badge-primary, .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+  background-color: $alkemy_blue
 }
+
+.nav-pills .nav-link{
+  color: $alkemy_blue;
+  &:not(.active):hover{
+    color: $alkemy_dark_blue;
+  } 
+}
+
+
 .blog-info-category{
   @media screen and (min-width:1024px){
     -webkit-justify-content: flex-start !important;
@@ -1538,18 +1577,14 @@ div.spinContainer{
   -webkit-justify-content: flex-end !important;
   justify-content: flex-end !important;
 }
-.blog-info-time{
-  @media screen and (min-width:1024px){
-    -webkit-justify-content: flex-end !important;
-    justify-content: flex-end !important;
-  }
-  -webkit-justify-content: flex-start !important;
-  justify-content: flex-start !important;
-}
+
+
 
 .blog,.blog-single-page{
-  #bodyWrap{
-    overflow-x: unset;
+  .disqus{
+    margin: 0 auto;
+    max-width: 900px;
+    width: 100%;
   }
 }
 
@@ -1576,10 +1611,45 @@ div.spinContainer{
 
 .blog-single-page{
   #main:not(.footer){
+    h1, h2, h3,
+    h4, h5, h6 {
+      color: $alkemy_blue;
+    }
+
+    .contactForm {
+      h2{
+        color: $alkemy_black;
+      }
+    }
+
     a{
+      &.active{
+        color: white;
+      }
       color: $alkemy_blue;
       &:hover{
         color: $alkemy_dark_blue;
+      }
+    }
+  }
+
+  .blog-single.hero{
+    .hero-text{
+      @media screen and (min-width:768px){
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+      }
+
+      h2{
+        font-size: 2.5rem;
+        @media screen and (min-width:768px){
+          color: white !important;
+          font-size: 3.5rem;
+        }
       }
     }
   }
@@ -1827,6 +1897,7 @@ body{
   }
 
   section.contactForm{
+    h2{color: black}
     margin: 0;
   }
 

@@ -86,7 +86,6 @@ const Header = ({ pageTitle, hideHeader, renderHeaderSolid, search }) => (
                             : "header fadeInDown position-fixed"
                     }
                 >
-                    {console.log(data.logo.childImageSharp.fluid)}
                     {data.logo.childImageSharp && (
                         <ReactNavbar
                             menuArray={_menuArray}

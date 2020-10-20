@@ -28,56 +28,44 @@ const BlogWidget = props => {
         .slice(0, size) // select only 3 posts (query should organize by DESC)
         .map(edge => {
             return (
-                <Col key={edge.node.id} xs={12} md={4} className="mb-4">
-                    <Card className="blogCard">
-                        <Link to={edge.node.frontmatter.path} aria-label="Read More">
-                            {edge.node.frontmatter.cover && (
-                                <Img
-                                    className="card-img-top"
-                                    fluid={
-                                        edge.node.frontmatter.cover
-                                            .childImageSharp.fluid
-                                    }
-                                    alt={edge.node.frontmatter.coverAlt}
-                                />
-                            )}
+                <Card className="blogCard mb-4" key={edge.node.id}>
+                    <Link
+                        to={edge.node.frontmatter.path}
+                        aria-label="Read More"
+                    >
+                        {edge.node.frontmatter.cover && (
+                            <Img
+                                className="card-img-top"
+                                fluid={
+                                    edge.node.frontmatter.cover.childImageSharp
+                                        .fluid
+                                }
+                                alt={edge.node.frontmatter.coverAlt}
+                            />
+                        )}
+                    </Link>
+                    <CardBody>
+                        <Link to={edge.node.frontmatter.path}>
+                            <CardTitle tag="h3">
+                                {edge.node.frontmatter.title}
+                            </CardTitle>
                         </Link>
-                        <CardBody>
-                            <Link to={edge.node.frontmatter.path}>
-                                <CardTitle tag="h3">
-                                    {edge.node.frontmatter.title}
-                                </CardTitle>
-                            </Link>
+                    </CardBody>
+                    <CardImgOverlay className="d-none d-lg-flex">
+                        <CardBody className="d-flex flex-row align-items-center justify-content-center">
+                            <Button
+                                tag={Link}
+                                to={edge.node.frontmatter.path}
+                                className="mt-0"
+                                block
+                                size="md"
+                                color="primary"
+                            >
+                                Read More
+                            </Button>
                         </CardBody>
-                        <CardImgOverlay className="d-none d-lg-block">
-                            <CardBody>
-                                <CardText>
-                                    {truncate(edge.node.frontmatter.excerpt, {
-                                    'length': 145,
-                                    'omission': ' ...'}) ? truncate(
-                                        edge.node.frontmatter.excerpt,{
-                                        'length': 145,
-                                        'omission': ' ...'})
-                                     : (
-                                        <Loading />
-                                    )}
-                                </CardText>
-                            </CardBody>
-                            <CardFooter className="w-100">
-                                <Button
-                                    tag={Link}
-                                    to={edge.node.frontmatter.path}
-                                    className="mt-0"
-                                    block
-                                    size="md"
-                                    color="primary"
-                                >
-                                    Read More...
-                                </Button>
-                            </CardFooter>
-                        </CardImgOverlay>
-                    </Card>
-                </Col>
+                    </CardImgOverlay>
+                </Card>
             );
         });
     return (
@@ -85,7 +73,7 @@ const BlogWidget = props => {
             <div className="container-fluid p-5">
                 <h2 className="pb-3 text-xl-center">Check Out Our Recent Posts</h2>
                 <CardDeck className="justify-content-xl-center">
-                    <Row className="no-gutters">{Posts}</Row>
+                    {Posts}
                 </CardDeck>
             </div>
         </>

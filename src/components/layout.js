@@ -112,18 +112,6 @@ const Layout = ({
             `}
             render={data => (
                 <div key={`body`} id="bodyWrap">
-                    {/* Google Tag Manager (noscript) */}
-                    <noscript>
-                        <iframe
-                            src="https://www.googletagmanager.com/ns.html?id=GTM-TRL98WJ"
-                            height="0"
-                            width="0"
-                            style={{ display: "none", visibility: "hidden" }}
-                            title="googletagmanager"
-                        />
-                    </noscript>
-                    {/* End Google Tag Manager (noscript) */}
-
                     <Header
                         hideHeader={headerTitle ? headerTitle[0] : null}
                         pageTitle={headerTitle ? headerTitle[1] : {}}
