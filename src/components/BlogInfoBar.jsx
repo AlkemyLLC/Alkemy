@@ -13,6 +13,7 @@ const BlogInfoBar = props => {
                     xs={6}
                     md={6}
                     lg={props.author && type !== "single" ? 3 : 4}
+                    className="mb-3"
                 >
                     <Badge
                         color="primary"
@@ -25,7 +26,7 @@ const BlogInfoBar = props => {
                     xs={6}
                     md={6}
                     lg={4}
-                    className="d-flex align-items-center blog-info-time mb-3 mb-lg-0"
+                    className="d-flex align-items-center blog-info-time mb-3 mb-md-0"
                 >
                     <FontAwesomeIcon
                         icon={["far", "clock"]}
@@ -37,8 +38,7 @@ const BlogInfoBar = props => {
                 </Col>
                 {props.author && props.author.length > 0 ? (
                     <Col
-                        xs={6}
-                        md={12}
+                        xs={12}
                         lg={4}
                         className="d-flex align-items-center justify-content-lg-end mb-md-0"
                     >

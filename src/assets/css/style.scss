@@ -98,7 +98,7 @@ body{
 }
 
 /* Colors */
-
+$alkemy_black: #212529;
 $alkemy_darkest_blue: darken(#2bb3e5,50%); //#141B22
 $alkemy_blue: #2bb3e5;
 $alkemy_light_blue: rgba(43, 179, 229, 0.1); //#2bb3e5 10% opacity
@@ -476,7 +476,7 @@ a {
     transition:1000ms ease all;
     &:hover {
       svg path{
-        fill: #212529;
+        fill: $alkemy_black;
       }
     }
   }
@@ -1421,8 +1421,15 @@ div.spinContainer{
   overflow-x: scroll;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  li{
+  li.nav-item{
     display: inline-flex;
+    a.nav-link{
+      &.active{
+        &:hover{
+          color: white !important;
+        }
+      }
+    }
   }
 }
 
@@ -1558,8 +1565,9 @@ div.spinContainer{
   color: $alkemy_blue;
   &:not(.active):hover{
     color: $alkemy_dark_blue;
-  }
+  } 
 }
+
 
 .blog-info-category{
   @media screen and (min-width:1024px){
@@ -1608,6 +1616,12 @@ div.spinContainer{
       color: $alkemy_blue;
     }
 
+    .contactForm {
+      h2{
+        color: $alkemy_black;
+      }
+    }
+
     a{
       &.active{
         color: white;
@@ -1621,21 +1635,21 @@ div.spinContainer{
 
   .blog-single.hero{
     .hero-text{
-      @media screen and (min-width:960px){
+      @media screen and (min-width:768px){
         position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
         z-index: 10;
-        h2{
-          color: white;
-          font-size: 3.5rem;
-        }
       }
-      
+
       h2{
         font-size: 2.5rem;
+        @media screen and (min-width:768px){
+          color: white !important;
+          font-size: 3.5rem;
+        }
       }
     }
   }

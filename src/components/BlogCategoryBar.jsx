@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import { Link,navigate } from "gatsby";
 import PropTypes from "prop-types";
 import { Nav, NavItem, NavLink } from "reactstrap";
 
@@ -18,10 +19,15 @@ const BlogCategoryBar = (props) => {
                 key={item.value}
                 onClick={e => {
                     setSelection(item.value);
-                    onSelectCategory(item.value)
+                    onSelectCategory(item.value);
                 }}
             >
-                <NavLink href={"#"+item.value.replace(' ','-')} active={item.value === selection}>
+                <NavLink
+                    tag={Link}
+                    to={"/alkemy-blog/"}
+                    state={{ hash: item.value.replace(" ", "-") }}
+                    active={item.value === selection}
+                >
                     {item.label}
                 </NavLink>
             </NavItem>

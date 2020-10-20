@@ -25,7 +25,7 @@ import {
 
 
 const BlogSharing = (props,location) => {
-    const url = window && window.location.href;
+    const url = typeof window!=="undefined" && window.location.href;
 
     return (
         <div className={props.className + " my-4 mx-0 text-center text-md-left"}>

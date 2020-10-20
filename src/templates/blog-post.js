@@ -1,6 +1,6 @@
-import React,{createRef,useState} from "react";
+import React,{ useState } from "react";
 import { Link, graphql, navigate } from "gatsby";
-import {MDXRenderer} from "gatsby-plugin-mdx";
+import { MDXRenderer } from "gatsby-plugin-mdx";
 import { MDXProvider } from "@mdx-js/react";
 import Img from "gatsby-image";
 import { Context } from "../store/appContext.js";
@@ -13,16 +13,14 @@ import Layout from "../components/layout";
 import {uniq} from "lodash";
 import SEO from "../components/seo";
 import { rhythm } from "../utils/typography";
-import { FormGroup, Label, Col, Row, Container, Button } from "reactstrap";
+import { Col, Row, Container, Button } from "reactstrap";
 import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
-import Select from "react-select";
 import BlogInfoBar from "../components/BlogInfoBar.jsx";
-import FloatingTitleBar from "../components/FloatingTitleBar.js";
 import SocialLinks from "../components/SocialLinks.jsx";
 import PropTypes from "prop-types";
 import BlogCategoryBar from "../components/BlogCategoryBar.jsx";
 import BlogSharing from "../components/blogShare";
-import { Disqus, CommentCount } from "gatsby-plugin-disqus";
+import { Disqus } from "gatsby-plugin-disqus";
 
 /*
 Layout props:
@@ -52,8 +50,6 @@ const BlogPostTemplate = (props) => {
     const siteTitle = data.site.siteMetadata.title;
     const { previous, next } = props.pageContext;
     const [category, setCategory] = useState("all");
-    const [filterBySearch, setFilter] = useState(false);
-    const [searchResults, setSearchResults] = useState(0);
     const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
     const edges = data.allMdx.edges;
     const author =
@@ -92,15 +88,12 @@ const BlogPostTemplate = (props) => {
     };
 
     const resetSearch = actions => {
-        setFilter(false);
-        setSearchResults(0);
         actions.search("");
         actions.searchTitle("");
     };
 
-    const handleCategorySelect = (data, actions) => {
+    const handleCategorySelect = async (data, actions) => {
         resetSearch(actions);
-        setCategory(data);
     };
 
     return (

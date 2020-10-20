@@ -44,7 +44,7 @@ const AlkemyBlog = ({
     // pageTitle: SEO friendly title for the title bar
     const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
     const size = useWindowSize();
-    const [category, setCategory] = useState('all');
+    const [category, setCategory] = useState("all");
     const [filterBySearch, setFilter] = useState(false);
     const [searchResults, setSearchResults] = useState(0);
     const [pages, setPages] = useState([]);
@@ -65,15 +65,19 @@ const AlkemyBlog = ({
         });
 
     useEffect(() => {
-        buildPages();
-        let hash = location.hash.replace("-", " ").replace("#", "");
+        let hash = location.state.hash
+            ? location.state.hash.replace("-", " ").replace("#", "")
+            : location.hash.replace("-", " ").replace("#", "");
 
-        if(typeof hash!=="undefined" && hash!=="") {
+        if(location.state.hash!==null && typeof hash!=="undefined" && hash!=="") {
             setCategory(hash);
+        }else{
+            buildPages();
         }
     }, []); 
 
     useEffect(() => {
+        console.log('location',location,location.state)
         buildPages();
     },[searchResults,category]); 
 
