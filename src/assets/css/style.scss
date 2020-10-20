@@ -1443,6 +1443,12 @@ div.spinContainer{
           right:0;
           left:0;
           background: rgba(0,0,0,.5);
+          @media screen and (min-width: 768px){
+            position: relative;
+            bottom: unset;
+            right: unset;
+            left: unset;
+          }
         }
       }
     }
@@ -1483,20 +1489,6 @@ div.spinContainer{
     .card{
       max-height: 500px;
       margin-bottom: 2rem;
-    }
-  }
-}
-
-.latestFromCategory{
-  background: $alkemy_light_blue;
-  .card{
-    background: transparent;
-    border: none;
-    .card-img-top{
-      max-height: 160px;
-    }
-    .card-body{
-      padding: 1.25rem 0;
     }
   }
 }

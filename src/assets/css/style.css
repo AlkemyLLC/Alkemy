@@ -16880,6 +16880,15 @@ div.spinContainer {
   color: white;
 }
 
+@media screen and (min-width: 768px) {
+  .blog-post-listing .blog-featured .blog-card a .card-body {
+    position: relative;
+    bottom: unset;
+    right: unset;
+    left: unset;
+  }
+}
+
 .blog-featured {
   min-height: 50vh;
 }
@@ -16923,23 +16932,6 @@ div.spinContainer {
 .blog-post-listing .card-deck .card {
   max-height: 500px;
   margin-bottom: 2rem;
-}
-
-.latestFromCategory {
-  background: rgba(43, 179, 229, 0.1);
-}
-
-.latestFromCategory .card {
-  background: transparent;
-  border: none;
-}
-
-.latestFromCategory .card .card-img-top, .latestFromCategory .card .recent-blogs {
-  max-height: 160px;
-}
-
-.latestFromCategory .card .card-body {
-  padding: 1.25rem 0;
 }
 
 .blogCard a:hover, .recent-blogs a:hover, .categoryCard a:hover {

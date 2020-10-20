@@ -168,83 +168,105 @@ const AlkemyBlog = ({
         actions.searchTitle("");
     };
 
-    const renderFeatured = data =>
-        data && data.length > 0 && size.width >= 760 ? (
-            <Row className="alk-container pr-sm-0 blog-featured">
-                <Col
-                    xs={12}
-                    sm={6}
-                    className="d-flex flex-column justify-content-center order-2 order-sm-1"
-                >
-                    <Link to={data[0].node.frontmatter.path}>
-                        <h2>{data[0].node.frontmatter.title}</h2>
-                        <p className="my-4 blog-featured-excerpt">
-                            {data[0].node.frontmatter.excerpt}
-                        </p>
-                        <BlogInfoBar
-                            category={data[0].node.frontmatter.category}
-                            time={data[0].node.frontmatter.readingTime}
-                            author={data[0].node.frontmatter.author}
-                            layout="horizontal"
-                            className="my-2"
-                        />
-                    </Link>
-                </Col>
-                <Col xs={12} sm={6} className="order-1 order-sm-2 mb-5 mb-sm-0">
-                <Link to={data[0].node.frontmatter.path}>
-                    {data[0].node.frontmatter.cover.childImageSharp.fluid && (
-                        <Img
-                            imgStyle={{ objectFit: "cover" }}
-                            className="h-100 featured-blog-cover-image"
-                            fluid={
-                                data[0].node.frontmatter.cover.childImageSharp
-                                    .fluid
-                            }
-                            alt={data[0].node.frontmatter.coverAlt}
-                        />
-                    )}
-                    </Link>
-                </Col>
-            </Row>
-        ) : (
-            <Row className="px-0 blog-featured">
-                <Col xs={12} sm={6} md={4}>
-                    <CardDeck>
-                        <Card className="blog-card">
-                            <Link to={data[0].node.frontmatter.path}>
+    const renderFeatured = data => {
+        console.log('featured',data[0],data.length,size.width);
+        if(data && data.length > 0 && size.width >= 760){
+            return (
+                <Row className="alk-container pr-sm-0 blog-featured">
+                    <Col
+                        xs={12}
+                        sm={6}
+                        className="d-flex flex-column justify-content-center order-2 order-sm-1"
+                    >
+                        <Link to={data[0].node.frontmatter.path}>
+                            <h2>{data[0].node.frontmatter.title}</h2>
+                            <p className="my-4 blog-featured-excerpt">
+                                {data[0].node.frontmatter.excerpt}
+                            </p>
+                            <BlogInfoBar
+                                category={data[0].node.frontmatter.category}
+                                time={data[0].node.frontmatter.readingTime}
+                                author={data[0].node.frontmatter.author}
+                                layout="horizontal"
+                                className="my-2"
+                            />
+                        </Link>
+                    </Col>
+                    <Col
+                        xs={12}
+                        sm={6}
+                        className="order-1 order-sm-2 mb-5 mb-sm-0"
+                    >
+                        <Link to={data[0].node.frontmatter.path}>
+                            {data[0].node.frontmatter.cover.childImageSharp
+                                .fluid && (
                                 <Img
-                                    className="h-100 card-img-top"
-                                    imgStyle={{ objectFit: "cover" }}
                                     style={{
-                                        position: "unset",
+                                        minHeight: "500px",
                                     }}
+                                    objectFit="cover"
+                                    className="h-100 featured-blog-cover-image"
                                     fluid={
                                         data[0].node.frontmatter.cover
                                             .childImageSharp.fluid
                                     }
                                     alt={data[0].node.frontmatter.coverAlt}
                                 />
-                                <CardBody>
-                                    <CardTitle className="text-bold" tag="h2">
-                                        {data[0].node.frontmatter.title}
-                                    </CardTitle>
-                                    <BlogInfoBar
-                                        category={
-                                            data[0].node.frontmatter.category
+                            )}
+                        </Link>
+                    </Col>
+                </Row>
+            );
+        }else {
+            return (
+                <Row className="px-0 blog-featured">
+                    <Col xs={12} sm={6} md={4}>
+                        <CardDeck>
+                            <Card className="blog-card">
+                                <Link to={data[0].node.frontmatter.path}>
+                                    <Img
+                                        className="h-100 card-img-top"
+                                        style={{
+                                            minHeight: "500px",
+                                            position: "unset",
+                                        }}
+                                        imgStyle={{
+                                            minHeight: "500px",
+                                        }}
+                                        fluid={
+                                            data[0].node.frontmatter.cover
+                                                .childImageSharp.fluid
                                         }
-                                        time={
-                                            data[0].node.frontmatter.readingTime
-                                        }
-                                        layout="horizontal"
-                                        className="mt-2"
+                                        alt={data[0].node.frontmatter.coverAlt}
                                     />
-                                </CardBody>
-                            </Link>
-                        </Card>
-                    </CardDeck>
-                </Col>
-            </Row>
-        );
+                                    <CardBody>
+                                        <CardTitle
+                                            className="text-bold"
+                                            tag="h2"
+                                        >
+                                            {data[0].node.frontmatter.title}
+                                        </CardTitle>
+                                        <BlogInfoBar
+                                            category={
+                                                data[0].node.frontmatter
+                                                    .category
+                                            }
+                                            time={
+                                                data[0].node.frontmatter
+                                                    .readingTime
+                                            }
+                                            layout="horizontal"
+                                            className="mt-2"
+                                        />
+                                    </CardBody>
+                                </Link>
+                            </Card>
+                        </CardDeck>
+                    </Col>
+                </Row>
+            );
+        }
+    }
 
     const renderView = (store)=>{
         let blogs = getFilteredBlogs();
@@ -262,7 +284,8 @@ const AlkemyBlog = ({
             setSearchResults(blogs.length);
         }
 
-        if (filterBySearch === false) {
+        if (!filterBySearch) {
+            console.log('filtered by search',filterBySearch,currentPage)
             return currentPage === 1 ? (
                 <section className="blog-post-listing">
                     {renderFeatured(blogs)}
