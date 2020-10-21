@@ -63,15 +63,6 @@ const Header = ({ pageTitle, hideHeader, renderHeaderSolid, search }) => (
                 siteSearchIndex {
                     index
                 }
-                allMdx {
-                    edges {
-                        node {
-                            frontmatter {
-                                title
-                            }
-                        }
-                    }
-                }
                 logo: file(relativePath: { regex: "/alkemy_logo.png/" }) {
                     ...fluidImageSmall
                 }
