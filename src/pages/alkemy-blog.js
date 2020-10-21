@@ -69,15 +69,18 @@ const AlkemyBlog = ({
             ? location.state.hash.replace("-", " ").replace("#", "")
             : location.hash.replace("-", " ").replace("#", "");
 
-        if(location.state.hash!==null && typeof hash!=="undefined" && hash!=="") {
+        if (
+            location.state && location.state.hash !== null &&
+            typeof hash !== "undefined" &&
+            hash !== ""
+        ) {
             setCategory(hash);
-        }else{
+        } else {
             buildPages();
         }
     }, []); 
 
     useEffect(() => {
-        console.log('location',location,location.state)
         buildPages();
     },[searchResults,category]); 
 
