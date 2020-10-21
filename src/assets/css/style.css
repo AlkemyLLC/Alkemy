@@ -16851,6 +16851,12 @@ div.spinContainer {
   -webkit-overflow-scrolling: touch;
 }
 
+@media screen and (min-width: 768px) {
+  .blog-category-bar {
+    overflow-x: unset;
+  }
+}
+
 .blog-category-bar li.nav-item {
   display: inline-flex;
 }
