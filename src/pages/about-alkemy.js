@@ -7,6 +7,7 @@ import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
 import BuildYourDream from "../components/BuildYourDream.jsx";
 import SEO from "../components/seo";
+import EnquiryWidget from "../components/widgetEnquiry";
 
 /*
 Layout props:
@@ -74,9 +75,15 @@ const AboutAlkemy = ({ data }) => {
                                 }
                                 alt="woman interacting with holographic user interface"
                             />
-                            <p className="sub-text text-white">Jonathan Ferragut, President/CEO</p>
+                            <p className="sub-text text-white">
+                                Jonathan Ferragut, President/CEO
+                            </p>
                         </Col>
-                        <Col xs={12} sm={7} className="order-1 order-sm-2 justify-content-center d-flex flex-column">
+                        <Col
+                            xs={12}
+                            sm={7}
+                            className="order-1 order-sm-2 justify-content-center d-flex flex-column"
+                        >
                             <h2 className="h1 font-weight-normal mb-4">
                                 {data.aboutJson &&
                                     data.aboutJson.sections[1].blocks[0]
@@ -95,7 +102,9 @@ const AboutAlkemy = ({ data }) => {
                         </Col>
                     </Row>
                 </section>
-                <section className="section--enquiry"></section>
+                <section className="section--enquiry alk-container d-flex align-items-center justify-content-center">
+                    <EnquiryWidget/>
+                </section>
                 <section className="section--taste"></section>
                 <section className="section--idea"></section>
                 <section className="section--promise"></section>

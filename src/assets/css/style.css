@@ -16728,6 +16728,11 @@ div.spinContainer {
   z-index: 10;
 }
 
+.about-page .section--enquiry {
+  min-height: 180px;
+  background: #1E5E8D;
+}
+
 /* Contact Alkemy */
 .contactDetails {
   background: url("../images/contact/contact-bg.jpg") top center;
