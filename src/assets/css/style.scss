@@ -81,14 +81,6 @@ html{
 
 body{
   font-size: clamp(var(--minBodyFontSize), var(--scaler), 20px);
-  header{
-    @media (min-width: 1023px) and (max-width: 1108px) {
-      font-size: calc(16px);
-      a{
-        font-size: inherit;
-      }
-    }
-  }
 }
 
 
@@ -334,7 +326,6 @@ a {
 
 .navbar-nav{
   .dropdown-menu{
-    font-size: inherit;
     top: 90%;
   }
 }
@@ -1256,37 +1247,17 @@ div.spinContainer{
 /* About Us Page */
 
 .about-page{
-  section:not(.section--enquiry) p{font-size: 1.125rem;}
+  
   .section--hero{
-    .hero-image{
-      max-height: 400px;
-      @media screen and (min-width:768px){
-        &:after{
-          z-index: 0;
-          background: linear-gradient(to left,black,transparent 45%);
-          content: "";
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-        }
-      }
-    }
-    .hero-text{
-      @media screen and (min-width:768px){
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 10;
-      }
+    min-height: 400px;
+    
 
+    .hero-text{
+      z-index: 10;
       h2{
-        font-size: 2.5rem;
+        color: white;
+        font-size: 2.75rem;
         @media screen and (min-width:768px){
-          color: white !important;
           font-size: 3.75rem;
           filter: drop-shadow(1px 1px black);
         }
@@ -1304,9 +1275,9 @@ div.spinContainer{
       margin: 0;
       position: absolute;
       bottom:0;
-      left: 0;
+      left: 4rem;
       right: 0;
-      text-align: center;
+      text-align: left;
       z-index: 10;
     }
   }

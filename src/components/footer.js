@@ -26,18 +26,23 @@ const _menuArray = [
             { name: "Web Development", id: "1b", url: "/web-development" },
             { name: "eCommerce Design", id: "1c", url: "/ecommerce-design" },
             { name: "Digital Marketing", id: "1d", url: "/digital-marketing" },
+            {
+                name: "Wordpress Care Plans",
+                id: "1e",
+                url: "/wordpress-care-plans",
+            },
         ],
     },
     {
-        name: "Alkemy Blog",
+        name: "Blog",
         id: "2",
         links: [
-            { name: "Read the Latest", id: "2a", url: "/alkemy-blog" },
+            { name: "View Blog", id: "2a", url: "/alkemy-blog" },
             { name: "Search by Tag", id: "2b", url: "/tags" },
         ],
     },
     {
-        name: "About Us",
+        name: "About",
         id: "3",
         links: [{ name: "About Alkemy", id: "3a", url: "/about-alkemy" }],
     },

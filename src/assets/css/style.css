@@ -15487,15 +15487,6 @@ body {
   font-size: clamp(var(--minBodyFontSize), var(--scaler), 20px);
 }
 
-@media (min-width: 1023px) and (max-width: 1108px) {
-  body header {
-    font-size: calc(16px);
-  }
-  body header a {
-    font-size: inherit;
-  }
-}
-
 .lead {
   font-weight: 400;
   line-height: 200%;
@@ -15737,7 +15728,6 @@ a {
 }
 
 .navbar-nav .dropdown-menu {
-  font-size: inherit;
   top: 90%;
 }
 
@@ -16669,45 +16659,21 @@ div.spinContainer {
 }
 
 /* About Us Page */
-.about-page section:not(.section--enquiry) p {
-  font-size: 1.125rem;
+.about-page .section--hero {
+  min-height: 400px;
 }
 
-.about-page .section--hero .hero-image {
-  max-height: 400px;
-}
-
-@media screen and (min-width: 768px) {
-  .about-page .section--hero .hero-image:after {
-    z-index: 0;
-    background: linear-gradient(to left, black, transparent 45%);
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .about-page .section--hero .hero-text {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-  }
+.about-page .section--hero .hero-text {
+  z-index: 10;
 }
 
 .about-page .section--hero .hero-text h2 {
-  font-size: 2.5rem;
+  color: white;
+  font-size: 2.75rem;
 }
 
 @media screen and (min-width: 768px) {
   .about-page .section--hero .hero-text h2 {
-    color: white !important;
     font-size: 3.75rem;
     filter: drop-shadow(1px 1px black);
   }
@@ -16726,9 +16692,9 @@ div.spinContainer {
   margin: 0;
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 4rem;
   right: 0;
-  text-align: center;
+  text-align: left;
   z-index: 10;
 }
 

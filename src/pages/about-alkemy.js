@@ -2,12 +2,18 @@ import React from "react";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import "../utils/utils.js";
+import {
+    fluidImage,
+    fluidImageSmall,
+    useWindowSize,
+} from "../utils/utils.js";
 import { Col, Row } from "reactstrap";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
 import BuildYourDream from "../components/BuildYourDream.jsx";
 import SEO from "../components/seo";
 import EnquiryWidget from "../components/widgetEnquiry";
+import BackgroundImage from "gatsby-background-image";
 
 /*
 Layout props:
@@ -26,6 +32,23 @@ Layout props:
 const AboutAlkemy = ({ data }) => {
     // pageTitle: SEO friendly title for the title bar
     const pageTitle = { name: "About Alkemy", url: "/about-alkemy" };
+    const size = useWindowSize();
+
+    const heroImg =
+        size.width >= 768
+            ? size.width <= 960
+                ? [
+                      data.uiDesign.childImageSharp.fluid,
+                      `linear-gradient(to left,black,transparent 55%)`,
+                  ].reverse()
+                : [
+                      data.uiDesign.childImageSharp.fluid,
+                      `linear-gradient(to left,black,transparent 45%)`,
+                  ].reverse()
+            : [
+                  data.uiDesign.childImageSharp.fluid,
+                  `linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25))`,
+              ].reverse();
 
     return (
         <ScrollWrapper onWindowScroll={handleScroll}>
@@ -36,31 +59,33 @@ const AboutAlkemy = ({ data }) => {
             >
                 <SEO title={pageTitle.name} />
 
-                <section className="section--hero position-relative">
-                    <Img
-                        className="h-100 hero-image"
-                        imgStyle={{
-                            objectPosition: "center 28%",
-                        }}
-                        objectFit="cover"
-                        objectPosition="center 10%"
-                        fluid={data.uiDesign.childImageSharp.fluid}
-                        alt="woman interacting with holographic user interface"
-                    />
-                    <Row className="alk-container h-100 d-flex flex-column justify-content-center hero-text">
-                        <Col xs={12} md={{ size: 6, offset: 6 }}>
-                            <h2 className="text-right">
-                                {JSON.parse(
-                                    JSON.stringify(
-                                        data.aboutJson &&
-                                            data.aboutJson.sections[0].blocks[0]
-                                                .heading
-                                    ).replace(/\n/g, "<br/>")
-                                )}
+                <BackgroundImage
+                    Tag="section"
+                    className="section--hero h-100 d-flex flex-column justify-content-center"
+                    style={{
+                        backgroundPosition: "center 28%",
+                    }}
+                    fluid={heroImg}
+                    alt="woman interacting with holographic user interface"
+                >
+                    <Row className="alk-container hero-text">
+                        <Col xs={12}>
+                            <h2 className="text-left text-sm-right">
+                                {data.aboutJson &&
+                                    data.aboutJson.sections[0].blocks[0]
+                                        .heading}
+                                <br />
+                                {data.aboutJson &&
+                                    data.aboutJson.sections[0].blocks[1]
+                                        .heading}
+                                <br />
+                                {data.aboutJson &&
+                                    data.aboutJson.sections[0].blocks[2]
+                                        .heading}
                             </h2>
                         </Col>
                     </Row>
-                </section>
+                </BackgroundImage>
 
                 <section className="section--beginnings alk-container">
                     <Row>
@@ -108,13 +133,13 @@ const AboutAlkemy = ({ data }) => {
                     <EnquiryWidget />
                 </section>
 
-                <section className="section--taste position-relative">
-                    <Img
-                        className="h-100 bg position-relative"
-                        fluid={data.planningSession.childImageSharp.fluid}
-                        alt="Planning session on a large table with laptops, coffee, and papers"
-                    />
-                    <div className="alk-container h-100 w-100 position-absolute callout d-flex flex-column align-items-center justify-content-center">
+                <BackgroundImage
+                    Tag="section"
+                    className="section--taste h-100 bg alk-container"
+                    fluid={data.planningSession.childImageSharp.fluid}
+                    alt="Planning session on a large table with laptops, coffee, and papers"
+                >
+                    <div className=" h-100 w-100 callout d-flex flex-column align-items-center justify-content-center">
                         <h2 className="font-weight-normal mb-4 text-center">
                             {data.aboutJson &&
                                 data.aboutJson.sections[2].blocks[0].heading}
@@ -128,7 +153,7 @@ const AboutAlkemy = ({ data }) => {
                                 data.aboutJson.sections[2].blocks[1].content}
                         </p>
                     </div>
-                </section>
+                </BackgroundImage>
 
                 <section className="section--idea alk-container d-flex flex-column align-items-center justify-content-center">
                     <h2 className="font-weight-normal mb-4 text-center">

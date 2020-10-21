@@ -5,7 +5,13 @@
         "id": "1",
         "blocks": [
           {
-            "heading": "Innovation.\nSuccess.\nSimplified."
+            "heading": "Innovation."
+          },
+          {
+            "heading": "Success."
+          },
+          {
+            "heading": "Simplified."
           }
         ]
       },
