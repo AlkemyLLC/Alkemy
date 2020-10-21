@@ -1421,6 +1421,9 @@ div.spinContainer{
   overflow-x: scroll;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  @media screen and (min-width:768px){
+    overflow-x: unset;
+  }
   li.nav-item{
     display: inline-flex;
     a.nav-link{
