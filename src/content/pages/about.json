@@ -14,7 +14,7 @@
         "blocks": [
           {
             "heading": "Humble beginnings",
-            "content": "For as long as Jonathan can remember, he was always taking things apart to find out what made them tick."
+            "content": "For as long as he can remember, Jonathan was always taking things apart to find out what made them tick."
           },
           {
             "content": "When he was 8 years old he took apart his first computer (Commodore 64c) and then taught himself how to code. From then on, it was nothing but love for the possibilities this new device held."
@@ -25,16 +25,20 @@
         "id": "3",
         "blocks": [
           {
-            "heading": "Our Passion",
-            "content": "What drives us? The desire to create Awesome Software that answers the needs of our world. We meet complex problems with creative and innovative solutions every day. At our center is the idea that each member of our team brings something unique to the table and we strive to show it every chance we get."
+            "heading": "A taste of entrepreneurship",
+            "content": "Our founder caught the bug young.  Although Jonathan grew up surrounded by New York business owners and entrepreneurs, like many kids in the 80’s, he didn’t know many people in tech. Since he couldn’t bank on his relationships to explore his new passion, he did the only thing he could - learned and explored on his own."
           },
           {
-            "heading": "",
-            "content": "Here at Alkemy, we believe in the Japanese principle of Kaizen."
-          },
+            "content": "When he was 16, his father helped him and a couple of good friends start a business. Compulogic Consulting and Development, inc. was born and for several years they provided Web Design, Web Hosting, and IT services to the South Florida community.  The experience was amazing, but as it goes for many small businesses, at some point it came to an end."
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "blocks": [
           {
-            "heading": "",
-            "content": "We apply this by constantly striving to improve our business bit by bit. From that code that we updated to make your website load quicker, to the adjustment we made on mobile devices so that users could interact better — Our team is always working on making something better so that we can be proud of everything we create and do."
+            "heading": "The birth of an idea",
+            "content": "After many years and several other companies built, Jonathan decided that he wanted to go back to his passion for code. He settled on the idea that he wanted to create a company that didn’t work like other companies but rather represented his eclecticism, strong work ethic, pride, and passion... Alkemy was born."
           }
         ]
       }

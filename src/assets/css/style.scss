@@ -1256,6 +1256,7 @@ div.spinContainer{
 /* About Us Page */
 
 .about-page{
+  section:not(.section--enquiry) p{font-size: 1.125rem;}
   .section--hero{
     .hero-image{
       max-height: 400px;
@@ -1313,6 +1314,36 @@ div.spinContainer{
   .section--enquiry{
     min-height: 180px;
     background: $alkemy_mid_blue;
+  }
+
+  .section--taste{
+    .bg{
+      img{
+        filter: blur(1px);
+        -webkit-filter: blur(1px);
+      }
+      &:after{
+        content: "";
+        background: rgba(0,0,0,.35);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 0;
+      }
+    }
+    .callout{
+      color: white;
+      z-index: 10;
+      bottom: 0;
+    }
+  }
+
+  .section--idea{
+    min-height: 300px;
+    background: $alkemy_blue;
+    color: white;
   }
 }
 

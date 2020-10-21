@@ -16669,6 +16669,10 @@ div.spinContainer {
 }
 
 /* About Us Page */
+.about-page section:not(.section--enquiry) p {
+  font-size: 1.125rem;
+}
+
 .about-page .section--hero .hero-image {
   max-height: 400px;
 }
@@ -16731,6 +16735,34 @@ div.spinContainer {
 .about-page .section--enquiry {
   min-height: 180px;
   background: #1E5E8D;
+}
+
+.about-page .section--taste .bg img {
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+}
+
+.about-page .section--taste .bg:after {
+  content: "";
+  background: rgba(0, 0, 0, 0.35);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+}
+
+.about-page .section--taste .callout {
+  color: white;
+  z-index: 10;
+  bottom: 0;
+}
+
+.about-page .section--idea {
+  min-height: 300px;
+  background: #2bb3e5;
+  color: white;
 }
 
 /* Contact Alkemy */

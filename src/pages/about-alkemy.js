@@ -61,6 +61,7 @@ const AboutAlkemy = ({ data }) => {
                         </Col>
                     </Row>
                 </section>
+
                 <section className="section--beginnings alk-container">
                     <Row>
                         <Col
@@ -84,7 +85,7 @@ const AboutAlkemy = ({ data }) => {
                             sm={7}
                             className="order-1 order-sm-2 justify-content-center d-flex flex-column"
                         >
-                            <h2 className="h1 font-weight-normal mb-4">
+                            <h2 className="font-weight-normal mb-4">
                                 {data.aboutJson &&
                                     data.aboutJson.sections[1].blocks[0]
                                         .heading}
@@ -94,7 +95,7 @@ const AboutAlkemy = ({ data }) => {
                                     data.aboutJson.sections[1].blocks[0]
                                         .content}
                             </p>
-                            <p className="">
+                            <p className="mb-0">
                                 {data.aboutJson &&
                                     data.aboutJson.sections[1].blocks[1]
                                         .content}
@@ -102,11 +103,44 @@ const AboutAlkemy = ({ data }) => {
                         </Col>
                     </Row>
                 </section>
+
                 <section className="section--enquiry alk-container d-flex align-items-center justify-content-center">
-                    <EnquiryWidget/>
+                    <EnquiryWidget />
                 </section>
-                <section className="section--taste"></section>
-                <section className="section--idea"></section>
+
+                <section className="section--taste position-relative">
+                    <Img
+                        className="h-100 bg position-relative"
+                        fluid={data.planningSession.childImageSharp.fluid}
+                        alt="Planning session on a large table with laptops, coffee, and papers"
+                    />
+                    <div className="alk-container h-100 w-100 position-absolute callout d-flex flex-column align-items-center justify-content-center">
+                        <h2 className="font-weight-normal mb-4 text-center">
+                            {data.aboutJson &&
+                                data.aboutJson.sections[2].blocks[0].heading}
+                        </h2>
+                        <p className="">
+                            {data.aboutJson &&
+                                data.aboutJson.sections[2].blocks[0].content}
+                        </p>
+                        <p className="mb-0">
+                            {data.aboutJson &&
+                                data.aboutJson.sections[2].blocks[1].content}
+                        </p>
+                    </div>
+                </section>
+
+                <section className="section--idea alk-container d-flex flex-column align-items-center justify-content-center">
+                    <h2 className="font-weight-normal mb-4 text-center">
+                        {data.aboutJson &&
+                            data.aboutJson.sections[3].blocks[0].heading}
+                    </h2>
+                    <p className="mb-0">
+                        {data.aboutJson &&
+                            data.aboutJson.sections[3].blocks[0].content}
+                    </p>
+                </section>
+
                 <section className="section--promise"></section>
 
                 <section ref={dreamForm}>
