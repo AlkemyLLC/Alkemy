@@ -12,7 +12,6 @@
  */
 .fa,
 .fas,
-.aboutValues .coreValues,
 .far,
 .fal,
 .fad,
@@ -23,16 +22,6 @@
   font-style: normal;
   font-variant: normal;
   text-rendering: auto;
-  line-height: 1;
-}
-
-.aboutValues .coreValues {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
   line-height: 1;
 }
 
@@ -129,7 +118,6 @@
 
 .fa.fa-pull-left,
 .fas.fa-pull-left,
-.aboutValues .fa-pull-left.coreValues,
 .far.fa-pull-left,
 .fal.fa-pull-left,
 .fab.fa-pull-left {
@@ -138,7 +126,6 @@
 
 .fa.fa-pull-right,
 .fas.fa-pull-right,
-.aboutValues .fa-pull-right.coreValues,
 .far.fa-pull-right,
 .fal.fa-pull-right,
 .fab.fa-pull-right {
@@ -5806,8 +5793,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa,
-.fas,
-.aboutValues .coreValues {
+.fas {
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
 }
@@ -5818,7 +5804,7 @@ readers do not read off random characters that represent icons */
 /* Mobile Menu */
 /* Bootstrap breakpoint override */
 /*!
- * Bootstrap v4.5.2 (https://getbootstrap.com/)
+ * Bootstrap v4.5.3 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -5876,7 +5862,7 @@ body {
   font-family: "Avenir Next", "Helvetica Neue", "Segoe UI", "Helvetica", "Arial", sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.666;
+  line-height: 2;
   color: #212529;
   text-align: left;
   background-color: #fff;
@@ -6033,6 +6019,7 @@ caption {
 
 th {
   text-align: inherit;
+  text-align: -webkit-match-parent;
 }
 
 label {
@@ -9321,8 +9308,9 @@ input[type="button"].btn-block {
   position: relative;
   z-index: 1;
   display: block;
-  min-height: 1.666rem;
+  min-height: 2rem;
   padding-left: 1.5rem;
+  color-adjust: exact;
 }
 
 .custom-control-inline {
@@ -9335,7 +9323,7 @@ input[type="button"].btn-block {
   left: 0;
   z-index: -1;
   width: 1rem;
-  height: 1.333rem;
+  height: 1.5rem;
   opacity: 0;
 }
 
@@ -9375,7 +9363,7 @@ input[type="button"].btn-block {
 
 .custom-control-label::before {
   position: absolute;
-  top: 0.333rem;
+  top: 0.5rem;
   left: -1.5rem;
   display: block;
   width: 1rem;
@@ -9388,7 +9376,7 @@ input[type="button"].btn-block {
 
 .custom-control-label::after {
   position: absolute;
-  top: 0.333rem;
+  top: 0.5rem;
   left: -1.5rem;
   display: block;
   width: 1rem;
@@ -9446,7 +9434,7 @@ input[type="button"].btn-block {
 }
 
 .custom-switch .custom-control-label::after {
-  top: calc(0.333rem + 2px);
+  top: calc(0.5rem + 2px);
   left: calc(-2.25rem + 2px);
   width: calc(1rem - 4px);
   height: calc(1rem - 4px);
@@ -10782,6 +10770,7 @@ a.badge-dark:focus, a.badge-dark.focus {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 2;
   padding: 0.75rem 1.25rem;
   color: inherit;
 }
@@ -11584,7 +11573,7 @@ a.close.disabled {
   font-family: "Avenir Next", "Helvetica Neue", "Segoe UI", "Helvetica", "Arial", sans-serif;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.666;
+  line-height: 2;
   text-align: left;
   text-align: start;
   text-decoration: none;
@@ -11697,7 +11686,7 @@ a.close.disabled {
   font-family: "Avenir Next", "Helvetica Neue", "Segoe UI", "Helvetica", "Arial", sans-serif;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.666;
+  line-height: 2;
   text-align: left;
   text-align: start;
   text-decoration: none;
@@ -15389,7 +15378,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .text-break {
   word-break: break-word !important;
-  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
 }
 
 .text-reset {
@@ -15495,7 +15484,7 @@ html {
 }
 
 body {
-  font-size: clamp(var(--minBodyFontSize), var(--scaler), 18px);
+  font-size: clamp(var(--minBodyFontSize), var(--scaler), 20px);
 }
 
 @media (min-width: 1023px) and (max-width: 1108px) {
@@ -16680,82 +16669,63 @@ div.spinContainer {
 }
 
 /* About Us Page */
-.whoWeAre {
-  height: 82.5vh;
+.about-page .section--hero .hero-image {
+  max-height: 400px;
 }
 
-@media screen and (min-width: 1024px) {
-  .whoWeAre .img-col {
-    height: 100% !important;
+@media screen and (min-width: 768px) {
+  .about-page .section--hero .hero-image:after {
+    z-index: 0;
+    background: linear-gradient(to left, black, transparent 45%);
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 }
 
-@media screen and (min-width: 990px) {
-  .whoWeAre .arrow {
-    width: 70%;
-    margin-left: -.5em;
-    margin-top: 5vh;
+@media screen and (min-width: 768px) {
+  .about-page .section--hero .hero-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
   }
 }
 
-.aboutValues {
-  background: url("../images/about/city-bg.jpg") no-repeat center center;
-  background-size: cover;
-  min-height: 93.5vh;
-}
-
-.aboutValues .coreValues {
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
-  line-height: 1.2;
-}
-
-@media screen and (max-width: 768px) {
-  .aboutValues .coreValues {
-    margin-top: 16rem;
-  }
-}
-
-.aboutValues .coreValues .valueTitle {
-  color: #f8da32;
-  font-weight: bold;
-}
-
-.aboutValues .coreValues ul {
-  list-style: disc;
-}
-
-.aboutValues .coreValues span {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
-.aboutValues .coreValues ol {
-  list-style: none;
-  counter-reset: alkemy-counter;
-}
-
-.aboutValues .coreValues ol li:before {
-  content: "\f0c3";
+.about-page .section--hero .hero-text h2 {
   font-size: 2.5rem;
-  position: absolute;
-  display: inline-flex;
-  margin-left: -3.5rem;
-  margin-top: .5rem;
-  color: #2bb3e5;
 }
 
-.aboutValues .coreValues ol ul {
-  list-style: none;
+@media screen and (min-width: 768px) {
+  .about-page .section--hero .hero-text h2 {
+    color: white !important;
+    font-size: 3.75rem;
+    filter: drop-shadow(1px 1px black);
+  }
 }
 
-.aboutValues .coreValues ol li ul li:before {
-  content: "\f054";
-  font-size: 2.5rem;
+.about-page .section--beginnings {
+  padding-bottom: 0;
+  position: relative;
+}
+
+.about-page .section--beginnings .headshot {
+  max-width: 500px;
+}
+
+.about-page .section--beginnings .sub-text {
+  margin: 0;
   position: absolute;
-  display: inline-flex;
-  margin-left: -1.8rem;
-  margin-top: -.2rem;
-  color: #f8da32;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
 }
 
 /* Contact Alkemy */
@@ -17124,14 +17094,6 @@ div.spinContainer {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 6;
-}
-
-body .addthis-smartlayers {
-  display: none;
-}
-
-body.blog .addthis-smartlayers, body.blog-single-page .addthis-smartlayers {
-  display: block;
 }
 
 .page-404 #main .alk-container {

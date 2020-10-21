@@ -31,181 +31,74 @@ const AboutAlkemy = ({ data }) => {
             <Layout
                 renderHeaderSolid={true}
                 headerTitle={[true, pageTitle]}
-                bodyClasses="webDesign"
+                bodyClasses="about-page"
             >
                 <SEO title={pageTitle.name} />
 
-                {/* Section 1 */}
-                <section className="whoWeAre">
-                    <Row className="align-items-center h-100">
+                <section className="section--hero position-relative">
+                    <Img
+                        className="h-100 hero-image"
+                        imgStyle={{
+                            objectPosition: "center 28%",
+                        }}
+                        objectFit="cover"
+                        objectPosition="center 10%"
+                        fluid={data.uiDesign.childImageSharp.fluid}
+                        alt="woman interacting with holographic user interface"
+                    />
+                    <Row className="alk-container h-100 d-flex flex-column justify-content-center hero-text">
+                        <Col xs={12} md={{ size: 6, offset: 6 }}>
+                            <h2 className="text-right">
+                                {JSON.parse(
+                                    JSON.stringify(
+                                        data.aboutJson &&
+                                            data.aboutJson.sections[0].blocks[0]
+                                                .heading
+                                    ).replace(/\n/g, "<br/>")
+                                )}
+                            </h2>
+                        </Col>
+                    </Row>
+                </section>
+                <section className="section--beginnings alk-container">
+                    <Row>
                         <Col
                             xs={12}
-                            lg={6}
-                            className="text-center mb-5 img-col"
+                            sm={5}
+                            className="order-2 order-sm-1 align-items-center"
                         >
-                            {data.puzzlePieces.childImageSharp && (
-                                <Img
-                                    imgStyle={{ objectFit: "cover" }}
-                                    className="h-100"
-                                    fluid={
-                                        data.puzzlePieces.childImageSharp.fluid
-                                    }
-                                    alt="Alkemy is always the best fit for your business and digital presence."
-                                />
-                            )}
+                            <Img
+                                className="h-100 headshot"
+                                fluid={
+                                    data.jonathanHeadshot.childImageSharp.fluid
+                                }
+                                alt="woman interacting with holographic user interface"
+                            />
+                            <p className="sub-text text-white">Jonathan Ferragut, President/CEO</p>
                         </Col>
-                        <Col xs={12} lg={6}>
-                            <div className="alk-container">
-                                <h2 className="mb-4">
-                                    {data.aboutJson &&
-                                        data.aboutJson.sections[0].blocks[0]
-                                            .heading}
-                                </h2>
-                                <p className="mb-4">
-                                    {data.aboutJson &&
-                                        data.aboutJson.sections[0].blocks[0]
-                                            .content}
-                                </p>
-                            </div>
-
-                            <div className="arrow ml-4 ml-lg-0">
-                                {data.arrowLine.childImageSharp && (
-                                    <Img
-                                        objectFit="contain"
-                                        className="h-100"
-                                        fluid={
-                                            data.arrowLine.childImageSharp.fluid
-                                        }
-                                        alt="Arrow showing a journey from one point down to the next section."
-                                    />
-                                )}
-                            </div>
+                        <Col xs={12} sm={7} className="order-1 order-sm-2 justify-content-center d-flex flex-column">
+                            <h2 className="h1 font-weight-normal mb-4">
+                                {data.aboutJson &&
+                                    data.aboutJson.sections[1].blocks[0]
+                                        .heading}
+                            </h2>
+                            <p className="">
+                                {data.aboutJson &&
+                                    data.aboutJson.sections[1].blocks[0]
+                                        .content}
+                            </p>
+                            <p className="">
+                                {data.aboutJson &&
+                                    data.aboutJson.sections[1].blocks[1]
+                                        .content}
+                            </p>
                         </Col>
                     </Row>
                 </section>
-
-                {/* Section 2 */}
-                <section className="aboutValues py-4 alk-container ">
-                    <Row className="py-4 px-0">
-                        <Col xs={12} md={8}>
-                            <div className="coreValues py-4 pl-5 pr-3 p-lg-5 font-weight-normal">
-                                <ol>
-                                    <li>
-                                        <span className="valueTitle">
-                                            {data.aboutJson &&
-                                                data.aboutJson.sections[1]
-                                                    .blocks[0].heading}
-                                        </span>
-                                        <span>
-                                            <br />
-                                            {data.aboutJson &&
-                                                data.aboutJson.sections[1].blocks[0]
-                                                    .content}
-                                        </span>
-                                    </li>
-                                    <li>
-                                       
-                                        <span className="valueTitle">
-                                            {data.aboutJson &&
-                                                data.aboutJson.sections[1]
-                                                    .blocks[1].heading}
-                                        </span>
-                                        <span>
-                                            <br />
-                                            {data.aboutJson &&
-                                                data.aboutJson.sections[1].blocks[1]
-                                                    .content}
-                                        </span>
-                                        <ul>
-                                            <li>
-                                                <span className="valueTitle">
-                                                    {data.aboutJson &&
-                                                        data.aboutJson
-                                                            .sections[1]
-                                                            .blocks[2].heading}
-                                                </span>{" "}
-                                                <span>
-                                                    {data.aboutJson &&
-                                                        data.aboutJson.sections[1]
-                                                            .blocks[2].content}
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span className="valueTitle">
-                                                    {data.aboutJson &&
-                                                        data.aboutJson
-                                                            .sections[1]
-                                                            .blocks[3].heading}
-                                                </span>{" "}
-                                                <span>
-                                                    {data.aboutJson &&
-                                                        data.aboutJson.sections[1]
-                                                            .blocks[3].content}
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <span className="valueTitle">
-                                            {data.aboutJson &&
-                                                data.aboutJson.sections[1]
-                                                    .blocks[4].heading}
-                                        </span>
-                                        <span>
-                                        <br />
-                                            {data.aboutJson &&
-                                                data.aboutJson.sections[1].blocks[4]
-                                                    .content}
-                                        </span>
-                                    </li>
-                                </ol>
-                            </div>
-                        </Col>
-                    </Row>
-                </section>
-
-                {/* Section 3 */}
-                <section className="ourPassion py-4 alk-container">
-                    <Row className="py-2">
-                        <Col xs={12}>
-                            <div>
-                                <h2 className="mb-4">
-                                    {data.aboutJson &&
-                                        data.aboutJson.sections[2].blocks[0]
-                                            .heading}
-                                </h2>
-                                <p>
-                                    {data.aboutJson &&
-                                        data.aboutJson.sections[2].blocks[0]
-                                            .content}
-                                </p>
-                                <p>
-                                    {data.aboutJson &&
-                                        data.aboutJson.sections[2].blocks[1]
-                                            .content}
-                                </p>
-                                <blockquote className="blockquote default my-4 py-3">
-                                    <h2 className="text-gray bold">kai·zen</h2>
-                                    <p>
-                                        /ˈkīzən/
-                                        <br />
-                                        noun
-                                    </p>
-                                    <p>
-                                        a Japanese business philosophy of
-                                        continuous improvement of working
-                                        practices, personal efficiency, etc.
-                                    </p>
-                                </blockquote>
-                                <p>
-                                    {data.aboutJson &&
-                                        data.aboutJson.sections[2].blocks[2]
-                                            .content}
-                                </p>
-                            </div>
-                        </Col>
-                    </Row>
-                </section>
+                <section className="section--enquiry"></section>
+                <section className="section--taste"></section>
+                <section className="section--idea"></section>
+                <section className="section--promise"></section>
 
                 <section ref={dreamForm}>
                     <BuildYourDream />
@@ -230,10 +123,20 @@ export const query = graphql`
                 }
             }
         }
-        puzzlePieces: file(relativePath: { regex: "/puzzle-pieces.jpg/" }) {
+
+        uiDesign: file(relativePath: { regex: "/ui-design.jpg/" }) {
             ...fluidImage
         }
-        arrowLine: file(relativePath: { regex: "/arrowline.png/" }) {
+
+        jonathanHeadshot: file(relativePath: { regex: "/jonathan-headshot.png/" }) {
+            ...fluidImageSmall
+        }
+
+        planningSession: file(relativePath: { regex: "/planning-session.jpg/" }) {
+            ...fluidImage
+        }
+
+        alkemyLogo: file(relativePath: { regex: "/alkemy-logo-vertical.png/" }) {
             ...fluidImageSmall
         }
     }

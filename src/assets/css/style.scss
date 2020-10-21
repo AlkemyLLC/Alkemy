@@ -43,7 +43,7 @@ $container-max-widths: (
 );
 
 $font-family-base: 'Avenir Next','Helvetica Neue','Segoe UI','Helvetica','Arial',sans-serif;
-$line-height-base: 1.666;
+$line-height-base: 2;
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
@@ -80,7 +80,7 @@ html{
 }
 
 body{
-  font-size: clamp(var(--minBodyFontSize), var(--scaler), 18px);
+  font-size: clamp(var(--minBodyFontSize), var(--scaler), 20px);
   header{
     @media (min-width: 1023px) and (max-width: 1108px) {
       font-size: calc(16px);
@@ -1255,80 +1255,59 @@ div.spinContainer{
 
 /* About Us Page */
 
-.whoWeAre{
-  height: 100vh - calcVh($header-height + $subheader-height);
-  .img-col{
-    @media screen and (min-width:1024px){
-      height: 100% !important;
+.about-page{
+  .section--hero{
+    .hero-image{
+      max-height: 400px;
+      @media screen and (min-width:768px){
+        &:after{
+          z-index: 0;
+          background: linear-gradient(to left,black,transparent 45%);
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+      }
+    }
+    .hero-text{
+      @media screen and (min-width:768px){
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+      }
+
+      h2{
+        font-size: 2.5rem;
+        @media screen and (min-width:768px){
+          color: white !important;
+          font-size: 3.75rem;
+          filter: drop-shadow(1px 1px black);
+        }
+      }
     }
   }
-  .arrow{
-    @media screen and (min-width: 990px){
-      width: 70%;
-      margin-left: -.5em;
-      margin-top: 5vh;
+
+  .section--beginnings{
+    padding-bottom: 0;
+    position: relative;
+    .headshot{
+      max-width: 500px;
     }
-  }
-}
-
-.aboutValues{
-  background: url('../images/about/city-bg.jpg') no-repeat center center;
-  background-size: cover;
-  min-height: 100vh - calcVh($header-height);
-
-  .coreValues{
-    background: rgba(0,0,0,.9);
-    color: white;
-    line-height: 1.2;
-    @media screen and (max-width: 768px){
-      margin-top: 16rem;
+    .sub-text{
+      margin: 0;
+      position: absolute;
+      bottom:0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      z-index: 10;
     }
-
-    .valueTitle{
-      color: $alkemy_light_yellow;
-      font-weight: bold;
-    }
-
-  	ul{
-  		list-style: disc;
-  	}
-
-    @extend %fa-icon;
-    @extend .fas;
-
-    span {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    }
-
-  	ol{
-      list-style: none;
-      counter-reset: alkemy-counter;
-      
-  		li:before{
-  			content: fa-content($fa-var-flask);
-  			
-        font-size: 2.5rem;
-        position: absolute;
-        display: inline-flex;
-        margin-left: -3.5rem;
-        margin-top: .5rem;
-        color: $alkemy_blue;
-  		}
-
-  		ul{
-  			list-style: none;
-  		}
-
-  		li ul li:before{
-  			content: fa-content($fa-var-chevron-right);
-        font-size: 2.5rem;
-        position: absolute;
-        display: inline-flex;
-        margin-left: -1.8rem;
-        margin-top: -.2rem;
-        color: $alkemy_light_yellow;
-  		}
-  	}
   }
 }
 
@@ -1684,17 +1663,6 @@ div.spinContainer{
   display: -webkit-box;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
-}
-
-body{
-  .addthis-smartlayers{
-    display: none;
-  }
-  &.blog,&.blog-single-page{
-    .addthis-smartlayers {
-      display: block;
-    }
-  }
 }
 
 .page-404 {
