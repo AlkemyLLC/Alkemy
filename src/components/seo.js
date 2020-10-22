@@ -11,8 +11,7 @@ import Helmet from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 import { TypographyStyle, GoogleFont } from "react-typography";
 import typography from "../utils/typography";
-// typography.toString();
-// typography.injectStyles();
+
 
 import logo from "../assets/images/alkemy-logo-vertical.png";
 import screenshot from "../assets/images/alkemy-website-screenshot.png";
@@ -88,7 +87,7 @@ function SEO({
                     content:
                         "width=device-width, initial-scale=1, maximum-scale=1",
                 },
-                { httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1" },
+                { httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1" }
             ].concat(meta)}
         >
             <html lang={lang ? lang : "en"} />
@@ -158,7 +157,7 @@ function SEO({
                 "@context":"https://schema.org",
                 "@type":"WebSite",
                 "url":"${siteAddress}",
-                "name":"Alkemy",
+                "name":"Alkemy"
               }`}
             </script>
             <script defer type="application/ld+json">
