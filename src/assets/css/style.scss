@@ -251,7 +251,7 @@ input[type="checkbox"]:checked + label:before {
     background: $alkemy_darkest_blue;
   }
   color: white;
-  height: $header-height;
+  min-height: $header-height;
   top: 0;
   left: 0;
   right: 0;
@@ -317,13 +317,14 @@ a {
   }
 }
 
-.navbar-brand img {
-  width: 11em;
-  @media screen and (max-width: 321px){
-    width: 10em;
+.navbar-brand {
+  img {
+    width: 11em;
+    @media screen and (max-width: 321px){
+      width: 10em;
+    }
   }
 }
-
 .navbar-nav{
   .dropdown-menu{
     top: 90%;
@@ -430,12 +431,12 @@ a {
 
   /* iPhone 6/7/8 */
   @media screen and (min-width:375px) and (min-height:667px){
-    width: 14vw;
+    width: 10vw;
   }
 
   /* iPhone 6/7/8 plus */
   @media screen and (min-width:414px) and (min-height:736px){
-    width: 14vw;
+    width: 10vw;
   }
 
   /* iPhone X */
@@ -448,7 +449,7 @@ a {
     display:none;
   }
 
-  padding: 1rem;
+  padding: 0.5rem;
   background: $alkemy_blue;
   transform: translateY(-50%);
   border-radius: 20rem 0 0 20rem;
@@ -456,7 +457,7 @@ a {
   .callNowButton{
     background: white;
     color: black;
-    margin: 0 auto;
+    margin: 10px auto 0 auto;
     border-radius: 1rem;
   }
 }
@@ -1302,20 +1303,7 @@ div.spinContainer{
 
   .section--taste{
     .bg{
-      img{
-        filter: blur(1px);
-        -webkit-filter: blur(1px);
-      }
-      &:after{
-        content: "";
-        background: rgba(0,0,0,.35);
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 0;
-      }
+      
     }
     .callout{
       color: white;
@@ -1329,6 +1317,8 @@ div.spinContainer{
     background: $alkemy_blue;
     color: white;
   }
+
+  .section--promise{}
 }
 
 

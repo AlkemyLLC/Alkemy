@@ -15,7 +15,7 @@ _menuArray object details:
 
 const _menuArray = [
     {
-        name: "Our Solutions",
+        name: "Solutions",
         id: "1",
         links: [
             {

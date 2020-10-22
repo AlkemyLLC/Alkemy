@@ -175,7 +175,8 @@ export default class ReactNavbar extends React.Component {
                     <div key={item.id}>
                         <ul className="mobileSubMenu list-unstyled mx-auto text-center mb-5">
                             <NavItem className="text-center font-weight-bold siteTitle">
-                                <p className="text-white">{item.name}</p>
+                                <p className="h4 font-weight-bold mt-5">{item.name}</p>
+                                <hr style={{borderColor:"white",width:"50%",margin:"1rem auto"}}/>
                                 <ul className="list-unstyled m-0">
                                     {item.submenu.map(subitem => {
                                         return (
@@ -216,8 +217,8 @@ export default class ReactNavbar extends React.Component {
                             fluid={this.props.brand}
                             alt="Alkemy"
                             style={{
-                                height: "auto",
-                                width: "200px"
+                                // height: "auto",
+                                width: "150px",
                             }}
                         />
                     </Link>
@@ -240,7 +241,7 @@ export default class ReactNavbar extends React.Component {
                             onMouseOver={this.handleButtonHover}
                             onMouseOut={this.handleButtonHover}
                             onClick={this.toggleAppointmentModal}
-                            className="ml-4 my-auto align-middle"
+                            className="ml-4 my-auto align-middle text-white"
                         >
                             <FontAwesomeIcon
                                 icon={this.state.icon}
@@ -258,7 +259,7 @@ export default class ReactNavbar extends React.Component {
                         <li className="mx-auto">
                             <a
                                 color="light"
-                                className="btn btn-outline btn-white mx-auto my-4 align-middle"
+                                className="btn btn-outline btn-white mx-auto my-4 align-middle text-white"
                                 onClick={this.toggleAppointmentModal}
                             >
                                 <FontAwesomeIcon

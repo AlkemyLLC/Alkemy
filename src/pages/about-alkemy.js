@@ -87,7 +87,7 @@ const AboutAlkemy = ({ data }) => {
                     </Row>
                 </BackgroundImage>
 
-                <section className="section--beginnings pt-4 pt-sm-0">
+                <section className="section--beginnings pt-5 pt-sm-0">
                     <Row>
                         <Col
                             xs={12}
@@ -97,10 +97,9 @@ const AboutAlkemy = ({ data }) => {
                         >
                             <BackgroundImage
                                 className="h-100 headshot"
-
                                 style={{
                                     backgroundSize: "auto 100%",
-                                    backgroundPosition: "bottom center"
+                                    backgroundPosition: "bottom center",
                                 }}
                                 fluid={
                                     data.jonathanHeadshot.childImageSharp.fluid
@@ -141,8 +140,11 @@ const AboutAlkemy = ({ data }) => {
 
                 <BackgroundImage
                     Tag="section"
-                    className="section--taste h-100 bg alk-container"
-                    fluid={data.planningSession.childImageSharp.fluid}
+                    className="section--taste h-100 bg alk-container py-5"
+                    fluid={[
+                        data.planningSession.childImageSharp.fluid,
+                        `linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35))`,
+                    ].reverse()}
                     alt="Planning session on a large table with laptops, coffee, and papers"
                 >
                     <div className=" h-100 w-100 callout d-flex flex-column align-items-center justify-content-center">
@@ -161,7 +163,7 @@ const AboutAlkemy = ({ data }) => {
                     </div>
                 </BackgroundImage>
 
-                <section className="section--idea alk-container d-flex flex-column align-items-center justify-content-center">
+                <section className="section--idea alk-container d-flex flex-column align-items-center justify-content-center py-4">
                     <h2 className="font-weight-normal mb-4 text-center">
                         {data.aboutJson &&
                             data.aboutJson.sections[3].blocks[0].heading}
@@ -172,17 +174,49 @@ const AboutAlkemy = ({ data }) => {
                     </p>
                 </section>
 
-                <section className="section--promise"></section>
+                <section className="section--promise py-5 alk-container">
+                    <Row>
+                        <Col xs={12} lg={5} className="mb-5">
+                            <Img
+                                className="mx-auto"
+                                style={{
+                                    maxWidth: "625px",
+                                    width: "100%",
+                                }}
+                                fluid={data.alkemyLogo.childImageSharp.fluid}
+                                alt="Alkemy Logo"
+                            />
+                        </Col>
+                        <Col xs={12} lg={7}>
+                            <div>
+                                {data.aboutJson &&
+                                    data.aboutJson.sections[4].blocks.map(
+                                        (block, index) =>
+                                            index < 4 && (
+                                                <p className="" key={index}>
+                                                    {block.content}
+                                                </p>
+                                            )
+                                    )}
+                            </div>
 
-                <section ref={dreamForm}>
-                    <BuildYourDream />
+                            <h2 className="h4 text-center text-sm-right mt-5 mb-0">
+                                {data.aboutJson &&
+                                    data.aboutJson.sections[4].blocks[4]
+                                        .heading}
+                            </h2>
+                            <p className="text-center text-sm-right">
+                                {data.aboutJson &&
+                                    data.aboutJson.sections[4].blocks[4]
+                                        .content}
+                            </p>
+                        </Col>
+                    </Row>
                 </section>
             </Layout>
         </ScrollWrapper>
     );
 };
-
-const dreamForm = React.createRef();
 
 const handleScroll = () => {};
 
