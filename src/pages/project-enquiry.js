@@ -100,7 +100,7 @@ const ProjectEnquiry = ({ data }) => {
                     </Row>
                 </BackgroundImage>
 
-                <section className="section--beginnings pt-5 pt-sm-0">
+                <section className="section--beginnings alk-container">
                     <h2 className="text-center mb-3">
                         Let Us Build Your Dream
                     </h2>
@@ -130,7 +130,7 @@ const ProjectEnquiry = ({ data }) => {
                         solution we will be able to provide will be.
                     </p>
 
-                    <Form>
+                    <Form className="container mx-auto">
                         <h2>Business Snapshot</h2>
                         <p>
                             First, let&apos;s get a general idea about you and
@@ -186,103 +186,135 @@ const ProjectEnquiry = ({ data }) => {
                         </FormGroup>
 
                         <FormGroup>
-                            <Label for="contactNumber">Contact number</Label>
+                            <Label for="companyName">
+                                What’s the name of your company?
+                            </Label>
                             <Input
-                                name="contactNumber"
-                                id="contactNumber"
-                                type="tel"
+                                name="companyName"
+                                id="companyName"
+                                type="text"
+                                required
+                                onChange={e => setFirstName(e.target.value)}
+                            />
+                            <FormFeedback>{errorText}</FormFeedback>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label for="companyIndustry">
+                                What does your company do?
+                            </Label>
+                            <Input
+                                name="companyIndustry"
+                                id="companyIndustry"
+                                type="textarea"
                                 required
                                 onChange={e => setFirstName(e.target.value)}
                             />
                             <FormFeedback>{errorText}</FormFeedback>
                             <FormText>
-                                Example help text that remains unchanged.
+                                What are the products and services you offer?
                             </FormText>
                         </FormGroup>
 
-                        <label>Contact number *</label>
-                        <input
-                            name="input_33"
-                            id="input_12_33"
-                            type="text"
-                            value=""
-                            className=""
-                        />
+                        <FormGroup>
+                            <Label for="decisionMakers">
+                                Who are the decision makers for this project?
+                            </Label>
+                            <Input
+                                name="decisionMakers"
+                                id="decisionMakers"
+                                type="textarea"
+                                required
+                                onChange={e => setFirstName(e.target.value)}
+                            />
+                            <FormFeedback>{errorText}</FormFeedback>
+                        </FormGroup>
 
-                        <label>What’s the name of your company? *</label>
-                        <input
-                            name="input_3"
-                            id="input_12_3"
-                            type="text"
-                            value=""
-                            className=""
-                        />
-
-                        <label>
-                            What does your company do? What are the products and
-                            services you offer? *
-                        </label>
-                        <textarea
-                            name="input_4"
-                            id="input_12_4"
-                            className=""
-                            rows="10"
-                            cols="50"
-                        ></textarea>
-
-                        <label>
-                            Who are the decision makers for this project?
-                        </label>
-                        <textarea
-                            name="input_5"
-                            id="input_12_5"
-                            className="textarea small"
-                            aria-invalid="false"
-                            rows="10"
-                            cols="50"
-                        ></textarea>
-                        <label>
-                            What budget have you allocated for this project? Be
-                            honest and we will tell you what we can and
-                            can&apos;t do. *
-                        </label>
-                        <select
-                            name="input_6"
-                            id="input_12_6"
-                            className=" gfield_select"
-                        >
-                            <option
-                                value="Select your budget range"
-                                selected="selected"
+                        <FormGroup>
+                            <Label for="projectBudget">
+                                What budget have you allocated for this project?
+                            </Label>
+                            <Input
+                                type="select"
+                                name="projectBudget"
+                                id="projectBudget"
+                                required
+                                onChange={e => setFirstName(e.target.value)}
                             >
-                                Select your budget range
-                            </option>
-                            <option value="Below $3,500">Below $3,500</option>
-                            <option value="$3,500 - $5K">$3,500 - $5K</option>
-                            <option value="$5K - $10K">$5K - $10K</option>
-                            <option value="$10K - $15K">$10K - $15K</option>
-                            <option value="$15K - $20K">$15K - $20K</option>
-                            <option value="$20K +">$20K +</option>
-                            <option value="Not sure">Not sure</option>
-                        </select>
+                                <option value="" selected>
+                                    Select your budget range
+                                </option>
+                                <option value="Below $3,500">
+                                    Less than $3,500
+                                </option>
+                                <option value="$3,500 - $5K">
+                                    $3,500 - $5K
+                                </option>
+                                <option value="$5K - $10K">$5K - $10K</option>
+                                <option value="$10K - $15K">$10K - $15K</option>
+                                <option value="$15K - $20K">$15K - $20K</option>
+                                <option value="$20K+">$20K+</option>
+                                <option value="Not sure">Not sure</option>
+                            </Input>
+                            <FormFeedback>{errorText}</FormFeedback>
+                            <FormText>
+                                Be honest and we will tell you what we can and
+                                can&apos;t do.
+                            </FormText>
+                        </FormGroup>
 
-                        <label>
-                            Timeframe: when do you need this project delivered
-                            by? *
-                        </label>
-                        <p>
-                            Note: website projects typically take 4 - 8 weeks.
-                            E-commerce, membership and learning sites 6 - 12
-                            weeks.
-                        </p>
-                        <input
-                            name="input_32"
-                            id="input_12_32"
-                            type="text"
-                            value=""
-                            className=""
-                            aria-describedby="gfield_description_12_32"
-                        />
+                        <FormGroup>
+                            <Label for="timeframe">
+                                What timeframe do you need this project
+                                delivered by?
+                            </Label>
+                            <Input
+                                name="timeframe"
+                                id="timeframe"
+                                type="text"
+                                required
+                                onChange={e => setFirstName(e.target.value)}
+                            />
+                            <FormFeedback>{errorText}</FormFeedback>
+                            <FormText>
+                                Note: Websites typically take 1 to 3 months
+                                based on complexity and type.
+                            </FormText>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label for="contentReady">
+                                Do you have high quality photos and content
+                                ready?
+                            </Label>
+                            <Input
+                                name="contentReady"
+                                id="contentReady"
+                                type="select"
+                                required
+                                onChange={e => setFirstName(e.target.value)}
+                            >
+                                <option value="Yes, I have everything ready">
+                                    Yes - I have everything ready
+                                </option>
+                                <option value="Not yet but it's being created now">
+                                    Not yet but it&apos;s being created now
+                                </option>
+                                <option value="No, We are still working on it">
+                                    No, We are still working on it
+                                </option>
+                                <option value="No, We need your help">
+                                    No, We need your help
+                                </option>
+                            </Input>
+                            <FormFeedback>{errorText}</FormFeedback>
+                            <FormText>
+                                Content includes a list of the pages you need,
+                                well-written text for each section as well as
+                                high-quality photos. If you need help with this,
+                                please let us know.
+                            </FormText>
+                        </FormGroup>
 
                         <label>
                             Content: do you have high quality photos and text
