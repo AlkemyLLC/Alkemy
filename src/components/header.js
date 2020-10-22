@@ -85,17 +85,16 @@ const Header = ({ pageTitle, hideHeader, renderHeaderSolid, search }) => (
                     )}
                 </header>
                 {hideHeader === true ? (
-                    <Row className="subHeader mx-0 alk-container">
+                    <Row className="subHeader mx-0 alk-container py-2">
                         <Col xs={12} md={8} className="px-0">
-                            <h1 className="m-0 font-weight-normal">
-                                <Link
-                                    tag="h1"
-                                    to={pageTitle.url}
-                                    className="m-0 text-white"
-                                >
+                            <Link
+                                to={pageTitle.url}
+                                className="m-0 text-white"
+                            >
+                                <h1 className="m-0 font-weight-normal">
                                     {pageTitle.name}
-                                </Link>
-                            </h1>
+                                </h1>
+                            </Link>
                         </Col>
                         {search === true ? (
                             <Col xs={12} md={4} className="px-0">

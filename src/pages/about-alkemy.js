@@ -87,28 +87,36 @@ const AboutAlkemy = ({ data }) => {
                     </Row>
                 </BackgroundImage>
 
-                <section className="section--beginnings alk-container">
+                <section className="section--beginnings">
                     <Row>
                         <Col
                             xs={12}
                             sm={5}
                             className="order-2 order-sm-1 align-items-center"
                         >
-                            <Img
+                            <BackgroundImage
                                 className="h-100 headshot"
+                                background-size="100% 450px"
+                                style={{
+                                    // Defaults are overwrite-able by setting one or each of the following:
+                                    backgroundSize: "",
+                                    // backgroundPosition: "",
+                                    // backgroundRepeat: "",
+                                }}
                                 fluid={
                                     data.jonathanHeadshot.childImageSharp.fluid
                                 }
-                                alt="woman interacting with holographic user interface"
-                            />
-                            <p className="sub-text text-white">
-                                Jonathan Ferragut, President/CEO
-                            </p>
+                                alt="headshot of jonathan ferragut"
+                            >
+                                <p className="sub-text text-white">
+                                    Jonathan Ferragut, President/CEO
+                                </p>
+                            </BackgroundImage>
                         </Col>
                         <Col
                             xs={12}
                             sm={7}
-                            className="order-1 order-sm-2 justify-content-center d-flex flex-column"
+                            className="alk-container order-1 order-sm-2 justify-content-center d-flex flex-column"
                         >
                             <h2 className="font-weight-normal mb-4">
                                 {data.aboutJson &&
@@ -129,7 +137,6 @@ const AboutAlkemy = ({ data }) => {
                     </Row>
                 </section>
 
-                
                 <EnquiryWidget />
 
                 <BackgroundImage

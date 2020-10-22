@@ -15870,13 +15870,20 @@ a {
 }
 
 .subHeader {
-  background: #41a4e0 url("../images/banners/banner-bg.png") center right no-repeat;
+  background: #41a4e0 url("../images/banners/banner-bg.png") 70% center no-repeat;
+  background-size: auto 100%;
   color: white;
   width: 100%;
-  height: 110px;
+  min-height: 110px;
   margin-top: 65px;
   display: flex;
   align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .subHeader {
+    background-position: center right;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -16669,7 +16676,7 @@ div.spinContainer {
 
 .about-page .section--hero .hero-text h2 {
   color: white;
-  font-size: 2.75rem;
+  font-size: 2.7rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -16680,12 +16687,13 @@ div.spinContainer {
 }
 
 .about-page .section--beginnings {
+  min-height: 500px;
   padding-bottom: 0;
-  position: relative;
 }
 
 .about-page .section--beginnings .headshot {
-  max-width: 500px;
+  min-height: 450px;
+  width: 100%;
 }
 
 .about-page .section--beginnings .sub-text {

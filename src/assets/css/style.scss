@@ -473,10 +473,15 @@ a {
   }
 }
 .subHeader{
-  background: #41a4e0 url('../images/banners/banner-bg.png') center right no-repeat;
+  background: #41a4e0 url('../images/banners/banner-bg.png') 70% center  no-repeat;
+  background-size: auto 100%;
+  @media screen and (min-width: 768px){
+    background-position: center right;
+
+  }
   color: white;
   width: 100%;
-  height: $subheader-height;
+  min-height: $subheader-height;
   margin-top: $header-height;
   display: flex;
   align-items: center;
@@ -1256,7 +1261,7 @@ div.spinContainer{
       z-index: 10;
       h2{
         color: white;
-        font-size: 2.75rem;
+        font-size: 2.7rem;
         @media screen and (min-width:768px){
           font-size: 3.75rem;
           filter: drop-shadow(1px 1px black);
@@ -1266,10 +1271,11 @@ div.spinContainer{
   }
 
   .section--beginnings{
+    min-height: 500px;
     padding-bottom: 0;
-    position: relative;
     .headshot{
-      max-width: 500px;
+      min-height: 450px;
+      width: 100%;
     }
     .sub-text{
       margin: 0;
