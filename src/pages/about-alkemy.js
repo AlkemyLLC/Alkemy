@@ -129,9 +129,8 @@ const AboutAlkemy = ({ data }) => {
                     </Row>
                 </section>
 
-                <section className="section--enquiry alk-container d-flex align-items-center justify-content-center">
-                    <EnquiryWidget />
-                </section>
+                
+                <EnquiryWidget />
 
                 <BackgroundImage
                     Tag="section"
