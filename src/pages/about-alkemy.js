@@ -87,26 +87,25 @@ const AboutAlkemy = ({ data }) => {
                     </Row>
                 </BackgroundImage>
 
-                <section className="section--beginnings">
+                <section className="section--beginnings pt-4 pt-sm-0">
                     <Row>
                         <Col
                             xs={12}
-                            sm={5}
+                            sm={6}
+                            md={5}
                             className="order-2 order-sm-1 align-items-center"
                         >
                             <BackgroundImage
                                 className="h-100 headshot"
-                                background-size="100% 450px"
+
                                 style={{
-                                    // Defaults are overwrite-able by setting one or each of the following:
-                                    backgroundSize: "",
-                                    // backgroundPosition: "",
-                                    // backgroundRepeat: "",
+                                    backgroundSize: "auto 100%",
+                                    backgroundPosition: "bottom center"
                                 }}
                                 fluid={
                                     data.jonathanHeadshot.childImageSharp.fluid
                                 }
-                                alt="headshot of jonathan ferragut"
+                                alt="headshot of Jonathan Ferragut"
                             >
                                 <p className="sub-text text-white">
                                     Jonathan Ferragut, President/CEO
@@ -115,8 +114,9 @@ const AboutAlkemy = ({ data }) => {
                         </Col>
                         <Col
                             xs={12}
-                            sm={7}
-                            className="alk-container order-1 order-sm-2 justify-content-center d-flex flex-column"
+                            sm={6}
+                            md={7}
+                            className="text alk-container order-1 order-sm-2 justify-content-center d-flex flex-column"
                         >
                             <h2 className="font-weight-normal mb-4">
                                 {data.aboutJson &&

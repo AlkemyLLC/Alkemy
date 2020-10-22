@@ -16700,10 +16700,14 @@ div.spinContainer {
   margin: 0;
   position: absolute;
   bottom: 0;
-  left: 4rem;
+  left: 0;
   right: 0;
-  text-align: left;
+  text-align: center;
   z-index: 10;
+}
+
+.about-page .section--beginnings .text {
+  min-height: 500px;
 }
 
 .about-page .section--enquiry {
