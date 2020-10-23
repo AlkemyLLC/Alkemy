@@ -17317,3 +17317,11 @@ div.spinContainer {
 .wordpressCarePlans .modal-dialog.careModal .carePlanEnrollment section.thankYou {
   background: transparent;
 }
+
+.enquiry--page .section--hero {
+  min-height: 250px;
+}
+
+.enquiry--page .section--hero .hero-text {
+  color: white;
+}

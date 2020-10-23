@@ -1,6 +1,15 @@
 import { graphql } from "gatsby";
 import React,{useEffect,useState} from "react";
 
+export const fluidImageLG = graphql`
+    fragment fluidImageLG on File {
+        childImageSharp {
+            fluid(maxWidth: 1920) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+            }
+        }
+    }
+`;
 export const fluidImage = graphql`
     fragment fluidImage on File {
         childImageSharp {

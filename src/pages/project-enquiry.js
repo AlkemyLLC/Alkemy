@@ -3,8 +3,7 @@ import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import "../utils/utils.js";
 import {
-    fluidImage,
-    fluidImageSmall,
+    fluidImageLG,
     useWindowSize,
 } from "../utils/utils.js";
 import {
@@ -51,15 +50,15 @@ const ProjectEnquiry = ({ data }) => {
         size.width >= 768
             ? size.width <= 960
                 ? [
-                      data.uiDesign.childImageSharp.fluid,
+                      data.doMore.childImageSharp.fluid,
                       `linear-gradient(to left,black,transparent 55%)`,
                   ].reverse()
                 : [
-                      data.uiDesign.childImageSharp.fluid,
+                      data.doMore.childImageSharp.fluid,
                       `linear-gradient(to left,black,transparent 45%)`,
                   ].reverse()
             : [
-                  data.uiDesign.childImageSharp.fluid,
+                  data.doMore.childImageSharp.fluid,
                   `linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25))`,
               ].reverse();
 
@@ -68,7 +67,7 @@ const ProjectEnquiry = ({ data }) => {
             <Layout
                 renderHeaderSolid={true}
                 headerTitle={[true, pageTitle]}
-                bodyClasses="enquiry-page"
+                bodyClasses="enquiry--page"
             >
                 <SEO title={pageTitle.name} />
 
@@ -316,34 +315,7 @@ const ProjectEnquiry = ({ data }) => {
                             </FormText>
                         </FormGroup>
 
-                        <label>
-                            Content: do you have high quality photos and text
-                            copy ready? *
-                        </label>
-                        <p>
-                            Content includes a list of the pages you need,
-                            well-written web copy as well as high-quality
-                            photos. If you need help with this, please let us
-                            know.
-                        </p>
-                        <select
-                            name="input_34"
-                            id="input_12_34"
-                            className=" gfield_select"
-                        >
-                            <option value="Yes - I have all text content and photos ready">
-                                Yes - I have all text content and photos ready
-                            </option>
-                            <option value="Not yet - it's being created now">
-                                Not yet - it&apos;s being created now
-                            </option>
-                            <option value="No - I am still working on it">
-                                No - I am still working on it
-                            </option>
-                            <option value="No - I need your help">
-                                No - I need your help
-                            </option>
-                        </select>
+                        
 
                         <h2>What Are We Doing?</h2>
                         <h2>
@@ -537,33 +509,21 @@ const ProjectEnquiry = ({ data }) => {
 const handleScroll = () => {};
 
 export const query = graphql`
-    {
-        aboutJson {
-            sections {
-                id
-                blocks {
-                    heading
-                    content
-                }
-            }
-        }
+           {
+               aboutJson {
+                   sections {
+                       id
+                       blocks {
+                           heading
+                           content
+                       }
+                   }
+               }
 
-        uiDesign: file(relativePath: { regex: "/ui-design.jpg/" }) {
-            ...fluidImage
-        }
-
-        jonathanHeadshot: file(relativePath: { regex: "/jonathan-headshot.png/" }) {
-            ...fluidImageSmall
-        }
-
-        planningSession: file(relativePath: { regex: "/planning-session.jpg/" }) {
-            ...fluidImage
-        }
-
-        alkemyLogo: file(relativePath: { regex: "/alkemy-logo-vertical.png/" }) {
-            ...fluidImageSmall
-        }
-    }
-`;
+               doMore: file(relativePath: { regex: "/do-more.jpg/" }) {
+                   ...fluidImageLG
+               }
+           }
+       `;
 
 export default ProjectEnquiry;
