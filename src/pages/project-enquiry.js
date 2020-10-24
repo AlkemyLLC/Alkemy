@@ -4,6 +4,7 @@ import Img from "gatsby-image";
 import "../utils/utils.js";
 import {
     fluidImageLG,
+    fluidImageSmall,
     useWindowSize,
 } from "../utils/utils.js";
 import {
@@ -47,19 +48,16 @@ const ProjectEnquiry = ({ data }) => {
     const [email,setEmail] = useState("")
 
     const heroImg =
-        size.width >= 768
-            ? size.width <= 960
-                ? [
-                      data.doMore.childImageSharp.fluid,
-                      `linear-gradient(to left,black,transparent 55%)`,
-                  ].reverse()
+        size.width > 767
+            ? size.width >= 960
+                ? data.doMore.childImageSharp.fluid
                 : [
                       data.doMore.childImageSharp.fluid,
-                      `linear-gradient(to left,black,transparent 45%)`,
+                      `linear-gradient(to right, transparent 45vw, white 60vw)`,
                   ].reverse()
             : [
-                  data.doMore.childImageSharp.fluid,
-                  `linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25))`,
+                  data.doMoreMobile.childImageSharp.fluid,
+                  `linear-gradient(to bottom, rgba(255,255,255,.25) , white 25vh)`,
               ].reverse();
 
     return (
@@ -75,24 +73,18 @@ const ProjectEnquiry = ({ data }) => {
                     Tag="section"
                     className="section--hero h-100 d-flex flex-column justify-content-center"
                     style={{
-                        backgroundPosition: "center 28%",
+                        backgroundSize:
+                            size.width > 767 ? "auto 400px" : "cover",
+                        backgroundPosition: "left 40%",
                     }}
                     fluid={heroImg}
                     alt="woman interacting with holographic user interface"
                 >
                     <Row className="alk-container hero-text">
-                        <Col xs={12}>
-                            <h2 className="text-left text-sm-right">
-                                {data.aboutJson &&
-                                    data.aboutJson.sections[0].blocks[0]
-                                        .heading}
-                                <br />
-                                {data.aboutJson &&
-                                    data.aboutJson.sections[0].blocks[1]
-                                        .heading}
-                                <br />
-                                {data.aboutJson &&
-                                    data.aboutJson.sections[0].blocks[2]
+                        <Col xs={12} md={{ size: 6, offset: 6 }}>
+                            <h2 className="h1 text-left text-sm-center text-md-right">
+                                {data.enquiryJson &&
+                                    data.enquiryJson.sections[0].blocks[0]
                                         .heading}
                             </h2>
                         </Col>
@@ -100,20 +92,15 @@ const ProjectEnquiry = ({ data }) => {
                 </BackgroundImage>
 
                 <section className="section--beginnings alk-container">
-                    <h2 className="text-center mb-3">
-                        Let Us Build Your Dream
-                    </h2>
                     <p>
-                        Tell us about your business and what you are trying to
-                        achieve. Fill out the fields below so that we can get a
-                        better picture of the kind of site you&apos;ve been
-                        dreaming of and we&apos;ll do the rest. As soon as we
-                        have had a chance to review your information,
-                        you&apos;ll recieve a follow-up call from one of our
-                        team members to discuss the next steps.
+                        {data.enquiryJson &&
+                            data.enquiryJson.sections[0].blocks[0].content}
                     </p>
 
-                    <h2>About the form</h2>
+                    <h2>
+                        {data.enquiryJson &&
+                            data.enquiryJson.sections[1].blocks[0].heading}
+                    </h2>
                     <p>
                         Too often, people don&apos;t ask enough questions and
                         this can lead to many unforseen circumstances and
@@ -315,8 +302,6 @@ const ProjectEnquiry = ({ data }) => {
                             </FormText>
                         </FormGroup>
 
-                        
-
                         <h2>What Are We Doing?</h2>
                         <h2>
                             What are your main reasons for needing this project?
@@ -510,7 +495,7 @@ const handleScroll = () => {};
 
 export const query = graphql`
            {
-               aboutJson {
+               enquiryJson {
                    sections {
                        id
                        blocks {
@@ -520,8 +505,12 @@ export const query = graphql`
                    }
                }
 
-               doMore: file(relativePath: { regex: "/do-more.jpg/" }) {
+               doMore: file(relativePath: { regex: "/do-more-desktop.jpg/" }) {
                    ...fluidImageLG
+               }
+
+               doMoreMobile: file(relativePath: { regex: "/do-more-mobile.jpg/" }) {
+                   ...fluidImageSmall
                }
            }
        `;

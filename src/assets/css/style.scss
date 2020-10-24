@@ -1921,7 +1921,8 @@ div.spinContainer{
   .section--hero{
     min-height: 250px;
     .hero-text{
-      color: white;
+      color: black;
+      // filter: drop-shadow(1px 1px white)
     }
   }
 }
