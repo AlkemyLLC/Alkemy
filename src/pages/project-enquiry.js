@@ -111,6 +111,10 @@ const ProjectEnquiry = ({ data }) => {
                         {data.enquiryJson &&
                             data.enquiryJson.sections[1].blocks[1].content}
                     </p>
+                    <p>
+                        <span className="text-danger">*</span> denotes required
+                        field.
+                    </p>
 
                     <hr />
                     <Form onSubmit={e => e.preventDefault()}>
@@ -128,7 +132,7 @@ const ProjectEnquiry = ({ data }) => {
                                         <FormGroup>
                                             <Label for="firstName">
                                                 First name{" "}
-                                                <span className="text-red">
+                                                <span className="text-danger">
                                                     *
                                                 </span>
                                             </Label>
@@ -150,7 +154,7 @@ const ProjectEnquiry = ({ data }) => {
                                         <FormGroup>
                                             <Label for="lastName">
                                                 Last name{" "}
-                                                <span className="text-red">
+                                                <span className="text-danger">
                                                     *
                                                 </span>
                                             </Label>
@@ -172,7 +176,7 @@ const ProjectEnquiry = ({ data }) => {
                                 <FormGroup>
                                     <Label for="contactNumber">
                                         Contact number{" "}
-                                        <span className="text-red">*</span>
+                                        <span className="text-danger">*</span>
                                     </Label>
                                     <Input
                                         name="contactNumber"
@@ -205,7 +209,7 @@ const ProjectEnquiry = ({ data }) => {
                                 <FormGroup>
                                     <Label for="email">
                                         Email{" "}
-                                        <span className="text-red">*</span>
+                                        <span className="text-danger">*</span>
                                     </Label>
                                     <Input
                                         name="email"
@@ -219,7 +223,7 @@ const ProjectEnquiry = ({ data }) => {
                                 <FormGroup>
                                     <Label for="companyName">
                                         What&apos;s the name of your company?{" "}
-                                        <span className="text-red">*</span>
+                                        <span className="text-danger">*</span>
                                     </Label>
                                     <Input
                                         name="companyName"
@@ -235,7 +239,7 @@ const ProjectEnquiry = ({ data }) => {
                                 <FormGroup>
                                     <Label for="companyIndustry">
                                         What does your company do?{" "}
-                                        <span className="text-red">*</span>
+                                        <span className="text-danger">*</span>
                                     </Label>
                                     <Input
                                         name="companyIndustry"
@@ -390,7 +394,7 @@ const ProjectEnquiry = ({ data }) => {
                                 <FormGroup>
                                     <Label for="idealCustomer">
                                         Tell us about your ideal customer.{" "}
-                                        <span className="text-red">*</span>
+                                        <span className="text-danger">*</span>
                                     </Label>
                                     <Input
                                         name="idealCustomer"
@@ -415,7 +419,7 @@ const ProjectEnquiry = ({ data }) => {
                                     <Label for="top5reasons">
                                         What are the top 5 reasons your ideal
                                         customer will visit your website?{" "}
-                                        <span className="text-red">*</span>
+                                        <span className="text-danger">*</span>
                                     </Label>
                                     <Input
                                         name="top5reasons"
@@ -447,7 +451,7 @@ const ProjectEnquiry = ({ data }) => {
                                 <FormGroup>
                                     <Label for="projectType">
                                         What type of project is this?{" "}
-                                        <span className="text-red">*</span>
+                                        <span className="text-danger">*</span>
                                     </Label>
                                     <CustomInput
                                         type="select"
@@ -483,7 +487,7 @@ const ProjectEnquiry = ({ data }) => {
                                     <Label for="projectBudget">
                                         What budget have you allocated for this
                                         project?{" "}
-                                        <span className="text-red">*</span>
+                                        <span className="text-danger">*</span>
                                     </Label>
                                     <CustomInput
                                         type="select"
@@ -528,7 +532,7 @@ const ProjectEnquiry = ({ data }) => {
                                     <Label for="timeframe">
                                         What timeframe do you need this project
                                         delivered by?{" "}
-                                        <span className="text-red">*</span>
+                                        <span className="text-danger">*</span>
                                     </Label>
                                     <Input
                                         name="timeframe"
@@ -567,7 +571,7 @@ const ProjectEnquiry = ({ data }) => {
                                     <Label for="contentReady">
                                         Do you have high quality photos and
                                         content ready?{" "}
-                                        <span className="text-red">*</span>
+                                        <span className="text-danger">*</span>
                                     </Label>
                                     <CustomInput
                                         name="contentReady"
@@ -711,188 +715,202 @@ const ProjectEnquiry = ({ data }) => {
                             </Col>
                         </Row>
 
-                        <h2>What Are We Doing?</h2>
-                        <h2>
-                            What are your main reasons for needing this project?
-                        </h2>
-                        <p>
-                            It&apos;s helpful to set SMART goals as it keeps all
-                            of us on the same page and moving in the same
-                            direction. IE: Goals that are specific, measurable,
-                            achievable, relevant and time-bound.
-                            <br />
-                            <br />
-                            With this in mind, what are the top 5 business needs
-                            of your new website?
-                            <br />
-                            <br />
-                            EG: 20% increase in sales in 6 months, 30% increase
-                            in membership this year, reduce admin costs by 15%
-                            in 3 months
-                        </p>
-                        <label>Goal #1</label>
-                        <input
-                            name="input_9"
-                            id="input_12_9"
-                            type="text"
-                            value=""
-                            className=""
-                            aria-invalid="false"
-                        />
-                        <label>Goal #2</label>
-                        <input
-                            name="input_10"
-                            id="input_12_10"
-                            type="text"
-                            value=""
-                            className=""
-                            aria-invalid="false"
-                        />
-                        <label>Goal #3</label>
-                        <input
-                            name="input_11"
-                            id="input_12_11"
-                            type="text"
-                            value=""
-                            className=""
-                            aria-invalid="false"
-                        />
-                        <label>Goal #4</label>
-                        <input
-                            name="input_12"
-                            id="input_12_12"
-                            type="text"
-                            value=""
-                            className=""
-                            aria-invalid="false"
-                        />
-                        <label>Goal #5</label>
-                        <input
-                            name="input_13"
-                            id="input_12_13"
-                            type="text"
-                            value=""
-                            className=""
-                            aria-invalid="false"
-                        />
+                        <Row form className="my-5">
+                            <Col xs={12}>
+                                <h3>Website Designs</h3>
+                            </Col>
 
-                        <label>
-                            For websites: is there anything about your current
-                            site that serves the business well and if so, why?
-                        </label>
-                        <textarea
-                            name="input_14"
-                            id="input_12_14"
-                            className=""
-                            aria-invalid="false"
-                            rows="10"
-                            cols="50"
-                        ></textarea>
+                            <Col xs={12} sm={6} className="pr-sm-5">
+                                <FormGroup>
+                                    <Label for="currentWebsiteWins">
+                                        Is there anything about your current
+                                        website that serves the business well
+                                        and if so, why?{" "}
+                                        <span className="text-danger">*</span>
+                                    </Label>
+                                    <Input
+                                        name="currentWebsiteWins"
+                                        id="currentWebsiteWins"
+                                        type="textarea"
+                                        required
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6} className="pl-sm-5">
+                                <Row form tag="fieldset">
+                                    <Col xs={12}>
+                                        If you currently have a website, would
+                                        you agree to switching to our preferred
+                                        host?
+                                    </Col>
+                                    <Col xs={12}>
+                                        <FormGroup check>
+                                            <Label check>
+                                                <Input
+                                                    type="radio"
+                                                    name="willSwitchToOurHost"
+                                                />{" "}
+                                                Yes
+                                            </Label>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={12}>
+                                        <FormGroup check>
+                                            <Label check>
+                                                <Input
+                                                    type="radio"
+                                                    name="willNotSwitchToOurHost"
+                                                />{" "}
+                                                No
+                                            </Label>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
 
-                        <h2>Who Are We Doing This For?</h2>
-                        <label>
-                            Tell us about your ideal customer. Who are they? How
-                            old are they? What gender are they? Where do they
-                            hang out online? What are their interests? *
-                        </label>
-                        <textarea
-                            name="input_16"
-                            id="input_12_16"
-                            className=""
-                            rows="10"
-                            cols="50"
-                        ></textarea>
+                        <Row form className="my-5">
+                            <Col xs={12}>
+                                <h2>Design Conceptualization</h2>
+                            </Col>
 
-                        <label>
-                            What are the top 5 reasons your ideal customer will
-                            visit your website? *
-                        </label>
-                        <p>
-                            EG: research product information, get contact
-                            details, ask questions about services, pricing
-                        </p>
-                        <textarea
-                            name="input_17"
-                            id="input_12_17"
-                            className=""
-                            rows="10"
-                            cols="50"
-                        ></textarea>
+                            <Col xs={12} sm={6} className="pr-sm-5">
+                                <FormGroup>
+                                    <Label for="brandFeeling">
+                                        How do you want people to feel when they
+                                        interact with your brand?
+                                    </Label>
+                                    <Input
+                                        name="brandFeeling"
+                                        id="brandFeeling"
+                                        type="textarea"
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormText>
+                                        <strong>Eg:</strong> Safe and secure,
+                                        edgy and excited, exclusive and cool,
+                                        like they belong
+                                    </FormText>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="competitorWebsites">
+                                        Do your competitors have websites?
+                                    </Label>
+                                    <Input
+                                        name="competitorWebsites"
+                                        id="competitorWebsites"
+                                        type="textarea"
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormText>
+                                        If they do, please make sure to list
+                                        them. This way we can ensure that yours
+                                        is better!
+                                    </FormText>
+                                </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6} className="pl-sm-5">
+                                <FormGroup>
+                                    <Label for="top3Competitors">
+                                        Who are your top 3 competitors?
+                                    </Label>
+                                    <Input
+                                        name="top3Competitors"
+                                        id="top3Competitors"
+                                        type="textarea"
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormText>
+                                        Let us know who is competing for the
+                                        attention of your ideal customer and
+                                        what they are doing that you feel is
+                                        working.
+                                    </FormText>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="websitesForDesignAesthetic">
+                                        Are there any other websites in
+                                        particular that you like the design of?
+                                        Why?
+                                    </Label>
+                                    <Input
+                                        name="websitesForDesignAesthetic"
+                                        id="websitesForDesignAesthetic"
+                                        type="textarea"
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                            </Col>
+                        </Row>
 
-                        <h2>Design Concept</h2>
-                        <label>
-                            How do you want people to feel when they interact
-                            with your brand? Safe and secure, edgy and excited,
-                            exclusive and cool, like they belong? *
-                        </label>
-                        <textarea
-                            name="input_19"
-                            id="input_12_19"
-                            className=""
-                            rows="10"
-                            cols="50"
-                        ></textarea>
-                        <label>
-                            Do your competitors have websites? If so, list them
-                            here so we can make sure yours is better 🙂 *
-                        </label>
-                        <textarea
-                            name="input_20"
-                            id="input_12_20"
-                            className=""
-                            rows="10"
-                            cols="50"
-                        ></textarea>
-                        <label>
-                            Tell us about your competitors. Who else is
-                            competing for the attention of your ideal customer
-                            and what are they doing that you think is working? *
-                        </label>
-                        <textarea
-                            name="input_21"
-                            id="input_12_21"
-                            className=""
-                            rows="10"
-                            cols="50"
-                        ></textarea>
-                        <label>
-                            Are there any other websites in particular that you
-                            like the design of? Why? *
-                        </label>
-                        <textarea
-                            name="input_22"
-                            id="input_12_22"
-                            className=""
-                            rows="10"
-                            cols="50"
-                        ></textarea>
+                        <Row form className="my-5">
+                            <Col xs={12}>
+                                <h2>
+                                    And finally, what will success look like?
+                                </h2>
+                            </Col>
 
-                        <h2>What Does Success Look Like?</h2>
-                        <label>
-                            If we were to be celebrating success in 12 months
-                            time, what would that have to look like? How many
-                            website visitors? How many leads? How many sales? Be
-                            as descriptive as you possibly can. *
-                        </label>
-                        <textarea
-                            name="input_24"
-                            id="input_12_24"
-                            className=""
-                            rows="10"
-                            cols="50"
-                        ></textarea>
-                        <label>
-                            Finally: anything else you want to let us know?
-                        </label>
-                        <textarea
-                            name="input_25"
-                            id="input_12_25"
-                            className=""
-                            rows="10"
-                            cols="50"
-                        ></textarea>
-
-                        <input type="submit" value="Send Enquiry" />
+                            <Col xs={12} sm={6} className="pr-sm-5">
+                                <FormGroup>
+                                    <Label for="successLooksLike">
+                                        If we were to be celebrating success in
+                                        12 months time, what would that have to
+                                        look like?{" "}
+                                        <span className="text-danger">*</span>
+                                    </Label>
+                                    <Input
+                                        name="successLooksLike"
+                                        id="successLooksLike"
+                                        type="textarea"
+                                        required
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormText>
+                                        How many website visitors? How many
+                                        leads? How many sales? Be as descriptive
+                                        as you possibly can.
+                                    </FormText>
+                                </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6} className="pl-sm-5">
+                                <FormGroup>
+                                    <Label for="additionalComments">
+                                        Anything else you feel we should know?
+                                    </Label>
+                                    <Input
+                                        name="additionalComments"
+                                        id="additionalComments"
+                                        type="textarea"
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Button type="submit" color="primary">
+                            Send Enquiry
+                        </Button>
                     </Form>
                 </section>
             </Layout>
