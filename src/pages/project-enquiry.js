@@ -23,6 +23,7 @@ import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
 import SEO from "../components/seo";
 import BackgroundImage from "gatsby-background-image";
+import ThankYou from "../components/thankYou.jsx";
 import loadable from "@loadable/component";
 
 const ReCAPTCHA = loadable(() => import("../components/recaptcha.jsx"));
@@ -58,6 +59,7 @@ const ProjectEnquiry = ({ data }) => {
                   `linear-gradient(to bottom, rgba(255,255,255,.25) , white 25vh)`,
               ].reverse();
 
+    const [thankYou,setThankYou] = useState(false);
     const [formValues, setFormValues] = useState({
         "g-recaptcha-response": "",
         firstName: "",
@@ -206,7 +208,7 @@ const ProjectEnquiry = ({ data }) => {
                 .join("&");
         };
 
-        const recaptchaValue = this.state.formValues["g-recaptcha-response"];
+        const recaptchaValue = formValues["g-recaptcha-response"];
 
         if (valid && recaptchaValue.length > 0) {
             fetch("/", {
@@ -215,23 +217,19 @@ const ProjectEnquiry = ({ data }) => {
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
                 body: encode({
-                    "form-name": "dreamForm",
-                    ...this.state.formValues,
+                    "form-name": "project-enquiry-form",
+                    ...formValues,
                 }),
             })
                 .then(res => {
-                    this.setState({
-                        success: true,
-                    });
+                    setThankYou(true);
                     console.log(res);
                 })
                 .catch(error => console.log(error));
         } else {
-            let errors = { ...this.state.errors };
-            errors.ReCAPTCHA = "ReCAPTCHA Verification Needed to Submit Form.";
-            this.setState({
-                errors,
-            });
+            let errorObj = { ...errors };
+            errorObj.ReCAPTCHA = "ReCAPTCHA Verification Needed to Submit Form.";
+            setErrors(errorObj)
         }
     };
 
@@ -410,8 +408,11 @@ const ProjectEnquiry = ({ data }) => {
                         </Col>
                     </Row>
                 </BackgroundImage>
-
-                <section className="section--beginnings alk-container my-4">
+                
+                {
+                    thankYou
+                    ? ()
+                    : (<section className="section--enquiry-form alk-container my-4">
                     <p className="mt-4 mb-5">
                         {data.enquiryJson &&
                             data.enquiryJson.sections[0].blocks[0].content}
@@ -1349,14 +1350,17 @@ const ProjectEnquiry = ({ data }) => {
                         <input
                             type="hidden"
                             name="form-name"
-                            value="dreamForm"
+                            value="project-enquiry-form"
                         />
                         <input type="hidden" name="bot-field" className="hp" />
                         <Button onClick={handleSubmit} color="primary">
                             Send Enquiry
                         </Button>
                     </Form>
-                </section>
+                </section>)
+
+                }
+                
             </Layout>
         </ScrollWrapper>
     );
