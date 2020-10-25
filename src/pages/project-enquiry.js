@@ -647,118 +647,49 @@ const ProjectEnquiry = ({ data }) => {
                             </Col>
                             <Col xs={12} sm={6} className="pr-sm-5">
                                 <FormGroup>
-                                    <Label for="projectType">
-                                        What type of project is this?{" "}
-                                        <span className="text-red">*</span>
-                                    </Label>
-                                    <CustomInput
-                                        type="select"
-                                        name="projectType"
-                                        id="projectType"
-                                        required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
-                                    >
-                                        <option value="" selected disabled>
-                                            Select your project type
-                                        </option>
-                                        <option value="Web Design">
-                                            Web Design
-                                        </option>
-                                        <option value="Software Development">
-                                            Software Development
-                                        </option>
-                                        <option value="E-commerce">
-                                            E-commerce
-                                        </option>
-                                        <option value="Digital Marketing">
-                                            Digital Marketing
-                                        </option>
-                                        <option value="Consulting">
-                                            Consulting
-                                        </option>
-                                    </CustomInput>
-                                    <FormFeedback>{errorText}</FormFeedback>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="projectBudget">
-                                        What budget have you allocated for this
-                                        project?{" "}
-                                        <span className="text-red">*</span>
-                                    </Label>
-                                    <CustomInput
-                                        type="select"
-                                        name="projectBudget"
-                                        id="projectBudget"
-                                        required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
-                                    >
-                                        <option value="" selected disabled>
-                                            Select your budget range
-                                        </option>
-                                        <option value="Below $3,500">
-                                            Less than $3,500
-                                        </option>
-                                        <option value="$3,500 - $5K">
-                                            $3,500 - $5K
-                                        </option>
-                                        <option value="$5K - $10K">
-                                            $5K - $10K
-                                        </option>
-                                        <option value="$10K - $15K">
-                                            $10K - $15K
-                                        </option>
-                                        <option value="$15K - $20K">
-                                            $15K - $20K
-                                        </option>
-                                        <option value="$20K+">$20K+</option>
-                                        <option value="Not sure">
-                                            Not sure
-                                        </option>
-                                    </CustomInput>
-                                    <FormFeedback>{errorText}</FormFeedback>
-                                    <FormText>
-                                        Be honest and we will tell you what we
-                                        can and can&apos;t do.
-                                    </FormText>
-                                </FormGroup>
-
-                                <FormGroup>
-                                    <Label for="timeframe">
-                                        What timeframe do you need this project
-                                        delivered by?{" "}
-                                        <span className="text-red">*</span>
-                                    </Label>
+                                    <Label for="goal1">Goal #1</Label>
                                     <Input
-                                        name="timeframe"
-                                        id="timeframe"
+                                        name="goal1"
+                                        id="goal1"
                                         type="text"
-                                        required
                                         onChange={e =>
                                             setFirstName(e.target.value)
                                         }
                                     />
                                     <FormFeedback>{errorText}</FormFeedback>
-                                    <FormText>
-                                        <strong>Note:</strong> Websites
-                                        typically take 1 to 3 months based on
-                                        complexity and type.
-                                    </FormText>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="goal2">Goal #2</Label>
+                                    <Input
+                                        name="goal2"
+                                        id="goal2"
+                                        type="text"
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="goal3">Goal #3</Label>
+                                    <Input
+                                        name="goal3"
+                                        id="goal3"
+                                        type="text"
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
                                 </FormGroup>
                             </Col>
                             <Col xs={12} sm={6} className="pl-sm-5">
                                 <FormGroup>
-                                    <Label for="decisionMakers">
-                                        Who are the decision makers for this
-                                        project?
-                                    </Label>
+                                    <Label for="goal4">Goal #4</Label>
                                     <Input
-                                        name="decisionMakers"
-                                        id="decisionMakers"
-                                        type="textarea"
+                                        name="goal4"
+                                        id="goal4"
+                                        type="text"
                                         onChange={e =>
                                             setFirstName(e.target.value)
                                         }
@@ -766,42 +697,16 @@ const ProjectEnquiry = ({ data }) => {
                                     <FormFeedback>{errorText}</FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label for="contentReady">
-                                        Do you have high quality photos and
-                                        content ready?{" "}
-                                        <span className="text-red">*</span>
-                                    </Label>
-                                    <CustomInput
-                                        name="contentReady"
-                                        id="contentReady"
-                                        type="select"
-                                        required
+                                    <Label for="goal5">Goal #5</Label>
+                                    <Input
+                                        name="goal5"
+                                        id="goal5"
+                                        type="text"
                                         onChange={e =>
                                             setFirstName(e.target.value)
                                         }
-                                    >
-                                        <option value="Yes, I have everything ready">
-                                            Yes - I have everything ready
-                                        </option>
-                                        <option value="Not yet but it's being created now">
-                                            Not yet but it&apos;s being created
-                                            now
-                                        </option>
-                                        <option value="No, We are still working on it">
-                                            No, We are still working on it
-                                        </option>
-                                        <option value="No, We need your help">
-                                            No, We need your help
-                                        </option>
-                                    </CustomInput>
+                                    />
                                     <FormFeedback>{errorText}</FormFeedback>
-                                    <FormText>
-                                        <strong>Note:</strong> Content includes
-                                        a list of the pages you need,
-                                        well-written text for each section as
-                                        well as high-quality photos. If you need
-                                        help with this, please let us know.
-                                    </FormText>
                                 </FormGroup>
                             </Col>
                         </Row>
