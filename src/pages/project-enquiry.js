@@ -91,8 +91,8 @@ const ProjectEnquiry = ({ data }) => {
                     </Row>
                 </BackgroundImage>
 
-                <section className="section--beginnings alk-container">
-                    <p>
+                <section className="section--beginnings alk-container my-4">
+                    <p className="mt-4 mb-5">
                         {data.enquiryJson &&
                             data.enquiryJson.sections[0].blocks[0].content}
                     </p>
@@ -101,107 +101,289 @@ const ProjectEnquiry = ({ data }) => {
                         {data.enquiryJson &&
                             data.enquiryJson.sections[1].blocks[0].heading}
                     </h2>
-                    <p>
-                        Too often, people don&apos;t ask enough questions and
-                        this can lead to many unforseen circumstances and
-                        problems. This form is an effort to make sure that we
-                        lay the groundwork for something amazing to come. Below
-                        you will find an your opportunity to explain why you
-                        need a website and what key objectives the website
-                        should achieve.
+                    <p className="my-5">
+                        {data.enquiryJson &&
+                            data.enquiryJson.sections[1].blocks[0].content}
                         <br />
                         <br />
-                        <strong>Remember:</strong> Our goal is your success so
-                        the more information you give us here, the better the
-                        solution we will be able to provide will be.
+                        <strong>Remember:</strong>{" "}
+                        {data.enquiryJson &&
+                            data.enquiryJson.sections[1].blocks[1].content}
                     </p>
 
-                    <Form className="container mx-auto">
-                        <h2>Business Snapshot</h2>
-                        <p>
-                            First, let&apos;s get a general idea about you and
-                            your business.
-                        </p>
+                    <hr/>
+                    <Form onSubmit={e => e.preventDefault()}>
+                        <Row form className="my-5">
+                            <Col xs={12}>
+                                <h2>Business Snapshot</h2>
+                                <p>
+                                    First, let&apos;s get a general idea about
+                                    you and your business.
+                                </p>
+                            </Col>
+                            <Col xs={12} sm={6} className="pr-sm-5">
+                                <Row form>
+                                    <Col xs={12} sm={6}>
+                                        <FormGroup>
+                                            <Label for="firstName">
+                                                First name{" "}
+                                                <span className="text-red">
+                                                    *
+                                                </span>
+                                            </Label>
+                                            <Input
+                                                name="firstName"
+                                                id="firstName"
+                                                type="text"
+                                                required
+                                                onChange={e =>
+                                                    setFirstName(e.target.value)
+                                                }
+                                            />
+                                            <FormFeedback>
+                                                {errorText}
+                                            </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={12} sm={6}>
+                                        <FormGroup>
+                                            <Label for="lastName">
+                                                Last name{" "}
+                                                <span className="text-red">
+                                                    *
+                                                </span>
+                                            </Label>
+                                            <Input
+                                                name="lastName"
+                                                id="lastName"
+                                                type="text"
+                                                required
+                                                onChange={e =>
+                                                    setLastName(e.target.value)
+                                                }
+                                            />
+                                            <FormFeedback>
+                                                {errorText}
+                                            </FormFeedback>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <FormGroup>
+                                    <Label for="contactNumber">
+                                        Contact number{" "}
+                                        <span className="text-red">*</span>
+                                    </Label>
+                                    <Input
+                                        name="contactNumber"
+                                        id="contactNumber"
+                                        type="tel"
+                                        required
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="website">
+                                        What&apos;s your current website
+                                        address?
+                                    </Label>
+                                    <Input
+                                        name="website"
+                                        id="website"
+                                        type="url"
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6} className="pl-sm-5">
+                                <FormGroup>
+                                    <Label for="email">
+                                        Email{" "}
+                                        <span className="text-red">*</span>
+                                    </Label>
+                                    <Input
+                                        name="email"
+                                        id="email"
+                                        type="email"
+                                        required
+                                        onChange={e => setEmail(e.target.value)}
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="companyName">
+                                        What&apos;s the name of your company?{" "}
+                                        <span className="text-red">*</span>
+                                    </Label>
+                                    <Input
+                                        name="companyName"
+                                        id="companyName"
+                                        type="text"
+                                        required
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="companyIndustry">
+                                        What does your company do?{" "}
+                                        <span className="text-red">*</span>
+                                    </Label>
+                                    <Input
+                                        name="companyIndustry"
+                                        id="companyIndustry"
+                                        type="textarea"
+                                        required
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormText>
+                                        What are the products and services you
+                                        offer?
+                                    </FormText>
+                                </FormGroup>
+                            </Col>
+                        </Row>
 
-                        <FormGroup>
-                            <Label for="firstName">First name</Label>
-                            <Input
-                                name="firstName"
-                                id="firstName"
-                                type="text"
-                                required
-                                onChange={e => setFirstName(e.target.value)}
-                            />
-                            <FormFeedback>{errorText}</FormFeedback>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label for="lastName">Last name</Label>
-                            <Input
-                                name="lastName"
-                                id="lastName"
-                                type="text"
-                                required
-                                onChange={e => setLastName(e.target.value)}
-                            />
-                            <FormFeedback>{errorText}</FormFeedback>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label for="email">Email</Label>
-                            <Input
-                                name="email"
-                                id="email"
-                                type="email"
-                                required
-                                onChange={e => setEmail(e.target.value)}
-                            />
-                            <FormFeedback>{errorText}</FormFeedback>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label for="contactNumber">Contact number</Label>
-                            <Input
-                                name="contactNumber"
-                                id="contactNumber"
-                                type="tel"
-                                required
-                                onChange={e => setFirstName(e.target.value)}
-                            />
-                            <FormFeedback>{errorText}</FormFeedback>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label for="companyName">
-                                What’s the name of your company?
-                            </Label>
-                            <Input
-                                name="companyName"
-                                id="companyName"
-                                type="text"
-                                required
-                                onChange={e => setFirstName(e.target.value)}
-                            />
-                            <FormFeedback>{errorText}</FormFeedback>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label for="companyIndustry">
-                                What does your company do?
-                            </Label>
-                            <Input
-                                name="companyIndustry"
-                                id="companyIndustry"
-                                type="textarea"
-                                required
-                                onChange={e => setFirstName(e.target.value)}
-                            />
-                            <FormFeedback>{errorText}</FormFeedback>
-                            <FormText>
-                                What are the products and services you offer?
-                            </FormText>
-                        </FormGroup>
-
+                        <Row form className="my-5">
+                            <Col xs={12}>
+                                <h2>Social Media</h2>
+                            </Col>
+                            <Col xs={12} sm={6} className="pr-sm-5">
+                                <FormGroup>
+                                    <Label for="facebook">Facebook</Label>
+                                    <Input
+                                        name="facebook"
+                                        id="facebook"
+                                        type="url"
+                                        onChange={e => setEmail(e.target.value)}
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="twitter">Twitter</Label>
+                                    <Input
+                                        name="twitter"
+                                        id="twitter"
+                                        type="url"
+                                        onChange={e => setEmail(e.target.value)}
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="instagram">Instagram</Label>
+                                    <Input
+                                        name="instagram"
+                                        id="instagram"
+                                        type="url"
+                                        onChange={e => setEmail(e.target.value)}
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="linkedin">Linkedin</Label>
+                                    <Input
+                                        name="linkedin"
+                                        id="linkedin"
+                                        type="url"
+                                        onChange={e => setEmail(e.target.value)}
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6} className="pl-sm-5">
+                                <FormGroup>
+                                    <Label for="youtube">Youtube</Label>
+                                    <Input
+                                        name="youtube"
+                                        id="youtube"
+                                        type="url"
+                                        onChange={e => setEmail(e.target.value)}
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="tiktok">TikTok</Label>
+                                    <Input
+                                        name="tiktok"
+                                        id="tiktok"
+                                        type="url"
+                                        onChange={e => setEmail(e.target.value)}
+                                    />
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="socialMediaFrequency">
+                                        How frequently do you post to social
+                                        media?
+                                    </Label>
+                                    <Input
+                                        name="socialMediaFrequency"
+                                        id="socialMediaFrequency"
+                                        type="select"
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    >
+                                        <option value="" selected>
+                                            Select your posting frequency
+                                        </option>
+                                        <option value="once or less per month">
+                                            Once or fewer times per month
+                                        </option>
+                                        <option value="Once or twice per week">
+                                            Once or twice per week
+                                        </option>
+                                        <option value="daily">Daily</option>
+                                    </Input>
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="socialMediaFollowing">
+                                        How large would you say your following
+                                        is?
+                                    </Label>
+                                    <Input
+                                        name="socialMediaFollowing"
+                                        id="socialMediaFollowing"
+                                        type="select"
+                                        onChange={e =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    >
+                                        <option value="" selected>
+                                            Select your social media following
+                                        </option>
+                                        <option value="Less than 50">
+                                            Less than 50
+                                        </option>
+                                        <option value="Between 50 and 200">
+                                            Between 50 and 200
+                                        </option>
+                                        <option value="Between 200 and 1000">
+                                            Between 200 and 1000
+                                        </option>
+                                        <option value="Greater than 1000">
+                                            Greater than 1000
+                                        </option>
+                                    </Input>
+                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormText>
+                                        What are the products and services you
+                                        offer?
+                                    </FormText>
+                                </FormGroup>
+                            </Col>
+                        </Row>
                         <FormGroup>
                             <Label for="decisionMakers">
                                 Who are the decision makers for this project?
