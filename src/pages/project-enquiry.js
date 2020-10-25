@@ -23,6 +23,9 @@ import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
 import SEO from "../components/seo";
 import BackgroundImage from "gatsby-background-image";
+import loadable from "@loadable/component";
+
+const ReCAPTCHA = loadable(() => import("../components/recaptcha.jsx"));
 
 /*
 Layout props:
@@ -42,12 +45,6 @@ const ProjectEnquiry = ({ data }) => {
     // pageTitle: SEO friendly title for the title bar
     const pageTitle = { name: "Project Enquiry", url: "/project-enquiry" };
     const size = useWindowSize();
-
-    const [errorText,setErrorText] = useState("")
-    const [firstName,setFirstName] = useState("")
-    const [lastName,setLastName] = useState("")
-    const [email,setEmail] = useState("")
-
     const heroImg =
         size.width > 767
             ? size.width >= 960
@@ -60,6 +57,156 @@ const ProjectEnquiry = ({ data }) => {
                   data.doMoreMobile.childImageSharp.fluid,
                   `linear-gradient(to bottom, rgba(255,255,255,.25) , white 25vh)`,
               ].reverse();
+
+    const [formValues, setFormValues] = useState({
+        "g-recaptcha-response": "",
+        firstName: "",
+        lastName: "",
+        contactNumber: "",
+        website: "",
+        email: "",
+        companyName: "",
+        budget: "",
+        timeframe: "",
+        designExamples: "",
+        industry: "",
+        otherIndustry: "",
+    });
+    const [errors, setErrors] = useState({
+        companyNameLength: "",
+        emailFormat: "",
+        firstName: "",
+        lastName: "",
+        otherIndustryLength: "",
+        phone: "",
+        websiteAddressFormat: "",
+        ReCAPTCHA: "",
+    });
+
+    const handleFieldChange = (e)=>{
+
+    }
+
+    const handleRecaptcha = value => {
+        let errorObj = { ...errors };
+        let formValueObj = { ...formValues };
+        errorObj.ReCAPTCHA = "";
+        formValueObj["g-recaptcha-response"] = value;
+
+        setErrors(errorObj);
+        setFormValues(formValueObj);
+    };
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        let valid = validate();
+
+        const encode = data => {
+            return Object.keys(data)
+                .map(
+                    key =>
+                        encodeURIComponent(key) +
+                        "=" +
+                        encodeURIComponent(data[key])
+                )
+                .join("&");
+        };
+
+        const recaptchaValue = this.state.formValues["g-recaptcha-response"];
+        console.log("test encode: ", encode(this.state.formValues));
+        if (valid && recaptchaValue.length > 0) {
+            fetch("/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: encode({
+                    "form-name": "dreamForm",
+                    ...this.state.formValues,
+                }),
+            })
+                .then(res => {
+                    this.setState({
+                        success: true,
+                    });
+                    console.log(res);
+                })
+                .catch(error => console.log(error));
+        } else {
+            let errors = { ...this.state.errors };
+            errors.ReCAPTCHA = "ReCAPTCHA Verification Needed to Submit Form.";
+            this.setState({
+                errors,
+            });
+        }
+    };
+
+    const validate = () => {
+        let isError = false;
+        let errors = {};
+
+        // Full Name Field Validation
+        if (this.state.formValues.fullName.length > 0) {
+            let nameArray = this.state.formValues.fullName.split(" ");
+            // check name is at least 2 words
+            if (nameArray.length < 2) {
+                isError = true;
+                errors.fullNameLength = "Only first name was entered.";
+            } else if (nameArray.length >= 2) {
+                for (let val in nameArray) {
+                    if (nameArray[val].length < 2) {
+                        isError = true;
+                        errors.fullNameLength =
+                            "Length of each name must be 2 or more characters.";
+                    }
+                }
+            }
+        }
+
+        // Email Validation
+        let emailReg = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let emailValid = emailReg.test(
+            String(this.state.formValues.email.toLowerCase())
+        );
+
+        if (!emailValid) {
+            isError = true;
+            errors.emailFormat = "Invalid format. Must be name@domain.com";
+        }
+
+        // Phone Validation
+        let phoneReg = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s/0-9]*$/;
+        let phone = this.state.formValues.phone;
+        let phoneValidate = phoneReg.test(String(phone));
+
+        if (phoneValidate === false) {
+            isError = true;
+            errors.phone = "Not a valid phone number.";
+        }
+
+        // websiteAddressFormat Validation
+        let urlReg = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
+        let url = this.state.formValues.websiteAddress;
+        let urlValidate = urlReg.test(String(url));
+
+        if (
+            this.state.formValues.hasWebsite === "yes" &&
+            urlValidate === false
+        ) {
+            isError = true;
+            errors.websiteAddressFormat =
+                "Website format is invalid. Must be of type www.yoursite.com";
+        }
+
+        if (isError) {
+            this.setState({
+                ...this.state,
+                errors: { ...errors },
+            });
+            return false;
+        }
+        if (!isError) return true;
+    };
 
     return (
         <ScrollWrapper onWindowScroll={handleScroll}>
@@ -117,7 +264,7 @@ const ProjectEnquiry = ({ data }) => {
                     </p>
 
                     <hr />
-                    <Form onSubmit={e => e.preventDefault()}>
+                    <Form onSubmit={e => handleSubmit(e)}>
                         <Row form className="my-5">
                             <Col xs={12}>
                                 <h2>Business Snapshot</h2>
@@ -142,11 +289,11 @@ const ProjectEnquiry = ({ data }) => {
                                                 type="text"
                                                 required
                                                 onChange={e =>
-                                                    setFirstName(e.target.value)
+                                                    handleFieldChange(e)
                                                 }
                                             />
                                             <FormFeedback>
-                                                {errorText}
+                                                {errors.firstName}
                                             </FormFeedback>
                                         </FormGroup>
                                     </Col>
@@ -164,11 +311,11 @@ const ProjectEnquiry = ({ data }) => {
                                                 type="text"
                                                 required
                                                 onChange={e =>
-                                                    setLastName(e.target.value)
+                                                    handleFieldChange(e)
                                                 }
                                             />
                                             <FormFeedback>
-                                                {errorText}
+                                                {errors.lastName}
                                             </FormFeedback>
                                         </FormGroup>
                                     </Col>
@@ -183,11 +330,11 @@ const ProjectEnquiry = ({ data }) => {
                                         id="contactNumber"
                                         type="tel"
                                         required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.contactNumber}
+                                    </FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="website">
@@ -198,11 +345,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="website"
                                         id="website"
                                         type="url"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.website}
+                                    </FormFeedback>
                                 </FormGroup>
                             </Col>
                             <Col xs={12} sm={6} className="pl-sm-5">
@@ -216,9 +363,9 @@ const ProjectEnquiry = ({ data }) => {
                                         id="email"
                                         type="email"
                                         required
-                                        onChange={e => setEmail(e.target.value)}
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>{errors.email}</FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="companyName">
@@ -230,27 +377,27 @@ const ProjectEnquiry = ({ data }) => {
                                         id="companyName"
                                         type="text"
                                         required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.companyName}
+                                    </FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label for="companyIndustry">
+                                    <Label for="industry">
                                         What does your company do?{" "}
                                         <span className="text-danger">*</span>
                                     </Label>
                                     <Input
-                                        name="companyIndustry"
-                                        id="companyIndustry"
+                                        name="industry"
+                                        id="industry"
                                         type="textarea"
                                         required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.industry}
+                                    </FormFeedback>
                                     <FormText>
                                         What are the products and services you
                                         offer?
@@ -270,9 +417,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="facebook"
                                         id="facebook"
                                         type="url"
-                                        onChange={e => setEmail(e.target.value)}
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.facebook}
+                                    </FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="twitter">Twitter</Label>
@@ -280,9 +429,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="twitter"
                                         id="twitter"
                                         type="url"
-                                        onChange={e => setEmail(e.target.value)}
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.twitter}
+                                    </FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="instagram">Instagram</Label>
@@ -290,9 +441,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="instagram"
                                         id="instagram"
                                         type="url"
-                                        onChange={e => setEmail(e.target.value)}
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.instagram}
+                                    </FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="linkedin">Linkedin</Label>
@@ -300,9 +453,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="linkedin"
                                         id="linkedin"
                                         type="url"
-                                        onChange={e => setEmail(e.target.value)}
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.linkedin}
+                                    </FormFeedback>
                                 </FormGroup>
                             </Col>
                             <Col xs={12} sm={6} className="pl-sm-5">
@@ -312,9 +467,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="youtube"
                                         id="youtube"
                                         type="url"
-                                        onChange={e => setEmail(e.target.value)}
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.youtube}
+                                    </FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="tiktok">TikTok</Label>
@@ -322,9 +479,9 @@ const ProjectEnquiry = ({ data }) => {
                                         name="tiktok"
                                         id="tiktok"
                                         type="url"
-                                        onChange={e => setEmail(e.target.value)}
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>{errors.tiktok}</FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="socialMediaFrequency">
@@ -335,9 +492,7 @@ const ProjectEnquiry = ({ data }) => {
                                         name="socialMediaFrequency"
                                         id="socialMediaFrequency"
                                         type="select"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     >
                                         <option value="" selected disabled>
                                             Select your posting frequency
@@ -350,7 +505,9 @@ const ProjectEnquiry = ({ data }) => {
                                         </option>
                                         <option value="daily">Daily</option>
                                     </CustomInput>
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.socialMediaFrequency}
+                                    </FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="socialMediaFollowing">
@@ -361,9 +518,7 @@ const ProjectEnquiry = ({ data }) => {
                                         name="socialMediaFollowing"
                                         id="socialMediaFollowing"
                                         type="select"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     >
                                         <option value="" selected disabled>
                                             Select your social media following
@@ -381,7 +536,9 @@ const ProjectEnquiry = ({ data }) => {
                                             Greater than 1000
                                         </option>
                                     </CustomInput>
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.socialMediaFollowing}
+                                    </FormFeedback>
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -401,11 +558,11 @@ const ProjectEnquiry = ({ data }) => {
                                         id="idealCustomer"
                                         type="textarea"
                                         required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.idealCustomer}
+                                    </FormFeedback>
                                     <FormText>
                                         <strong>Eg:</strong> Who are they? How
                                         old are they? Do they identify as a
@@ -426,11 +583,11 @@ const ProjectEnquiry = ({ data }) => {
                                         id="top5reasons"
                                         type="textarea"
                                         required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.top5reasons}
+                                    </FormFeedback>
                                     <FormText>
                                         <strong>Eg:</strong> make a purchase,
                                         get information about your product(s),
@@ -458,9 +615,7 @@ const ProjectEnquiry = ({ data }) => {
                                         name="projectType"
                                         id="projectType"
                                         required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     >
                                         <option value="" selected disabled>
                                             Select your project type
@@ -481,7 +636,9 @@ const ProjectEnquiry = ({ data }) => {
                                             Consulting
                                         </option>
                                     </CustomInput>
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.projectType}
+                                    </FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="projectBudget">
@@ -494,9 +651,7 @@ const ProjectEnquiry = ({ data }) => {
                                         name="projectBudget"
                                         id="projectBudget"
                                         required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     >
                                         <option value="" selected disabled>
                                             Select your budget range
@@ -521,7 +676,9 @@ const ProjectEnquiry = ({ data }) => {
                                             Not sure
                                         </option>
                                     </CustomInput>
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.projectBudget}
+                                    </FormFeedback>
                                     <FormText>
                                         Be honest and we will tell you what we
                                         can and can&apos;t do.
@@ -539,11 +696,11 @@ const ProjectEnquiry = ({ data }) => {
                                         id="timeframe"
                                         type="text"
                                         required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.timeframe}
+                                    </FormFeedback>
                                     <FormText>
                                         <strong>Note:</strong> Websites
                                         typically take 1 to 3 months based on
@@ -561,11 +718,8 @@ const ProjectEnquiry = ({ data }) => {
                                         name="decisionMakers"
                                         id="decisionMakers"
                                         type="textarea"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="contentReady">
@@ -578,9 +732,7 @@ const ProjectEnquiry = ({ data }) => {
                                         id="contentReady"
                                         type="select"
                                         required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     >
                                         <option value="Yes, I have everything ready">
                                             Yes - I have everything ready
@@ -596,7 +748,9 @@ const ProjectEnquiry = ({ data }) => {
                                             No, We need your help
                                         </option>
                                     </CustomInput>
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.contentReady}
+                                    </FormFeedback>
                                     <FormText>
                                         <strong>Note:</strong> Content includes
                                         a list of the pages you need,
@@ -656,11 +810,8 @@ const ProjectEnquiry = ({ data }) => {
                                         name="goal1"
                                         id="goal1"
                                         type="text"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="goal2">Goal #2</Label>
@@ -668,11 +819,8 @@ const ProjectEnquiry = ({ data }) => {
                                         name="goal2"
                                         id="goal2"
                                         type="text"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="goal3">Goal #3</Label>
@@ -680,11 +828,8 @@ const ProjectEnquiry = ({ data }) => {
                                         name="goal3"
                                         id="goal3"
                                         type="text"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                 </FormGroup>
                             </Col>
                             <Col xs={12} sm={6} className="pl-sm-5">
@@ -694,11 +839,8 @@ const ProjectEnquiry = ({ data }) => {
                                         name="goal4"
                                         id="goal4"
                                         type="text"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="goal5">Goal #5</Label>
@@ -706,11 +848,8 @@ const ProjectEnquiry = ({ data }) => {
                                         name="goal5"
                                         id="goal5"
                                         type="text"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -732,12 +871,8 @@ const ProjectEnquiry = ({ data }) => {
                                         name="currentWebsiteWins"
                                         id="currentWebsiteWins"
                                         type="textarea"
-                                        required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                 </FormGroup>
                             </Col>
                             <Col xs={12} sm={6} className="pl-sm-5">
@@ -751,8 +886,13 @@ const ProjectEnquiry = ({ data }) => {
                                         <FormGroup check>
                                             <Label check>
                                                 <Input
+                                                    onChange={e =>
+                                                        handleFieldChange(e)
+                                                    }
+                                                    checked
                                                     type="radio"
-                                                    name="willSwitchToOurHost"
+                                                    name="willSwitchHost"
+                                                    value="yes"
                                                 />{" "}
                                                 Yes
                                             </Label>
@@ -762,8 +902,12 @@ const ProjectEnquiry = ({ data }) => {
                                         <FormGroup check>
                                             <Label check>
                                                 <Input
+                                                    onChange={e =>
+                                                        handleFieldChange(e)
+                                                    }
                                                     type="radio"
-                                                    name="willNotSwitchToOurHost"
+                                                    name="willSwitchHost"
+                                                    value="no"
                                                 />{" "}
                                                 No
                                             </Label>
@@ -788,11 +932,8 @@ const ProjectEnquiry = ({ data }) => {
                                         name="brandFeeling"
                                         id="brandFeeling"
                                         type="textarea"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                     <FormText>
                                         <strong>Eg:</strong> Safe and secure,
                                         edgy and excited, exclusive and cool,
@@ -807,11 +948,8 @@ const ProjectEnquiry = ({ data }) => {
                                         name="competitorWebsites"
                                         id="competitorWebsites"
                                         type="textarea"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                     <FormText>
                                         If they do, please make sure to list
                                         them. This way we can ensure that yours
@@ -828,11 +966,8 @@ const ProjectEnquiry = ({ data }) => {
                                         name="top3Competitors"
                                         id="top3Competitors"
                                         type="textarea"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                     <FormText>
                                         Let us know who is competing for the
                                         attention of your ideal customer and
@@ -850,11 +985,8 @@ const ProjectEnquiry = ({ data }) => {
                                         name="websitesForDesignAesthetic"
                                         id="websitesForDesignAesthetic"
                                         type="textarea"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -879,11 +1011,11 @@ const ProjectEnquiry = ({ data }) => {
                                         id="successLooksLike"
                                         type="textarea"
                                         required
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
+                                    <FormFeedback>
+                                        {errors.successLooksLike}
+                                    </FormFeedback>
                                     <FormText>
                                         How many website visitors? How many
                                         leads? How many sales? Be as descriptive
@@ -900,14 +1032,33 @@ const ProjectEnquiry = ({ data }) => {
                                         name="additionalComments"
                                         id="additionalComments"
                                         type="textarea"
-                                        onChange={e =>
-                                            setFirstName(e.target.value)
-                                        }
+                                        onChange={e => handleFieldChange(e)}
                                     />
-                                    <FormFeedback>{errorText}</FormFeedback>
                                 </FormGroup>
                             </Col>
                         </Row>
+                        <Row>
+                            <Col xs={12} className="my-2 py-0">
+                                <FormGroup>
+                                    <ReCAPTCHA
+                                        className="recaptcha"
+                                        handleChange={handleRecaptcha}
+                                    />
+                                    <FormText
+                                        color="danger"
+                                        className="text-center"
+                                    >
+                                        {errors.ReCAPTCHA}
+                                    </FormText>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <input
+                            type="hidden"
+                            name="form-name"
+                            value="dreamForm"
+                        />
+                        <input type="hidden" name="bot-field" className="hp" />
                         <Button type="submit" color="primary">
                             Send Enquiry
                         </Button>
