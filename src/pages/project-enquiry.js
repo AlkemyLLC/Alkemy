@@ -66,25 +66,119 @@ const ProjectEnquiry = ({ data }) => {
         website: "",
         email: "",
         companyName: "",
-        budget: "",
+        industryProductsAndServices: "",
+        facebook: "",
+        twitter: "",
+        linkedin: "",
+        instagram: "",
+        tiktok: "",
+        youtube: "",
+        socialMediaFrequency: "",
+        socialMediaFollowing: "",
+        idealCustomer: "",
+        top5reasons: "",
+        projectType: "",
+        projectBudget: "",
         timeframe: "",
-        designExamples: "",
-        industry: "",
-        otherIndustry: "",
+        decisionMakers: "",
+        contentReady: "Yes, I have everything ready",
+        goal1: "",
+        goal2: "",
+        goal3: "",
+        goal4: "",
+        goal5: "",
+        currentWebsiteWins: "",
+        willSwitchHost: "yes",
+        brandFeeling: "",
+        competitorWebsites: "",
+        top3Competitors: "",
+        websitesForDesignAesthetic: "",
+        successLooksLike: "",
+        additionalComments: "",
     });
     const [errors, setErrors] = useState({
-        companyNameLength: "",
-        emailFormat: "",
+        ReCAPTCHA: "",
         firstName: "",
         lastName: "",
-        otherIndustryLength: "",
-        phone: "",
-        websiteAddressFormat: "",
-        ReCAPTCHA: "",
+        contactNumber: "",
+        website: "",
+        email: "",
+        companyName: "",
+        industryProductsAndServices: "",
+        facebook: "",
+        twitter: "",
+        linkedin: "",
+        instagram: "",
+        tiktok: "",
+        youtube: "",
+        socialMediaFrequency: "",
+        socialMediaFollowing: "",
+        idealCustomer: "",
+        top5reasons: "",
+        projectType: "",
+        projectBudget: "",
+        timeframe: "",
+        decisionMakers: "",
+        contentReady: "",
+        goal1: "",
+        goal2: "",
+        goal3: "",
+        goal4: "",
+        goal5: "",
+        currentWebsiteWins: "",
+        willSwitchHost: "",
+        brandFeeling: "",
+        competitorWebsites: "",
+        top3Competitors: "",
+        websitesForDesignAesthetic: "",
+        successLooksLike: "",
+        additionalComments: "",
     });
 
     const handleFieldChange = (e)=>{
+        let formValueObj = { ...formValues };
 
+        formValueObj[e.target.name] = e.target.value;
+        
+        setFormValues(formValueObj);
+        setErrors({
+            ReCAPTCHA: "",
+            firstName: "",
+            lastName: "",
+            contactNumber: "",
+            website: "",
+            email: "",
+            companyName: "",
+            industryProductsAndServices: "",
+            facebook: "",
+            twitter: "",
+            linkedin: "",
+            instagram: "",
+            tiktok: "",
+            youtube: "",
+            socialMediaFrequency: "",
+            socialMediaFollowing: "",
+            idealCustomer: "",
+            top5reasons: "",
+            projectType: "",
+            projectBudget: "",
+            timeframe: "",
+            decisionMakers: "",
+            contentReady: "",
+            goal1: "",
+            goal2: "",
+            goal3: "",
+            goal4: "",
+            goal5: "",
+            currentWebsiteWins: "",
+            willSwitchHost: "",
+            brandFeeling: "",
+            competitorWebsites: "",
+            top3Competitors: "",
+            websitesForDesignAesthetic: "",
+            successLooksLike: "",
+            additionalComments: "",
+        });
     }
 
     const handleRecaptcha = value => {
@@ -113,7 +207,7 @@ const ProjectEnquiry = ({ data }) => {
         };
 
         const recaptchaValue = this.state.formValues["g-recaptcha-response"];
-        console.log("test encode: ", encode(this.state.formValues));
+
         if (valid && recaptchaValue.length > 0) {
             fetch("/", {
                 method: "POST",
@@ -143,65 +237,143 @@ const ProjectEnquiry = ({ data }) => {
 
     const validate = () => {
         let isError = false;
-        let errors = {};
+        let errorObj = {...errors};
 
-        // Full Name Field Validation
-        if (this.state.formValues.fullName.length > 0) {
-            let nameArray = this.state.formValues.fullName.split(" ");
-            // check name is at least 2 words
-            if (nameArray.length < 2) {
-                isError = true;
-                errors.fullNameLength = "Only first name was entered.";
-            } else if (nameArray.length >= 2) {
-                for (let val in nameArray) {
-                    if (nameArray[val].length < 2) {
-                        isError = true;
-                        errors.fullNameLength =
-                            "Length of each name must be 2 or more characters.";
-                    }
-                }
-            }
+        // Name validations
+        if(formValues.firstName.length>0) { 
+            errorObj.firstName = ""
+        } else {
+            errorObj.firstName = "First name is a required field.";
         }
+
+        if (formValues.lastName.length > 0) {
+            errorObj.lastName = "";
+        } else {
+            errorObj.lastName = "Last name is a required field.";
+        }
+
 
         // Email Validation
         let emailReg = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let emailValid = emailReg.test(
-            String(this.state.formValues.email.toLowerCase())
+            String(formValues.email.toLowerCase())
         );
 
-        if (!emailValid) {
-            isError = true;
-            errors.emailFormat = "Invalid format. Must be name@domain.com";
+        if (formValues.email.length > 0) {
+            errorObj.email = "";
+        } else if (formValues.email.length===0) {
+            errorObj.email =
+                "Email is a required field.";
+        } else if (!emailValid) {
+            errorObj.email =
+                "Invalid email format. Must be name@domain.com";
         }
 
         // Phone Validation
         let phoneReg = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s/0-9]*$/;
-        let phone = this.state.formValues.phone;
+        let phone = formValues.contactNumber;
         let phoneValidate = phoneReg.test(String(phone));
 
         if (phoneValidate === false) {
-            isError = true;
-            errors.phone = "Not a valid phone number.";
+            errorObj.contactNumber = "Not a valid telephone number.";
         }
 
         // websiteAddressFormat Validation
         let urlReg = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
-        let url = this.state.formValues.websiteAddress;
+        let url = formValues.website;
         let urlValidate = urlReg.test(String(url));
 
         if (
-            this.state.formValues.hasWebsite === "yes" &&
+            formValues.website.length>0 &&
             urlValidate === false
         ) {
-            isError = true;
-            errors.websiteAddressFormat =
+            errorObj.website =
                 "Website format is invalid. Must be of type www.yoursite.com";
         }
 
+        // Company name validation
+        if (formValues.companyName.length > 0) {
+            errorObj.companyName = "";
+        } else {
+            errorObj.companyName = "Company Name is a required field.";
+        }
+
+        // Industry products and services
+        if (formValues.industryProductsAndServices.length > 0) {
+            errorObj.industryProductsAndServices = "";
+        } else {
+            errorObj.industryProductsAndServices =
+                "What your company does is a required field.";
+        }
+
+        // Social Media 
+        if(formValues.socialMediaFrequency.length>0){
+            errorObj.socialMediaFrequency = "";
+        }else {
+            errorObj.socialMediaFrequency =
+                "Social Media Frequency is a required field.";
+        }
+
+        if(formValues.socialMediaFollowing.length>0){
+            errorObj.socialMediaFollowing = ""
+        }else {
+            errorObj.socialMediaFollowing =
+                "Social Media Following is a required field.";
+        }
+
+        // Ideal Customer
+        if (formValues.idealCustomer.length > 0) {
+            errorObj.idealCustomer = "";
+        } else {
+            errorObj.idealCustomer = "Ideal customer is a required field.";
+        }
+
+        // Top 5 reasons
+        if (formValues.top5reasons.length > 0) {
+            errorObj.top5reasons = "";
+        } else {
+            errorObj.top5reasons =
+                "Top 5 reasons for visiting is a required field";
+        }
+
+        // Project Type
+        if (formValues.projectType.length > 0) {
+            errorObj.projectType = "";
+        } else {
+            errorObj.projectType =
+                "Type of project is a required field";
+        }
+
+        // Project Budget
+        if (formValues.projectBudget.length > 0) {
+            errorObj.projectBudget = "";
+        } else {
+            errorObj.projectBudget =
+                "Project Budget is a required field";
+        }
+
+        // Timeframe
+        if (formValues.timeframe.length > 0) {
+            errorObj.timeframe = "";
+        } else {
+            errorObj.timeframe =
+                "Project Timeframe is a required field";
+        }
+
+        // Success looks like
+        if (formValues.successLooksLike.length > 0) {
+            errorObj.successLooksLike = "";
+        } else {
+            errorObj.successLooksLike = "Your definition of success is a required field";
+        }
+
+        for(let key in errorObj){
+            if(errorObj[key].length>0) isError=true;
+        }
+
         if (isError) {
-            this.setState({
-                ...this.state,
-                errors: { ...errors },
+            setErrors({
+                ...errorObj
             });
             return false;
         }
@@ -264,7 +436,7 @@ const ProjectEnquiry = ({ data }) => {
                     </p>
 
                     <hr />
-                    <Form onSubmit={e => handleSubmit(e)}>
+                    <Form onSubmit={handleSubmit}>
                         <Row form className="my-5">
                             <Col xs={12}>
                                 <h2>Business Snapshot</h2>
@@ -288,6 +460,11 @@ const ProjectEnquiry = ({ data }) => {
                                                 id="firstName"
                                                 type="text"
                                                 required
+                                                invalid={
+                                                    typeof errors.firstName !==
+                                                        "undefined" &&
+                                                    errors.firstName.length > 0
+                                                }
                                                 onChange={e =>
                                                     handleFieldChange(e)
                                                 }
@@ -310,6 +487,11 @@ const ProjectEnquiry = ({ data }) => {
                                                 id="lastName"
                                                 type="text"
                                                 required
+                                                invalid={
+                                                    typeof errors.lastName !==
+                                                        "undefined" &&
+                                                    errors.lastName.length > 0
+                                                }
                                                 onChange={e =>
                                                     handleFieldChange(e)
                                                 }
@@ -329,6 +511,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="contactNumber"
                                         id="contactNumber"
                                         type="tel"
+                                        invalid={
+                                            typeof errors.contactNumber !==
+                                                "undefined" &&
+                                            errors.contactNumber.length > 0
+                                        }
                                         required
                                         onChange={e => handleFieldChange(e)}
                                     />
@@ -345,6 +532,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="website"
                                         id="website"
                                         type="url"
+                                        invalid={
+                                            typeof errors.website !==
+                                                "undefined" &&
+                                            errors.website.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
@@ -363,6 +555,11 @@ const ProjectEnquiry = ({ data }) => {
                                         id="email"
                                         type="email"
                                         required
+                                        invalid={
+                                            typeof errors.email !==
+                                                "undefined" &&
+                                            errors.email.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>{errors.email}</FormFeedback>
@@ -377,6 +574,11 @@ const ProjectEnquiry = ({ data }) => {
                                         id="companyName"
                                         type="text"
                                         required
+                                        invalid={
+                                            typeof errors.companyName !==
+                                                "undefined" &&
+                                            errors.companyName.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
@@ -384,19 +586,25 @@ const ProjectEnquiry = ({ data }) => {
                                     </FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label for="industry">
+                                    <Label for="industryProductsAndServices">
                                         What does your company do?{" "}
                                         <span className="text-danger">*</span>
                                     </Label>
                                     <Input
-                                        name="industry"
-                                        id="industry"
+                                        name="industryProductsAndServices"
+                                        id="industryProductsAndServices"
                                         type="textarea"
                                         required
+                                        invalid={
+                                            typeof errors.industryProductsAndServices !==
+                                                "undefined" &&
+                                            errors.industryProductsAndServices
+                                                .length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
-                                        {errors.industry}
+                                        {errors.industryProductsAndServices}
                                     </FormFeedback>
                                     <FormText>
                                         What are the products and services you
@@ -417,6 +625,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="facebook"
                                         id="facebook"
                                         type="url"
+                                        invalid={
+                                            typeof errors.facebook !==
+                                                "undefined" &&
+                                            errors.facebook.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
@@ -429,6 +642,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="twitter"
                                         id="twitter"
                                         type="url"
+                                        invalid={
+                                            typeof errors.twitter !==
+                                                "undefined" &&
+                                            errors.twitter.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
@@ -441,6 +659,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="instagram"
                                         id="instagram"
                                         type="url"
+                                        invalid={
+                                            typeof errors.instagram !==
+                                                "undefined" &&
+                                            errors.instagram.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
@@ -453,6 +676,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="linkedin"
                                         id="linkedin"
                                         type="url"
+                                        invalid={
+                                            typeof errors.linkedin !==
+                                                "undefined" &&
+                                            errors.linkedin.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
@@ -467,6 +695,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="youtube"
                                         id="youtube"
                                         type="url"
+                                        invalid={
+                                            typeof errors.youtube !==
+                                                "undefined" &&
+                                            errors.youtube.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
@@ -479,6 +712,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="tiktok"
                                         id="tiktok"
                                         type="url"
+                                        invalid={
+                                            typeof errors.tiktok !==
+                                                "undefined" &&
+                                            errors.tiktok.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>{errors.tiktok}</FormFeedback>
@@ -492,12 +730,18 @@ const ProjectEnquiry = ({ data }) => {
                                         name="socialMediaFrequency"
                                         id="socialMediaFrequency"
                                         type="select"
+                                        invalid={
+                                            typeof errors.socialMediaFrequency !==
+                                                "undefined" &&
+                                            errors.socialMediaFrequency.length >
+                                                0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     >
                                         <option value="" selected disabled>
                                             Select your posting frequency
                                         </option>
-                                        <option value="once or less per month">
+                                        <option value="once or fewer per month">
                                             Once or fewer times per month
                                         </option>
                                         <option value="Once or twice per week">
@@ -518,6 +762,12 @@ const ProjectEnquiry = ({ data }) => {
                                         name="socialMediaFollowing"
                                         id="socialMediaFollowing"
                                         type="select"
+                                        invalid={
+                                            typeof errors.socialMediaFollowing !==
+                                                "undefined" &&
+                                            errors.socialMediaFollowing.length >
+                                                0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     >
                                         <option value="" selected disabled>
@@ -558,6 +808,11 @@ const ProjectEnquiry = ({ data }) => {
                                         id="idealCustomer"
                                         type="textarea"
                                         required
+                                        invalid={
+                                            typeof errors.idealCustomer !==
+                                                "undefined" &&
+                                            errors.idealCustomer.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
@@ -583,10 +838,15 @@ const ProjectEnquiry = ({ data }) => {
                                         id="top5reasons"
                                         type="textarea"
                                         required
+                                        invalid={
+                                            typeof errors.idealCustomer !==
+                                                "undefined" &&
+                                            errors.idealCustomer.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
-                                        {errors.top5reasons}
+                                        {errors.idealCustomer}
                                     </FormFeedback>
                                     <FormText>
                                         <strong>Eg:</strong> make a purchase,
@@ -615,6 +875,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="projectType"
                                         id="projectType"
                                         required
+                                        invalid={
+                                            typeof errors.projectType !==
+                                                "undefined" &&
+                                            errors.projectType.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     >
                                         <option value="" selected disabled>
@@ -651,6 +916,11 @@ const ProjectEnquiry = ({ data }) => {
                                         name="projectBudget"
                                         id="projectBudget"
                                         required
+                                        invalid={
+                                            typeof errors.projectBudget !==
+                                                "undefined" &&
+                                            errors.projectBudget.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     >
                                         <option value="" selected disabled>
@@ -696,6 +966,11 @@ const ProjectEnquiry = ({ data }) => {
                                         id="timeframe"
                                         type="text"
                                         required
+                                        invalid={
+                                            typeof errors.timeframe !==
+                                                "undefined" &&
+                                            errors.timeframe.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
@@ -732,6 +1007,11 @@ const ProjectEnquiry = ({ data }) => {
                                         id="contentReady"
                                         type="select"
                                         required
+                                        invalid={
+                                            typeof errors.contentReady !==
+                                                "undefined" &&
+                                            errors.contentReady.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     >
                                         <option value="Yes, I have everything ready">
@@ -854,68 +1134,76 @@ const ProjectEnquiry = ({ data }) => {
                             </Col>
                         </Row>
 
-                        <Row form className="my-5">
-                            <Col xs={12}>
-                                <h3>Website Designs</h3>
-                            </Col>
+                        {formValues.projectType.toLowerCase === "web design" ? (
+                            <Row form className="my-5">
+                                <Col xs={12}>
+                                    <h3>Website Designs</h3>
+                                </Col>
 
-                            <Col xs={12} sm={6} className="pr-sm-5">
-                                <FormGroup>
-                                    <Label for="currentWebsiteWins">
-                                        Is there anything about your current
-                                        website that serves the business well
-                                        and if so, why?{" "}
-                                        <span className="text-danger">*</span>
-                                    </Label>
-                                    <Input
-                                        name="currentWebsiteWins"
-                                        id="currentWebsiteWins"
-                                        type="textarea"
-                                        onChange={e => handleFieldChange(e)}
-                                    />
-                                </FormGroup>
-                            </Col>
-                            <Col xs={12} sm={6} className="pl-sm-5">
-                                <Row form tag="fieldset">
-                                    <Col xs={12}>
-                                        If you currently have a website, would
-                                        you agree to switching to our preferred
-                                        host?
-                                    </Col>
-                                    <Col xs={12}>
-                                        <FormGroup check>
-                                            <Label check>
-                                                <Input
-                                                    onChange={e =>
-                                                        handleFieldChange(e)
-                                                    }
-                                                    checked
-                                                    type="radio"
-                                                    name="willSwitchHost"
-                                                    value="yes"
-                                                />{" "}
-                                                Yes
-                                            </Label>
-                                        </FormGroup>
-                                    </Col>
-                                    <Col xs={12}>
-                                        <FormGroup check>
-                                            <Label check>
-                                                <Input
-                                                    onChange={e =>
-                                                        handleFieldChange(e)
-                                                    }
-                                                    type="radio"
-                                                    name="willSwitchHost"
-                                                    value="no"
-                                                />{" "}
-                                                No
-                                            </Label>
-                                        </FormGroup>
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </Row>
+                                <Col xs={12} sm={6} className="pr-sm-5">
+                                    <FormGroup>
+                                        <Label for="currentWebsiteWins">
+                                            Is there anything about your current
+                                            website that serves the business
+                                            well and if so, why?
+                                        </Label>
+                                        <Input
+                                            name="currentWebsiteWins"
+                                            id="currentWebsiteWins"
+                                            type="textarea"
+                                            onChange={e => handleFieldChange(e)}
+                                        />
+                                    </FormGroup>
+                                </Col>
+                                <Col xs={12} sm={6} className="pl-sm-5">
+                                    <Row form tag="fieldset">
+                                        <Col xs={12}>
+                                            If you currently have a website,
+                                            would you agree to switching to our
+                                            preferred host?
+                                        </Col>
+                                        <Col xs={12}>
+                                            <FormGroup check>
+                                                <Label check>
+                                                    <Input
+                                                        onChange={e =>
+                                                            handleFieldChange(e)
+                                                        }
+                                                        checked={
+                                                            formValues.willSwitchHost ===
+                                                            "yes"
+                                                        }
+                                                        type="radio"
+                                                        name="willSwitchHost"
+                                                        value="yes"
+                                                    />{" "}
+                                                    Yes
+                                                </Label>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col xs={12}>
+                                            <FormGroup check>
+                                                <Label check>
+                                                    <Input
+                                                        onChange={e =>
+                                                            handleFieldChange(e)
+                                                        }
+                                                        checked={
+                                                            formValues.willSwitchHost ===
+                                                            "no"
+                                                        }
+                                                        type="radio"
+                                                        name="willSwitchHost"
+                                                        value="no"
+                                                    />{" "}
+                                                    No
+                                                </Label>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
+                        ) : null}
 
                         <Row form className="my-5">
                             <Col xs={12}>
@@ -1011,6 +1299,11 @@ const ProjectEnquiry = ({ data }) => {
                                         id="successLooksLike"
                                         type="textarea"
                                         required
+                                        invalid={
+                                            typeof errors.successLooksLike !==
+                                                "undefined" &&
+                                            errors.successLooksLike.length > 0
+                                        }
                                         onChange={e => handleFieldChange(e)}
                                     />
                                     <FormFeedback>
@@ -1059,7 +1352,7 @@ const ProjectEnquiry = ({ data }) => {
                             value="dreamForm"
                         />
                         <input type="hidden" name="bot-field" className="hp" />
-                        <Button type="submit" color="primary">
+                        <Button onClick={handleSubmit} color="primary">
                             Send Enquiry
                         </Button>
                     </Form>
