@@ -4,21 +4,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const ThankYou = () => {
     return (
         <section className="thankYou py-5 px-3">
-            <h1 className="text-center text-success mb-5">
+            <span className="d-flex flex-row align-items-center justify-content-center text-success mb-5">
                 <FontAwesomeIcon
                     icon={["far", "check-circle"]}
                     size="2x"
                     color="success"
                 />
-                Success!
-            </h1>
+                <h1 className="ml-2 text-center my-auto">Success!</h1>
+            </span>
 
             <div className="container">
                 <p>
-                    Thank You for Choosing Alkemy! We have successfully received
-                    your request. As soon as one of our team
-                    members has reviewed your request, we will contact you to
-                    discuss the next steps.
+                    Thank you for choosing Alkemy! We have successfully received
+                    your request. As soon as one of our team members has
+                    reviewed your request, we will contact you to discuss the
+                    next steps.
                 </p>
                 <p>
                     If for any reason you don&apos;t hear back from our team in

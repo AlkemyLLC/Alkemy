@@ -13,13 +13,12 @@ if (typeof window !== "undefined") {
 }
 
 const LoadableRecaptcha = (props)=>{
-    const {handleChange} = props;
 
     return (
         <ReCAPTCHA
             className="recaptcha"
             sitekey={RECAPTCHA_KEY}
-            onChange={handleChange}
+            onChange={props.onChange}
         />
     );
 }
