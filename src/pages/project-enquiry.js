@@ -476,7 +476,12 @@ const ProjectEnquiry = ({ data }) => {
                         </p>
 
                         <hr />
-                        <Form onSubmit={handleSubmit}>
+                        <Form
+                            onSubmit={handleSubmit}
+                            data-netlify="true"
+                            data-netlify-honeypot="bot-field"
+                            data-netlify-recaptcha="true"
+                        >
                             <Row form className="my-5">
                                 <Col xs={12}>
                                     <h2>Business Snapshot</h2>
