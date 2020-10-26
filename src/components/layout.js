@@ -127,10 +127,9 @@ const Layout = ({
                         <a href="tel:8774255369" title="Call Now!">
                             <FontAwesomeIcon
                                 icon="mobile-alt"
-                                size="3x"
+                                size="2x"
                                 color="white"
                                 className="callNowButton"
-                                
                             />
                         </a>
                     </div>

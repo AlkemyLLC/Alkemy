@@ -43,7 +43,7 @@ $container-max-widths: (
 );
 
 $font-family-base: 'Avenir Next','Helvetica Neue','Segoe UI','Helvetica','Arial',sans-serif;
-$line-height-base: 1.666;
+$line-height-base: 2;
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
@@ -80,15 +80,7 @@ html{
 }
 
 body{
-  font-size: clamp(var(--minBodyFontSize), var(--scaler), 18px);
-  header{
-    @media (min-width: 1023px) and (max-width: 1108px) {
-      font-size: calc(16px);
-      a{
-        font-size: inherit;
-      }
-    }
-  }
+  font-size: clamp(var(--minBodyFontSize), var(--scaler), 20px);
 }
 
 
@@ -259,7 +251,7 @@ input[type="checkbox"]:checked + label:before {
     background: $alkemy_darkest_blue;
   }
   color: white;
-  height: $header-height;
+  min-height: $header-height;
   top: 0;
   left: 0;
   right: 0;
@@ -325,16 +317,16 @@ a {
   }
 }
 
-.navbar-brand img {
-  width: 11em;
-  @media screen and (max-width: 321px){
-    width: 10em;
+.navbar-brand {
+  img {
+    width: 11em;
+    @media screen and (max-width: 321px){
+      width: 10em;
+    }
   }
 }
-
 .navbar-nav{
   .dropdown-menu{
-    font-size: inherit;
     top: 90%;
   }
 }
@@ -439,12 +431,12 @@ a {
 
   /* iPhone 6/7/8 */
   @media screen and (min-width:375px) and (min-height:667px){
-    width: 14vw;
+    width: 10vw;
   }
 
   /* iPhone 6/7/8 plus */
   @media screen and (min-width:414px) and (min-height:736px){
-    width: 14vw;
+    width: 10vw;
   }
 
   /* iPhone X */
@@ -457,7 +449,7 @@ a {
     display:none;
   }
 
-  padding: 1rem;
+  padding: 0.5rem;
   background: $alkemy_blue;
   transform: translateY(-50%);
   border-radius: 20rem 0 0 20rem;
@@ -465,7 +457,7 @@ a {
   .callNowButton{
     background: white;
     color: black;
-    margin: 0 auto;
+    margin: 10px auto 0 auto;
     border-radius: 1rem;
   }
 }
@@ -482,10 +474,15 @@ a {
   }
 }
 .subHeader{
-  background: #41a4e0 url('../images/banners/banner-bg.png') center right no-repeat;
+  background: #41a4e0 url('../images/banners/banner-bg.png') 70% center  no-repeat;
+  background-size: auto 100%;
+  @media screen and (min-width: 768px){
+    background-position: center right;
+
+  }
   color: white;
   width: 100%;
-  height: $subheader-height;
+  min-height: $subheader-height;
   margin-top: $header-height;
   display: flex;
   align-items: center;
@@ -1255,81 +1252,73 @@ div.spinContainer{
 
 /* About Us Page */
 
-.whoWeAre{
-  height: 100vh - calcVh($header-height + $subheader-height);
-  .img-col{
-    @media screen and (min-width:1024px){
-      height: 100% !important;
+.about-page{
+  
+  .section--hero{
+    min-height: 400px;
+    
+
+    .hero-text{
+      z-index: 10;
+      h2{
+        color: white;
+        font-size: 2.7rem;
+        @media screen and (min-width:768px){
+          font-size: 3.75rem;
+          filter: drop-shadow(1px 1px black);
+        }
+      }
     }
   }
-  .arrow{
-    @media screen and (min-width: 990px){
-      width: 70%;
-      margin-left: -.5em;
-      margin-top: 5vh;
+
+  .section--beginnings{
+    min-height: 500px;
+    padding-bottom: 0;
+    .headshot{
+      min-height: 450px;
+      width: 100%;
+    }
+    .sub-text{
+      margin: 0;
+      position: absolute;
+      bottom:0;
+      left: 0;
+      // @media screen and (min-width: 760px){
+      //   left: 4rem;
+      //   text-align: left;
+      // }
+      right: 0;
+      text-align: center;
+      z-index: 10;
+    }
+    .text {
+      min-height: 500px;
     }
   }
-}
 
-.aboutValues{
-  background: url('../images/about/city-bg.jpg') no-repeat center center;
-  background-size: cover;
-  min-height: 100vh - calcVh($header-height);
+  .section--enquiry{
+    min-height: 180px;
+    background: $alkemy_mid_blue;
+  }
 
-  .coreValues{
-    background: rgba(0,0,0,.9);
-    color: white;
-    line-height: 1.2;
-    @media screen and (max-width: 768px){
-      margin-top: 16rem;
-    }
-
-    .valueTitle{
-      color: $alkemy_light_yellow;
-      font-weight: bold;
-    }
-
-  	ul{
-  		list-style: disc;
-  	}
-
-    @extend %fa-icon;
-    @extend .fas;
-
-    span {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    }
-
-  	ol{
-      list-style: none;
-      counter-reset: alkemy-counter;
+  .section--taste{
+    .bg{
       
-  		li:before{
-  			content: fa-content($fa-var-flask);
-  			
-        font-size: 2.5rem;
-        position: absolute;
-        display: inline-flex;
-        margin-left: -3.5rem;
-        margin-top: .5rem;
-        color: $alkemy_blue;
-  		}
-
-  		ul{
-  			list-style: none;
-  		}
-
-  		li ul li:before{
-  			content: fa-content($fa-var-chevron-right);
-        font-size: 2.5rem;
-        position: absolute;
-        display: inline-flex;
-        margin-left: -1.8rem;
-        margin-top: -.2rem;
-        color: $alkemy_light_yellow;
-  		}
-  	}
+    }
+    .callout{
+      color: white;
+      z-index: 10;
+      bottom: 0;
+    }
   }
+
+  .section--idea{
+    min-height: 300px;
+    background: $alkemy_blue;
+    color: white;
+  }
+
+  .section--promise{}
 }
 
 
@@ -1686,17 +1675,6 @@ div.spinContainer{
   -webkit-box-orient: vertical;
 }
 
-body{
-  .addthis-smartlayers{
-    display: none;
-  }
-  &.blog,&.blog-single-page{
-    .addthis-smartlayers {
-      display: block;
-    }
-  }
-}
-
 .page-404 {
   #main .alk-container {
     max-width: 1080px;
@@ -1936,5 +1914,26 @@ body{
 
       
     }
+  }
+}
+
+.text-alk-blue{
+  color: $alkemy_blue;
+}
+
+.enquiry--page{
+  .section--hero{
+    min-height: 250px;
+    .hero-text{
+      color: black;
+      filter: drop-shadow(1px 1px 1px white);
+      @media screen and (min-width: 768px){
+        filter: unset;
+      }
+    }
+  }
+
+  .recaptcha{
+    margin: unset;
   }
 }

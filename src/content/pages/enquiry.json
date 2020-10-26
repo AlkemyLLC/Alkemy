@@ -1,0 +1,27 @@
+[
+  {
+    "sections":[
+      {
+        "id": "1",
+        "blocks": [
+          {
+            "heading": "Let’s Build Your Dream",
+            "content": "Tell us about your business and what you are trying to achieve. Fill out the fields below so that we can get a better picture of the kind of site you've been dreaming of and we'll do the rest. As soon as we have had a chance to review your information, you'll recieve a follow-up call from one of our team members to discuss the next steps."
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "blocks": [
+          {
+            "heading": "Why the enquiry?",
+            "content": "Too often, people don't ask enough questions and this can lead to many unforseen circumstances and problems. This form is an effort to make sure that we lay the groundwork for something amazing to come. Below you will find an opportunity to explain why you need your specific project and what key objectives it should achieve."
+          },
+          {
+            "content": "Our goal is your success so the more information you give us here, the better the solution we will be able to provide will be."
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -3,8 +3,8 @@ import Typography from "typography";
 const typography = new Typography({
     title: "Alkemy Typography",
     fontDisplay: "swap",
-    baseFontSize: "16px",
-    baseLineHeight: 1.666,
+    baseFontSize: "20px",
+    baseLineHeight: 2,
     scaleRatio: 2,
     headerFontFamily: [
         "Avenir Next",

@@ -12,7 +12,6 @@
  */
 .fa,
 .fas,
-.aboutValues .coreValues,
 .far,
 .fal,
 .fad,
@@ -23,16 +22,6 @@
   font-style: normal;
   font-variant: normal;
   text-rendering: auto;
-  line-height: 1;
-}
-
-.aboutValues .coreValues {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
   line-height: 1;
 }
 
@@ -129,7 +118,6 @@
 
 .fa.fa-pull-left,
 .fas.fa-pull-left,
-.aboutValues .fa-pull-left.coreValues,
 .far.fa-pull-left,
 .fal.fa-pull-left,
 .fab.fa-pull-left {
@@ -138,7 +126,6 @@
 
 .fa.fa-pull-right,
 .fas.fa-pull-right,
-.aboutValues .fa-pull-right.coreValues,
 .far.fa-pull-right,
 .fal.fa-pull-right,
 .fab.fa-pull-right {
@@ -5806,8 +5793,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa,
-.fas,
-.aboutValues .coreValues {
+.fas {
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
 }
@@ -5818,7 +5804,7 @@ readers do not read off random characters that represent icons */
 /* Mobile Menu */
 /* Bootstrap breakpoint override */
 /*!
- * Bootstrap v4.5.2 (https://getbootstrap.com/)
+ * Bootstrap v4.5.3 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -5876,7 +5862,7 @@ body {
   font-family: "Avenir Next", "Helvetica Neue", "Segoe UI", "Helvetica", "Arial", sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.666;
+  line-height: 2;
   color: #212529;
   text-align: left;
   background-color: #fff;
@@ -6033,6 +6019,7 @@ caption {
 
 th {
   text-align: inherit;
+  text-align: -webkit-match-parent;
 }
 
 label {
@@ -9321,8 +9308,9 @@ input[type="button"].btn-block {
   position: relative;
   z-index: 1;
   display: block;
-  min-height: 1.666rem;
+  min-height: 2rem;
   padding-left: 1.5rem;
+  color-adjust: exact;
 }
 
 .custom-control-inline {
@@ -9335,7 +9323,7 @@ input[type="button"].btn-block {
   left: 0;
   z-index: -1;
   width: 1rem;
-  height: 1.333rem;
+  height: 1.5rem;
   opacity: 0;
 }
 
@@ -9375,7 +9363,7 @@ input[type="button"].btn-block {
 
 .custom-control-label::before {
   position: absolute;
-  top: 0.333rem;
+  top: 0.5rem;
   left: -1.5rem;
   display: block;
   width: 1rem;
@@ -9388,7 +9376,7 @@ input[type="button"].btn-block {
 
 .custom-control-label::after {
   position: absolute;
-  top: 0.333rem;
+  top: 0.5rem;
   left: -1.5rem;
   display: block;
   width: 1rem;
@@ -9446,7 +9434,7 @@ input[type="button"].btn-block {
 }
 
 .custom-switch .custom-control-label::after {
-  top: calc(0.333rem + 2px);
+  top: calc(0.5rem + 2px);
   left: calc(-2.25rem + 2px);
   width: calc(1rem - 4px);
   height: calc(1rem - 4px);
@@ -10782,6 +10770,7 @@ a.badge-dark:focus, a.badge-dark.focus {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 2;
   padding: 0.75rem 1.25rem;
   color: inherit;
 }
@@ -11584,7 +11573,7 @@ a.close.disabled {
   font-family: "Avenir Next", "Helvetica Neue", "Segoe UI", "Helvetica", "Arial", sans-serif;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.666;
+  line-height: 2;
   text-align: left;
   text-align: start;
   text-decoration: none;
@@ -11697,7 +11686,7 @@ a.close.disabled {
   font-family: "Avenir Next", "Helvetica Neue", "Segoe UI", "Helvetica", "Arial", sans-serif;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.666;
+  line-height: 2;
   text-align: left;
   text-align: start;
   text-decoration: none;
@@ -15389,7 +15378,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .text-break {
   word-break: break-word !important;
-  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
 }
 
 .text-reset {
@@ -15495,16 +15484,7 @@ html {
 }
 
 body {
-  font-size: clamp(var(--minBodyFontSize), var(--scaler), 18px);
-}
-
-@media (min-width: 1023px) and (max-width: 1108px) {
-  body header {
-    font-size: calc(16px);
-  }
-  body header a {
-    font-size: inherit;
-  }
+  font-size: clamp(var(--minBodyFontSize), var(--scaler), 20px);
 }
 
 .lead {
@@ -15648,7 +15628,7 @@ input[type="checkbox"]:checked + label:before {
 .header {
   background: rgba(2, 12, 15, 0.7);
   color: white;
-  height: 65px;
+  min-height: 65px;
   top: 0;
   left: 0;
   right: 0;
@@ -15748,7 +15728,6 @@ a {
 }
 
 .navbar-nav .dropdown-menu {
-  font-size: inherit;
   top: 90%;
 }
 
@@ -15844,7 +15823,7 @@ a {
   /* iPhone 6/7/8 plus */
   /* iPhone X */
   /* Nexus 10, iPad, and iPad Pro */
-  padding: 1rem;
+  padding: 0.5rem;
   background: #2bb3e5;
   transform: translateY(-50%);
   border-radius: 20rem 0 0 20rem;
@@ -15853,13 +15832,13 @@ a {
 
 @media screen and (min-width: 375px) and (min-height: 667px) {
   .callNow {
-    width: 14vw;
+    width: 10vw;
   }
 }
 
 @media screen and (min-width: 414px) and (min-height: 736px) {
   .callNow {
-    width: 14vw;
+    width: 10vw;
   }
 }
 
@@ -15878,7 +15857,7 @@ a {
 .callNow .callNowButton {
   background: white;
   color: black;
-  margin: 0 auto;
+  margin: 10px auto 0 auto;
   border-radius: 1rem;
 }
 
@@ -15891,13 +15870,20 @@ a {
 }
 
 .subHeader {
-  background: #41a4e0 url("../images/banners/banner-bg.png") center right no-repeat;
+  background: #41a4e0 url("../images/banners/banner-bg.png") 70% center no-repeat;
+  background-size: auto 100%;
   color: white;
   width: 100%;
-  height: 110px;
+  min-height: 110px;
   margin-top: 65px;
   display: flex;
   align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .subHeader {
+    background-position: center right;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -16680,82 +16666,65 @@ div.spinContainer {
 }
 
 /* About Us Page */
-.whoWeAre {
-  height: 82.5vh;
+.about-page .section--hero {
+  min-height: 400px;
 }
 
-@media screen and (min-width: 1024px) {
-  .whoWeAre .img-col {
-    height: 100% !important;
-  }
+.about-page .section--hero .hero-text {
+  z-index: 10;
 }
 
-@media screen and (min-width: 990px) {
-  .whoWeAre .arrow {
-    width: 70%;
-    margin-left: -.5em;
-    margin-top: 5vh;
-  }
-}
-
-.aboutValues {
-  background: url("../images/about/city-bg.jpg") no-repeat center center;
-  background-size: cover;
-  min-height: 93.5vh;
-}
-
-.aboutValues .coreValues {
-  background: rgba(0, 0, 0, 0.9);
+.about-page .section--hero .hero-text h2 {
   color: white;
-  line-height: 1.2;
+  font-size: 2.7rem;
 }
 
-@media screen and (max-width: 768px) {
-  .aboutValues .coreValues {
-    margin-top: 16rem;
+@media screen and (min-width: 768px) {
+  .about-page .section--hero .hero-text h2 {
+    font-size: 3.75rem;
+    filter: drop-shadow(1px 1px black);
   }
 }
 
-.aboutValues .coreValues .valueTitle {
-  color: #f8da32;
-  font-weight: bold;
+.about-page .section--beginnings {
+  min-height: 500px;
+  padding-bottom: 0;
 }
 
-.aboutValues .coreValues ul {
-  list-style: disc;
+.about-page .section--beginnings .headshot {
+  min-height: 450px;
+  width: 100%;
 }
 
-.aboutValues .coreValues span {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
-.aboutValues .coreValues ol {
-  list-style: none;
-  counter-reset: alkemy-counter;
-}
-
-.aboutValues .coreValues ol li:before {
-  content: "\f0c3";
-  font-size: 2.5rem;
+.about-page .section--beginnings .sub-text {
+  margin: 0;
   position: absolute;
-  display: inline-flex;
-  margin-left: -3.5rem;
-  margin-top: .5rem;
-  color: #2bb3e5;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
 }
 
-.aboutValues .coreValues ol ul {
-  list-style: none;
+.about-page .section--beginnings .text {
+  min-height: 500px;
 }
 
-.aboutValues .coreValues ol li ul li:before {
-  content: "\f054";
-  font-size: 2.5rem;
-  position: absolute;
-  display: inline-flex;
-  margin-left: -1.8rem;
-  margin-top: -.2rem;
-  color: #f8da32;
+.about-page .section--enquiry {
+  min-height: 180px;
+  background: #1E5E8D;
+}
+
+.about-page .section--taste .callout {
+  color: white;
+  z-index: 10;
+  bottom: 0;
+}
+
+.about-page .section--idea {
+  min-height: 300px;
+  background: #2bb3e5;
+  color: white;
 }
 
 /* Contact Alkemy */
@@ -17126,14 +17095,6 @@ div.spinContainer {
   -webkit-line-clamp: 6;
 }
 
-body .addthis-smartlayers {
-  display: none;
-}
-
-body.blog .addthis-smartlayers, body.blog-single-page .addthis-smartlayers {
-  display: block;
-}
-
 .page-404 #main .alk-container {
   max-width: 1080px;
   width: 100%;
@@ -17355,4 +17316,27 @@ body.blog .addthis-smartlayers, body.blog-single-page .addthis-smartlayers {
 
 .wordpressCarePlans .modal-dialog.careModal .carePlanEnrollment section.thankYou {
   background: transparent;
+}
+
+.text-alk-blue {
+  color: #2bb3e5;
+}
+
+.enquiry--page .section--hero {
+  min-height: 250px;
+}
+
+.enquiry--page .section--hero .hero-text {
+  color: black;
+  filter: drop-shadow(1px 1px 1px white);
+}
+
+@media screen and (min-width: 768px) {
+  .enquiry--page .section--hero .hero-text {
+    filter: unset;
+  }
+}
+
+.enquiry--page .recaptcha {
+  margin: unset;
 }

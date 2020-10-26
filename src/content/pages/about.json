@@ -5,8 +5,13 @@
         "id": "1",
         "blocks": [
           {
-            "heading": "Who we are and what we stand for",
-            "content": "Here at Alkemy, we’re a group of designers, programmers, professionals, and visionaries that are working together to develop the next big thing (and have a little fun on the side). We take pride in all we do and love creating awesome new products and websites."
+            "heading": "Innovation."
+          },
+          {
+            "heading": "Success."
+          },
+          {
+            "heading": "Simplified."
           }
         ]
       },
@@ -14,28 +19,11 @@
         "id": "2",
         "blocks": [
           {
-            "heading": "Competitive Pricing and Delivery Times",
-            "content": "We quote projects based upon their complexity and the time it will take to produce the desired results. Some projects are more costly than others, but we always try to be as reasonable as possible with our estimates. In the world of Development and Design there is an old saying, “Fast, Cheap, and Good. You can choose any two.” (Here’s a tip: You should always choose Quality as one of the 2)"
+            "heading": "Humble beginnings",
+            "content": "For as long as he can remember, Jonathan was always taking things apart to find out what made them tick."
           },
           {
-            "heading": "Always deliver work that we can be proud of",
-            "content": "Your success is a direct reflection on our success and that is why it’s important to us to provide only our best, Always. We live up to this by treating your project as if it were our project. This means:"
-          },
-          {
-            "heading": "Making meaningful suggestions when necessary.",
-            "content": "We are industry experts, and as we mentioned before, your success matters. That means that we will always suggest something if we feel it’s to your benefit. Ultimately, you will always have the final say in your project and our suggestions will only be made when we feel they are needed. Consider them carefully."
-          },
-          {
-            "heading": "High Grade Quality Assurance Testing.",
-            "content": "While designing and developing, we run through many checks to ensure that quality is being met. However infrequently, things are bound to slip through the cracks. To answer this concern, we provide you with rounds of revisions (number of revision rounds depends on your specific agreement). This means that you have an opportunity to provide your own feedback during the process. We also provide a final review period for the product, so that you and your team can have some time to explore and see if anything was missed."
-          },
-          {
-            "heading": "Always have fun in everything we do.",
-            "content": "We love what we do and feel blessed that we can enjoy doing what we love everyday. This translates into a better working relationship with you and your business. Relationships are powerful motivators and we’re not just looking to collect a fee from you. We want to help your business succeed for years to come, and that means building a strong foundation."
-          },
-          {
-            "heading": "Approach every project holistically, by suggesting a valid Marketing and Care Strategy.",
-            "content": "Every Website, App, or Web App doesn't just need good code to succeed. Marketing and Regular Maintenance are just as important to make sure that you launch your vision correctly. With our Marketing Services we leverage SEO (Search Engine Optimization), Content Creation, Social Media Marketing, and PPC (Pay Per Click) Marketing to help boost traffic and visibility for your website. We start with forming the plan for your business so that you can reach your specific goals, and then get you on a program that will steadily bring in traffic and keep your audience growing. While with our Care Packages, we can ensure that your website gets the continuous maintenance and care that it needs to succeed."
+            "content": "When he was 8 years old he took apart his first computer (Commodore 64c) and then taught himself how to code. From then on, it was nothing but love for the possibilities this new device held."
           }
         ]
       },
@@ -43,16 +31,41 @@
         "id": "3",
         "blocks": [
           {
-            "heading": "Our Passion",
-            "content": "What drives us? The desire to create Awesome Software that answers the needs of our world. We meet complex problems with creative and innovative solutions every day. At our center is the idea that each member of our team brings something unique to the table and we strive to show it every chance we get."
+            "heading": "A taste of entrepreneurship",
+            "content": "Our founder caught the bug young.  Although Jonathan grew up surrounded by New York business owners and entrepreneurs, like many kids in the 80’s, he didn’t know many people in tech. Since he couldn’t bank on his relationships to explore his new passion, he did the only thing he could - learned and explored on his own."
           },
           {
-            "heading": "",
-            "content": "Here at Alkemy, we believe in the Japanese principle of Kaizen."
+            "content": "When he was 16, his father helped him and a couple of good friends start a business. Compulogic Consulting and Development, inc. was born and for several years they provided Web Design, Web Hosting, and IT services to the South Florida community.  The experience was amazing, but as it goes for many small businesses, at some point it came to an end."
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "blocks": [
+          {
+            "heading": "The birth of an idea",
+            "content": "After many years and several other companies built, Jonathan decided that he wanted to go back to his passion for code. He settled on the idea that he wanted to create a company that didn’t work like other companies but rather represented his eclecticism, strong work ethic, pride, and passion... Alkemy was born."
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "blocks": [
+          {
+            "content": "Alkemy represents a dream of America and success. Being born a first generation American citizen, I was raised with a strong work ethic and deep ties to my cultural heretige. I grew up with two of the greatest examples that I’ve ever known as my strongest character influences and had the pleasure of calling them Mom and Dad."
           },
           {
-            "heading": "",
-            "content": "We apply this by constantly striving to improve our business bit by bit. From that code that we updated to make your website load quicker, to the adjustment we made on mobile devices so that users could interact better — Our team is always working on making something better so that we can be proud of everything we create and do."
+            "content": "I firmly believe that people don’t buy skills alone, they buy people. As part of that belief, I stand 100% behind all of our work and always have a final say so in every project before it is rolled out."
+          },
+          {
+            "content": "We promise that Alkemy will always do everything it can to create the most compelling digital experience for your business, and always treat your passion as if it were our own."
+          },
+          {
+            "content": "I look forward to working with you and helping to cultivate your business goals with our planning, skill, and experience. Welcome to the Alkemy family!"
+          },
+          {
+            "heading": "Jonathan Ferragut",
+            "content": "President/CEO - Alkemy, LLC."
           }
         ]
       }
