@@ -56,7 +56,7 @@ const ProjectEnquiry = ({ data }) => {
                   ].reverse()
             : [
                   data.doMoreMobile.childImageSharp.fluid,
-                  `linear-gradient(to bottom, rgba(255,255,255,.25) , white 25vh)`,
+                  `linear-gradient(to bottom, rgba(255,255,255,.25) , white )`,
               ].reverse();
 
     const [thankYou,setThankYou] = useState(false);

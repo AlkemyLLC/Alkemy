@@ -1926,7 +1926,10 @@ div.spinContainer{
     min-height: 250px;
     .hero-text{
       color: black;
-      // filter: drop-shadow(1px 1px white)
+      filter: drop-shadow(1px 1px 1px white);
+      @media screen and (min-width: 768px){
+        filter: unset;
+      }
     }
   }
 
