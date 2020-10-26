@@ -647,6 +647,7 @@ const ProjectEnquiry = ({ data }) => {
                                             name="industryProductsAndServices"
                                             id="industryProductsAndServices"
                                             type="textarea"
+                                            rows="4"
                                             required
                                             invalid={
                                                 typeof errors.industryProductsAndServices !==
@@ -848,6 +849,7 @@ const ProjectEnquiry = ({ data }) => {
                                             name="idealCustomer"
                                             id="idealCustomer"
                                             type="textarea"
+                                            rows="4"
                                             required
                                             invalid={
                                                 typeof errors.idealCustomer !==
@@ -881,6 +883,7 @@ const ProjectEnquiry = ({ data }) => {
                                             name="top5reasons"
                                             id="top5reasons"
                                             type="textarea"
+                                            rows="4"
                                             required
                                             invalid={
                                                 typeof errors.idealCustomer !==
@@ -1043,6 +1046,7 @@ const ProjectEnquiry = ({ data }) => {
                                             name="decisionMakers"
                                             id="decisionMakers"
                                             type="textarea"
+                                            rows="4"
                                             onChange={e => handleFieldChange(e)}
                                         />
                                     </FormGroup>
@@ -1205,6 +1209,7 @@ const ProjectEnquiry = ({ data }) => {
                                                 name="currentWebsiteWins"
                                                 id="currentWebsiteWins"
                                                 type="textarea"
+                                                rows="4"
                                                 onChange={e =>
                                                     handleFieldChange(e)
                                                 }
@@ -1280,6 +1285,7 @@ const ProjectEnquiry = ({ data }) => {
                                             name="brandFeeling"
                                             id="brandFeeling"
                                             type="textarea"
+                                            rows="4"
                                             onChange={e => handleFieldChange(e)}
                                         />
                                         <FormText>
@@ -1296,6 +1302,7 @@ const ProjectEnquiry = ({ data }) => {
                                             name="competitorWebsites"
                                             id="competitorWebsites"
                                             type="textarea"
+                                            rows="4"
                                             onChange={e => handleFieldChange(e)}
                                         />
                                         <FormText>
@@ -1314,6 +1321,7 @@ const ProjectEnquiry = ({ data }) => {
                                             name="top3Competitors"
                                             id="top3Competitors"
                                             type="textarea"
+                                            rows="4"
                                             onChange={e => handleFieldChange(e)}
                                         />
                                         <FormText>
@@ -1333,6 +1341,7 @@ const ProjectEnquiry = ({ data }) => {
                                             name="websitesForDesignAesthetic"
                                             id="websitesForDesignAesthetic"
                                             type="textarea"
+                                            rows="4"
                                             onChange={e => handleFieldChange(e)}
                                         />
                                     </FormGroup>
@@ -1361,6 +1370,7 @@ const ProjectEnquiry = ({ data }) => {
                                             name="successLooksLike"
                                             id="successLooksLike"
                                             type="textarea"
+                                            rows="4"
                                             required
                                             invalid={
                                                 typeof errors.successLooksLike !==
@@ -1390,6 +1400,7 @@ const ProjectEnquiry = ({ data }) => {
                                             name="additionalComments"
                                             id="additionalComments"
                                             type="textarea"
+                                            rows="4"
                                             onChange={e => handleFieldChange(e)}
                                         />
                                     </FormGroup>
@@ -1398,19 +1409,7 @@ const ProjectEnquiry = ({ data }) => {
                             <Row>
                                 <Col xs={12} className="my-2 py-0">
                                     <FormGroup>
-                                        {/* <LoadableRecaptcha
-                                            className="recaptcha"
-                                            handleChange={values => {
-                                                handleRecaptcha(
-                                                    values,
-                                                    formValues
-                                                );
-                                            }}
-                                        /> */}
-
-                                        <Recaptcha
-                                            onChange={handleRecaptcha}
-                                        />
+                                        <Recaptcha onChange={handleRecaptcha} />
                                         <FormText
                                             color="danger"
                                             className="text-center"
