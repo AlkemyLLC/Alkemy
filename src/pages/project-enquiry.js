@@ -477,6 +477,7 @@ const ProjectEnquiry = ({ data }) => {
 
                         <hr />
                         <Form
+                            name="project-enquiry-form"
                             onSubmit={handleSubmit}
                             data-netlify="true"
                             data-netlify-honeypot="bot-field"
