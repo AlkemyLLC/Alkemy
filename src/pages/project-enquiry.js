@@ -214,13 +214,13 @@ const ProjectEnquiry = ({ data }) => {
                 },
                 body: encode({
                     "form-name": "project-enquiry-form",
-                    "g-recaptcha-value": recaptcha,
+                    "g-recaptcha-response": recaptcha,
                     ...formValues,
                 }),
             })
                 .then(res => {
                     setThankYou(true);
-                    window.scrollTo(0,0);
+                    window.scrollTo(0, 0);
                 })
                 .catch(error => console.log(error));
         } else if (recaptcha.length === 0 || recaptcha === null) {
