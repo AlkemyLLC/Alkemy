@@ -82,7 +82,8 @@ library.add(
     faServer,
     faTachometerAlt,
     faDatabase,
-    faTimesCircle
+    faTimesCircle,
+    faSearch
 );
 
 

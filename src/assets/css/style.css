@@ -15727,6 +15727,18 @@ a {
   }
 }
 
+.button-bar {
+  cursor: pointer;
+}
+
+.button-bar button.btn.btn-link svg path {
+  fill: white;
+}
+
+.button-bar button.btn.btn-link:hover svg path {
+  fill: #F0C611;
+}
+
 .navbar-nav .dropdown-menu {
   top: 90%;
 }

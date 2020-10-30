@@ -94,7 +94,7 @@ export default class BlogSearch extends React.Component {
         return (
             <Row className="blogSearch">
                 <Col>
-                    {/* <Context.Consumer>
+                    <Context.Consumer>
                         {({ actions }) => {
                              this.state.actions===null?this.setState({actions:actions}):null
 
@@ -139,7 +139,7 @@ export default class BlogSearch extends React.Component {
                                  </InputGroup>
                              );
                         }}
-                    </Context.Consumer> */}
+                    </Context.Consumer>
                 </Col>
             </Row>
         );

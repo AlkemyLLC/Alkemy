@@ -325,6 +325,22 @@ a {
     }
   }
 }
+
+.button-bar{
+  cursor: pointer;
+  button.btn.btn-link{
+    svg path{
+      fill: white;
+    }
+    &:hover{
+      svg path{
+        fill: $alkemy_yellow;
+      }
+    }
+  }
+}
+
+
 .navbar-nav{
   .dropdown-menu{
     top: 90%;

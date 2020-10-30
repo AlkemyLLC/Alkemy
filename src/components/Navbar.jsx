@@ -6,12 +6,12 @@ import Img from "gatsby-image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+    Button,
     Collapse,
     NavbarToggler,
     Navbar,
     Nav,
     NavItem,
-    Button,
     Dropdown,
     DropdownToggle,
     DropdownMenu,
@@ -19,6 +19,7 @@ import {
     Modal,
     ModalHeader,
     ModalBody,
+    UncontrolledTooltip,
 } from "reactstrap";
 
 export default class ReactNavbar extends React.Component {
@@ -32,7 +33,8 @@ export default class ReactNavbar extends React.Component {
             loading: true,
             mobileMenuClasses: "d-block d-lg-none mobileMenu",
             togglerClasses: "mr-3 d-lg-none hamburger hamburger--slider",
-            icon: ["far", "calendar-alt"],
+            appointmentIcon: ["far", "calendar-alt"],
+            search: false
         };
 
         this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
@@ -44,17 +46,19 @@ export default class ReactNavbar extends React.Component {
         this.handleButtonHover = this.handleButtonHover.bind(this);
 
         this.iframe = React.createRef();
+        this.searchBtn = React.createRef();
+        this.appointmentBtn = React.createRef();
     }
 
     handleButtonHover = e => {
         if (e.type === "mouseover") {
             this.setState({
-                icon: ["far", "calendar-plus"],
-            });
+                appointmentIcon: ["far", "calendar-plus"],
+            })
         } else {
             this.setState({
-                icon: ["far", "calendar-alt"],
-            });
+                appointmentIcon: ["far", "calendar-alt"],
+            })
         }
     };
 
@@ -222,6 +226,19 @@ export default class ReactNavbar extends React.Component {
                             }}
                         />
                     </Link>
+                    <Button
+                        id="search-button"
+                        color="link"
+                        size="lg"
+                        className="d-block d-lg-none p-0 mr-5"
+                        onClick={e =>
+                            this.setState(prevState => ({
+                                search: !prevState.search,
+                            }))
+                        }
+                    >
+                        <FontAwesomeIcon icon="search" color="white" />
+                    </Button>
                     <NavbarToggler
                         onClickCapture={this.toggleMobileMenu}
                         className={this.state.togglerClasses}
@@ -235,41 +252,65 @@ export default class ReactNavbar extends React.Component {
                         <Nav className="ml-auto" navbar>
                             {this.renderMenuLinks()}
                         </Nav>
-                        <Button
-                            outline
-                            color="light"
-                            onMouseOver={this.handleButtonHover}
-                            onMouseOut={this.handleButtonHover}
-                            onClick={this.toggleAppointmentModal}
-                            className="ml-4 my-auto align-middle text-white"
-                        >
-                            <FontAwesomeIcon
-                                icon={this.state.icon}
-                                color="white"
-                                size="lg"
-                                className="mr-2"
-                            />
-                            Reserve Appointment
-                        </Button>
+                        <div className="button-bar ml-4 mr-2">
+                            <UncontrolledTooltip
+                                placement="bottom"
+                                target="search-button"
+                            >
+                                Search
+                            </UncontrolledTooltip>
+                            <Button
+                                id="search-button"
+                                color="link"
+                                className="p-0"
+                                onClick={e =>
+                                    this.setState(prevState => ({
+                                        search: !prevState.search,
+                                    }))
+                                }
+                            >
+                                <FontAwesomeIcon icon="search" color="white" />
+                            </Button>
+
+                            <UncontrolledTooltip
+                                placement="bottom"
+                                target="appt-button"
+                            >
+                                Book Appointment
+                            </UncontrolledTooltip>
+                            <Button
+                                id="appt-button"
+                                color="link"
+                                onMouseOver={this.handleButtonHover}
+                                onMouseOut={this.handleButtonHover}
+                                onClick={this.toggleAppointmentModal}
+                                className="ml-4 p-0"
+                            >
+                                <FontAwesomeIcon
+                                    icon={this.state.appointmentIcon}
+                                    color="white"
+                                />
+                            </Button>
+                        </div>
                     </Collapse>
                 </Navbar>
                 <div className={this.state.mobileMenuClasses}>
                     <Nav className="mx-auto w-100" navbar>
                         {this.renderMobileLinks()}
                         <li className="mx-auto">
-                            <a
+                            <Button
                                 color="light"
-                                className="btn btn-outline btn-white mx-auto my-4 align-middle text-white"
+                                outline
+                                className="btn-white mx-auto my-4 align-middle text-white p-2"
                                 onClick={this.toggleAppointmentModal}
                             >
                                 <FontAwesomeIcon
-                                    icon={this.state.icon}
+                                    icon={this.state.appointmentIcon}
                                     color="white"
-                                    size="lg"
                                     className="mr-2"
                                 />
                                 Reserve Appointment
-                            </a>
+                            </Button>
                         </li>
                     </Nav>
                 </div>
