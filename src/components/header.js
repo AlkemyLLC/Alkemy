@@ -73,8 +73,8 @@ const Header = ({ pageTitle, hideHeader, renderHeaderSolid, search }) => (
                 <header
                     className={
                         renderHeaderSolid
-                            ? "header solid fadeInDown position-fixed"
-                            : "header fadeInDown position-fixed"
+                            ? "header solid position-fixed"
+                            : "header position-fixed"
                     }
                 >
                     {data.logo.childImageSharp && (

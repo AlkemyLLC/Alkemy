@@ -216,8 +216,8 @@ export default class ReactNavbar extends React.Component {
                             className="my-auto"
                             fluid={this.props.brand}
                             alt="Alkemy"
+                            loading="eager"
                             style={{
-                                // height: "auto",
                                 width: "150px",
                             }}
                         />
