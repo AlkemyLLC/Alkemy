@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import SearchBox from "./search-box";
 
 const open = css`
-    bottom: -1.6em;
+    width: 450px;
     opacity: 1;
     background: ${({ theme }) => theme.background};
     cursor: text;
@@ -26,10 +26,10 @@ export default styled(SearchBox)`
     margin-bottom: 0;
 
     .SearchInput {
-        border-radius: 1rem !important;
         position: absolute;
         right: 0;
-        width: 450px;
+        bottom: -1.6em;
+        
 
         outline: none;
         border: ${({ hasFocus }) => (hasFocus ? "auto" : "none")};

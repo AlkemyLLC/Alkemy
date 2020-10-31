@@ -4,7 +4,12 @@ import { Search as SearchIcon } from "@styled-icons/fa-solid";
 
 export default connectSearchBox(
     ({ refine, currentRefinement, className, onFocus }) => (
-        <form className={className} >
+        <form
+            className={className}
+            noValidate
+            action=""
+            role="search"
+        >
             <input
                 className="SearchInput"
                 type="text"

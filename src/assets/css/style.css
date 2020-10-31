@@ -16037,7 +16037,6 @@ input:not([type=checkbox]):not([type=radio]),
 input[type=tel],
 input[type=text] {
   padding: 0.375rem 0.75rem;
-  font-size: calc(18px + .2vw);
   height: calc(1.85em + 0.75rem + 2px);
   border-radius: 0;
 }
@@ -16448,7 +16447,6 @@ section.dreamForm form button,
 section.thankYou form button,
 .blogSearch form button {
   box-shadow: 2px 4px 6px;
-  border-radius: 2px;
 }
 
 
@@ -16469,10 +16467,6 @@ section.thankYou form input,
   padding: 1.4rem;
 }
 
-.formDefaults form input.form-control, section.contactForm form input.form-control, section.dreamForm form input.form-control, section.thankYou form input.form-control, .blogSearch form input.form-control {
-  height: calc(1.85em + 0.75rem + 2px);
-}
-
 .formDefaults form .form-control, section.contactForm form .form-control, section.dreamForm form .form-control, section.thankYou form .form-control, .blogSearch form .form-control,
 .formDefaults form button,
 section.contactForm form button,
@@ -16481,12 +16475,6 @@ section.thankYou form button,
 .blogSearch form button {
   font-size: calc(18px + .2vw);
   padding: 0.375rem 0.75rem;
-}
-
-.formDefaults form input[type=file], section.contactForm form input[type=file], section.dreamForm form input[type=file], section.thankYou form input[type=file], .blogSearch form input[type=file] {
-  padding: unset;
-  box-shadow: unset;
-  border-radius: unset;
 }
 
 
@@ -17351,4 +17339,24 @@ div.spinContainer {
 
 .enquiry--page .recaptcha {
   margin: unset;
+}
+
+.ais-PoweredBy {
+  align-items: center;
+}
+
+.ais-PoweredBy a.ais-PoweredBy-link svg path:nth-child(even) {
+  fill: #2bb3e5 !important;
+}
+
+.ais-PoweredBy a.ais-PoweredBy-link:hover {
+  color: white !important;
+}
+
+.ais-PoweredBy-text {
+  margin-right: 0.5rem;
+}
+
+.HitCount, .ais-PoweredBy-text {
+  color: #2bb3e5;
 }

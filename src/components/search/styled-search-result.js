@@ -37,8 +37,6 @@ export default styled(SearchResult)`
             margin-bottom: 1em;
 
             a {
-                color: ${({ theme }) => theme.foreground};
-
                 h4 {
                     margin-bottom: 0.2em;
                 }

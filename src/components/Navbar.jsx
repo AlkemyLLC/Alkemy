@@ -43,6 +43,7 @@ export default class ReactNavbar extends React.Component {
         this.toggleAppointmentModal = this.toggleAppointmentModal.bind(this);
         this.toggle = this.toggle.bind(this);
 
+        this.handleSetFocus = this.handleSetFocus.bind(this);
         this.onMouseEnter = this.onMouseEnter.bind(this);
         this.onMouseLeave = this.onMouseLeave.bind(this);
         this.handleButtonHover = this.handleButtonHover.bind(this);
@@ -63,6 +64,12 @@ export default class ReactNavbar extends React.Component {
             })
         }
     };
+
+    handleSetFocus = value =>{
+        this.setState({
+            search: value,
+        });
+    }
 
     // Appointment Modal Window Toggler
     toggleAppointmentModal() {
@@ -272,7 +279,7 @@ export default class ReactNavbar extends React.Component {
                                 }
                             >
                                 {/* <FontAwesomeIcon icon="search" color="white" /> */}
-                                <Search indices={searchIndices} hasFocus={this.state.search} setFocus={this.setState}/>
+                                <Search indices={searchIndices} hasFocus={this.state.search} setFocus={this.handleSetFocus}/>
                             </Button>
 
                             <UncontrolledTooltip

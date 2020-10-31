@@ -643,7 +643,6 @@ input:not([type=checkbox]):not([type=radio]),
 input[type=tel],
 input[type=text] {
   padding: 0.375rem 0.75rem;
-	font-size: calc(18px + .2vw);
   height: calc(1.85em + 0.75rem + 2px);
   border-radius: 0;
 }
@@ -1043,7 +1042,6 @@ section.recentBlogPosts{
     input:not([type=radio]),
     button {
       box-shadow: 2px 4px 6px;
-      border-radius: 2px;
     }
 
     select{
@@ -1055,20 +1053,10 @@ section.recentBlogPosts{
       padding: 1.4rem;
     }
 
-    input.form-control{
-      height: calc(1.85em + 0.75rem + 2px);
-    }
-
     .form-control,
     button{
       font-size: calc(18px + .2vw);
       padding: 0.375rem 0.75rem;
-    }
-
-    input[type=file] {
-      padding: unset;
-      box-shadow: unset;
-      border-radius: unset;
     }
 
     button {
@@ -1953,3 +1941,23 @@ div.spinContainer{
     margin: unset;
   }
 }
+
+// Site search
+.ais-PoweredBy{
+  align-items: center;
+  a.ais-PoweredBy-link{
+    svg{
+      path{
+        &:nth-child(even){
+          fill: $alkemy_blue !important;
+        }
+      }
+    }
+    &:hover{
+      color: white !important;
+    }
+  }
+}
+.ais-PoweredBy-text{margin-right: 0.5rem;}
+
+.HitCount,.ais-PoweredBy-text{color: $alkemy_blue;}

@@ -15,13 +15,13 @@ const theme = {
 
 export default function Search({ indices,hasFocus,setFocus}) {
     const rootRef = createRef();
-    const [query, setQuery] = useState();
+    const [query, setQuery] = useState("");
     const searchClient = algoliasearch(
         process.env.GATSBY_ALGOLIA_APP_ID,
         process.env.GATSBY_ALGOLIA_SEARCH_KEY
     );
 
-    useClickOutside(rootRef, () => props.setFocus({ search: false }));
+    useClickOutside(rootRef, () => setFocus(false));
 
     return (
         <ThemeProvider theme={theme}>
@@ -32,7 +32,7 @@ export default function Search({ indices,hasFocus,setFocus}) {
                     onSearchStateChange={({ query }) => setQuery(query)}
                 >
                     <StyledSearchBox
-                        onFocus={() => setFocus({search:true})}
+                        onFocus={() => setFocus(true)}
                         hasFocus={hasFocus}
                     />
                     <StyledSearchResult
