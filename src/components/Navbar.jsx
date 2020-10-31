@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "gatsby";
 import Loading from "./loading.jsx";
 import Img from "gatsby-image";
+import Search from "./search/search.js";
+const searchIndices = [{ name: `Posts`, title: `Posts` }];
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -269,7 +271,8 @@ export default class ReactNavbar extends React.Component {
                                     }))
                                 }
                             >
-                                <FontAwesomeIcon icon="search" color="white" />
+                                {/* <FontAwesomeIcon icon="search" color="white" /> */}
+                                <Search indices={searchIndices} hasFocus={this.state.search} setFocus={this.setState}/>
                             </Button>
 
                             <UncontrolledTooltip
