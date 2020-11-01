@@ -16729,6 +16729,12 @@ div.spinContainer {
   width: 100vw;
 }
 
+@media screen and (min-width: 769px) {
+  .contactDetails {
+    background-size: cover;
+  }
+}
+
 .contactDetails .intl-tel-input.allow-dropdown .flag-container {
   left: 7px;
 }

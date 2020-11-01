@@ -1325,6 +1325,9 @@ div.spinContainer{
 
 .contactDetails{
   background: url('../images/contact/contact-bg.jpg') top center;
+  @media screen and (min-width: 769px){
+    background-size: cover;
+  }
   min-height: 100vh;
   width: 100vw;
 

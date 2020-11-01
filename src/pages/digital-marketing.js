@@ -6,6 +6,7 @@ import { Button, Col, Row } from "reactstrap";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
 import SEO from "../components/seo";
+import EnquiryWidget from "../components/widgetEnquiry";
 
 /*
 Layout props:
@@ -70,7 +71,7 @@ const DigitalMarketing = ({ data }) => {
                                         tag={Link}
                                         to="/project-enquiry"
                                         block
-                                        className="btn btn-primary form-control"
+                                        className="btn btn-primary"
                                     >
                                         Let’s Grow My Traffic
                                     </Button>
@@ -250,6 +251,8 @@ const DigitalMarketing = ({ data }) => {
                         </Col>
                     </Row>
                 </section>
+
+                <EnquiryWidget/>
             </Layout>
         </ScrollWrapper>
     );
