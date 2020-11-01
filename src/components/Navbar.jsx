@@ -307,11 +307,14 @@ export default class ReactNavbar extends React.Component {
                         </li>
                     </Nav>
                 </div>
-                <Search
-                    indices={searchIndices}
-                    hasFocus={this.state.search}
-                    setFocus={this.handleSetFocus}
-                />
+                {this.state.search && (
+                    <Search
+                        indices={searchIndices}
+                        hasFocus={this.state.search}
+                        setFocus={this.handleSetFocus}
+                    />
+                )}
+
                 <Modal
                     size={"lg"}
                     className="bookingModal"
