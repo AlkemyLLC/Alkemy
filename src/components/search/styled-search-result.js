@@ -5,7 +5,7 @@ const Popover = css`
     width: 100vw;
     max-height: calc(
         100vh -
-            ${() =>
+            ${() => typeof window !== "undefined" &&
                 document.querySelector("header") &&
                 document.querySelector("header").offsetHeight + 54}px
     );

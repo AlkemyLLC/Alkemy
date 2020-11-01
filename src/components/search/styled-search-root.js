@@ -6,8 +6,11 @@ export default styled.div`
     left: 0;
     right: 0;
     @media screen and (min-width: 1080px) {
-        right: ${() => document.getElementById("search-button") && 
+        right: ${() =>
+            typeof window !== "undefined" &&
+            document.getElementById("search-button") &&
             window.innerWidth -
-            document.getElementById("search-button").getBoundingClientRect().right}px;
+                document.getElementById("search-button").getBoundingClientRect()
+                    .right}px;
     }
 `;

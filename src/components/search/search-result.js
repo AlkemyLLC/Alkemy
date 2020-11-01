@@ -24,13 +24,19 @@ const HitCount = connectStateResults(({ searchResults }) => {
 const PageHit = ({ hit }) => (
     <Row>
         <Col xs={12} sm={4}>
-            <Link to={hit.slug} onClick={()=>document.documentElement.classList.toggle('overflow-hidden')}>
+            <Link
+                to={hit.slug}
+                onClick={() =>
+                    typeof window !== "undefined" &&
+                    document.documentElement.classList.toggle("overflow-hidden")
+                }
+            >
                 <Img
                     className="h-100 search-hit-image"
                     fluid={hit.cover.childImageSharp.fluid}
                     alt={hit.coverAlt}
                     style={{
-                        maxHeight: "200px"
+                        maxHeight: "200px",
                     }}
                 />
             </Link>

@@ -24,7 +24,8 @@ export default function Search({ indices,hasFocus,setFocus }) {
     useClickOutside(rootRef, hasFocus, setFocus);
 
     useEffect(()=>{
-        if(hasFocus) document.getElementById("search-box").focus();
+        if (typeof window !== "undefined" && hasFocus)
+            document.getElementById("search-box").focus();
     },[hasFocus])
 
     return (
