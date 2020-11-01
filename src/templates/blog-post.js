@@ -13,7 +13,7 @@ import {uniq} from "lodash";
 import SEO from "../components/seo";
 import { rhythm } from "../utils/typography";
 import { Col, Row, Container, Button } from "reactstrap";
-import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
+import EnquiryWidget from "../components/widgetEnquiry";
 import BlogInfoBar from "../components/BlogInfoBar.jsx";
 import SocialLinks from "../components/SocialLinks.jsx";
 import PropTypes from "prop-types";
@@ -210,7 +210,7 @@ const BlogPostTemplate = (props) => {
                     </li>
                 </ul>
             </div>
-            <FreeWebsiteAnalysis />
+            <EnquiryWidget />
         </Layout>
     );
 };

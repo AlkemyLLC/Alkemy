@@ -6,8 +6,8 @@ import { Card, Col, Row } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
-import BuildYourDream from "../components/BuildYourDream.jsx";
 import SEO from "../components/seo";
+import EnquiryWidget from "../components/widgetEnquiry";
 
 /*
 Layout props:
@@ -93,7 +93,7 @@ const EcommerceDesign = ({ data }) => {
     };
 
     return (
-        <ScrollWrapper onWindowScroll={handleScroll}>
+        <ScrollWrapper>
             <Layout
                 renderHeaderSolid={true}
                 headerTitle={[true, pageTitle]}
@@ -115,17 +115,15 @@ const EcommerceDesign = ({ data }) => {
                                     data.ecommDesignJson.sections[0].blocks[0]
                                         .content}
                             </p>
-                            <p className="mb-5 lead">
-                                {data.ecommDesignJson &&
-                                    data.ecommDesignJson.sections[0].blocks[1]
-                                        .content}
-                            </p>
                         </Col>
                     </Row>
                 </section>
 
                 {/* Section 2 */}
-                <section className="roadmap mt-4 py-5 ">
+                <EnquiryWidget />
+
+                {/* Section 3 */}
+                <section className="roadmap py-5">
                     <h2 className="my-4 text-center">
                         {data.ecommDesignJson &&
                             data.ecommDesignJson.sections[2].blocks[0].heading}
@@ -266,91 +264,7 @@ const EcommerceDesign = ({ data }) => {
                     </Row>
                 </section>
 
-                {/* eCommerce platforms */}
-                <section className="my-5 alk-container">
-                    <h2 className="mb-5 text-center">
-                        {data.ecommDesignJson.sections[1].blocks[0].heading}
-                    </h2>
-                    <Row className="justify-content-between">
-                        <Col xs={12} md={3}>
-                            {data.shopifyLogo.childImageSharp && (
-                                <Img
-                                    className="platforms"
-                                    imgStyle={{
-                                        maxHeight: "auto",
-                                        maxWidth: "200px",
-                                        objectFit: "contain",
-                                        top: "50%",
-                                        left: "50%",
-                                        transform: "translate(-50%,-50%)",
-                                    }}
-                                    fluid={
-                                        data.shopifyLogo.childImageSharp.fluid
-                                    }
-                                    alt="Shopify Shopping Cart Platform"
-                                />
-                            )}
-                        </Col>
-                        <Col xs={12} md={3}>
-                            {data.dcartLogo.childImageSharp && (
-                                <Img
-                                    className="platforms"
-                                    imgStyle={{
-                                        maxHeight: "auto",
-                                        maxWidth: "200px",
-                                        objectFit: "contain",
-                                        top: "50%",
-                                        left: "50%",
-                                        transform: "translate(-50%,-50%)",
-                                    }}
-                                    fluid={data.dcartLogo.childImageSharp.fluid}
-                                    alt="3dcart Shopping Cart Platform"
-                                />
-                            )}
-                        </Col>
-                        <Col xs={12} md={3}>
-                            {data.bigcommerceLogo.childImageSharp && (
-                                <Img
-                                    className="platforms"
-                                    imgStyle={{
-                                        maxHeight: "auto",
-                                        maxWidth: "200px",
-                                        objectFit: "contain",
-                                        top: "50%",
-                                        left: "50%",
-                                        transform: "translate(-50%,-50%)",
-                                    }}
-                                    fluid={
-                                        data.bigcommerceLogo.childImageSharp
-                                            .fluid
-                                    }
-                                    alt="Big Commerce Shopping Cart Platform"
-                                />
-                            )}
-                        </Col>
-                        <Col xs={12} md={3}>
-                            {data.wordpressLogo.childImageSharp && (
-                                <Img
-                                    className="platforms"
-                                    imgStyle={{
-                                        maxHeight: "auto",
-                                        maxWidth: "200px",
-                                        objectFit: "contain",
-                                        top: "50%",
-                                        left: "50%",
-                                        transform: "translate(-50%,-50%)",
-                                    }}
-                                    fluid={
-                                        data.wordpressLogo.childImageSharp.fluid
-                                    }
-                                    alt="Wordpress Platform"
-                                />
-                            )}
-                        </Col>
-                    </Row>
-                </section>
-
-                {/* Section 3 */}
+                {/* Section 4 */}
                 <section className="innovativeDesign mb-4 py-4">
                     <Row className="alk-container pt-4">
                         <Col xs={12} lg={5} className="mb-5">
@@ -382,41 +296,7 @@ const EcommerceDesign = ({ data }) => {
                     </Row>
                 </section>
 
-                {/* Section 4 */}
-                <section
-                    ref={plansSection}
-                    className="eCommercePlans pt-4 pb-0 alk-container"
-                >
-                    <Row>
-                        <Col>
-                            <h2 className="text-center mb-4">
-                                {data.ecommDesignJson &&
-                                    data.ecommDesignJson.sections[4].blocks[0]
-                                        .heading}
-                            </h2>
-                            <p className="lead">
-                                {data.ecommDesignJson &&
-                                    data.ecommDesignJson.sections[4].blocks[0]
-                                        .content}
-                            </p>
-                        </Col>
-                    </Row>
-                    <Row className="my-5" noGutters>
-                        {data.ecommDesignJson &&
-                            planCards(data.ecommDesignJson.sections[5].plans)}
-                    </Row>
-                    <Row className="mt-3" noGutters>
-                        <ul className="small list-unstyled p-0 m-0">
-                            {data.ecommDesignJson &&
-                                disclaimers(
-                                    data.ecommDesignJson.sections[4].blocks[0]
-                                )}
-                        </ul>
-                    </Row>
-                </section>
-
                 {/* Section 5 */}
-
                 <section className="partnerSection my-5 my-lg-2 py-0 alk-container">
                     <Row className="justify-content-around align-items-center no-gutters">
                         <Col xs={12} md={3}>
@@ -495,16 +375,10 @@ const EcommerceDesign = ({ data }) => {
                         </Col>
                     </Row>
                 </section>
-
-                <BuildYourDream />
             </Layout>
         </ScrollWrapper>
     );
 };
-
-const plansSection = React.createRef();
-
-const handleScroll = () => {};
 
 export const query = graphql`
     {

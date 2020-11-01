@@ -15,7 +15,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
 import CarePlanEnrollment from "../components/carePlanEnrollment.jsx";
-import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
 import SEO from "../components/seo";
 
 /*
@@ -186,7 +185,7 @@ const WordpressCarePlans = ({ data }) => {
     };
 
     return (
-        <ScrollWrapper onWindowScroll={handleScroll}>
+        <ScrollWrapper>
             <Layout
                 renderHeaderSolid={true}
                 headerTitle={[true, pageTitle]}
@@ -334,14 +333,12 @@ const WordpressCarePlans = ({ data }) => {
                     toggle={() => setCareModal(!careModal)}
                     plan={plan}
                 />
-
-                <FreeWebsiteAnalysis />
             </Layout>
         </ScrollWrapper>
     );
 };
 
-const dreamForm = React.createRef();
+
 const plansSection = React.createRef();
 
 const handleViewPlansClick = () => {
@@ -350,8 +347,6 @@ const handleViewPlansClick = () => {
         behavior: "smooth",
     });
 };
-
-const handleScroll = () => {};
 
 export const query = graphql`
     {

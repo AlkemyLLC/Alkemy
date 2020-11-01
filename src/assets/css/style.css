@@ -16710,11 +16710,6 @@ div.spinContainer {
   min-height: 500px;
 }
 
-.about-page .section--enquiry {
-  min-height: 180px;
-  background: #1E5E8D;
-}
-
 .about-page .section--taste .callout {
   color: white;
   z-index: 10;
@@ -17359,4 +17354,9 @@ div.spinContainer {
 
 .HitCount, .ais-PoweredBy-text {
   color: #2bb3e5;
+}
+
+.section--enquiry {
+  min-height: 180px;
+  background: #1E5E8D;
 }

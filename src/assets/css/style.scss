@@ -1300,11 +1300,6 @@ div.spinContainer{
     }
   }
 
-  .section--enquiry{
-    min-height: 180px;
-    background: $alkemy_mid_blue;
-  }
-
   .section--taste{
     .bg{
       
@@ -1961,3 +1956,9 @@ div.spinContainer{
 .ais-PoweredBy-text{margin-right: 0.5rem;}
 
 .HitCount,.ais-PoweredBy-text{color: $alkemy_blue;}
+
+// enquiry widget
+.section--enquiry{
+    min-height: 180px;
+    background: $alkemy_mid_blue;
+  }

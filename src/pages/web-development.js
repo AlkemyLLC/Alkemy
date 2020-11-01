@@ -1,11 +1,11 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql,Link } from "gatsby";
 import Img from "gatsby-image";
 import "../utils/utils.js";
 import { Button, Col, Row } from "reactstrap";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
-import BuildYourDream from "../components/BuildYourDream.jsx";
+import EnquiryWidget from "../components/widgetEnquiry";
 import SEO from "../components/seo";
 
 /*
@@ -26,7 +26,7 @@ const WebDevelopment = ({ data }) => {
     const pageTitle = {name: "Custom Web Development",url:'/web-development'};
 
     return (
-        <ScrollWrapper onWindowScroll={handleScroll}>
+        <ScrollWrapper>
             <Layout
                 renderHeaderSolid={true}
                 headerTitle={[true, pageTitle]}
@@ -35,9 +35,9 @@ const WebDevelopment = ({ data }) => {
                 <SEO title={pageTitle.name} />
 
                 {/* Section 1 */}
-                <section className=" alk-container my-5">
+                <section className=" alk-container mt-5">
                     <Row className="mb-5">
-                        <Col>
+                        <Col xs={12}>
                             <h2 className="mb-4">
                                 {
                                     data.webDevelopmentJson.sections[0]
@@ -58,6 +58,11 @@ const WebDevelopment = ({ data }) => {
                             </p>
                         </Col>
                     </Row>
+                </section>
+
+                <EnquiryWidget />
+
+                <section className=" alk-container my-5">
                     <Row className="flex-column-reverse flex-lg-row align-items-center">
                         <Col xs={12} lg={6}>
                             <h2 className="mb-4">
@@ -72,23 +77,6 @@ const WebDevelopment = ({ data }) => {
                                         .blocks[2].content
                                 }
                             </p>
-                            <p className="lead">
-                                {
-                                    data.webDevelopmentJson.sections[0]
-                                        .blocks[3].content
-                                }
-                            </p>
-                            <Row className="my-5">
-                                <Col xs={12}>
-                                    <Button
-                                        onClick={handleDiscussClick}
-                                        color="primary"
-                                        block
-                                    >
-                                        Let&apos;s Discuss My Project
-                                    </Button>
-                                </Col>
-                            </Row>
                         </Col>
                         <Col xs={12} lg={6} className="text-center mb-5">
                             {data.webDevFlasks.childImageSharp && (
@@ -137,38 +125,25 @@ const WebDevelopment = ({ data }) => {
                                 }
                             </p>
                             <Row className="my-5">
-                                <Col xs={12} lg={6}>
+                                <Col xs={12}>
                                     <Button
-                                        onClick={handleDiscussClick}
+                                        tag={Link}
+                                        to="/project-enquiry"
                                         color="primary"
                                         block
                                     >
-                                        Let&apos;s Discuss My Project
+                                        Let&apos;s get started
                                     </Button>
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
                 </section>
-
-                <section ref={dreamForm}>
-                    <BuildYourDream />
-                </section>
             </Layout>
         </ScrollWrapper>
     );
 };
 
-const dreamForm = React.createRef();
-
-const handleDiscussClick = () => {
-    window.scrollTo({
-        top: dreamForm.current.offsetTop - 80,
-        behavior: "smooth",
-    });
-};
-
-const handleScroll = () => {};
 
 export const query = graphql`
     {

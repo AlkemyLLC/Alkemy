@@ -15,7 +15,7 @@ import {
     CardTitle, 
     CardDeck
 } from "reactstrap";
-import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
+import EnquiryWidget from "../components/widgetEnquiry";
 import SEO from "../components/seo";
 import BlogInfoBar from "../components/BlogInfoBar.jsx";
 import RecentBlogs from "../components/RecentBlogs.jsx";
@@ -295,7 +295,7 @@ const AlkemyBlog = ({
     }
 
     return (
-        <ScrollWrapper onWindowScroll={handleScroll}>
+        <ScrollWrapper>
             <Layout
                 renderHeaderSolid={true}
                 headerTitle={[true, pageTitle]}
@@ -314,26 +314,20 @@ const AlkemyBlog = ({
                         <BlogCategoryBar
                             defaultSelected={category}
                             categories={blogCategories()}
-                            onSelectCategory={e =>
-                                handleCategorySelect(e)
-                            }
+                            onSelectCategory={e => handleCategorySelect(e)}
                         />
                     </Col>
                 </Row>
                 {renderView()}
 
                 {pagination}
-                <section ref={dreamForm}>
-                    <FreeWebsiteAnalysis />
-                </section>
+
+                <EnquiryWidget />
             </Layout>
         </ScrollWrapper>
     );
 };
 
-const dreamForm = React.createRef();
-
-const handleScroll = () => {};
 
 export const query = graphql`{
     siteSearchIndex {

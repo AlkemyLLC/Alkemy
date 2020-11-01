@@ -10,7 +10,6 @@ import {
 import { Col, Row } from "reactstrap";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
-import BuildYourDream from "../components/BuildYourDream.jsx";
 import SEO from "../components/seo";
 import EnquiryWidget from "../components/widgetEnquiry";
 import BackgroundImage from "gatsby-background-image";

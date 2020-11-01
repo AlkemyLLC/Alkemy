@@ -7,7 +7,7 @@ import {uniq} from "lodash";
 import SEO from "../components/seo";
 import SkillGraph from "../components/SkillGraph.jsx";
 import { Col, Row } from "reactstrap";
-import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
+import EnquiryWidget from "../components/widgetEnquiry";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import BlogCategoryBar from "../components/BlogCategoryBar.jsx";
@@ -134,7 +134,7 @@ const AuthorProfile = (props)=> {
                         </Row>
                     </section>
                 </div>
-                <FreeWebsiteAnalysis />
+                <EnquiryWidget />
             </Layout>
         );
 

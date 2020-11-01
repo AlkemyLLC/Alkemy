@@ -1,11 +1,10 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql,Link } from "gatsby";
 import "../utils/utils.js";
 import Img from "gatsby-image";
 import { Button, Col, Row } from "reactstrap";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
-import BuildYourDream from "../components/BuildYourDream.jsx";
 import SEO from "../components/seo";
 
 /*
@@ -68,7 +67,8 @@ const DigitalMarketing = ({ data }) => {
                             <Row className="mb-4">
                                 <Col xs={12} lg={6}>
                                     <Button
-                                        onClick={handleDiscussClick}
+                                        tag={Link}
+                                        to="/project-enquiry"
                                         block
                                         className="btn btn-primary form-control"
                                     >
@@ -138,8 +138,9 @@ const DigitalMarketing = ({ data }) => {
                             <Row className="mt-5">
                                 <Col xs={12} lg={6}>
                                     <Button
+                                        tag={Link}
                                         block
-                                        onClick={handleDiscussClick}
+                                        to="/project-enquiry"
                                         className="btn btn-primary"
                                     >
                                         Let&apos;s Discuss My Project!
@@ -249,22 +250,9 @@ const DigitalMarketing = ({ data }) => {
                         </Col>
                     </Row>
                 </section>
-
-                <section ref={dreamForm}>
-                    <BuildYourDream />
-                </section>
             </Layout>
         </ScrollWrapper>
     );
-};
-
-const dreamForm = React.createRef();
-
-const handleDiscussClick = () => {
-    window.scrollTo({
-        top: dreamForm.current.offsetTop - 80,
-        behavior: "smooth",
-    });
 };
 
 const handleScroll = () => {};
