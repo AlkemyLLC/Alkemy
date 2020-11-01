@@ -2,16 +2,30 @@ import styled, { css } from "styled-components";
 import SearchResult from "./search-result";
 
 const Popover = css`
-    max-height: 80vh;
+    width: 100vw;
+    max-height: calc(
+        100vh -
+            ${() =>
+                document.querySelector("header") &&
+                document.querySelector("header").offsetHeight + 54}px
+    );
+    @media screen and (min-width: 1080px) {
+        max-width: 30em;
+        max-height: 80vh;
+        position: absolute;
+        z-index: 2;
+        right: 0;
+        top: 54px;
+    }
+
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
-    position: absolute;
+    position: relative;
     z-index: 2;
     right: 0;
-    top: 4.5em;
+    top: 54px;
     margin-top: 0.5em;
-    width: 80vw;
-    max-width: 30em;
+
     box-shadow: 0 0 5px 0;
     padding: 1em;
     border-radius: 2px;

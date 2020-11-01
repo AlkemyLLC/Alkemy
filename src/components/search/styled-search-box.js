@@ -2,7 +2,10 @@ import styled, { css } from "styled-components";
 import SearchBox from "./search-box";
 
 const open = css`
-    width: 450px;
+    width: 100vw;
+    @media screen and (min-width: 1080px) {
+        max-width: 450px;
+    }
     opacity: 1;
     background: ${({ theme }) => theme.background};
     cursor: text;
@@ -29,7 +32,6 @@ export default styled(SearchBox)`
         position: absolute;
         right: 0;
         bottom: -1.6em;
-        
 
         outline: none;
         border: ${({ hasFocus }) => (hasFocus ? "auto" : "none")};
@@ -43,11 +45,12 @@ export default styled(SearchBox)`
         ${({ hasFocus }) => (hasFocus ? open : closed)}
     }
 
-    .SearchIcon {
-        width: 1em;
-        margin: 0.3em;
-        color: ${({ theme, hasFocus }) =>
-            hasFocus ? theme.foreground : theme.background};
-        pointer-events: none;
+    .SearchInputClose {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        margin-top: 15px;
+        opacity: ${({ hasFocus }) => (hasFocus ? 1 : 0)};
     }
 `;

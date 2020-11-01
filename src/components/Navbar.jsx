@@ -65,10 +65,11 @@ export default class ReactNavbar extends React.Component {
         }
     };
 
-    handleSetFocus = value =>{
-        this.setState({
-            search: value,
-        });
+    handleSetFocus = () =>{
+        this.setState(prevState => ({
+            search: !prevState.search,
+        }));
+        document.documentElement.classList.toggle('overflow-hidden');
     }
 
     // Appointment Modal Window Toggler
@@ -78,42 +79,33 @@ export default class ReactNavbar extends React.Component {
             loading: prevState.modal ? true : prevState.loading,
         }));
 
-        setTimeout(() => {
-            if (this.state.modal) {
-                document.documentElement.classList.add("no-overflow");
-                document.body.style.removeProperty("padding-right");
-            } else {
-                document.documentElement.classList.remove("no-overflow");
-            }
-        }, 300);
+
+        document.documentElement.classList.toggle("no-overflow");
+        if (this.state.modal) {
+            document.body.style.removeProperty("padding-right");
+        } 
+
     }
 
     // Navbar Toggler Function
     toggleMobileMenu() {
         this.setState(prevState => ({
             isOpen: !prevState.isOpen,
+            mobileMenuClasses: !prevState.isOpen
+                ? "d-block d-lg-none mobileMenu open"
+                : "d-block d-lg-none mobileMenu",
+            togglerClasses: !prevState.isOpen
+                ? "mr-3 d-lg-none hamburger hamburger--slider is-active"
+                : "mr-3 d-lg-none hamburger hamburger--slider"
         }));
-
-        if (this.state.isOpen) {
-            this.setState({
-                mobileMenuClasses: "d-block d-lg-none mobileMenu open",
-                togglerClasses:
-                    "mr-3 d-lg-none hamburger hamburger--slider is-active",
-            });
-            document.body.classList.add("open");
-        } else {
-            this.setState({
-                mobileMenuClasses: "d-block d-lg-none mobileMenu",
-                togglerClasses: "mr-3 d-lg-none hamburger hamburger--slider",
-            });
-        }
+        document.documentElement.classList.toggle("overflow-hidden");  
     }
 
     // Functions for Dropdown menu
     toggle = () => {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen,
-        });
+        this.setState(prevState=>({
+            dropdownOpen: !prevState.dropdownOpen,
+        }));
     };
 
     onMouseEnter = () => {
@@ -236,20 +228,16 @@ export default class ReactNavbar extends React.Component {
                         />
                     </Link>
                     <Button
-                        id="search-button"
                         color="link"
                         size="lg"
                         className="d-block d-lg-none p-0 mr-5"
-                        onClick={e =>
-                            this.setState(prevState => ({
-                                search: !prevState.search,
-                            }))
-                        }
+                        onClick={this.handleSetFocus}
                     >
                         <FontAwesomeIcon icon="search" color="white" />
                     </Button>
                     <NavbarToggler
-                        onClickCapture={this.toggleMobileMenu}
+                        onClick={this.toggleMobileMenu}
+                        // onClickCapture={this.toggleMobileMenu}
                         className={this.state.togglerClasses}
                         aria-label="Menu"
                     >
@@ -272,14 +260,9 @@ export default class ReactNavbar extends React.Component {
                                 id="search-button"
                                 color="link"
                                 className="p-0"
-                                onClick={e =>
-                                    this.setState(prevState => ({
-                                        search: !prevState.search,
-                                    }))
-                                }
+                                onClick={this.handleSetFocus}
                             >
-                                {/* <FontAwesomeIcon icon="search" color="white" /> */}
-                                <Search indices={searchIndices} hasFocus={this.state.search} setFocus={this.handleSetFocus}/>
+                                <FontAwesomeIcon icon="search" color="white" />
                             </Button>
 
                             <UncontrolledTooltip
@@ -324,6 +307,11 @@ export default class ReactNavbar extends React.Component {
                         </li>
                     </Nav>
                 </div>
+                <Search
+                    indices={searchIndices}
+                    hasFocus={this.state.search}
+                    setFocus={this.handleSetFocus}
+                />
                 <Modal
                     size={"lg"}
                     className="bookingModal"

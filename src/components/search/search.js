@@ -1,5 +1,5 @@
 import algoliasearch from "algoliasearch/lite";
-import { createRef, default as React, useState } from "react";
+import { createRef, default as React, useState,useEffect } from "react";
 import { InstantSearch } from "react-instantsearch-dom";
 import { ThemeProvider } from "styled-components";
 import StyledSearchBox from "./styled-search-box";
@@ -13,7 +13,7 @@ const theme = {
     faded: "#888",
 };
 
-export default function Search({ indices,hasFocus,setFocus}) {
+export default function Search({ indices,hasFocus,setFocus }) {
     const rootRef = createRef();
     const [query, setQuery] = useState("");
     const searchClient = algoliasearch(
@@ -21,7 +21,11 @@ export default function Search({ indices,hasFocus,setFocus}) {
         process.env.GATSBY_ALGOLIA_SEARCH_KEY
     );
 
-    useClickOutside(rootRef, () => setFocus(false));
+    useClickOutside(rootRef, hasFocus, setFocus);
+
+    useEffect(()=>{
+        if(hasFocus) document.getElementById("search-box").focus();
+    },[hasFocus])
 
     return (
         <ThemeProvider theme={theme}>
@@ -32,7 +36,7 @@ export default function Search({ indices,hasFocus,setFocus}) {
                     onSearchStateChange={({ query }) => setQuery(query)}
                 >
                     <StyledSearchBox
-                        onFocus={() => setFocus(true)}
+                        onFocus={setFocus}
                         hasFocus={hasFocus}
                     />
                     <StyledSearchResult

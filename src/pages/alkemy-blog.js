@@ -45,8 +45,6 @@ const AlkemyBlog = ({
     const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
     const size = useWindowSize();
     const [category, setCategory] = useState("all");
-    const [filterBySearch, setFilter] = useState(false);
-    const [searchResults, setSearchResults] = useState(0);
     const [pages, setPages] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -82,13 +80,13 @@ const AlkemyBlog = ({
 
     useEffect(() => {
         buildPages();
-    },[searchResults,category]); 
+    },[category]); 
 
     const buildPages = ()=>{
         let aux = [];
         let blogLength = getFilteredBlogs().length;
-        let data = filterBySearch ? searchResults : blogLength;
-        let size = filterBySearch ? 8 : 6;
+        let data = blogLength;
+        let size = 6;
         let count = ((data - 4) / size )+ 1;
         for (let i = 0; i < count; i++) {
             aux.push(i + 1);
@@ -166,13 +164,6 @@ const AlkemyBlog = ({
         }
 
         return categoryArray;
-    };
-
-    const resetSearch = actions => {
-        setFilter(false);
-        setSearchResults(0);
-        actions.search("");
-        actions.searchTitle("");
     };
 
     const renderFeatured = data => {
@@ -278,21 +269,6 @@ const AlkemyBlog = ({
     const renderView = (store)=>{
         let blogs = getFilteredBlogs();
 
-        if (store.searchResults.length > 0) {
-            let results = store.searchResults;
-            blogs = data.allMdx.edges.filter(e => {
-                for (let item in results) {
-                    if (results[item].path === e.node.frontmatter.path)
-                        return e;
-                }
-            });
-
-            setFilter(true);
-            setSearchResults(blogs.length);
-        }
-
-        if (!filterBySearch) {
-            console.log('filtered by search',filterBySearch,currentPage)
             return currentPage === 1 ? (
                 <section className="blog-post-listing">
                     {renderFeatured(blogs)}
@@ -313,23 +289,9 @@ const AlkemyBlog = ({
                     />
                 </section>
             );
-        } else {
-            let offset = currentPage!==1?((currentPage-1)*6):0
-            let end = blogs.length > offset+6 ? offset+6 : store.searchResults.length;
-
-            let currentData = blogs.slice(offset, end);
-            console.log("result",blogs,currentData,offset,end);
-
-            return (
-                <section className="blog-post-listing">
-                    <RecentBlogs blogdata={currentData} layout="search" />
-                </section>
-            );
-        }
     }
 
     const handleCategorySelect = (data,actions)=>{
-        resetSearch(actions);
         setCurrentPage(1);
         setCategory(data);
     }
@@ -339,7 +301,6 @@ const AlkemyBlog = ({
             <Layout
                 renderHeaderSolid={true}
                 headerTitle={[true, pageTitle]}
-                search={true}
                 bodyClasses="blog"
             >
                 <SEO title={pageTitle.name} />
@@ -363,20 +324,6 @@ const AlkemyBlog = ({
                                 />
                             </Col>
                         </Row>)
-                    }}
-                </Context.Consumer>
-                <Context.Consumer>
-                    {({ store }) => {
-                        filterBySearch === true ? (
-                            <Row>
-                                <Col className="my-4 px-5">
-                                    Displaying results for {store.searchTitle}.
-                                </Col>
-                                <Col className="my-4 px-5 text-right-md">
-                                    {searchResults} Posts Found.
-                                </Col>
-                            </Row>
-                        ) : null;
                     }}
                 </Context.Consumer>
                 <Context.Consumer>

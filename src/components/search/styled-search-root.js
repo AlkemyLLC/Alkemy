@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 export default styled.div`
-    position: relative;
-    margin: 0.6em 0;
+    position: absolute;
+    top: 55px;
+    left: 0;
+    right: 0;
+    @media screen and (min-width: 1080px) {
+        right: ${() => document.getElementById("search-button") && 
+            window.innerWidth -
+            document.getElementById("search-button").getBoundingClientRect().right}px;
+    }
 `;

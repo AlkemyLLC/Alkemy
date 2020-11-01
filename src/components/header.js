@@ -2,7 +2,6 @@ import React from "react";
 import { graphql, Link, StaticQuery } from "gatsby";
 import ReactNavbar from "./Navbar.jsx";
 import { Col, Row } from "reactstrap";
-import BlogSearch from "./BlogSearch.jsx";
 import PropTypes from "prop-types";
 import { fluidImageSmall } from "../utils/utils.js";
 
@@ -56,7 +55,7 @@ var _menuArray = [
     },
 ];
 
-const Header = ({ pageTitle, hideHeader, renderHeaderSolid, search }) => (
+const Header = ({ pageTitle, hideHeader, renderHeaderSolid }) => (
     <StaticQuery
         query={graphql`
             query HeaderBlogQuery {
@@ -96,13 +95,6 @@ const Header = ({ pageTitle, hideHeader, renderHeaderSolid, search }) => (
                                 </h1>
                             </Link>
                         </Col>
-                        {search === true ? (
-                            <Col xs={12} md={4} className="px-0">
-                                <BlogSearch
-                                    searchIndex={data.siteSearchIndex.index}
-                                />
-                            </Col>
-                        ) : null}
                     </Row>
                 ) : null}
             </>
@@ -114,6 +106,5 @@ Header.propTypes = {
     pageTitle: PropTypes.object,
     hideHeader: PropTypes.bool,
     renderHeaderSolid: PropTypes.bool,
-    search: PropTypes.bool,
 };
 export default Header;
