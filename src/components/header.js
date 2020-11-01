@@ -59,9 +59,6 @@ const Header = ({ pageTitle, hideHeader, renderHeaderSolid }) => (
     <StaticQuery
         query={graphql`
             query HeaderBlogQuery {
-                siteSearchIndex {
-                    index
-                }
                 logo: file(relativePath: { regex: "/alkemy_logo.png/" }) {
                     ...fluidImageSmall
                 }

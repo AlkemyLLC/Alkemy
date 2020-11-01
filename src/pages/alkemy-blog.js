@@ -330,9 +330,6 @@ const AlkemyBlog = ({
 
 
 export const query = graphql`{
-    siteSearchIndex {
-        index
-    }
     allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
         edges {
             node {

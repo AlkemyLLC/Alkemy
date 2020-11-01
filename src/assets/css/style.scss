@@ -1942,6 +1942,7 @@ div.spinContainer{
 
 // Site search
 .ais-PoweredBy{
+  
   align-items: center;
   a.ais-PoweredBy-link{
     svg{
@@ -1958,7 +1959,19 @@ div.spinContainer{
 }
 .ais-PoweredBy-text{margin-right: 0.5rem;}
 
-.HitCount,.ais-PoweredBy-text{color: $alkemy_blue;}
+.HitCount,.ais-PoweredBy{color: black;}
+
+header{
+  .ais-Hits {
+    li.ais-Hits-item {
+      a {
+        &:hover{
+          color: $alkemy_blue !important;
+        }
+      }
+    }
+  }
+}
 
 // enquiry widget
 .section--enquiry{

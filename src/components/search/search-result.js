@@ -15,7 +15,7 @@ const HitCount = connectStateResults(({ searchResults }) => {
     const hitCount = searchResults && searchResults.nbHits;
 
     return hitCount > 0 ? (
-        <div className="HitCount justify-content-start mb-2">
+        <div className="HitCount justify-content-start align-items-center">
             {hitCount} result{hitCount !== 1 ? `s` : ``} found
         </div>
     ) : null;
@@ -48,11 +48,11 @@ const PageHit = ({ hit }) => (
 
 const HitsInIndex = ({ index }) => (
     <Index indexName={index.name}>
-        <Row>
+        <Row className="mb-3">
             <Col>
                 <HitCount />
             </Col>
-            <Col className="ais-PoweredBy">
+            <Col className="ais-PoweredBy justify-content-center">
                 <span>Powered By: </span>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

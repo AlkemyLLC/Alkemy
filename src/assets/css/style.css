@@ -17358,8 +17358,12 @@ div.spinContainer {
   margin-right: 0.5rem;
 }
 
-.HitCount, .ais-PoweredBy-text {
-  color: #2bb3e5;
+.HitCount, .ais-PoweredBy {
+  color: black;
+}
+
+header .ais-Hits li.ais-Hits-item a:hover {
+  color: #2bb3e5 !important;
 }
 
 .section--enquiry {
