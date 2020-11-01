@@ -66,10 +66,12 @@ export default class ReactNavbar extends React.Component {
     };
 
     handleSetFocus = () =>{
+        if(this.state.isOpen) this.toggleMobileMenu();
         this.setState(prevState => ({
             search: !prevState.search,
         }));
         document.documentElement.classList.toggle('overflow-hidden');
+        
     }
 
     // Appointment Modal Window Toggler
