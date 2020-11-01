@@ -3,7 +3,6 @@ import { Link, graphql, navigate } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { MDXProvider } from "@mdx-js/react";
 import Img from "gatsby-image";
-import { Context } from "../store/appContext.js";
 import {
     fluidImageSmall,
     fluidImageXS,
@@ -87,15 +86,6 @@ const BlogPostTemplate = (props) => {
         return categoryArray;
     };
 
-    const resetSearch = actions => {
-        actions.search("");
-        actions.searchTitle("");
-    };
-
-    const handleCategorySelect = async (data, actions) => {
-        resetSearch(actions);
-    };
-
     return (
         <Layout
             location={props.location}
@@ -113,30 +103,21 @@ const BlogPostTemplate = (props) => {
                 date={post.frontmatter.date}
                 author={post.frontmatter.author}
             />
-            <Context.Consumer>
-                {({ store, actions }) => {
-                    return (
-                        <Row
-                            className={
-                                size.width > 760
-                                    ? "alk-container py-4 my-3"
-                                    : "alk-container pr-0 py-4 my-3"
-                            }
-                            noGutters
-                        >
-                            <Col xs={12}>
-                                <BlogCategoryBar
-                                    defaultSelected={category}
-                                    categories={blogCategories()}
-                                    onSelectCategory={e =>
-                                        handleCategorySelect(e, actions)
-                                    }
-                                />
-                            </Col>
-                        </Row>
-                    );
-                }}
-            </Context.Consumer>
+            <Row
+                className={
+                    size.width > 760
+                        ? "alk-container py-4 my-3"
+                        : "alk-container pr-0 py-4 my-3"
+                }
+                noGutters
+            >
+                <Col xs={12}>
+                    <BlogCategoryBar
+                        defaultSelected={category}
+                        categories={blogCategories()}
+                    />
+                </Col>
+            </Row>
             <div className="blog-single hero mb-4">
                 <div className="position-relative">
                     <Img

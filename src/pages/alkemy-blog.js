@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {uniq} from "lodash";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
-import { Context } from "../store/appContext.js";
 import { fluidImageSmall, useWindowSize } from "../utils/utils.js";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
@@ -167,7 +166,6 @@ const AlkemyBlog = ({
     };
 
     const renderFeatured = data => {
-        console.log('featured',data[0],data.length,size.width);
         if(data && data.length > 0 && size.width >= 760){
             return (
                 <Row className="alk-container pr-sm-0 blog-featured">
@@ -266,7 +264,7 @@ const AlkemyBlog = ({
         }
     }
 
-    const renderView = (store)=>{
+    const renderView = ()=>{
         let blogs = getFilteredBlogs();
 
             return currentPage === 1 ? (
@@ -291,7 +289,7 @@ const AlkemyBlog = ({
             );
     }
 
-    const handleCategorySelect = (data,actions)=>{
+    const handleCategorySelect = (data)=>{
         setCurrentPage(1);
         setCategory(data);
     }
@@ -304,31 +302,25 @@ const AlkemyBlog = ({
                 bodyClasses="blog"
             >
                 <SEO title={pageTitle.name} />
-                <Context.Consumer>
-                    {({ actions }) => {
-                        return(<Row
-                            className={
-                                size.width > 760
-                                    ? "alk-container py-4 my-3"
-                                    : "alk-container pr-0 py-4 my-3"
+                <Row
+                    className={
+                        size.width > 760
+                            ? "alk-container py-4 my-3"
+                            : "alk-container pr-0 py-4 my-3"
+                    }
+                    noGutters
+                >
+                    <Col xs={12}>
+                        <BlogCategoryBar
+                            defaultSelected={category}
+                            categories={blogCategories()}
+                            onSelectCategory={e =>
+                                handleCategorySelect(e)
                             }
-                            noGutters
-                        >
-                            <Col xs={12}>
-                                <BlogCategoryBar
-                                    defaultSelected={category}
-                                    categories={blogCategories()}
-                                    onSelectCategory={e =>
-                                        handleCategorySelect(e, actions)
-                                    }
-                                />
-                            </Col>
-                        </Row>)
-                    }}
-                </Context.Consumer>
-                <Context.Consumer>
-                    {({ store }) => renderView(store)}
-                </Context.Consumer>
+                        />
+                    </Col>
+                </Row>
+                {renderView()}
 
                 {pagination}
                 <section ref={dreamForm}>

@@ -1,7 +1,6 @@
 import React,{useState} from "react";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
-import { Context } from "../store/appContext.js";
 import { useWindowSize, fluidImageSmall } from "../utils/utils.js";
 import Layout from "../components/layout";
 import {uniq} from "lodash";
@@ -58,15 +57,6 @@ const AuthorProfile = (props)=> {
             return categoryArray;
         };
 
-        const resetSearch = actions => {
-            actions.search("");
-            actions.searchTitle("");
-        };
-
-        const handleCategorySelect = async (data, actions) => {
-            resetSearch(actions);
-        };
-
         return (
             <Layout
                 location={location}
@@ -81,30 +71,24 @@ const AuthorProfile = (props)=> {
                     description={author.name + "-" + author.bio}
                 />
                 <div className="alk-container blog-author pb-5">
-                    <Context.Consumer>
-                    {({ store, actions }) => {
-                        return (
-                            <Row
-                                className={
-                                    size.width > 760
-                                        ? "py-4 my-3"
-                                        : "pr-0 py-4 my-3"
+                    <Row
+                        className={
+                            size.width > 760
+                                ? "py-4 my-3"
+                                : "pr-0 py-4 my-3"
+                        }
+                        noGutters
+                    >
+                        <Col xs={12}>
+                            <BlogCategoryBar
+                                defaultSelected={category}
+                                categories={blogCategories()}
+                                onSelectCategory={e =>
+                                    handleCategorySelect(e)
                                 }
-                                noGutters
-                            >
-                                <Col xs={12}>
-                                    <BlogCategoryBar
-                                        defaultSelected={category}
-                                        categories={blogCategories()}
-                                        onSelectCategory={e =>
-                                            handleCategorySelect(e, actions)
-                                        }
-                                    />
-                                </Col>
-                            </Row>
-                        );
-                    }}
-                </Context.Consumer>
+                            />
+                        </Col>
+                    </Row>
                     <section className="blog-author-profile my-5">
                         <Row className="h-100">
                             <Col xs={12} lg={4} className="h-100 mb-4">

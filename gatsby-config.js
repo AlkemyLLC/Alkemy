@@ -215,31 +215,6 @@ module.exports = {
             },
         },
         {
-            resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
-            options: {
-                // Fields to index
-                fields: [`title`, `tags`, `excerpt`],
-                // How to resolve each field`s value for a supported node type
-                resolvers: {
-                    // For any node of type MarkdownRemark, list how to resolve the fields` values
-                    Mdx: {
-                        title: node => node.frontmatter.title,
-                        tags: node => node.frontmatter.tags,
-                        path: node => node.frontmatter.path,
-                        excerpt: node => node.frontmatter.excerpt,
-                        cover: node => (node, getNode) =>
-                            getNode(node.featuredImage___NODE),
-                    },
-                },
-                // // Optional filter to limit indexed nodes
-                filter: (node, getNode) => node.frontmatter.tags !== `exempt`,
-                // For any node of type Asset, this is how BlogPost featuredImage is resolved
-                Asset: {
-                    fileUrl: node => node.file && node.file.url,
-                },
-            },
-        },
-        {
             resolve: "gatsby-plugin-remove-console",
             options: {
                 exclude: ["error", "warn"], // <- will be removed all console calls except these
