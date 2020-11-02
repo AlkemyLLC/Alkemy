@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
-
 import { Location } from "@reach/router";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "./header";
@@ -120,8 +119,12 @@ const Layout = ({
         if (typeof window !== "undefined") {
             let overflowControl = bodyClasses.includes(`blog-single-page`)?``:` body-wrap`;
             document.body.classList = bodyClasses + overflowControl;
+            if (document.documentElement.classList.contains("overflow-hidden"))
+                document.documentElement.classList.remove("overflow-hidden");
         }
     }, []);
+
+
     return (
         <StaticQuery
             query={graphql`
