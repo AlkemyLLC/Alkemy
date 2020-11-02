@@ -3,15 +3,17 @@ import PropTypes from "prop-types";
 import { Link } from "gatsby";
 import Loading from "./loading.jsx";
 import Img from "gatsby-image";
+import Search from "./search/search.js";
+const searchIndices = [{ name: `Posts`, title: `Posts` }];
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+    Button,
     Collapse,
     NavbarToggler,
     Navbar,
     Nav,
     NavItem,
-    Button,
     Dropdown,
     DropdownToggle,
     DropdownMenu,
@@ -19,6 +21,7 @@ import {
     Modal,
     ModalHeader,
     ModalBody,
+    UncontrolledTooltip,
 } from "reactstrap";
 
 export default class ReactNavbar extends React.Component {
@@ -32,31 +35,44 @@ export default class ReactNavbar extends React.Component {
             loading: true,
             mobileMenuClasses: "d-block d-lg-none mobileMenu",
             togglerClasses: "mr-3 d-lg-none hamburger hamburger--slider",
-            icon: ["far", "calendar-alt"],
+            appointmentIcon: ["far", "calendar-alt"],
+            search: false
         };
 
         this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
         this.toggleAppointmentModal = this.toggleAppointmentModal.bind(this);
         this.toggle = this.toggle.bind(this);
 
+        this.handleSetFocus = this.handleSetFocus.bind(this);
         this.onMouseEnter = this.onMouseEnter.bind(this);
         this.onMouseLeave = this.onMouseLeave.bind(this);
         this.handleButtonHover = this.handleButtonHover.bind(this);
 
         this.iframe = React.createRef();
+        this.searchBtn = React.createRef();
+        this.appointmentBtn = React.createRef();
     }
 
     handleButtonHover = e => {
         if (e.type === "mouseover") {
             this.setState({
-                icon: ["far", "calendar-plus"],
-            });
+                appointmentIcon: ["far", "calendar-plus"],
+            })
         } else {
             this.setState({
-                icon: ["far", "calendar-alt"],
-            });
+                appointmentIcon: ["far", "calendar-alt"],
+            })
         }
     };
+
+    handleSetFocus = () =>{
+        if(this.state.isOpen) this.toggleMobileMenu();
+        this.setState(prevState => ({
+            search: !prevState.search,
+        }));
+        document.documentElement.classList.toggle('overflow-hidden');
+        
+    }
 
     // Appointment Modal Window Toggler
     toggleAppointmentModal() {
@@ -65,42 +81,33 @@ export default class ReactNavbar extends React.Component {
             loading: prevState.modal ? true : prevState.loading,
         }));
 
-        setTimeout(() => {
-            if (this.state.modal) {
-                document.documentElement.classList.add("no-overflow");
-                document.body.style.removeProperty("padding-right");
-            } else {
-                document.documentElement.classList.remove("no-overflow");
-            }
-        }, 300);
+
+        document.documentElement.classList.toggle("no-overflow");
+        if (this.state.modal) {
+            document.body.style.removeProperty("padding-right");
+        } 
+
     }
 
     // Navbar Toggler Function
     toggleMobileMenu() {
         this.setState(prevState => ({
             isOpen: !prevState.isOpen,
+            mobileMenuClasses: !prevState.isOpen
+                ? "d-block d-lg-none mobileMenu open"
+                : "d-block d-lg-none mobileMenu",
+            togglerClasses: !prevState.isOpen
+                ? "mr-3 d-lg-none hamburger hamburger--slider is-active"
+                : "mr-3 d-lg-none hamburger hamburger--slider"
         }));
-
-        if (this.state.isOpen) {
-            this.setState({
-                mobileMenuClasses: "d-block d-lg-none mobileMenu open",
-                togglerClasses:
-                    "mr-3 d-lg-none hamburger hamburger--slider is-active",
-            });
-            document.body.classList.add("open");
-        } else {
-            this.setState({
-                mobileMenuClasses: "d-block d-lg-none mobileMenu",
-                togglerClasses: "mr-3 d-lg-none hamburger hamburger--slider",
-            });
-        }
+        document.documentElement.classList.toggle("overflow-hidden");  
     }
 
     // Functions for Dropdown menu
     toggle = () => {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen,
-        });
+        this.setState(prevState=>({
+            dropdownOpen: !prevState.dropdownOpen,
+        }));
     };
 
     onMouseEnter = () => {
@@ -216,14 +223,23 @@ export default class ReactNavbar extends React.Component {
                             className="my-auto"
                             fluid={this.props.brand}
                             alt="Alkemy"
+                            loading="eager"
                             style={{
-                                // height: "auto",
                                 width: "150px",
                             }}
                         />
                     </Link>
+                    <Button
+                        color="link"
+                        size="lg"
+                        className="d-block d-lg-none p-0 mr-5"
+                        onClick={this.handleSetFocus}
+                    >
+                        <FontAwesomeIcon icon="search" color="white" />
+                    </Button>
                     <NavbarToggler
-                        onClickCapture={this.toggleMobileMenu}
+                        onClick={this.toggleMobileMenu}
+                        // onClickCapture={this.toggleMobileMenu}
                         className={this.state.togglerClasses}
                         aria-label="Menu"
                     >
@@ -235,44 +251,72 @@ export default class ReactNavbar extends React.Component {
                         <Nav className="ml-auto" navbar>
                             {this.renderMenuLinks()}
                         </Nav>
-                        <Button
-                            outline
-                            color="light"
-                            onMouseOver={this.handleButtonHover}
-                            onMouseOut={this.handleButtonHover}
-                            onClick={this.toggleAppointmentModal}
-                            className="ml-4 my-auto align-middle text-white"
-                        >
-                            <FontAwesomeIcon
-                                icon={this.state.icon}
-                                color="white"
-                                size="lg"
-                                className="mr-2"
-                            />
-                            Reserve Appointment
-                        </Button>
+                        <div className="button-bar ml-4 mr-2">
+                            <UncontrolledTooltip
+                                placement="bottom"
+                                target="search-button"
+                            >
+                                Search
+                            </UncontrolledTooltip>
+                            <Button
+                                id="search-button"
+                                color="link"
+                                className="p-0"
+                                onClick={this.handleSetFocus}
+                            >
+                                <FontAwesomeIcon icon="search" color="white" />
+                            </Button>
+
+                            <UncontrolledTooltip
+                                placement="bottom"
+                                target="appt-button"
+                            >
+                                Book Appointment
+                            </UncontrolledTooltip>
+                            <Button
+                                id="appt-button"
+                                color="link"
+                                onMouseOver={this.handleButtonHover}
+                                onMouseOut={this.handleButtonHover}
+                                onClick={this.toggleAppointmentModal}
+                                className="ml-4 p-0"
+                            >
+                                <FontAwesomeIcon
+                                    icon={this.state.appointmentIcon}
+                                    color="white"
+                                />
+                            </Button>
+                        </div>
                     </Collapse>
                 </Navbar>
                 <div className={this.state.mobileMenuClasses}>
                     <Nav className="mx-auto w-100" navbar>
                         {this.renderMobileLinks()}
                         <li className="mx-auto">
-                            <a
+                            <Button
                                 color="light"
-                                className="btn btn-outline btn-white mx-auto my-4 align-middle text-white"
+                                outline
+                                className="btn-white mx-auto my-4 align-middle text-white p-2"
                                 onClick={this.toggleAppointmentModal}
                             >
                                 <FontAwesomeIcon
-                                    icon={this.state.icon}
+                                    icon={this.state.appointmentIcon}
                                     color="white"
-                                    size="lg"
                                     className="mr-2"
                                 />
                                 Reserve Appointment
-                            </a>
+                            </Button>
                         </li>
                     </Nav>
                 </div>
+                {this.state.search && (
+                    <Search
+                        indices={searchIndices}
+                        hasFocus={this.state.search}
+                        setFocus={this.handleSetFocus}
+                    />
+                )}
+
                 <Modal
                     size={"lg"}
                     className="bookingModal"

@@ -3,8 +3,9 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
-import InjectContext from "../store/appContext.js";
+
 import { Location } from "@reach/router";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "./header";
 import Footer from "./footer";
 
@@ -40,7 +41,8 @@ import {
     faServer,
     faTachometerAlt,
     faDatabase,
-    faTimesCircle
+    faTimesCircle,
+    faTimes
 } from "@fortawesome/free-solid-svg-icons";
 import {
     faCalendarAlt,
@@ -80,9 +82,30 @@ library.add(
     faCogs,
     faServer,
     faTachometerAlt,
+    faTimes,
     faDatabase,
-    faTimesCircle
+    faTimesCircle,
+    faSearch
 );
+
+
+const variants = {
+    initial: {
+        opacity: 0,
+    },
+    enter: {
+        opacity: 1,
+        transition: {
+            ease: "linear",
+            duration: 0.5,
+            when: "beforeChildren",
+        },
+    },
+    exit: {
+        opacity: 0,
+        transition: { duration: 0.5 },
+    },
+};
 
 const Layout = ({
     location,
@@ -118,21 +141,27 @@ const Layout = ({
                         renderHeaderSolid={renderHeaderSolid}
                         search={search}
                     />
-                    <div
-                        id="main"
-                    >
-                        {children}
-                    </div>
-                    <div className="callNow d-lg-none">
-                        <a href="tel:8774255369" title="Call Now!">
-                            <FontAwesomeIcon
-                                icon="mobile-alt"
-                                size="2x"
-                                color="white"
-                                className="callNowButton"
-                            />
-                        </a>
-                    </div>
+                    <AnimatePresence>
+                        <motion.main
+                            key={Location.pathname}
+                            variants={variants}
+                            initial="initial"
+                            animate="enter"
+                            exit="exit"
+                        >
+                            <div id="main">{children}</div>
+                            <div className="callNow d-lg-none">
+                                <a href="tel:8774255369" title="Call Now!">
+                                    <FontAwesomeIcon
+                                        icon="mobile-alt"
+                                        size="2x"
+                                        color="white"
+                                        className="callNowButton"
+                                    />
+                                </a>
+                            </div>
+                        </motion.main>
+                    </AnimatePresence>
                     <Footer />
                 </div>
             )}
@@ -147,4 +176,4 @@ Layout.propTypes = {
     search: PropTypes.bool,
 };
 
-export default InjectContext(Layout);
+export default Layout;

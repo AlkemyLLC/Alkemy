@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
-import BuildYourDream from "../components/BuildYourDream.jsx";
+import EnquiryWidget from "../components/widgetEnquiry";
 import SEO from "../components/seo";
 
 /*
@@ -37,7 +37,7 @@ const TermsAndConditions = ({ data }) => {
     // });
 
     return (
-        <ScrollWrapper onWindowScroll={handleScroll}>
+        <ScrollWrapper>
             <Layout
                 renderHeaderSolid={true}
                 headerTitle={[true, pageTitle]}
@@ -52,16 +52,11 @@ const TermsAndConditions = ({ data }) => {
                     data-policy-key="ZFdwUE1IVmlTMFpKY1ZwNGJVRTlQUT09"
                 />
 
-                <section ref={dreamForm}>
-                    <BuildYourDream />
-                </section>
+                <EnquiryWidget/>
             </Layout>
         </ScrollWrapper>
     );
 };
 const terms = React.createRef();
-const dreamForm = React.createRef();
-
-const handleScroll = () => {};
 
 export default TermsAndConditions;

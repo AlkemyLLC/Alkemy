@@ -6,8 +6,8 @@ import { Card, Button, Col, Row } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
-import BuildYourDream from "../components/BuildYourDream.jsx";
 import SEO from "../components/seo";
+import EnquiryWidget from "../components/widgetEnquiry";
 
 /*
 Layout props:
@@ -129,20 +129,12 @@ const WebDesign = ({ data }) => {
                             <Row>
                                 <Col xs={12} sm={6} className="mb-4">
                                     <Button
+                                        tag={Link}
+                                        to="/project-enquiry"
                                         block
-                                        onClick={handleViewPlansClick}
                                         color="primary"
                                     >
-                                        View our Web Design Plans
-                                    </Button>
-                                </Col>
-                                <Col xs={12} sm={6}>
-                                    <Button
-                                        block
-                                        onClick={handleQuoteClick}
-                                        color="primary"
-                                    >
-                                        Get a Custom Quote
+                                        Start your project
                                     </Button>
                                 </Col>
                             </Row>
@@ -189,7 +181,7 @@ const WebDesign = ({ data }) => {
                                         .content
                                 }
                             </p>
-                            <Row>
+                            {/* <Row>
                                 <Col xs={12} md={6} className="my-4">
                                     <Button
                                         block
@@ -199,7 +191,7 @@ const WebDesign = ({ data }) => {
                                         View our Web Design Plans
                                     </Button>
                                 </Col>
-                            </Row>
+                            </Row> */}
                         </Col>
                     </Row>
                 </section>
@@ -237,58 +229,12 @@ const WebDesign = ({ data }) => {
                     </Row>
                 </section>
 
-                {/* Section 4 */}
-                <section
-                    ref={plansSection}
-                    className="webDesignPlans mb-4 py-4"
-                >
-                    <Row className="alk-container">
-                        <Col>
-                            <h2 className="text-center mb-4">
-                                {
-                                    data.webDesignJson.sections[3].blocks[0]
-                                        .heading
-                                }
-                            </h2>
-                            <p>
-                                {
-                                    data.webDesignJson.sections[3].blocks[0]
-                                        .content
-                                }
-                            </p>
-                        </Col>
-                    </Row>
-                    <Row className="my-4 alk-container" noGutters>
-                        {planCards(data.webDesignJson.sections[4].plans)}
-                    </Row>
-                    <Row className="my-5 alk-container" noGutters>
-                        {disclaimers(data.webDesignJson.sections[3].blocks[0])}
-                    </Row>
-                </section>
-
-                <section ref={dreamForm}>
-                    <BuildYourDream />
-                </section>
+                <EnquiryWidget/>
             </Layout>
         </ScrollWrapper>
     );
 };
 
-const dreamForm = React.createRef();
-const plansSection = React.createRef();
-
-const handleViewPlansClick = () => {
-    window.scrollTo({
-        top: plansSection.current.offsetTop - 80,
-        behavior: "smooth",
-    });
-};
-const handleQuoteClick = () => {
-    window.scrollTo({
-        top: dreamForm.current.offsetTop - 80,
-        behavior: "smooth",
-    });
-};
 
 const handleScroll = () => {};
 

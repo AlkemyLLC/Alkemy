@@ -7,6 +7,7 @@ import ScrollWrapper from "../components/scrollWrapper.jsx";
 import CompanyInfo from "../components/CompanyInfo.jsx";
 import ContactForm from "../components/ContactForm.jsx";
 import ContactMap from "../components/Map.jsx";
+import EnquiryWidget from "../components/widgetEnquiry";
 import SEO from "../components/seo";
 import "../utils/utils.js";
 
@@ -98,6 +99,9 @@ const ContactAlkemy = ({ data }) => {
                         </Col>
                     </Row>
                 </section>
+
+
+                <EnquiryWidget />
 
                 {/* Section 2 */}
                 <section className="contactDetails py-4">

@@ -1,4 +1,7 @@
 const { isNil } = require(`lodash`)
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+});
 
 const mapPagesUrls = {
     index: `/`,
@@ -51,7 +54,18 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-plugin-algolia`,
+            options: {
+                appId: process.env.GATSBY_ALGOLIA_APP_ID,
+                apiKey: process.env.ALGOLIA_ADMIN_KEY,
+                queries: require("./src/utils/algolia"),
+            },
+        },
+        {
             resolve: `gatsby-plugin-preload-fonts`,
+        },
+        {
+            resolve: `gatsby-plugin-styled-components`,
         },
         {
             resolve: `gatsby-plugin-loadable-components-ssr`,
@@ -178,6 +192,7 @@ module.exports = {
                 shortname: `alkemy`,
             },
         },
+
         {
             resolve: `gatsby-plugin-typography`,
             options: {
@@ -196,31 +211,6 @@ module.exports = {
                 options: {
                     emitWarning: true,
                     failOnError: false,
-                },
-            },
-        },
-        {
-            resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
-            options: {
-                // Fields to index
-                fields: [`title`, `tags`, `excerpt`],
-                // How to resolve each field`s value for a supported node type
-                resolvers: {
-                    // For any node of type MarkdownRemark, list how to resolve the fields` values
-                    Mdx: {
-                        title: node => node.frontmatter.title,
-                        tags: node => node.frontmatter.tags,
-                        path: node => node.frontmatter.path,
-                        excerpt: node => node.frontmatter.excerpt,
-                        cover: node => (node, getNode) =>
-                            getNode(node.featuredImage___NODE),
-                    },
-                },
-                // // Optional filter to limit indexed nodes
-                filter: (node, getNode) => node.frontmatter.tags !== `exempt`,
-                // For any node of type Asset, this is how BlogPost featuredImage is resolved
-                Asset: {
-                    fileUrl: node => node.file && node.file.url,
                 },
             },
         },

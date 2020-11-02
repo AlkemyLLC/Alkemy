@@ -20,7 +20,7 @@ import Layout from "../components/layout.js";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
 import BlogWidget from "../components/BlogWidget.jsx";
 import ReactCounter from "../components/counter.jsx";
-import FreeWebsiteAnalysis from "../components/freeWebsiteAnalysis.jsx";
+import EnquiryWidget from "../components/widgetEnquiry";
 import SEO from "../components/seo";
 import loadable from "@loadable/component";
 
@@ -132,23 +132,25 @@ const HomePage = ({ data }) => {
                         className="heroChevron animated pulse infinite"
                     />
                 </section>
-                <section ref={introSection} className="introHome my-4">
-                    <div className="container-fluid py-4">
-                        <h2 className="mb-4">
-                            {data.homepageJson.sections[0].blocks[0].heading}
-                        </h2>
-                        <p className="mb-5">
-                            {data.homepageJson.sections[0].blocks[0].content}
-                        </p>
-
-                        <h2 className="mb-4">
-                            {data.homepageJson.sections[0].blocks[1].heading}
-                        </h2>
-                        <p className="mb-4">
-                            {data.homepageJson.sections[0].blocks[1].content}
-                        </p>
-                    </div>
+                <section
+                    ref={introSection}
+                    className="introHome my-4 py-4 alk-container"
+                >
+                    <h2 className="mb-4">
+                        {data.homepageJson.sections[0].blocks[0].heading}
+                    </h2>
+                    <p>{data.homepageJson.sections[0].blocks[0].content}</p>
                 </section>
+
+                <EnquiryWidget />
+
+                <section className="alk-container my-4 py-4">
+                    <h2 className="mb-4">
+                        {data.homepageJson.sections[0].blocks[1].heading}
+                    </h2>
+                    <p>{data.homepageJson.sections[0].blocks[1].content}</p>
+                </section>
+
                 <section className="alk-container servicesHome mt-auto mb-5">
                     <CardDeck className="my-auto">
                         <Row>
@@ -446,8 +448,6 @@ const HomePage = ({ data }) => {
                 <section className="recentBlogPosts">
                     <BlogWidget posts={data.allMdx.edges} />
                 </section>
-
-                <FreeWebsiteAnalysis />
             </Layout>
         </ScrollWrapper>
     );

@@ -150,9 +150,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
                    }
                }
             }
-            siteSearchIndex {
-                index
-            }
           }
         `
         ).then(result => {

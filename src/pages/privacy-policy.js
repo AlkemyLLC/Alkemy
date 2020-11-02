@@ -1,8 +1,8 @@
 import React,{useEffect} from "react";
 import Layout from "../components/layout";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
-import BuildYourDream from "../components/BuildYourDream.jsx";
 import SEO from "../components/seo";
+import EnquiryWidget from "../components/widgetEnquiry";
 
 /*
 Layout props:
@@ -31,7 +31,7 @@ const PrivacyPolicy = ({ data }) => {
     }, []);
 
     return (
-        <ScrollWrapper onWindowScroll={handleScroll}>
+        <ScrollWrapper>
             <Layout
                 renderHeaderSolid={true}
                 headerTitle={[true, pageTitle]}
@@ -46,17 +46,13 @@ const PrivacyPolicy = ({ data }) => {
                     data-policy-key="UzJ0Vk5Va3hZa0V6WTFGU1UzYzlQUT09"
                 />
 
-                <section ref={dreamForm}>
-                    <BuildYourDream />
-                </section>
+                <EnquiryWidget />
             </Layout>
         </ScrollWrapper>
     );
 };
 
 const policy = React.createRef();
-const dreamForm = React.createRef();
 
-const handleScroll = () => {};
 
 export default PrivacyPolicy;
