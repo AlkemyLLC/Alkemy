@@ -162,11 +162,7 @@ module.exports = {
             resolve: `gatsby-plugin-netlify`,
             options: {
                 headers: {
-                    "/*": [
-                        "cache-control: max-age=31536000, public",
-                        "Cross-Origin-Opener-Policy: same-origin",
-                        "Cross-Origin-Embedder-Policy: require-corp"
-                    ],
+                    "/*": ["cache-control: max-age=31536000, public"],
                 },
             },
         },
