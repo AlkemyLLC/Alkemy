@@ -260,7 +260,9 @@ body{
   @media screen and (min-width: 1025px){
     background: transparent;
   }
-
+  &.solid{
+    background: $alkemy_darkest_blue;
+  }
   color: white;
   min-height: $header-height;
   top: 0;

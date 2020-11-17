@@ -15708,6 +15708,10 @@ body.solid .header {
   }
 }
 
+.header.solid {
+  background: #020c0f;
+}
+
 .header a {
   transition: 800ms ease all;
 }

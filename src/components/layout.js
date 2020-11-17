@@ -142,7 +142,6 @@ const Layout = ({
                         hideHeader={headerTitle ? headerTitle[0] : null}
                         pageTitle={headerTitle ? headerTitle[1] : {}}
                         renderHeaderSolid={renderHeaderSolid}
-                        search={search}
                     />
                     <AnimatePresence>
                         <motion.main

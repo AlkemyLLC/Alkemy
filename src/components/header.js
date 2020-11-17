@@ -74,9 +74,7 @@ const Header = ({ pageTitle, hideHeader, renderHeaderSolid }) => {
                         className={
                             renderHeaderSolid
                                 ? "header solid position-fixed"
-                                : size.width >= 768
-                                    ? "header position-fixed"
-                                    : "header solid position-fixed"
+                                : "header position-fixed"
                         }
                     >
                         {data.logo.childImageSharp && (
