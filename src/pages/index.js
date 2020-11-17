@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
-import { fluidImageSmall } from "../utils/utils.js";
+import { useWindowSize, fluidImageSmall, fluidImageLG } from "../utils/utils.js";
 import { trunc } from "../utils/utils.js";
 import {
     CardDeck,
@@ -22,40 +22,8 @@ import BlogWidget from "../components/BlogWidget.jsx";
 import ReactCounter from "../components/counter.jsx";
 import EnquiryWidget from "../components/widgetEnquiry";
 import SEO from "../components/seo";
-import loadable from "@loadable/component";
+import BackgroundImage from "gatsby-background-image";
 
-
-// Carousel
-const LoadableVideoCarousel = loadable(() =>
-    import("../components/videoCarousel")
-);
-
-/* Define Slide Array
-Each object(slide) in array should have 2 keys:
-    1. img - image for the video fallback poster
-    2. mp4 - mp4 video file to use
-*/
-
-let slideArray = [
-    {
-        img: require("../assets/video/home-work/home-work.jpg"),
-        mp4: require("../assets/video/home-work/home-work.mp4"),
-        webp: require("../assets/video/home-work/home-work.webp"),
-        webm: require("../assets/video/home-work/home-work.webm"),
-    },
-    {
-        img: require("../assets/video/aloha-mundo/aloha-mundo.jpg"),
-        mp4: require("../assets/video/aloha-mundo/aloha-mundo.mp4"),
-        webp: require("../assets/video/aloha-mundo/aloha-mundo.webp"),
-        webm: require("../assets/video/aloha-mundo/aloha-mundo.webm"),
-    },
-    {
-        img: require("../assets/video/office-day/office-day.jpg"),
-        mp4: require("../assets/video/office-day/office-day.mp4"),
-        webp: require("../assets/video/office-day/office-day.webp"),
-        webm: require("../assets/video/office-day/office-day.webm"),
-    },
-];
 
 /*
 Layout props:
@@ -80,6 +48,12 @@ const HomePage = ({ data }) => {
         name: "Web Development, Design, eCommerce, and Marketing",
         url: "/",
     };
+    const size = useWindowSize();
+
+    const heroImg =
+        size.width >= 768
+            ? data.heroBg.childImageSharp.fluid
+            : data.heroBgMobile.childImageSharp.fluid;
 
     return (
         <ScrollWrapper onWindowScroll={handleScroll}>
@@ -87,24 +61,46 @@ const HomePage = ({ data }) => {
                 <SEO title={pageTitle.name} />
 
                 {/* Section 1 - Hero */}
-                <section className="homeHero d-flex justify-content-center">
-                    <div className="container-fluid p-0 position-relative">
-                        {/* Cover Video Slider */}
-                        <LoadableVideoCarousel
-                            slides={slideArray}
-                            showIndicators={false}
-                        >
-                            <Row className="cover-text-row h-100 d-flex align-items-center">
-                                <Col xs={12} lg={6} className="bg-transparent">
-                                    {/* Cover Text */}
+                <section className="hero-wrapper">
+                    <BackgroundImage
+                        Tag="div"
+                        className="homeHero d-flex flex-column align-items-center justify-content-lg-center h-100"
+                        fluid={heroImg}
+                        alt="view of tall skyscrapers while looking up from the ground"
+                    >
+                        <div className="container-fluid p-0 h-100 position-relative d-flex flex-column justify-content-lg-center">
+                            <Row className="d-block d-lg-none">
+                                {data.alkemyStack.childImageSharp && (
+                                    <Img
+                                        imgStyle={{
+                                            objectFit: "contain",
+                                            padding: "0 1rem",
+                                        }}
+                                        style={{
+                                            maxWidth: "580px",
+                                        }}
+                                        className="mx-auto"
+                                        objectFit="contain"
+                                        fluid={
+                                            data.alkemyStack.childImageSharp
+                                                .fluid
+                                        }
+                                        alt="Logos of various programming languages and frameworks we use"
+                                    />
+                                )}
+                            </Row>
+                            <Row className="cover-text-row d-flex align-items-center w-100 no-gutters">
+                                <Col xs={12} lg={7}>
                                     <div className="cover-text">
-                                        <div className="mb-5">
-                                            <span className="cover-text-1a animated bounceInLeft d-block mb-3 display-3 h2">
-                                                Your Brand Deserves
-                                            </span>
-                                            <span className="cover-text-1b animated bounceInRight d-block display-1 h1">
-                                                Only The Best
-                                            </span>
+                                        <div className="mb-3 mb-lg-5">
+                                            <h1 className="hero-heading animated bounceInLeft d-block mb-3">
+                                                Unique Digital Experiences
+                                            </h1>
+                                            <p className="animated bounceInRight d-block h5 font-weight-normal">
+                                                Expertly designed and crafted to
+                                                wow your customers and increase
+                                                sales.
+                                            </p>
                                         </div>
 
                                         {/* Cover CTA */}
@@ -114,23 +110,36 @@ const HomePage = ({ data }) => {
                                             to="/about-alkemy"
                                             tag={Link}
                                             className="animated fadeInUp"
-                                            block
                                         >
-                                            Learn About Us
+                                            Start your project
                                         </Button>
                                     </div>
                                 </Col>
+                                <Col
+                                    lg={5}
+                                    className="d-none d-lg-block pl-md-4"
+                                >
+                                    {data.alkemyStack.childImageSharp && (
+                                        <Img
+                                            fluid={
+                                                data.alkemyStack.childImageSharp
+                                                    .fluid
+                                            }
+                                            alt="Logos of various programming languages and frameworks we use"
+                                        />
+                                    )}
+                                </Col>
                             </Row>
-                        </LoadableVideoCarousel>
-                    </div>
-                    {/* Caret */}
-                    <FontAwesomeIcon
-                        onClick={handleCaretClick}
-                        icon="chevron-down"
-                        size="3x"
-                        color="white"
-                        className="heroChevron animated pulse infinite"
-                    />
+                        </div>
+                        {/* Caret */}
+                        <FontAwesomeIcon
+                            onClick={handleCaretClick}
+                            icon="chevron-down"
+                            size="3x"
+                            color="white"
+                            className="heroChevron animated pulse infinite"
+                        />
+                    </BackgroundImage>
                 </section>
                 <section
                     ref={introSection}
@@ -507,6 +516,19 @@ export const query = graphql`
                            }
                        }
                    }
+               }
+               heroBg: file(relativePath: { regex: "/hero-bg.jpg/" }) {
+                   ...fluidImageLG
+               }
+               heroBgMobile: file(
+                   relativePath: { regex: "/hero-bg.jpg/" }
+               ) {
+                   ...fluidImageSmall
+               }
+               alkemyStack: file(
+                   relativePath: { regex: "/alkemy-stack.png/" }
+               ) {
+                   ...fluidImageSmall
                }
                webDesign: file(relativePath: { regex: "/responsive.png/" }) {
                    ...fluidImageSmall

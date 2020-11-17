@@ -19,12 +19,15 @@
 /* Variables & Mixins */
 /**********************/
 
+
+
 /* Mobile Menu */
 $header-height: 65px; // Set height of header
 $half_viewport: 50vh; // Set height of header
 $subheader-height: 110px; // Set height of subheader
 $animation-time: 400ms; // Set the animation speed
 $animation-function: ease; // Set the animation type
+
 
 /* Bootstrap breakpoint override */
 $grid-breakpoints: (
@@ -44,7 +47,7 @@ $container-max-widths: (
 
 $font-family-base: 'Avenir Next','Helvetica Neue','Segoe UI','Helvetica','Arial',sans-serif;
 $line-height-base: 2;
-
+$enable-responsive-font-sizes: true;
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
 
@@ -246,7 +249,10 @@ input[type="checkbox"]:checked + label:before {
 
 /* Header */
 .header{
-  background: rgba($alkemy_darkest_blue,.70);
+  background: black;
+  @media screen and (min-width: 1025px){
+    background: transparent;
+  }
   &.solid{
     background: $alkemy_darkest_blue;
   }
@@ -351,7 +357,7 @@ a {
   background: $alkemy_darkest_blue;
   z-index: 1001;
   position: absolute;
-  top: -100vh;
+  top: -110vh;
   left: 0;
   right: 0;
   bottom: 0;
@@ -372,7 +378,6 @@ a {
     left: 50%;
     transform: translate(-50%,-50%);
     .siteTitle{
-      // font-size: 1.8rem;
       &:first-of-type{
         margin-top: 2rem;
         margin-bottom: 2rem;
@@ -387,22 +392,6 @@ a {
   }
 }
 
-/* Video Carousel Text Animations */
-
-.cover-text-row{
-
-  .cover-text {
-    z-index: 500;
-  }
-
-  .cover-text-1a,
-  .cover-text-1b {
-    text-shadow: 1px 1px #444;
-    color: white;
-    -webkit-animation-delay: 2s;
-    animation-delay: 2s;
-  }
-}
 
 
 
@@ -864,6 +853,52 @@ button:focus {
 
 
 // HomePage
+
+.hero-wrapper{
+  background: linear-gradient(270deg,$alkemy_blue 0%, $alkemy_dark_blue 57.29%, #000000 95%);
+  mix-blend-mode: normal;
+  .homeHero{
+    min-height: 700px;
+    margin-top: $header-height;
+
+    @media screen and (min-width: 1024px){
+      margin-top: 0;
+    }
+    @media screen and (min-width: 1025px){
+      min-height: calc( 100vh - #{$header-height} );
+      max-height: 800px;
+    }
+
+    mix-blend-mode: normal;
+
+    &:before,&:after{
+      opacity: .25 !important;
+    }
+
+    .container-fluid{
+      @media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+        margin-top: 1.5rem;
+      }
+    }
+
+    .cover-text-row{
+      .cover-text {
+        z-index: 500;
+        
+        color: white;
+        -webkit-animation-delay: 2s;
+        animation-delay: 2s;
+        .hero-heading{
+          text-shadow: 1px 1px #444;
+          line-height: 160%;
+        }
+        p{
+          line-height: 180%;
+        }
+      }
+    }
+  }
+}
 
 .servicesHome{
   min-height: 100% !important;
