@@ -1,11 +1,8 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
-import { useWindowSize, fluidImageSmall, fluidImageLG } from "../utils/utils.js";
+import { useWindowSize, fluidImageSmall, fluidImage } from "../utils/utils.js";
 import {
-    CardDeck,
-    CardTitle,
-    CardBody,
     Button,
     Col,
     Row,
@@ -13,12 +10,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Layout from "../components/layout.js";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
-import BlogWidget from "../components/BlogWidget.jsx";
-import ReactCounter from "../components/counter.jsx";
 import EnquiryWidget from "../components/widgetEnquiry";
 import SEO from "../components/seo";
 import BackgroundImage from "gatsby-background-image";
-import { motion,AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import loadable from "@loadable/component";
+
+const Services = loadable(() => import("../components/service-cards/serviceCards"));
+const BlogWidget = loadable(() => import("../components/BlogWidget.jsx"));
+const ReactCounter = loadable(() => import("../components/counter.jsx"));
 
 
 /*
@@ -63,7 +63,7 @@ const HomePage = ({ data }) => {
                 <SEO title={pageTitle.name} />
 
                 {/* Section 1 - Hero */}
-                <section className="hero-wrapper">
+                <section className="hero-wrapper bg-black">
                     <BackgroundImage
                         Tag="div"
                         className="homeHero d-flex flex-column align-items-center justify-content-lg-center h-100"
@@ -169,172 +169,7 @@ const HomePage = ({ data }) => {
                 </section>
 
                 <section className="alk-container servicesHome mt-auto mb-5">
-                    <CardDeck className="my-auto">
-                        <Row>
-                            <Col xs={12} sm={6} lg={3} className="mb-5">
-                                <Link to="/responsive-web-design">
-                                    <AnimatePresence>
-                                        <motion.div
-                                            className="card p-4 h-100"
-                                            variants={card}
-                                            initial="rest"
-                                            whileHover="hover"
-                                            whileTap="pressed"
-                                        >
-                                            {data.webDesign.childImageSharp && (
-                                                <Img
-                                                    imgStyle={{
-                                                        maxHeight: "200px",
-                                                        maxWidth: "auto",
-                                                        objectFit: "contain",
-                                                    }}
-                                                    fluid={
-                                                        data.webDesign
-                                                            .childImageSharp
-                                                            .fluid
-                                                    }
-                                                    className="card-img-top image-services mx-auto my-auto"
-                                                    alt="Responsive Web Design Services"
-                                                />
-                                            )}
-
-                                            <CardBody className="p-0 d-flex align-items-end justify-content-center flex-grow-1">
-                                                <CardTitle
-                                                    tag="h3"
-                                                    className="text-center m-0"
-                                                >
-                                                    {
-                                                        data.homepageJson
-                                                            .sections[1]
-                                                            .blocks[0].heading
-                                                    }
-                                                </CardTitle>
-                                            </CardBody>
-                                        </motion.div>
-                                    </AnimatePresence>
-                                </Link>
-                            </Col>
-                            <Col xs={12} sm={6} lg={3} className="mb-5">
-                                <Link to="/web-development">
-                                    <motion.div
-                                        className="card p-4 h-100"
-                                        variants={card}
-                                        initial="rest"
-                                        whileHover="hover"
-                                        whileTap="pressed"
-                                    >
-                                        {data.webDevelopment
-                                            .childImageSharp && (
-                                            <Img
-                                                imgStyle={{
-                                                    maxHeight: "200px",
-                                                    maxWidth: "auto",
-                                                    objectFit: "contain",
-                                                }}
-                                                className="card-img-top image-services mx-auto"
-                                                fluid={
-                                                    data.webDevelopment
-                                                        .childImageSharp.fluid
-                                                }
-                                                alt="Quality Web Development Services"
-                                            />
-                                        )}
-                                        <CardBody className="p-0 d-flex align-items-end justify-content-center flex-grow-1">
-                                            <CardTitle
-                                                tag="h3"
-                                                className="text-center m-0"
-                                            >
-                                                {
-                                                    data.homepageJson
-                                                        .sections[1].blocks[1]
-                                                        .heading
-                                                }
-                                            </CardTitle>
-                                        </CardBody>
-                                    </motion.div>
-                                </Link>
-                            </Col>
-                            <Col xs={12} sm={6} lg={3} className="mb-5">
-                                <Link to="/ecommerce-design">
-                                    <motion.div
-                                        className="card p-4 h-100"
-                                        variants={card}
-                                        initial="rest"
-                                        whileHover="hover"
-                                        whileTap="pressed"
-                                    >
-                                        {data.eCommerce.childImageSharp && (
-                                            <Img
-                                                imgStyle={{
-                                                    maxHeight: "200px",
-                                                    maxWidth: "auto",
-                                                    objectFit: "contain",
-                                                }}
-                                                className="card-img-top image-services mx-auto"
-                                                fluid={
-                                                    data.eCommerce
-                                                        .childImageSharp.fluid
-                                                }
-                                                alt="Ecommerce Design Services"
-                                            />
-                                        )}
-                                        <CardBody className="p-0 d-flex align-items-end justify-content-center flex-grow-1">
-                                            <CardTitle
-                                                tag="h3"
-                                                className="text-center m-0"
-                                            >
-                                                {
-                                                    data.homepageJson
-                                                        .sections[1].blocks[2]
-                                                        .heading
-                                                }
-                                            </CardTitle>
-                                        </CardBody>
-                                    </motion.div>
-                                </Link>
-                            </Col>
-                            <Col xs={12} sm={6} lg={3} className="mb-5">
-                                <Link to="/digital-marketing">
-                                    <motion.div
-                                        className="card p-4 h-100"
-                                        variants={card}
-                                        initial="rest"
-                                        whileHover="hover"
-                                        whileTap="pressed"
-                                    >
-                                        {data.digitalMarketing
-                                            .childImageSharp && (
-                                            <Img
-                                                imgStyle={{
-                                                    maxHeight: "200px",
-                                                    maxWidth: "auto",
-                                                    objectFit: "contain",
-                                                }}
-                                                className="card-img-top image-services mx-auto"
-                                                fluid={
-                                                    data.digitalMarketing
-                                                        .childImageSharp.fluid
-                                                }
-                                                alt="Digital Marketing Services"
-                                            />
-                                        )}
-                                        <CardBody className="p-0 d-flex align-items-end justify-content-center flex-grow-1">
-                                            <CardTitle
-                                                tag="h3"
-                                                className="text-center m-0"
-                                            >
-                                                {
-                                                    data.homepageJson
-                                                        .sections[1].blocks[3]
-                                                        .heading
-                                                }
-                                            </CardTitle>
-                                        </CardBody>
-                                    </motion.div>
-                                </Link>
-                            </Col>
-                        </Row>
-                    </CardDeck>
+                    <Services data={data} />
                 </section>
                 <section className="alk-container statsCounter mb-4 text-center py-4">
                     <h2>{data.homepageJson.sections[3].heading}</h2>
@@ -480,7 +315,7 @@ export const query = graphql`
                    }
                }
                heroBg: file(relativePath: { regex: "/hero-bg.jpg/" }) {
-                   ...fluidImageLG
+                   ...fluidImage
                }
                heroBgMobile: file(
                    relativePath: { regex: "/hero-bg.jpg/" }
