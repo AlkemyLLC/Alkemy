@@ -99,10 +99,10 @@ const HomePage = ({ data }) => {
                                 <Col xs={12} lg={7}>
                                     <div className="cover-text">
                                         <div className="mb-3 mb-lg-5">
-                                            <h1 className="hero-heading animated bounceInLeft d-block mb-3">
+                                            <h1 className="hero-heading d-block mb-3">
                                                 Unique Digital Experiences
                                             </h1>
-                                            <p className="animated bounceInRight d-block h5 font-weight-normal">
+                                            <p className="d-block h5 font-weight-normal">
                                                 Expertly designed and crafted to
                                                 wow your customers and increase
                                                 sales.
@@ -115,7 +115,6 @@ const HomePage = ({ data }) => {
                                             size="lg"
                                             to="/about-alkemy"
                                             tag={Link}
-                                            className="animated fadeInUp"
                                         >
                                             Start your project
                                         </Button>
@@ -143,7 +142,7 @@ const HomePage = ({ data }) => {
                             icon="chevron-down"
                             size="3x"
                             color="white"
-                            className="heroChevron animated pulse infinite"
+                            className="heroChevron"
                         />
                     </BackgroundImage>
                 </section>
@@ -376,7 +375,7 @@ const HomePage = ({ data }) => {
                             >
                                 {data.ourPassion.childImageSharp && (
                                     <Img
-                                        className="ourPassionImg animated slideInLeft mb-5 mb-lg-0"
+                                        className="ourPassionImg mb-5 mb-lg-0"
                                         fluid={
                                             data.ourPassion.childImageSharp
                                                 .fluid
