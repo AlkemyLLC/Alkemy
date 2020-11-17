@@ -1,8 +1,7 @@
-import React,{useEffect} from "react";
+import React from "react";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import { useWindowSize, fluidImageSmall, fluidImageLG } from "../utils/utils.js";
-import { trunc } from "../utils/utils.js";
 import {
     CardDeck,
     Card,
@@ -23,6 +22,7 @@ import ReactCounter from "../components/counter.jsx";
 import EnquiryWidget from "../components/widgetEnquiry";
 import SEO from "../components/seo";
 import BackgroundImage from "gatsby-background-image";
+import { motion,AnimatePresence } from "framer-motion";
 
 
 /*
@@ -54,6 +54,12 @@ const HomePage = ({ data }) => {
         size.width >= 768
             ? data.heroBg.childImageSharp.fluid
             : data.heroBgMobile.childImageSharp.fluid;
+
+    const card = {
+        rest: { scale: 1 },
+        hover: { scale: 1.1 },
+        pressed: { scale: 0.95 },
+    };
 
     return (
         <ScrollWrapper onWindowScroll={handleScroll}>
@@ -163,213 +169,167 @@ const HomePage = ({ data }) => {
                 <section className="alk-container servicesHome mt-auto mb-5">
                     <CardDeck className="my-auto">
                         <Row>
-                            <Col xs={12} sm={6} lg={3}>
-                                <Card className="border-0 p-0 p-lg-3 animated bounceInUp cardOne h-100">
-                                    {data.webDesign.childImageSharp && (
-                                        <Img
-                                            imgStyle={{
-                                                maxHeight: "200px",
-                                                maxWidth: "auto",
-                                                objectFit: "contain",
-                                            }}
-                                            fluid={
-                                                data.webDesign.childImageSharp
-                                                    .fluid
-                                            }
-                                            className="card-img-top image-services mx-auto my-auto"
-                                            alt="Responsive Web Design Services"
-                                        />
-                                    )}
-                                    <CardFooter>
-                                        <CardTitle
-                                            tag="h3"
-                                            className="text-center"
+                            <Col xs={12} sm={6} lg={3} className="mb-5">
+                                <Link to="/responsive-web-design">
+                                    <AnimatePresence>
+                                        <motion.div
+                                            className="card p-4 h-100"
+                                            variants={card}
+                                            initial="rest"
+                                            whileHover="hover"
+                                            whileTap="pressed"
                                         >
-                                            {
-                                                data.homepageJson.sections[1]
-                                                    .blocks[0].heading
-                                            }
-                                        </CardTitle>
-                                    </CardFooter>
-                                    <CardImgOverlay className="h-100">
-                                        <CardBody className="d-flex align-items-end justify-content-center">
-                                            <CardText>
-                                                {
-                                                    data.homepageJson
-                                                        .sections[1].blocks[0]
-                                                        .content
-                                                }
-                                            </CardText>
-                                        </CardBody>
-                                        <CardFooter>
-                                            <Button
-                                                color="primary"
-                                                size="md"
-                                                to="/responsive-web-design"
-                                                tag={Link}
-                                                block
-                                            >
-                                                Web Design Service
-                                            </Button>
-                                        </CardFooter>
-                                    </CardImgOverlay>
-                                </Card>
+                                            {data.webDesign.childImageSharp && (
+                                                <Img
+                                                    imgStyle={{
+                                                        maxHeight: "200px",
+                                                        maxWidth: "auto",
+                                                        objectFit: "contain",
+                                                    }}
+                                                    fluid={
+                                                        data.webDesign
+                                                            .childImageSharp
+                                                            .fluid
+                                                    }
+                                                    className="card-img-top image-services mx-auto my-auto"
+                                                    alt="Responsive Web Design Services"
+                                                />
+                                            )}
+
+                                            <CardBody className="p-0 d-flex align-items-end justify-content-center flex-grow-1">
+                                                <CardTitle
+                                                    tag="h3"
+                                                    className="text-center m-0"
+                                                >
+                                                    {
+                                                        data.homepageJson
+                                                            .sections[1]
+                                                            .blocks[0].heading
+                                                    }
+                                                </CardTitle>
+                                            </CardBody>
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </Link>
                             </Col>
-                            <Col xs={12} sm={6} lg={3}>
-                                <Card className="border-0 p-0 p-lg-3 animated bounceInUp cardTwo h-100">
-                                    {data.webDevelopment.childImageSharp && (
-                                        <Img
-                                            imgStyle={{
-                                                maxHeight: "200px",
-                                                maxWidth: "auto",
-                                                objectFit: "contain",
-                                            }}
-                                            className="card-img-top image-services mx-auto my-auto"
-                                            fluid={
-                                                data.webDevelopment
-                                                    .childImageSharp.fluid
-                                            }
-                                            alt="Quality Web Development Services"
-                                        />
-                                    )}
-                                    <CardFooter className="d-flex align-items-end justify-content-center">
-                                        <CardTitle
-                                            tag="h3"
-                                            className="text-center"
-                                        >
-                                            {
-                                                data.homepageJson.sections[1]
-                                                    .blocks[1].heading
-                                            }
-                                        </CardTitle>
-                                    </CardFooter>
-                                    <CardImgOverlay className="h-100">
-                                        <CardBody>
-                                            <CardText>
+                            <Col xs={12} sm={6} lg={3} className="mb-5">
+                                <Link to="/web-development">
+                                    <motion.div
+                                        className="card p-4 h-100"
+                                        variants={card}
+                                        initial="rest"
+                                        whileHover="hover"
+                                        whileTap="pressed"
+                                    >
+                                        {data.webDevelopment
+                                            .childImageSharp && (
+                                            <Img
+                                                imgStyle={{
+                                                    maxHeight: "200px",
+                                                    maxWidth: "auto",
+                                                    objectFit: "contain",
+                                                }}
+                                                className="card-img-top image-services mx-auto"
+                                                fluid={
+                                                    data.webDevelopment
+                                                        .childImageSharp.fluid
+                                                }
+                                                alt="Quality Web Development Services"
+                                            />
+                                        )}
+                                        <CardBody className="p-0 d-flex align-items-end justify-content-center flex-grow-1">
+                                            <CardTitle
+                                                tag="h3"
+                                                className="text-center m-0"
+                                            >
                                                 {
                                                     data.homepageJson
                                                         .sections[1].blocks[1]
-                                                        .content
+                                                        .heading
                                                 }
-                                            </CardText>
+                                            </CardTitle>
                                         </CardBody>
-                                        <CardFooter>
-                                            <Button
-                                                color="primary"
-                                                size="md"
-                                                to="/web-development"
-                                                tag={Link}
-                                                block
-                                            >
-                                                Web Development Service
-                                            </Button>
-                                        </CardFooter>
-                                    </CardImgOverlay>
-                                </Card>
+                                    </motion.div>
+                                </Link>
                             </Col>
-                            <Col xs={12} sm={6} lg={3}>
-                                <Card className="border-0 p-0 p-lg-3 animated bounceInUp cardThree h-100">
-                                    {data.eCommerce.childImageSharp && (
-                                        <Img
-                                            imgStyle={{
-                                                maxHeight: "200px",
-                                                maxWidth: "auto",
-                                                objectFit: "contain",
-                                            }}
-                                            className="card-img-top image-services mx-auto my-auto"
-                                            fluid={
-                                                data.eCommerce.childImageSharp
-                                                    .fluid
-                                            }
-                                            alt="Ecommerce Design Services"
-                                        />
-                                    )}
-                                    <CardFooter className="d-flex align-items-end justify-content-center">
-                                        <CardTitle
-                                            tag="h3"
-                                            className="text-center"
-                                        >
-                                            {
-                                                data.homepageJson.sections[1]
-                                                    .blocks[2].heading
-                                            }
-                                        </CardTitle>
-                                    </CardFooter>
-                                    <CardImgOverlay className="h-100">
-                                        <CardBody>
-                                            <CardText>
+                            <Col xs={12} sm={6} lg={3} className="mb-5">
+                                <Link to="/ecommerce-design">
+                                    <motion.div
+                                        className="card p-4 h-100"
+                                        variants={card}
+                                        initial="rest"
+                                        whileHover="hover"
+                                        whileTap="pressed"
+                                    >
+                                        {data.eCommerce.childImageSharp && (
+                                            <Img
+                                                imgStyle={{
+                                                    maxHeight: "200px",
+                                                    maxWidth: "auto",
+                                                    objectFit: "contain",
+                                                }}
+                                                className="card-img-top image-services mx-auto"
+                                                fluid={
+                                                    data.eCommerce
+                                                        .childImageSharp.fluid
+                                                }
+                                                alt="Ecommerce Design Services"
+                                            />
+                                        )}
+                                        <CardBody className="p-0 d-flex align-items-end justify-content-center flex-grow-1">
+                                            <CardTitle
+                                                tag="h3"
+                                                className="text-center m-0"
+                                            >
                                                 {
                                                     data.homepageJson
                                                         .sections[1].blocks[2]
-                                                        .content
+                                                        .heading
                                                 }
-                                            </CardText>
+                                            </CardTitle>
                                         </CardBody>
-                                        <CardFooter>
-                                            <Button
-                                                color="primary"
-                                                size="md"
-                                                tag={Link}
-                                                to="/ecommerce-design"
-                                                block
-                                            >
-                                                eCommerce Design Service
-                                            </Button>
-                                        </CardFooter>
-                                    </CardImgOverlay>
-                                </Card>
+                                    </motion.div>
+                                </Link>
                             </Col>
-                            <Col xs={12} sm={6} lg={3}>
-                                <Card className="border-0 p-0 p-lg-3 animated bounceInUp cardFour">
-                                    {data.digitalMarketing.childImageSharp && (
-                                        <Img
-                                            imgStyle={{
-                                                maxHeight: "200px",
-                                                maxWidth: "auto",
-                                                objectFit: "contain",
-                                            }}
-                                            className="card-img-top image-services mx-auto my-auto"
-                                            fluid={
-                                                data.digitalMarketing
-                                                    .childImageSharp.fluid
-                                            }
-                                            alt="Digital Marketing Services"
-                                        />
-                                    )}
-                                    <CardFooter className="d-flex align-items-end justify-content-center">
-                                        <CardTitle
-                                            tag="h3"
-                                            className="text-center"
-                                        >
-                                            {
-                                                data.homepageJson.sections[1]
-                                                    .blocks[3].heading
-                                            }
-                                        </CardTitle>
-                                    </CardFooter>
-                                    <CardImgOverlay className="h-100">
-                                        <CardBody>
-                                            <CardText>
+                            <Col xs={12} sm={6} lg={3} className="mb-5">
+                                <Link to="/digital-marketing">
+                                    <motion.div
+                                        className="card p-4 h-100"
+                                        variants={card}
+                                        initial="rest"
+                                        whileHover="hover"
+                                        whileTap="pressed"
+                                    >
+                                        {data.digitalMarketing
+                                            .childImageSharp && (
+                                            <Img
+                                                imgStyle={{
+                                                    maxHeight: "200px",
+                                                    maxWidth: "auto",
+                                                    objectFit: "contain",
+                                                }}
+                                                className="card-img-top image-services mx-auto"
+                                                fluid={
+                                                    data.digitalMarketing
+                                                        .childImageSharp.fluid
+                                                }
+                                                alt="Digital Marketing Services"
+                                            />
+                                        )}
+                                        <CardBody className="p-0 d-flex align-items-end justify-content-center flex-grow-1">
+                                            <CardTitle
+                                                tag="h3"
+                                                className="text-center m-0"
+                                            >
                                                 {
                                                     data.homepageJson
                                                         .sections[1].blocks[3]
-                                                        .content
+                                                        .heading
                                                 }
-                                            </CardText>
+                                            </CardTitle>
                                         </CardBody>
-                                        <CardFooter>
-                                            <Button
-                                                color="primary"
-                                                size="md"
-                                                tag={Link}
-                                                to="/digital-marketing"
-                                                block
-                                            >
-                                                Digital Marketing Service
-                                            </Button>
-                                        </CardFooter>
-                                    </CardImgOverlay>
-                                </Card>
+                                    </motion.div>
+                                </Link>
                             </Col>
                         </Row>
                     </CardDeck>
@@ -468,7 +428,7 @@ const handleCaretClick = () => {
     requestAnimationFrame(() => {
         window &&
             window.scrollTo({
-                top: introSection.current.offsetTop - 100,
+                top: introSection.current.offsetTop - 95,
                 behavior: "smooth",
             });
     });
@@ -476,7 +436,7 @@ const handleCaretClick = () => {
 
 const handleScroll = () => {
     // header opacity
-    const topBoundary = window.innerHeight - 100;
+    const topBoundary = window.innerHeight - 130;
     if (window.pageYOffset >= topBoundary) {
         document.body.classList.add("solid");
     } else {

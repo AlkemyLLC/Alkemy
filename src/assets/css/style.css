@@ -15685,8 +15685,12 @@ input[type="checkbox"]:checked + label:before {
 }
 
 /* Header */
+body.solid .header {
+  background: #020c0f;
+}
+
 .header {
-  background: black;
+  background: #020c0f;
   color: white;
   min-height: 65px;
   top: 0;
@@ -15702,10 +15706,6 @@ input[type="checkbox"]:checked + label:before {
   .header {
     background: transparent;
   }
-}
-
-.header.solid {
-  background: #020c0f;
 }
 
 .header a {
@@ -16348,89 +16348,20 @@ button:focus {
 }
 
 .servicesHome .row {
+  min-height: 400px;
   width: 100%;
   margin: 0 auto;
 }
 
 .servicesHome .card {
   background: transparent;
-  height: 100%;
-  min-height: 35vh;
-}
-
-.servicesHome .card.cardOne {
-  animation-delay: 0;
-}
-
-.servicesHome .card.cardTwo {
-  animation-delay: .25s;
-}
-
-.servicesHome .card.cardThree {
-  animation-delay: .5s;
-}
-
-.servicesHome .card.cardFour {
-  animation-delay: .75s;
-}
-
-.servicesHome .card .cardOne .card-footer,
-.servicesHome .card .cardOne .card-footer,
-.servicesHome .card .cardOne .card-footer,
-.servicesHome .card .cardOne .card-footer {
-  padding: 0;
+  border-radius: 20px;
 }
 
 .servicesHome .card .image-services.card-img-top, .servicesHome .card .image-services.recent-blogs {
   max-width: auto !important;
   max-height: 25vh;
   object-fit: contain;
-  margin-bottom: 2rem;
-}
-
-.servicesHome .card .image-services.card-body,
-.servicesHome .card .image-services.card-footer {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.servicesHome .card .card-img-overlay {
-  position: relative;
-  transition: .3s linear;
-  padding: 0;
-}
-
-@media only screen and (min-width: 992px) {
-  .servicesHome .card .card-img-overlay {
-    min-height: fit-content;
-    position: absolute;
-    opacity: 0;
-    font-size: 18px;
-  }
-}
-
-.servicesHome .card .card-img-overlay .card-footer {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 1em;
-}
-
-@media only screen and (max-width: 991px) {
-  .servicesHome .card .card-img-overlay .card-footer {
-    position: relative;
-    margin-top: 1em;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  .servicesHome .card:hover .card-img-overlay {
-    opacity: 1;
-    color: white;
-    background: rgba(0, 0, 0, 0.9);
-  }
 }
 
 section.statsCounter {

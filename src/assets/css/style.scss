@@ -248,14 +248,19 @@ input[type="checkbox"]:checked + label:before {
 
 
 /* Header */
+body{
+  &.solid{
+    .header{
+      background: $alkemy_darkest_blue;
+    }
+  }
+}
 .header{
-  background: black;
+  background: $alkemy_darkest_blue;
   @media screen and (min-width: 1025px){
     background: transparent;
   }
-  &.solid{
-    background: $alkemy_darkest_blue;
-  }
+
   color: white;
   min-height: $header-height;
   top: 0;
@@ -903,74 +908,19 @@ button:focus {
 .servicesHome{
   min-height: 100% !important;
   .row{
+    min-height: 400px;
     width: 100%;
     margin: 0 auto;
   }
 
   .card{
     background: transparent;
-    &.cardOne{animation-delay: 0;}
-    &.cardTwo{animation-delay: .25s;}
-    &.cardThree{animation-delay: .5s;}
-    &.cardFour{animation-delay: .75s;}
-
-    height: 100%;
-    min-height:35vh;
-
-    .cardOne .card-footer,
-    .cardOne .card-footer,
-    .cardOne .card-footer,
-    .cardOne .card-footer{
-      padding: 0;
-    }
+    border-radius: 20px;
 
     .image-services.card-img-top{
       max-width: auto !important;
       max-height: 25vh;
       object-fit: contain;
-      margin-bottom: 2rem;
-    }
-
-    .image-services.card-body,
-    .image-services.card-footer{
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .card-img-overlay{
-      position: relative;
-      transition: .3s linear;
-      padding: 0;
-
-      @media only screen and (min-width: 992px){
-        min-height: fit-content;
-        position: absolute;
-        opacity: 0;
-        font-size: 18px;
-      }
-
-      .card-footer {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 1em;
-          @media only screen and (max-width: 991px) {
-            position: relative;
-            margin-top: 1em;
-          }
-      }
-    }
-
-    &:hover{
-      @media only screen and (min-width: 992px) {
-        .card-img-overlay {
-          opacity: 1;
-          color: white;
-          background: rgba(0,0,0,.90);
-        }
-      }
     }
   }
 }
