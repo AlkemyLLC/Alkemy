@@ -3,7 +3,7 @@ import { graphql, Link, StaticQuery } from "gatsby";
 import ReactNavbar from "./Navbar.jsx";
 import { Col, Row } from "reactstrap";
 import PropTypes from "prop-types";
-import { fluidImageSmall } from "../utils/utils.js";
+import { useWindowSize,fluidImageSmall } from "../utils/utils.js";
 
 /*
 _menuArray object details:
@@ -55,49 +55,51 @@ var _menuArray = [
     },
 ];
 
-const Header = ({ pageTitle, hideHeader, renderHeaderSolid }) => (
-    <StaticQuery
-        query={graphql`
-            query HeaderBlogQuery {
-                logo: file(relativePath: { regex: "/alkemy_logo.png/" }) {
-                    ...fluidImageSmall
-                }
-            }
-        `}
-        render={data => (
-            <>
-                <header
-                    className={
-                        renderHeaderSolid
-                            ? "header solid position-fixed"
-                            : "header position-fixed"
+const Header = ({ pageTitle, hideHeader, renderHeaderSolid }) => {
+    const size = useWindowSize();
+
+    
+    return (
+        <StaticQuery
+            query={graphql`
+                query HeaderBlogQuery {
+                    logo: file(relativePath: { regex: "/alkemy_logo.png/" }) {
+                        ...fluidImageSmall
                     }
-                >
-                    {data.logo.childImageSharp && (
-                        <ReactNavbar
-                            menuArray={_menuArray}
-                            brand={data.logo.childImageSharp.fluid}
-                        />
-                    )}
-                </header>
-                {hideHeader === true ? (
-                    <Row className="subHeader mx-0 alk-container py-2">
-                        <Col xs={12} md={8} className="px-0">
-                            <Link
-                                to={pageTitle.url}
-                                className="m-0 text-white"
-                            >
-                                <h1 className="m-0 font-weight-normal">
-                                    {pageTitle.name}
-                                </h1>
-                            </Link>
-                        </Col>
-                    </Row>
-                ) : null}
-            </>
-        )}
-    />
-);
+                }
+            `}
+            render={data => (
+                <>
+                    <header
+                        className={
+                            renderHeaderSolid
+                                ? "header solid position-fixed"
+                                : "header position-fixed"
+                        }
+                    >
+                        {data.logo.childImageSharp && (
+                            <ReactNavbar
+                                menuArray={_menuArray}
+                                brand={data.logo.childImageSharp.fluid}
+                            />
+                        )}
+                    </header>
+                    {hideHeader === true ? (
+                        <Row className="subHeader mx-0 alk-container py-2">
+                            <Col xs={12} md={8} className="px-0">
+                                <Link to={pageTitle.url} className="m-0 text-white">
+                                    <h1 className="m-0 font-weight-normal">
+                                        {pageTitle.name}
+                                    </h1>
+                                </Link>
+                            </Col>
+                        </Row>
+                    ) : null}
+                </>
+            )}
+        />
+    )
+};
 
 Header.propTypes = {
     pageTitle: PropTypes.object,

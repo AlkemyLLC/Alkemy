@@ -227,18 +227,18 @@ function SEO({
           }
           `}</script>
             {author !== null && (
-                <script defer type="application/ld+json">{`
-            {
-              "@context": "https://schema.org",
-              "@type": "Article",
-              "headline": "${title}",
-              "author": {
-                "@type": "Person",
-                "name": "${author}"
-              },
-              "datePublished": "${articleDate}"
-            }
-            `}</script>
+              <script defer type="application/ld+json">{`
+                {
+                  "@context": "https://schema.org",
+                  "@type": "Article",
+                  "headline": "${title}",
+                  "author": {
+                    "@type": "Person",
+                    "name": "${author}"
+                  },
+                  "datePublished": "${articleDate}"
+                }
+              `}</script>
             )}
             {children}
         </Helmet>

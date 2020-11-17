@@ -6117,6 +6117,12 @@ legend {
   white-space: normal;
 }
 
+@media (max-width: 1200px) {
+  legend {
+    font-size: calc(1.275rem + 0.3vw) ;
+  }
+}
+
 progress {
   vertical-align: baseline;
 }
@@ -6168,16 +6174,40 @@ h1, .h1 {
   font-size: 2.5rem;
 }
 
+@media (max-width: 1200px) {
+  h1, .h1 {
+    font-size: calc(1.375rem + 1.5vw) ;
+  }
+}
+
 h2, .h2 {
   font-size: 2rem;
+}
+
+@media (max-width: 1200px) {
+  h2, .h2 {
+    font-size: calc(1.325rem + 0.9vw) ;
+  }
 }
 
 h3, .h3 {
   font-size: 1.75rem;
 }
 
+@media (max-width: 1200px) {
+  h3, .h3 {
+    font-size: calc(1.3rem + 0.6vw) ;
+  }
+}
+
 h4, .h4, .recent-blogs .blog-card .card-body .card-title {
   font-size: 1.5rem;
+}
+
+@media (max-width: 1200px) {
+  h4, .h4, .recent-blogs .blog-card .card-body .card-title {
+    font-size: calc(1.275rem + 0.3vw) ;
+  }
 }
 
 h5, .h5 {
@@ -6199,10 +6229,22 @@ h6, .h6 {
   line-height: 1.2;
 }
 
+@media (max-width: 1200px) {
+  .display-1 {
+    font-size: calc(1.725rem + 5.7vw) ;
+  }
+}
+
 .display-2 {
   font-size: 5.5rem;
   font-weight: 300;
   line-height: 1.2;
+}
+
+@media (max-width: 1200px) {
+  .display-2 {
+    font-size: calc(1.675rem + 5.1vw) ;
+  }
 }
 
 .display-3 {
@@ -6211,10 +6253,22 @@ h6, .h6 {
   line-height: 1.2;
 }
 
+@media (max-width: 1200px) {
+  .display-3 {
+    font-size: calc(1.575rem + 3.9vw) ;
+  }
+}
+
 .display-4 {
   font-size: 3.5rem;
   font-weight: 300;
   line-height: 1.2;
+}
+
+@media (max-width: 1200px) {
+  .display-4 {
+    font-size: calc(1.475rem + 2.7vw) ;
+  }
 }
 
 hr {
@@ -11292,6 +11346,12 @@ a.badge-dark:focus, a.badge-dark.focus {
   opacity: .5;
 }
 
+@media (max-width: 1200px) {
+  .close {
+    font-size: calc(1.275rem + 0.3vw) ;
+  }
+}
+
 .close:hover {
   color: #000;
   text-decoration: none;
@@ -15625,8 +15685,12 @@ input[type="checkbox"]:checked + label:before {
 }
 
 /* Header */
+body.solid .header {
+  background: #020c0f;
+}
+
 .header {
-  background: rgba(2, 12, 15, 0.7);
+  background: #020c0f;
   color: white;
   min-height: 65px;
   top: 0;
@@ -15636,6 +15700,12 @@ input[type="checkbox"]:checked + label:before {
   animation-duration: 2s;
   transition: .5s linear;
   /* dropdown menu restyle */
+}
+
+@media screen and (min-width: 1025px) {
+  .header {
+    background: transparent;
+  }
 }
 
 .header.solid {
@@ -15747,7 +15817,7 @@ a {
   background: #020c0f;
   z-index: 1001;
   position: absolute;
-  top: -100vh;
+  top: -110vh;
   left: 0;
   right: 0;
   bottom: 0;
@@ -15783,18 +15853,6 @@ a {
   top: 0;
   -webkit-font-smoothing: antialiased;
   transition: all 500ms ease;
-}
-
-/* Video Carousel Text Animations */
-.cover-text-row .cover-text {
-  z-index: 500;
-}
-
-.cover-text-row .cover-text-1a,
-.cover-text-row .cover-text-1b {
-  text-shadow: 1px 1px #444;
-  color: white;
-  animation-delay: 2s;
 }
 
 /* Button Styles */
@@ -16240,94 +16298,76 @@ button:focus {
   transform: translate3d(0, -20px, 0) rotate(-90deg);
 }
 
+.hero-wrapper {
+  background: linear-gradient(270deg, #2bb3e5 0%, #0B3C5D 57.29%, #000000 95%);
+  mix-blend-mode: normal;
+}
+
+.hero-wrapper .homeHero {
+  min-height: 700px;
+  margin-top: 65px;
+  mix-blend-mode: normal;
+}
+
+@media screen and (min-width: 1024px) {
+  .hero-wrapper .homeHero {
+    margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .hero-wrapper .homeHero {
+    min-height: calc( 100vh - 65px);
+    max-height: 800px;
+  }
+}
+
+.hero-wrapper .homeHero:before, .hero-wrapper .homeHero:after {
+  opacity: .25 !important;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+  .hero-wrapper .homeHero .container-fluid, .hero-wrapper .homeHero .container-sm, .hero-wrapper .homeHero .container-md, .hero-wrapper .homeHero .container-lg, .hero-wrapper .homeHero .container-xl {
+    margin-top: 1.5rem;
+  }
+}
+
+.hero-wrapper .homeHero .cover-text-row .cover-text {
+  z-index: 500;
+  color: white;
+  animation-delay: 2s;
+}
+
+.hero-wrapper .homeHero .cover-text-row .cover-text .hero-heading {
+  text-shadow: 1px 1px #444;
+  line-height: 160%;
+}
+
+.hero-wrapper .homeHero .cover-text-row .cover-text p {
+  line-height: 180%;
+}
+
 .servicesHome {
   min-height: 100% !important;
 }
 
 .servicesHome .row {
+  min-height: 400px;
   width: 100%;
   margin: 0 auto;
 }
 
 .servicesHome .card {
   background: transparent;
-  height: 100%;
-  min-height: 35vh;
-}
-
-.servicesHome .card.cardOne {
-  animation-delay: 0;
-}
-
-.servicesHome .card.cardTwo {
-  animation-delay: .25s;
-}
-
-.servicesHome .card.cardThree {
-  animation-delay: .5s;
-}
-
-.servicesHome .card.cardFour {
-  animation-delay: .75s;
-}
-
-.servicesHome .card .cardOne .card-footer,
-.servicesHome .card .cardOne .card-footer,
-.servicesHome .card .cardOne .card-footer,
-.servicesHome .card .cardOne .card-footer {
-  padding: 0;
+  border-radius: 20px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  transition: 0.3s;
 }
 
 .servicesHome .card .image-services.card-img-top, .servicesHome .card .image-services.recent-blogs {
   max-width: auto !important;
   max-height: 25vh;
   object-fit: contain;
-  margin-bottom: 2rem;
-}
-
-.servicesHome .card .image-services.card-body,
-.servicesHome .card .image-services.card-footer {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.servicesHome .card .card-img-overlay {
-  position: relative;
-  transition: .3s linear;
-  padding: 0;
-}
-
-@media only screen and (min-width: 992px) {
-  .servicesHome .card .card-img-overlay {
-    min-height: fit-content;
-    position: absolute;
-    opacity: 0;
-    font-size: 18px;
-  }
-}
-
-.servicesHome .card .card-img-overlay .card-footer {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 1em;
-}
-
-@media only screen and (max-width: 991px) {
-  .servicesHome .card .card-img-overlay .card-footer {
-    position: relative;
-    margin-top: 1em;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  .servicesHome .card:hover .card-img-overlay {
-    opacity: 1;
-    color: white;
-    background: rgba(0, 0, 0, 0.9);
-  }
 }
 
 section.statsCounter {
