@@ -109,7 +109,7 @@ const HomePage = ({ data }) => {
                                         <Button
                                             color="primary"
                                             size="lg"
-                                            to="/about-alkemy"
+                                            to="/project-enquiry"
                                             tag={Link}
                                         >
                                             Start your project
