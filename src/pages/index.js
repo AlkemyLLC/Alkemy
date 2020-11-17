@@ -4,12 +4,8 @@ import Img from "gatsby-image";
 import { useWindowSize, fluidImageSmall, fluidImageLG } from "../utils/utils.js";
 import {
     CardDeck,
-    Card,
-    CardText,
-    CardImgOverlay,
     CardTitle,
     CardBody,
-    CardFooter,
     Button,
     Col,
     Row,
