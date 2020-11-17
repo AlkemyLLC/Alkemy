@@ -133,13 +133,20 @@ const HomePage = ({ data }) => {
                             </Row>
                         </div>
                         {/* Caret */}
-                        <FontAwesomeIcon
-                            onClick={handleCaretClick}
-                            icon="chevron-down"
-                            size="3x"
-                            color="white"
+                        <motion.div
+                            variants={card}
+                            initial="rest"
+                            whileHover="hover"
+                            whileTap="pressed"
                             className="heroChevron"
-                        />
+                        >
+                            <FontAwesomeIcon
+                                onClick={handleCaretClick}
+                                icon="chevron-down"
+                                size="3x"
+                                color="white"
+                            />
+                        </motion.div>
                     </BackgroundImage>
                 </section>
                 <section
