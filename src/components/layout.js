@@ -5,9 +5,11 @@ import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
 import { Location } from "@reach/router";
 import { motion, AnimatePresence } from "framer-motion";
-import Header from "./header";
-import Footer from "./footer";
 
+import loadable from "@loadable/component";
+
+const Footer = loadable(() => import("./footer"));
+const Header = loadable(() => import("./header"));
 
 const Modernizr = typeof window!=='undefined' && require("../utils/modernizr-custom");
 
