@@ -15888,34 +15888,14 @@ a {
   top: 50%;
   right: 0;
   z-index: 800;
-  width: 16vw;
-  /* iPhone 6/7/8 */
-  /* iPhone 6/7/8 plus */
-  /* iPhone X */
+  width: 100%;
+  max-width: 42px;
   /* Nexus 10, iPad, and iPad Pro */
   padding: 0.5rem;
   background: #2bb3e5;
   transform: translateY(-50%);
   border-radius: 20rem 0 0 20rem;
   border: 1px solid white;
-}
-
-@media screen and (min-width: 375px) and (min-height: 667px) {
-  .callNow {
-    width: 10vw;
-  }
-}
-
-@media screen and (min-width: 414px) and (min-height: 736px) {
-  .callNow {
-    width: 10vw;
-  }
-}
-
-@media screen and (min-width: 375px) and (min-height: 812px) {
-  .callNow {
-    width: 16vw;
-  }
 }
 
 @media screen and (min-width: 700px) {

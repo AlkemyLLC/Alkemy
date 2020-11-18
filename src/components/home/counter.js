@@ -1,7 +1,7 @@
 import React from "react";
 import CountUp from "react-countup";
 import { Watch } from "scrollmonitor-react";
-import Loading from "./loading.jsx";
+import Loading from "../loading.jsx";
 import PropTypes from "prop-types";
 
 const Counter = props => (

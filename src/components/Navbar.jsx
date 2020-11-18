@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import { Link } from "gatsby";
 import Loading from "./loading.jsx";
 import Img from "gatsby-image";
-import Search from "./search/search.js";
+import loadable from "@loadable/component";
+
+const Search = loadable(() => import("./search/search.js"));
 const searchIndices = [{ name: `Posts`, title: `Posts` }];
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
