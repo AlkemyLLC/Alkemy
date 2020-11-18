@@ -1,24 +1,22 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
-import { useWindowSize, fluidImageSmall, fluidImage } from "../utils/utils.js";
+import { fluidImageSmall, fluidImage } from "../utils/utils.js";
 import {
     Button,
     Col,
     Row,
 } from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Layout from "../components/layout.js";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
-import EnquiryWidget from "../components/widgetEnquiry";
 import SEO from "../components/seo";
-import BackgroundImage from "gatsby-background-image";
-import { motion } from "framer-motion";
 import loadable from "@loadable/component";
 
+const HomeHero = loadable(() => import("../components/home/homeHero"));
+const StatsCounters = loadable(() => import("../components/home/statsCounter"));
 const Services = loadable(() => import("../components/service-cards/serviceCards"));
-const BlogWidget = loadable(() => import("../components/BlogWidget.jsx"));
-const ReactCounter = loadable(() => import("../components/counter.jsx"));
+const EnquiryWidget = loadable(() => import("../components/widgetEnquiry"));
+const BlogWidget = loadable(() => import("../components/BlogWidget"));
 
 
 /*
@@ -36,25 +34,9 @@ Layout props:
 */
 
 const HomePage = ({ data }) => {
-    const firstNumber = data.homepageJson.sections[3].stats[0].value;
-    const secondNumber = data.homepageJson.sections[3].stats[1].value;
-    const thirdNumber = data.homepageJson.sections[3].stats[2].value;
-    const fourthNumber = data.homepageJson.sections[3].stats[3].value;
     const pageTitle = {
         name: "Web Development, Design, eCommerce, and Marketing",
         url: "/",
-    };
-    const size = useWindowSize();
-
-    const heroImg =
-        size.width >= 768
-            ? data.heroBg.childImageSharp.fluid
-            : data.heroBgMobile.childImageSharp.fluid;
-
-    const card = {
-        rest: { scale: 1 },
-        hover: { scale: 1.1 },
-        pressed: { scale: 0.95 },
     };
 
     return (
@@ -63,92 +45,9 @@ const HomePage = ({ data }) => {
                 <SEO title={pageTitle.name} />
 
                 {/* Section 1 - Hero */}
-                <section className="hero-wrapper bg-black">
-                    <BackgroundImage
-                        Tag="div"
-                        className="homeHero d-flex flex-column align-items-center justify-content-lg-center h-100"
-                        fluid={heroImg}
-                        alt="view of tall skyscrapers while looking up from the ground"
-                    >
-                        <div className="container-fluid p-0 h-100 position-relative d-flex flex-column justify-content-lg-center">
-                            <Row className="d-block d-lg-none">
-                                {data.alkemyStack.childImageSharp && (
-                                    <Img
-                                        imgStyle={{
-                                            objectFit: "contain",
-                                            padding: "0 1rem",
-                                        }}
-                                        style={{
-                                            maxWidth: "580px",
-                                        }}
-                                        className="mx-auto"
-                                        objectFit="contain"
-                                        fluid={
-                                            data.alkemyStack.childImageSharp
-                                                .fluid
-                                        }
-                                        alt="Logos of various programming languages and frameworks we use"
-                                    />
-                                )}
-                            </Row>
-                            <Row className="cover-text-row d-flex align-items-center w-100 no-gutters">
-                                <Col xs={12} lg={7}>
-                                    <div className="cover-text">
-                                        <div className="mb-3 mb-lg-5">
-                                            <h1 className="hero-heading d-block mb-3">
-                                                Unique Digital Experiences
-                                            </h1>
-                                            <p className="d-block h5 font-weight-normal">
-                                                Expertly designed and crafted to
-                                                wow your customers and increase
-                                                sales.
-                                            </p>
-                                        </div>
+                <HomeHero data={data} handleCaretClick={handleCaretClick} />
 
-                                        {/* Cover CTA */}
-                                        <Button
-                                            color="primary"
-                                            size="lg"
-                                            to="/project-enquiry"
-                                            tag={Link}
-                                        >
-                                            Start your project
-                                        </Button>
-                                    </div>
-                                </Col>
-                                <Col
-                                    lg={5}
-                                    className="d-none d-lg-block pl-md-4"
-                                >
-                                    {data.alkemyStack.childImageSharp && (
-                                        <Img
-                                            fluid={
-                                                data.alkemyStack.childImageSharp
-                                                    .fluid
-                                            }
-                                            alt="Logos of various programming languages and frameworks we use"
-                                        />
-                                    )}
-                                </Col>
-                            </Row>
-                        </div>
-                        {/* Caret */}
-                        <motion.div
-                            variants={card}
-                            initial="rest"
-                            whileHover="hover"
-                            whileTap="pressed"
-                            className="heroChevron"
-                        >
-                            <FontAwesomeIcon
-                                onClick={handleCaretClick}
-                                icon="chevron-down"
-                                size="3x"
-                                color="white"
-                            />
-                        </motion.div>
-                    </BackgroundImage>
-                </section>
+                {/* Section 2 - Intro */}
                 <section
                     ref={introSection}
                     className="introHome my-4 py-4 alk-container"
@@ -159,6 +58,7 @@ const HomePage = ({ data }) => {
                     <p>{data.homepageJson.sections[0].blocks[0].content}</p>
                 </section>
 
+                {/* Project Enquiry Widget */}
                 <EnquiryWidget />
 
                 <section className="alk-container my-4 py-4">
@@ -168,41 +68,15 @@ const HomePage = ({ data }) => {
                     <p>{data.homepageJson.sections[0].blocks[1].content}</p>
                 </section>
 
+                {/* Section 3 - Services */}
                 <section className="alk-container servicesHome mt-auto mb-5">
                     <Services data={data} />
                 </section>
-                <section className="alk-container statsCounter mb-4 text-center py-4">
-                    <h2>{data.homepageJson.sections[3].heading}</h2>
-                    <Row className="pt-4">
-                        <Col xs={12} sm={6} md={3}>
-                            <ReactCounter theNumber={firstNumber} />
-                            <p className="text-muted">
-                                {data.homepageJson.sections[3].stats[0].title}
-                            </p>
-                        </Col>
 
-                        <Col xs={12} sm={6} md={3}>
-                            <ReactCounter theNumber={secondNumber} />
-                            <p className="text-muted">
-                                {data.homepageJson.sections[3].stats[1].title}
-                            </p>
-                        </Col>
+                {/* Section 4 - Counters */}
+                <StatsCounters data={data} />
 
-                        <Col xs={12} sm={6} md={3}>
-                            <ReactCounter theNumber={thirdNumber} />
-                            <p className="text-muted">
-                                {data.homepageJson.sections[3].stats[2].title}
-                            </p>
-                        </Col>
-
-                        <Col xs={12} sm={6} md={3}>
-                            <ReactCounter theNumber={fourthNumber} />
-                            <p className="text-muted">
-                                {data.homepageJson.sections[3].stats[3].title}
-                            </p>
-                        </Col>
-                    </Row>
-                </section>
+                {/* Section 5 - Our Passion */}
                 <section className="ourPassion my-5">
                     <div className="alk-container container-fluid">
                         <Row className="align-items-center">
