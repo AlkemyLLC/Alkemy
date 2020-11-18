@@ -70,7 +70,7 @@ const HomePage = ({ data }) => {
 
                 {/* Section 3 - Services */}
                 <section className="alk-container servicesHome mt-auto mb-5">
-                    <Services data={data} />
+                    <Services data={data}/>
                 </section>
 
                 {/* Section 4 - Counters */}
@@ -126,7 +126,7 @@ const HomePage = ({ data }) => {
                     </div>
                 </section>
                 <section className="recentBlogPosts">
-                    <BlogWidget posts={data.allMdx.edges} />
+                    <BlogWidget />
                 </section>
             </Layout>
         </ScrollWrapper>
@@ -171,52 +171,23 @@ export const query = graphql`
                        }
                    }
                }
-               allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
-                   edges {
-                       node {
-                           id
-                           excerpt(pruneLength: 100)
-                           frontmatter {
-                               title
-                               path
-                               excerpt
-                               date(formatString: "MMMM DD, YYYY")
-                               cover {
-                                   ...fluidImageSmall
-                               }
-                           }
-                       }
-                   }
-               }
+               
                heroBg: file(relativePath: { regex: "/hero-bg.jpg/" }) {
                    ...fluidImage
                }
+
                heroBgMobile: file(
                    relativePath: { regex: "/hero-bg.jpg/" }
                ) {
                    ...fluidImageSmall
                }
+
                alkemyStack: file(
                    relativePath: { regex: "/alkemy-stack.png/" }
                ) {
                    ...fluidImageSmall
                }
-               webDesign: file(relativePath: { regex: "/responsive.png/" }) {
-                   ...fluidImageSmall
-               }
-               webDevelopment: file(
-                   relativePath: { regex: "/development.png/" }
-               ) {
-                   ...fluidImageSmall
-               }
-               eCommerce: file(relativePath: { regex: "/ecommerce.png/" }) {
-                   ...fluidImageSmall
-               }
-               digitalMarketing: file(
-                   relativePath: { regex: "/marketing.png/" }
-               ) {
-                   ...fluidImageSmall
-               }
+
                ourPassion: file(relativePath: { regex: "/our-passion.jpg/" }) {
                    ...fluidImageSmall
                }

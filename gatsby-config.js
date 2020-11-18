@@ -1,11 +1,6 @@
-const { isNil } = require(`lodash`)
 require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`,
 });
-
-const mapPagesUrls = {
-    index: `/`,
-}
 
 const {
     NODE_ENV,
@@ -79,7 +74,7 @@ module.exports = {
         {
             resolve: "gatsby-plugin-brotli",
             options: {
-                extensions: ["css", "html", "js", "svg"],
+                extensions: ["css", "html", "js", "svg", "jsx"],
             },
         },
         {
