@@ -87,7 +87,7 @@ function SEO({
                     content:
                         "width=device-width, initial-scale=1, maximum-scale=1",
                 },
-                { httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1" }
+                { httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1" },
             ].concat(meta)}
         >
             <html lang={lang ? lang : "en"} />
@@ -116,7 +116,8 @@ function SEO({
             <meta name="twitter:description" content={metaDescription} />
             <meta name="twitter:image" content={siteUrl + ogImage}></meta>
             <meta name="twitter:image:alt" content={ogImageText} />
-
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://app.upcity.com" />
             <link
                 rel="canonical"
                 href={
@@ -227,7 +228,7 @@ function SEO({
           }
           `}</script>
             {author !== null && (
-              <script defer type="application/ld+json">{`
+                <script defer type="application/ld+json">{`
                 {
                   "@context": "https://schema.org",
                   "@type": "Article",

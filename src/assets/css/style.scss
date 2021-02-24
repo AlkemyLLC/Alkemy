@@ -847,46 +847,58 @@ button:focus {
 // HomePage
 
 .hero-wrapper{
-  background: linear-gradient(270deg,$alkemy_blue 0%, $alkemy_dark_blue 57.29%, #000000 95%);
-  mix-blend-mode: normal;
+  background: linear-gradient(270deg,$alkemy_blue 0%, $alkemy_dark_blue 57.29%, #000000 95%);;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 700px;
+
+  @media screen and (min-width: 769px){
+    justify-content: center;
+  }
+  
+  margin-top: $header-height;
+  @media screen and (min-width: 1024px){
+    margin-top: 0;
+  }
+  
+  @media screen and (min-width: 1025px){
+    min-height: calc( 100vh - #{$header-height} );
+    max-height: 100vh;
+  }
+  
   .homeHero{
-    min-height: 700px;
-    margin-top: $header-height;
+    opacity: .5;
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    mix-blend-mode: normal;  
+  }
 
-    @media screen and (min-width: 1024px){
-      margin-top: 0;
+  .container-fluid{
+    height: 100%;
+    z-index: 1;
+    @media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+      margin-top: 1.5rem;
     }
-    @media screen and (min-width: 1025px){
-      min-height: calc( 100vh - #{$header-height} );
-      max-height: 800px;
-    }
+  }
 
-    mix-blend-mode: normal;
-
-    &:before,&:after{
-      opacity: .25 !important;
-    }
-
-    .container-fluid{
-      @media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
-        margin-top: 1.5rem;
+  .cover-text-row{
+    .cover-text {
+      z-index: 10;
+      color: white;
+      -webkit-animation-delay: 2s;
+      animation-delay: 2s;
+      .hero-heading{
+        text-shadow: 1px 1px #444;
+        line-height: 160%;
       }
-    }
-
-    .cover-text-row{
-      .cover-text {
-        z-index: 500;
-        
-        color: white;
-        -webkit-animation-delay: 2s;
-        animation-delay: 2s;
-        .hero-heading{
-          text-shadow: 1px 1px #444;
-          line-height: 160%;
-        }
-        p{
-          line-height: 180%;
-        }
+      p{
+        line-height: 180%;
       }
     }
   }
