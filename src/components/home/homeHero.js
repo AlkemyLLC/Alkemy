@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
 import BackgroundImage from "gatsby-background-image";
-import { useWindowSize } from "../../utils/utils.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { Button, Col, Row } from "reactstrap";
@@ -11,12 +10,13 @@ import Img from "gatsby-image";
 const HomeHero = (props)=>{
     const {data} = props;
 
-    const size = useWindowSize();
-
-    const heroImg =
-        size.width >= 768
-            ? data.heroBg.childImageSharp.fluid
-            : data.heroBgMobile.childImageSharp.fluid;
+    const heroImg = [
+        data.heroBgMobile.childImageSharp.fluid,
+        {
+            ...data.heroBg.childImageSharp.fluid,
+            media: `(min-width: 769px)`,
+        }
+    ];
 
     const card = {
         rest: { scale: 1 },
@@ -27,7 +27,6 @@ const HomeHero = (props)=>{
     return (
         <section className="hero-wrapper bg-black">
             <BackgroundImage
-                Tag="div"
                 className="homeHero d-flex flex-column align-items-center justify-content-lg-center h-100"
                 fluid={heroImg}
                 alt="view of tall skyscrapers while looking up from the ground"
@@ -58,8 +57,8 @@ const HomeHero = (props)=>{
                                         Unique Digital Experiences
                                     </h1>
                                     <p className="d-block h5 font-weight-normal">
-                                        Expertly designed and crafted to wow your
-                                        customers and increase sales.
+                                        Expertly designed and crafted to wow
+                                        your customers and increase sales.
                                     </p>
                                 </div>
 
@@ -77,7 +76,9 @@ const HomeHero = (props)=>{
                         <Col lg={5} className="d-none d-lg-block pl-md-4">
                             {data.alkemyStack.childImageSharp && (
                                 <Img
-                                    fluid={data.alkemyStack.childImageSharp.fluid}
+                                    fluid={
+                                        data.alkemyStack.childImageSharp.fluid
+                                    }
                                     alt="Logos of various programming languages and frameworks we use"
                                 />
                             )}

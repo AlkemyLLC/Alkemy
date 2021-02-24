@@ -1,12 +1,13 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
-import { fluidImageSmall, fluidImage } from "../utils/utils.js";
+import { fluidImageSmall, fluidImage, fluidImageLG } from "../utils/utils.js";
 import {
     Button,
     Col,
     Row,
 } from "reactstrap";
+import BackgroundImage from "gatsby-background-image";
 import Layout from "../components/layout.js";
 import ScrollWrapper from "../components/scrollWrapper.jsx";
 import SEO from "../components/seo";
@@ -43,7 +44,6 @@ const HomePage = ({ data }) => {
         <ScrollWrapper onWindowScroll={handleScroll}>
             <Layout headerTitle={[false, {}]} bodyClasses="home">
                 <SEO title={pageTitle.name} />
-
                 {/* Section 1 - Hero */}
                 <HomeHero data={data} handleCaretClick={handleCaretClick} />
 
@@ -70,7 +70,7 @@ const HomePage = ({ data }) => {
 
                 {/* Section 3 - Services */}
                 <section className="alk-container servicesHome mt-auto mb-5">
-                    <Services data={data}/>
+                    <Services data={data} />
                 </section>
 
                 {/* Section 4 - Counters */}
@@ -171,14 +171,12 @@ export const query = graphql`
                        }
                    }
                }
-               
+
                heroBg: file(relativePath: { regex: "/hero-bg.jpg/" }) {
-                   ...fluidImage
+                   ...fluidImageLG
                }
 
-               heroBgMobile: file(
-                   relativePath: { regex: "/hero-bg.jpg/" }
-               ) {
+               heroBgMobile: file(relativePath: { regex: "/hero-bg.jpg/" }) {
                    ...fluidImageSmall
                }
 
