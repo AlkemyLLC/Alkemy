@@ -37,12 +37,6 @@ const WebDevelopment = ({ data }) => {
                 {/* Section 1 */}
                 <section className=" alk-container mt-5">
                     <Row className="mb-5">
-                        <Col md={6}  sm={12}className="d-flex justify-content-center mt-2">
-                        <a download="" target="_blank" href="https://res.cloudinary.com/expertise-com/image/upload/f_auto,fl_lossy,q_auto/w_auto/remote_media/awards/fl_fort-lauderdale_software-development_2021.png">
-                            <img data-src="https://res.cloudinary.com/expertise-com/image/upload/f_auto,fl_lossy,q_auto/w_auto/remote_media/awards/fl_fort-lauderdale_software-development_2021.png"
-                             src="https://res.cloudinary.com/expertise-com/image/upload/f_auto,fl_lossy,q_auto/w_auto/remote_media/awards/fl_fort-lauderdale_software-development_2021.png" width="340"
-                            alt="Regular"/></a>
-                        </Col>
                         <Col md={6} sm={12}>  
                             <h2 className="mb-4">
                                 {
@@ -56,6 +50,10 @@ const WebDevelopment = ({ data }) => {
                                         .blocks[0].content
                                 }
                             </p> 
+                        </Col>         
+                         <Col md={6}  sm={12}className="d-flex justify-content-center mt-2">
+                         <a href="https://www.expertise.com/fl/fort-lauderdale/software-development" target="_blank" rel="noopener noreferrer">
+                              <img  width="340" src="https://res.cloudinary.com/expertise-com/image/upload/f_auto,fl_lossy,q_auto/w_auto/remote_media/awards/fl_fort-lauderdale_software-development_2021.svg" alt="Top Fort Lauderdale Software Development Agencies" /></a>
                         </Col>
                     </Row>
                 </section>
