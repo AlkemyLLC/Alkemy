@@ -51,9 +51,9 @@ const WebDevelopment = ({ data }) => {
                                 }
                             </p> 
                         </Col>         
-                         <Col md={6}  sm={12}className="d-flex justify-content-center mt-2">
-                         <a href="https://www.expertise.com/fl/fort-lauderdale/software-development" target="_blank" rel="noopener noreferrer">
-                              <img  width="340" src="https://res.cloudinary.com/expertise-com/image/upload/f_auto,fl_lossy,q_auto/w_auto/remote_media/awards/fl_fort-lauderdale_software-development_2021.svg" alt="Top Fort Lauderdale Software Development Agencies" /></a>
+                         <Col md={6} sm={12} className="d-flex justify-content-center align-items-center mt-2 mt-md-0">
+                         <a href="https://www.expertise.com/fl/fort-lauderdale/software-development#AlkemyLLC" target="_blank" rel="noopener noreferrer">
+                              <img className="mb-0" width="340" src="https://res.cloudinary.com/expertise-com/image/upload/f_auto,fl_lossy,q_auto/w_auto/remote_media/awards/fl_fort-lauderdale_software-development_2021.svg" alt="Top Fort Lauderdale Software Development Agencies" /></a>
                         </Col>
                     </Row>
                 </section>
