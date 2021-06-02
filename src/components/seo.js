@@ -153,7 +153,7 @@ function SEO({
                 rel="stylesheet"
             />
 
-            <script defer type="application/ld+json">
+            <script type="application/ld+json">
                 {`{
                 "@context":"https://schema.org",
                 "@type":"WebSite",
@@ -161,7 +161,7 @@ function SEO({
                 "name":"Alkemy"
               }`}
             </script>
-            <script defer type="application/ld+json">
+            <script type="application/ld+json">
                 {`{
             "@context":"https://schema.org",
             "@type":"Organization",
@@ -175,7 +175,7 @@ function SEO({
             ]
           }`}
             </script>
-            <script defer type="application/ld+json">{`
+            <script type="application/ld+json">{`
           {
             "@context": "https://schema.org/", 
             "@type": "BreadcrumbList", 
@@ -228,7 +228,7 @@ function SEO({
           }
           `}</script>
             {author !== null && (
-                <script defer type="application/ld+json">{`
+                <script type="application/ld+json">{`
                 {
                   "@context": "https://schema.org",
                   "@type": "Article",
