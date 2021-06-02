@@ -40,12 +40,16 @@ module.exports = {
     },
     plugins: [
         {
-            resolve: "gatsby-plugin-google-tagmanager",
+            resolve: `gatsby-plugin-google-gtag`,
             options: {
-                id: "GTM-TRL98WJ",
-                includeInDevelopment: false,
-                defaultDataLayer: { platform: "gatsby" },
-                routeChangeEventName: "gatsby-route-change",
+              trackingIds: [
+                "GTM-TRL98WJ", // Google Analytics / GA
+              ],
+              // This object is used for configuration specific to this plugin
+              pluginConfig: {
+                // Puts tracking script in the head instead of the body
+                head: false,
+              },
             },
         },
         {
