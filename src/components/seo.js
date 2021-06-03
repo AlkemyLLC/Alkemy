@@ -79,10 +79,13 @@ function SEO({
     
 
 
-    /* For Schema Structure */
-    const datePublished = date ? `"datePublished": "${articleDate}"` : "";
+    /* For Schema Structure */ 
+    const datePublished = date ? `"datePublished": "${date}"` : "";
     const articleDateModified = dateModified ? `"datePublished": "${articleDate}"` : "";
     const articleImages = images ? `"image": "${images}"` : ""; 
+    console.log("datePublished", datePublished)
+    console.log("articleDateModified", articleDateModified)
+    console.log("articleImages", articleImages)
     return (
         <Helmet
             title={title}
