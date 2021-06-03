@@ -231,7 +231,7 @@ function SEO({
             }]
           }
           `}</script>
-            {(author !== null && author !== undefined) && (
+            {author !== null  && (
                 <script type="application/ld+json">{`
                 {
                   "@context": "https://schema.org",
@@ -239,7 +239,7 @@ function SEO({
                   "headline": "${title}",
                   "author": {
                     "@type": "Person",
-                    "name": "${author}"
+                    "name": "${pageAuthor}"
                   },
                   "image": ${articleImages}, 
                   "datePublished": "${articleDate}",    
