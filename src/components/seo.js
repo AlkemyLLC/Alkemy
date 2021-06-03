@@ -45,7 +45,9 @@ function SEO({
     children,
     date,
     coverImage,
-    coverDescription
+    coverDescription,
+    images,
+    dateModified
 }) {
     const { site } = useStaticQuery(
         graphql`
@@ -75,6 +77,8 @@ function SEO({
     const pageKeywords = keywords ? keywords : site.siteMetadata.keywords;
     const articleDate = date ? date : null;
     const siteAddress = site.siteMetadata.siteUrl;
+    const articleDataModefied = dateModified ? dateModified : null;
+    const articleImages = images? images : [];
 
     return (
         <Helmet
@@ -227,7 +231,7 @@ function SEO({
             }]
           }
           `}</script>
-            {author !== null && (
+            {(author !== null && author !== undefined) && (
                 <script type="application/ld+json">{`
                 {
                   "@context": "https://schema.org",
@@ -237,7 +241,9 @@ function SEO({
                     "@type": "Person",
                     "name": "${author}"
                   },
-                  "datePublished": "${articleDate}"
+                  "image": ${articleImages}, 
+                  "datePublished": "${articleDate}",    
+                  "dateModified": "${articleDataModefied}",
                 }
               `}</script>
             )}
