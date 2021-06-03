@@ -79,7 +79,7 @@
      const siteAddress = site.siteMetadata.siteUrl;
              
      /* Structed Data Schema */
-     const articleDate = date ? date : null;
+     const articleDate = date ? date : "2001-01-01";
      const articleURL =
          typeof window !== "undefined" ? window.location.href : "";
      return (
