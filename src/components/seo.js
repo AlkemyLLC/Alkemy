@@ -45,7 +45,8 @@
      children,
      date,
      coverImage,
-     coverDescription
+     coverDescription,
+     dateModified
  }) {
      const { site } = useStaticQuery(
          graphql`
@@ -62,7 +63,7 @@
              }
          `
      );
- 
+
      const ogImage = coverImage ? coverImage : screenshot;
      const ogImageText = coverDescription
          ? coverDescription
@@ -74,11 +75,15 @@
      const pageAuthor = author ? author : site.siteMetadata.author;
      const pageKeywords = keywords ? keywords : site.siteMetadata.keywords;
      const siteAddress = site.siteMetadata.siteUrl;
-             
+
      /* Structed Data Schema */
-     const articleDate = date ? date : "2001-01-01";
-     const articleImg = typeof window !=="undefined"? window.location.host + ogImage: "";
-     const articleURL = typeof window !== "undefined" ? window.location.href : "";
+     const articleModified = dateModified ? dateModified: date;
+     const articleImg =
+         typeof window !== "undefined"
+             ? window.location.host + ogImage
+             : ogImage;
+     const articleURL =
+         typeof window !== "undefined" ? window.location.href : "https://";
      return (
          <Helmet
              title={title}
@@ -234,7 +239,7 @@
              {pageAuthor !== null &&
                  pageAuthor !== undefined &&
                  ogImage !== null &&
-                 articleDate !== null && (
+                 date !== null && (
                      <script type="application/ld+json">
                          {`
                   {
@@ -245,9 +250,12 @@
                       "@type": "Person",
                       "name": "${pageAuthor}"
                     },
-                    "datePublished": "${articleDate}",
+                    "datePublished": "${date}",
+                    "dateModified": "${articleModified}",
                     "image": "${articleImg}",
-                    "url": "${articleURL}"
+                    "url": "${articleURL}",
+                    "headline": "${title}",
+                    "publisher": "Alkemy, LLC.",
                   }`}
                      </script>
                  )}
@@ -269,10 +277,11 @@
      title: PropTypes.string.isRequired,
      keywords: PropTypes.string,
      date: PropTypes.string,
+     dateModified: PropTypes.string,
      author: PropTypes.string,
      children: PropTypes.object,
      coverImage: PropTypes.string,
-     coverDescription: PropTypes.string
+     coverDescription: PropTypes.string,
  };
  
  export default SEO;
