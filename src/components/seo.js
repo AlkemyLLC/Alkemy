@@ -255,7 +255,7 @@
                     "image": "${articleImg}",
                     "url": "${articleURL}",
                     "headline": "${title}",
-                    "publisher": "Alkemy, LLC.",
+                    "publisher": "Alkemy, LLC."
                   }`}
                      </script>
                  )}
