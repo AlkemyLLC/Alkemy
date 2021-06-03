@@ -78,8 +78,8 @@ function SEO({
     const articleDate = date ? date : null;
     const siteAddress = site.siteMetadata.siteUrl;
     const articleDataModefied = dateModified ? dateModified : null;
-    const articleImages = images? images : [];
-
+    const articleImages = images? images : [""];
+         console.log("sadsadsad: ", articleImages)   
     return (
         <Helmet
             title={title}
