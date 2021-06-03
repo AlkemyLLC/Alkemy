@@ -173,7 +173,7 @@ export const query = graphql`
                }
 
                heroBg: file(relativePath: { regex: "/hero-bg.jpg/" }) {
-                   ...fluidImageLG
+                   ...fluidImage
                }
 
                heroBgMobile: file(relativePath: { regex: "/hero-bg.jpg/" }) {
