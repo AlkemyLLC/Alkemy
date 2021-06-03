@@ -46,6 +46,7 @@
      date,
      coverImage,
      coverDescription,
+     blogPath,
      dateModified
  }) {
      const { site } = useStaticQuery(
@@ -78,12 +79,8 @@
 
      /* Structed Data Schema */
      const articleModified = dateModified ? dateModified: date;
-     const articleImg =
-         typeof window !== "undefined"
-             ? window.location.host + ogImage
-             : ogImage;
-     const articleURL =
-         typeof window !== "undefined" ? window.location.href : "https://";
+     const articleImg = siteUrl + ogImage;
+     const articleURL = siteUrl + blogPath;
      return (
          <Helmet
              title={title}
@@ -255,7 +252,17 @@
                     "image": "${articleImg}",
                     "url": "${articleURL}",
                     "headline": "${title}",
-                    "publisher": "Alkemy, LLC."
+                    "publisher": {
+                      "@type": "Organization",
+                      "url":"${siteAddress}",
+                      "name":"Alkemy",
+                      "logo": "${siteAddress}${logo}",
+                      "sameAs":[
+                        "https://www.facebook.com/alkemydev",
+                        "https://www.twitter.com/alkemydev",
+                        "https://www.linkedin.com/company/alkemydev"
+                      ]
+                    }
                   }`}
                      </script>
                  )}
@@ -278,6 +285,7 @@
      keywords: PropTypes.string,
      date: PropTypes.string,
      dateModified: PropTypes.string,
+     blogPath: PropTypes.string,
      author: PropTypes.string,
      children: PropTypes.object,
      coverImage: PropTypes.string,

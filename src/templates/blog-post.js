@@ -102,6 +102,7 @@ const BlogPostTemplate = (props) => {
                 description={post.frontmatter.description || post.excerpt}
                 date={post.frontmatter.date}
                 author={post.frontmatter.author}
+                blogPath={post.path}
             />
             <Row
                 className={
@@ -241,6 +242,7 @@ export const query = graphql`
                        readingTime
                        tags
                        excerpt
+                       path
                        cover {
                            ...fluidImageSmall
                        }
