@@ -162,82 +162,88 @@
              <script defer type="application/ld+json">
                  {
                    `{
-                    "@context":"https://schema.org",
-                    "@type":"WebSite",
-                    "url":"${siteAddress}",
-                    "name":"Alkemy"
-                      },
-                      {
-                    "@context":"https://schema.org",
-                    "@type":"Organization",
-                    "url":"${siteAddress}",
-                    "name":"Alkemy",
-                    "logo": "${siteAddress}${logo}",
-                    "sameAs":[
-                      "https://www.facebook.com/alkemydev",
-                      "https://www.twitter.com/alkemydev",
-                      "https://www.linkedin.com/company/alkemydev"
-                    ]
-                  },
-                  {
-                    "@context": "https://schema.org/", 
-                    "@type": "BreadcrumbList", 
-                    "itemListElement": [{
-                      "@type": "ListItem", 
-                      "position": 1, 
-                      "name": "Home",
-                      "item": "${siteAddress}"  
-                    },{
-                      "@type": "ListItem", 
-                      "position": 2, 
-                      "name": "Responsive Web Design",
-                      "item": "${siteAddress}/responsive-web-design"  
-                    },{
-                      "@type": "ListItem", 
-                      "position": 3, 
-                      "name": "Web Development",
-                      "item": "${siteAddress}/web-development"  
-                    },{
-                      "@type": "ListItem", 
-                      "position": 4, 
-                      "name": "eCommerce Design",
-                      "item": "${siteAddress}/ecommerce-design"  
-                    },{
-                      "@type": "ListItem", 
-                      "position": 5, 
-                      "name": "Wordpress Care Plans",
-                      "item": "${siteAddress}/wordpress-care-plans"  
-                    },{
-                      "@type": "ListItem", 
-                      "position": 6, 
-                      "name": "Digital Marketing",
-                      "item": "${siteAddress}/digital-marketing"  
-                    },{
-                      "@type": "ListItem", 
-                      "position": 7, 
-                      "name": "About Alkemy",
-                      "item": "${siteAddress}/about-alkemy"  
-                    },{
-                      "@type": "ListItem", 
-                      "position": 8, 
-                      "name": "Alkemy Blog",
-                      "item": "${siteAddress}/alkemy-blog"  
-                    },{
-                      "@type": "ListItem", 
-                      "position": 9, 
-                      "name": "Contact Alkemy",
-                      "item": "${siteAddress}/contact-alkemy"  
-                    }]
+                      "@context":"https://schema.org",
+                      "@type":"WebSite",
+                      "url":"${siteAddress}",
+                      "name":"Alkemy"
+                    }`
                   }
-                `}
+                </script>
+                <script defer type="application/ld+json">
+                  {`{
+                      "@context":"https://schema.org",
+                      "@type":"Organization",
+                      "url":"${siteAddress}",
+                      "name":"Alkemy",
+                      "logo": "${siteAddress}${logo}",
+                      "sameAs":[
+                        "https://www.facebook.com/alkemydev",
+                        "https://www.twitter.com/alkemydev",
+                        "https://www.linkedin.com/company/alkemydev"
+                      ]
+                    }`}
+                </script>
+                <script defer type="application/ld+json">
+                  {
+                    `{
+                      "@context": "https://schema.org/", 
+                      "@type": "BreadcrumbList", 
+                      "itemListElement": [{
+                        "@type": "ListItem", 
+                        "position": 1, 
+                        "name": "Home",
+                        "item": "${siteAddress}"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 2, 
+                        "name": "Responsive Web Design",
+                        "item": "${siteAddress}/responsive-web-design"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 3, 
+                        "name": "Web Development",
+                        "item": "${siteAddress}/web-development"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 4, 
+                        "name": "eCommerce Design",
+                        "item": "${siteAddress}/ecommerce-design"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 5, 
+                        "name": "Wordpress Care Plans",
+                        "item": "${siteAddress}/wordpress-care-plans"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 6, 
+                        "name": "Digital Marketing",
+                        "item": "${siteAddress}/digital-marketing"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 7, 
+                        "name": "About Alkemy",
+                        "item": "${siteAddress}/about-alkemy"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 8, 
+                        "name": "Alkemy Blog",
+                        "item": "${siteAddress}/alkemy-blog"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 9, 
+                        "name": "Contact Alkemy",
+                        "item": "${siteAddress}/contact-alkemy"  
+                      }]
+                    }`
+                  }
               </script>
-
+              
               {pageAuthor !== null &&
                 pageAuthor !== undefined &&
                 ogImage !== null &&
                 articleDate !== null &&
                 (<script defer type="application/ld+json">
-                  {`,
+                  {`
                   {
                     "@context": "https://schema.org",
                     "@type": "Article",
