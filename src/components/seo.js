@@ -81,7 +81,7 @@ function SEO({
 
     /* For Schema Structure */
     const datePublished = date ? `"datePublished": "${articleDate}"` : "";
-    const dateModified = dateModified ? `"datePublished": "${articleDate}"` : "";
+    const articleDateModified = dateModified ? `"datePublished": "${articleDate}"` : "";
     const articleImages = images ? `"image": "${images}"` : ""; 
     return (
         <Helmet
@@ -246,7 +246,7 @@ function SEO({
                   },
                   ${articleImages}, 
                   ${datePublished},  
-                  ${dateModified},   
+                  ${articleDateModified},   
                 }
               `}</script>
             )}
