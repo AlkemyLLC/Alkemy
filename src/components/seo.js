@@ -45,10 +45,7 @@
      children,
      date,
      coverImage,
-     coverDescription,
-     images,
-     dateModified,
-     publisher
+     coverDescription
  }) {
      const { site } = useStaticQuery(
          graphql`
@@ -253,7 +250,7 @@
                       "name": "${pageAuthor}"
                     },
                     "datePublished": "${articleDate}",
-                    "image": "${ogImage}"
+                    "image": "${window.location.host + ogImage}"
                     "url": "${articleURL}"
                   }`}
                 </script>)
