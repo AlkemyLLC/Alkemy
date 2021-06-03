@@ -45,10 +45,7 @@
      children,
      date,
      coverImage,
-     coverDescription,
-     images,
-     dateModified,
-     publisher
+     coverDescription
  }) {
      const { site } = useStaticQuery(
          graphql`
@@ -79,7 +76,8 @@
      const siteAddress = site.siteMetadata.siteUrl;
              
      /* Structed Data Schema */
-     const articleDate = date ? date : null;
+     const articleDate = date ? date : "2001-01-01";
+     const articleImg = typeof window !=="undefined"? window.location.host + ogImage: "";
      const articleURL =
          typeof window !== "undefined" ? window.location.href : "";
      return (
@@ -160,17 +158,15 @@
              />
 
              <script type="application/ld+json">
-                 {
-                   `{
+                 {`{
                       "@context":"https://schema.org",
                       "@type":"WebSite",
                       "url":"${siteAddress}",
                       "name":"Alkemy"
-                    }`
-                  }
-                </script>
-                <script type="application/ld+json">
-                  {`{
+                    }`}
+             </script>
+             <script type="application/ld+json">
+                 {`{
                       "@context":"https://schema.org",
                       "@type":"Organization",
                       "url":"${siteAddress}",
@@ -182,10 +178,9 @@
                         "https://www.linkedin.com/company/alkemydev"
                       ]
                     }`}
-                </script>
-                <script defer type="application/ld+json">
-                  {
-                    `{
+             </script>
+             <script defer type="application/ld+json">
+                 {`{
                       "@context": "https://schema.org/", 
                       "@type": "BreadcrumbList", 
                       "itemListElement": [{
@@ -234,16 +229,15 @@
                         "name": "Contact Alkemy",
                         "item": "${siteAddress}/contact-alkemy"  
                       }]
-                    }`
-                  }
-              </script>
-              
-              {pageAuthor !== null &&
-                pageAuthor !== undefined &&
-                ogImage !== null &&
-                articleDate !== null &&
-                (<script type="application/ld+json">
-                  {`
+                    }`}
+             </script>
+
+             {pageAuthor !== null &&
+                 pageAuthor !== undefined &&
+                 ogImage !== null &&
+                 articleDate !== null && (
+                     <script type="application/ld+json">
+                         {`
                   {
                     "@context": "https://schema.org",
                     "@type": "Article",
@@ -253,11 +247,11 @@
                       "name": "${pageAuthor}"
                     },
                     "datePublished": "${articleDate}",
-                    "image": "${ogImage}",
+                    "image": "${articleImg}",
                     "url": "${articleURL}"
                   }`}
-                </script>)
-              }
+                     </script>
+                 )}
 
              {children}
          </Helmet>
