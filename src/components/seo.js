@@ -78,8 +78,7 @@
      /* Structed Data Schema */
      const articleDate = date ? date : "2001-01-01";
      const articleImg = typeof window !=="undefined"? window.location.host + ogImage: "";
-     const articleURL =
-         typeof window !== "undefined" ? window.location.href : "";
+     const articleURL = typeof window !== "undefined" ? window.location.href : "";
      return (
          <Helmet
              title={title}
