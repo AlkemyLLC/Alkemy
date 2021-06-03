@@ -159,7 +159,7 @@
                  rel="stylesheet"
              />
 
-             <script defer type="application/ld+json">
+             <script type="application/ld+json">
                  {
                    `{
                       "@context":"https://schema.org",
@@ -169,7 +169,7 @@
                     }`
                   }
                 </script>
-                <script defer type="application/ld+json">
+                <script type="application/ld+json">
                   {`{
                       "@context":"https://schema.org",
                       "@type":"Organization",
@@ -242,7 +242,7 @@
                 pageAuthor !== undefined &&
                 ogImage !== null &&
                 articleDate !== null &&
-                (<script defer type="application/ld+json">
+                (<script type="application/ld+json">
                   {`
                   {
                     "@context": "https://schema.org",
@@ -253,7 +253,7 @@
                       "name": "${pageAuthor}"
                     },
                     "datePublished": "${articleDate}",
-                    "image": "${ogImage}"
+                    "image": "${ogImage}",
                     "url": "${articleURL}"
                   }`}
                 </script>)
