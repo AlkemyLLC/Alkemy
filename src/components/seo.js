@@ -75,11 +75,14 @@ function SEO({
     const siteUrl = site.siteMetadata.siteUrl;
     const pageAuthor = author ? author : site.siteMetadata.author;
     const pageKeywords = keywords ? keywords : site.siteMetadata.keywords;
-    const articleDate = date ? date : null;
-    const siteAddress = site.siteMetadata.siteUrl;
-    const articleDataModefied = dateModified ? dateModified : null;
-    const articleImages = images? images : [""];
-         console.log("sadsadsad: ", articleImages)   
+    const siteAddress = site.siteMetadata.siteUrl; 
+    
+
+
+    /* For Schema Structure */
+    const datePublished = date ? `"datePublished": "${articleDate}"` : "";
+    const dateModified = dateModified ? `"datePublished": "${articleDate}"` : "";
+    const articleImages = images ? `"image": "${images}"` : ""; 
     return (
         <Helmet
             title={title}
@@ -241,9 +244,9 @@ function SEO({
                     "@type": "Person",
                     "name": "${pageAuthor}"
                   },
-                  "image": ${articleImages}, 
-                  "datePublished": "${articleDate}",    
-                  "dateModified": "${articleDataModefied}",
+                  ${articleImages}, 
+                  ${datePublished},  
+                  ${dateModified},   
                 }
               `}</script>
             )}
