@@ -45,9 +45,9 @@ const components = {
 const BlogPostTemplate = (props) => {
     const size = useWindowSize();
     const {data,location} = props;
-    const post = data.mdx;
+    const post = data.mdx && data.mdx;
     const siteTitle = data.site.siteMetadata.title;
-    const { previous, next } = props.pageContext;
+    const { previous, next, path,date } = props.pageContext;
     const [category, setCategory] = useState("all");
     const pageTitle = { name: "Alkemy Blog", url: "/alkemy-blog" };
     const edges = data.allMdx.edges;
@@ -100,8 +100,9 @@ const BlogPostTemplate = (props) => {
                 coverDescription={post.frontmatter.coverAlt}
                 title={post.frontmatter.title}
                 description={post.frontmatter.description || post.excerpt}
-                date={post.frontmatter.date}
+                date={date}
                 author={post.frontmatter.author}
+                blogPath={location.pathname}
             />
             <Row
                 className={
@@ -241,6 +242,7 @@ export const query = graphql`
                        readingTime
                        tags
                        excerpt
+                       path
                        cover {
                            ...fluidImageSmall
                        }

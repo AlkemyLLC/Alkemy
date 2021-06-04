@@ -46,9 +46,8 @@
      date,
      coverImage,
      coverDescription,
-     images,
-     dateModified,
-     publisher
+     blogPath,
+     dateModified
  }) {
      const { site } = useStaticQuery(
          graphql`
@@ -65,7 +64,7 @@
              }
          `
      );
- 
+
      const ogImage = coverImage ? coverImage : screenshot;
      const ogImageText = coverDescription
          ? coverDescription
@@ -77,12 +76,12 @@
      const pageAuthor = author ? author : site.siteMetadata.author;
      const pageKeywords = keywords ? keywords : site.siteMetadata.keywords;
      const siteAddress = site.siteMetadata.siteUrl;
-             
+
      /* Structed Data Schema */
-     const articleDate = date ? date : null;
-     const articleDateModified = dateModified ? dateModified : null; 
-     const articleImages = images ? images : null;
-     const articlePublisher = publisher ? publisher : null; 
+     const articleModified = dateModified ? dateModified : date;
+     const articleImg = siteUrl + ogImage;
+     const articleURL = blogPath && siteUrl + blogPath;
+
      return (
          <Helmet
              title={title}
@@ -100,23 +99,23 @@
              <html lang={lang ? lang : "en"} />
              <TypographyStyle typography={typography} />
              <GoogleFont typography={typography} />
- 
+
              <meta
                  name="msvalidate.01"
                  content="304B53089DF131D38A8031F5232E9FB1"
              />
- 
+
              <meta name="description" content={metaDescription} />
              <meta name="keywords" content={pageKeywords} />
              <meta name="author" content={pageAuthor} />
- 
+
              <meta name="apple-mobile-web-app-title" content="Alkemy" />
- 
+
              <meta property="og:image" content={siteUrl + ogImage} />
              <meta property="og:title" content={title} />
              <meta property="og:description" content={metaDescription} />
              <meta property="og:type" content="website" />
- 
+
              <meta name="twitter:card" content="summary" />
              <meta name="twitter:creator" content={pageAuthor} />
              <meta name="twitter:title" content={title} />
@@ -135,7 +134,7 @@
              />
              <meta name="msapplication-TileImage" content={msTileImg} />
              <meta name="msapplication-TileColor" content="#ffffff" />
- 
+
              {/* App Icons and Favicon */}
              <link rel="apple-touch-icon" sizes="57x57" href={appleIcon57} />
              <link rel="apple-touch-icon" sizes="60x60" href={appleIcon60} />
@@ -159,95 +158,116 @@
                  href="https://fonts.googleapis.com/css?family=Calligraffitti|Raleway:500&display=swap"
                  rel="stylesheet"
              />
- 
-             <script defer type="application/ld+json">
+
+             <script type="application/ld+json">
                  {`{
-                 "@context":"https://schema.org",
-                 "@type":"WebSite",
-                 "url":"${siteAddress}",
-                 "name":"Alkemy"
-               }`}
+                      "@context":"https://schema.org",
+                      "@type":"WebSite",
+                      "url":"${siteAddress}",
+                      "name":"Alkemy"
+                    }`}
+             </script>
+             <script type="application/ld+json">
+                 {`{
+                      "@context":"https://schema.org",
+                      "@type":"Organization",
+                      "url":"${siteAddress}",
+                      "name":"Alkemy",
+                      "logo": "${siteAddress}${logo}",
+                      "sameAs":[
+                        "https://www.facebook.com/alkemydev",
+                        "https://www.twitter.com/alkemydev",
+                        "https://www.linkedin.com/company/alkemydev"
+                      ]
+                    }`}
              </script>
              <script defer type="application/ld+json">
                  {`{
-             "@context":"https://schema.org",
-             "@type":"Organization",
-             "url":"${siteAddress}",
-             "name":"Alkemy",
-             "logo": "${siteAddress}${logo}",
-             "sameAs":[
-               "https://www.facebook.com/alkemydev",
-               "https://www.twitter.com/alkemydev",
-               "https://www.linkedin.com/company/alkemydev"
-             ]
-           }`}
+                      "@context": "https://schema.org/", 
+                      "@type": "BreadcrumbList", 
+                      "itemListElement": [{
+                        "@type": "ListItem", 
+                        "position": 1, 
+                        "name": "Home",
+                        "item": "${siteAddress}"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 2, 
+                        "name": "Responsive Web Design",
+                        "item": "${siteAddress}/responsive-web-design"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 3, 
+                        "name": "Web Development",
+                        "item": "${siteAddress}/web-development"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 4, 
+                        "name": "eCommerce Design",
+                        "item": "${siteAddress}/ecommerce-design"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 5, 
+                        "name": "Wordpress Care Plans",
+                        "item": "${siteAddress}/wordpress-care-plans"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 6, 
+                        "name": "Digital Marketing",
+                        "item": "${siteAddress}/digital-marketing"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 7, 
+                        "name": "About Alkemy",
+                        "item": "${siteAddress}/about-alkemy"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 8, 
+                        "name": "Alkemy Blog",
+                        "item": "${siteAddress}/alkemy-blog"  
+                      },{
+                        "@type": "ListItem", 
+                        "position": 9, 
+                        "name": "Contact Alkemy",
+                        "item": "${siteAddress}/contact-alkemy"  
+                      }]
+                    }`}
              </script>
-             <script defer type="application/ld+json">{`
-           {
-             "@context": "https://schema.org/", 
-             "@type": "BreadcrumbList", 
-             "itemListElement": [{
-               "@type": "ListItem", 
-               "position": 1, 
-               "name": "Home",
-               "item": "${siteAddress}"  
-             },{
-               "@type": "ListItem", 
-               "position": 2, 
-               "name": "Responsive Web Design",
-               "item": "${siteAddress}/responsive-web-design"  
-             },{
-               "@type": "ListItem", 
-               "position": 3, 
-               "name": "Web Development",
-               "item": "${siteAddress}/web-development"  
-             },{
-               "@type": "ListItem", 
-               "position": 4, 
-               "name": "eCommerce Design",
-               "item": "${siteAddress}/ecommerce-design"  
-             },{
-               "@type": "ListItem", 
-               "position": 5, 
-               "name": "Wordpress Care Plans",
-               "item": "${siteAddress}/wordpress-care-plans"  
-             },{
-               "@type": "ListItem", 
-               "position": 6, 
-               "name": "Digital Marketing",
-               "item": "${siteAddress}/digital-marketing"  
-             },{
-               "@type": "ListItem", 
-               "position": 7, 
-               "name": "About Alkemy",
-               "item": "${siteAddress}/about-alkemy"  
-             },{
-               "@type": "ListItem", 
-               "position": 8, 
-               "name": "Alkemy Blog",
-               "item": "${siteAddress}/alkemy-blog"  
-             },{
-               "@type": "ListItem", 
-               "position": 9, 
-               "name": "Contact Alkemy",
-               "item": "${siteAddress}/contact-alkemy"  
-             }]
-           }
-           `}</script>
-             {(author !== null || author !== undefined) && articleImages !== null && articleDate !== null && articleDateModified !== null && articlePublisher !== null(
-                 <script defer type="application/ld+json">{`
-                 {
-                   "@context": "https://schema.org",
-                   "@type": "Article",
-                   "headline": "${title}",
-                   "author": {
-                     "@type": "Person",
-                     "name": "${author}"
-                   },
-                   "datePublished": "${articleDate}"
-                 }
-               `}</script>
-             )}
+
+             {pageAuthor !== null &&
+                 pageAuthor !== undefined &&
+                 ogImage !== null &&
+                 date !== null && (
+                     <script type="application/ld+json">
+                         {`
+                  {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "name": "${title}",
+                    "author": {
+                      "@type": "Person",
+                      "name": "${pageAuthor}"
+                    },
+                    "datePublished": "${date}",
+                    "dateModified": "${articleModified}",
+                    "image": "${articleImg}",
+                    "url": "${articleURL}",
+                    "headline": "${title}",
+                    "publisher": {
+                      "@type": "Organization",
+                      "url":"${siteAddress}",
+                      "name":"Alkemy",
+                      "logo": "${siteAddress}${logo}",
+                      "sameAs":[
+                        "https://www.facebook.com/alkemydev",
+                        "https://www.twitter.com/alkemydev",
+                        "https://www.linkedin.com/company/alkemydev"
+                      ]
+                    }
+                  }`}
+                     </script>
+                 )}
+
              {children}
          </Helmet>
      );
@@ -265,10 +285,12 @@
      title: PropTypes.string.isRequired,
      keywords: PropTypes.string,
      date: PropTypes.string,
+     dateModified: PropTypes.string,
+     blogPath: PropTypes.string,
      author: PropTypes.string,
      children: PropTypes.object,
      coverImage: PropTypes.string,
-     coverDescription: PropTypes.string
+     coverDescription: PropTypes.string,
  };
  
  export default SEO;
