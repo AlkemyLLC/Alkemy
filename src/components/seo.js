@@ -80,7 +80,7 @@
      /* Structed Data Schema */
      const articleModified = dateModified ? dateModified : date;
      const articleImg = siteUrl + ogImage;
-     const articleURL = blogPath && siteUrl + "/" + blogPath;
+     const articleURL = blogPath && siteUrl + blogPath;
 
      return (
          <Helmet
