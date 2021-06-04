@@ -42,6 +42,7 @@ const Seo = ({ title, description, keywords, image, pathname }: SeoProps) => {
           lang
           facebookUsername
           twitterUsername
+          linkedinUsername
         }
       }
     }

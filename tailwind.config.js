@@ -1,12 +1,18 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     colors: {
+      yellow: colors.amber,
+      white: '#fff',
       'purple-light': '#fcfaff',
       purple: '#639',
       'purple-dark': '#362066',
+      'alkemy-light-blue': '#29AAE1',
+      'alkemy-orange': '#FFC444',
+      'alkemy-dark-blue': '#4042E2',
     },
     fontFamily: {
       sans: ['ManropeVariable', ...defaultTheme.fontFamily.sans],

@@ -3,8 +3,8 @@
     @apply scroll-behaviour-smooth;
   }
 
-  body {
-    @apply body bg-purple-dark text-purple-light;
+  body,html{
+    font-size: 16px;
   }
 
   svg {
