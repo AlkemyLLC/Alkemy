@@ -139,9 +139,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
                                 tags
                                 excerpt
                                 path
-                                cover {
-                                    ...fluidImageSmall
-                                }
                                 coverAlt
                             }
                         }
