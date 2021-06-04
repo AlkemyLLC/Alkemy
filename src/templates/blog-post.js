@@ -102,7 +102,7 @@ const BlogPostTemplate = (props) => {
                 description={post.frontmatter.description || post.excerpt}
                 date={date}
                 author={post.frontmatter.author}
-                blogPath={path}
+                blogPath={location.pathname}
             />
             <Row
                 className={

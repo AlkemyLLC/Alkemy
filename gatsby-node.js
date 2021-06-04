@@ -177,7 +177,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
                         slug: post.node.fields.slug,
                         author: "/" + post.node.frontmatter.author + "/",
                         date: post.node.frontmatter.date,
-                        path: post.node.frontmatter.path,
                         previous,
                         next,
                     },
