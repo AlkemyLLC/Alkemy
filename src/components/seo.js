@@ -78,9 +78,10 @@
      const siteAddress = site.siteMetadata.siteUrl;
 
      /* Structed Data Schema */
-     const articleModified = dateModified ? dateModified: date;
+     const articleModified = dateModified ? dateModified : date;
      const articleImg = siteUrl + ogImage;
-     const articleURL = siteUrl + blogPath;
+     const articleURL = blogPath && siteUrl + "/" + blogPath;
+
      return (
          <Helmet
              title={title}

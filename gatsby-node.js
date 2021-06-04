@@ -120,50 +120,58 @@ exports.onCreateWebpackConfig = ({ actions }) => {
    return new Promise((resolve, reject) => {
     resolve(
         graphql(`
-          {
-            allMdx(
-              sort: { fields: [frontmatter___date], order: DESC }
-              limit: 1000
-            ) {
-              edges {
-                node {
-                  fields {
-                    slug
-                  }
-                  frontmatter {
-                    tags
-                    title
-                    author
-                  }
+            {
+                allMdx(
+                    sort: { fields: [frontmatter___date], order: DESC }
+                    limit: 1000
+                ) {
+                    edges {
+                        node {
+                            fields {
+                                slug
+                            }
+                            frontmatter {
+                                title
+                                date(formatString: "MMMM, DD, YYYY")
+                                author
+                                category
+                                readingTime
+                                tags
+                                excerpt
+                                path
+                                cover {
+                                    ...fluidImageSmall
+                                }
+                                coverAlt
+                            }
+                        }
+                    }
                 }
-              }
+                allAuthorsJson {
+                    edges {
+                        node {
+                            name
+                            slug
+                            skills {
+                                name
+                                level
+                            }
+                        }
+                    }
+                }
             }
-            allAuthorsJson {
-               edges {
-                   node {
-                       name
-                       slug
-                       skills {
-                           name
-                           level
-                       }
-                   }
-               }
-            }
-          }
-        `
-        ).then(result => {
+        `).then(result => {
             if (result.errors) {
-                console.log(result.errors)
-                reject(result.errors)
+                console.log(result.errors);
+                reject(result.errors);
             }
 
-            const posts = result.data.allMdx.edges
+            const posts = result.data.allMdx.edges;
 
             posts.forEach((post, index) => {
                 const previous =
-                    index === posts.length - 1 ? null : posts[index + 1].node
-                const next = index === 0 ? null : posts[index - 1].node
+                    index === posts.length - 1 ? null : posts[index + 1].node;
+                const next = index === 0 ? null : posts[index - 1].node;
 
                 createPage({
                     path: post.node.fields.slug,
@@ -171,13 +179,15 @@ exports.onCreateWebpackConfig = ({ actions }) => {
                     context: {
                         slug: post.node.fields.slug,
                         author: "/" + post.node.frontmatter.author + "/",
+                        date: post.node.frontmatter.date,
+                        path: post.node.frontmatter.path,
                         previous,
                         next,
                     },
-                })
-            })
+                });
+            });
 
-            const authors = result.data.allAuthorsJson.edges
+            const authors = result.data.allAuthorsJson.edges;
 
             authors.forEach(post => {
                 createPage({
@@ -187,19 +197,19 @@ exports.onCreateWebpackConfig = ({ actions }) => {
                         slug: post.node.slug,
                         author: "/" + post.node.name + "/",
                     },
-                })
-            })
+                });
+            });
 
             // Tag pages:
-            let tags = []
+            let tags = [];
             // Iterate through each post, putting all found tags into `tags`
             each(posts, post => {
                 if (get(post, "node.frontmatter.tags")) {
-                    tags = tags.concat(post.node.frontmatter.tags)
+                    tags = tags.concat(post.node.frontmatter.tags);
                 }
-            })
+            });
             // Eliminate duplicate tags
-            tags = uniq(tags)
+            tags = uniq(tags);
 
             // Make Tag Index
             createPage({
@@ -208,7 +218,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
                 context: {
                     tags,
                 },
-            })
+            });
 
             // Make individual tag pages
             tags.forEach(tag => {
@@ -218,10 +228,10 @@ exports.onCreateWebpackConfig = ({ actions }) => {
                     context: {
                         tag,
                     },
-                })
-            })
-            return Promise.resolve()
+                });
+            });
+            return Promise.resolve();
         })
-    )
+    );
  })
 }
