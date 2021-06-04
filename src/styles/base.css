@@ -3,7 +3,8 @@
     @apply scroll-behaviour-smooth;
   }
 
-  body,html{
+  body,
+  html {
     font-size: 16px;
   }
 
