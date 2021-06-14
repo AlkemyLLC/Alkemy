@@ -18,7 +18,7 @@ const LoadableRecaptcha = (props)=>{
         <ReCAPTCHA
             className="recaptcha"
             sitekey={RECAPTCHA_KEY}
-            onChange={props.onChange}
+            onChange={props.handleChange}
         />
     );
 }
