@@ -183,7 +183,7 @@ const ProjectEnquiry = ({ data }) => {
         });
     }
 
-    const handleRecaptcha = (value) => {
+    const handleRecaptcha = value => {
         let errorObj = { ...errors };
         errorObj.ReCAPTCHA = "";
         setErrors(errorObj);
@@ -205,7 +205,7 @@ const ProjectEnquiry = ({ data }) => {
                 .join("&");
         };
 
-        if (valid && recaptcha.length > 0) {
+        if (valid && recaptcha) {
             console.log("submitting");
             fetch("/", {
                 method: "POST",
@@ -223,7 +223,7 @@ const ProjectEnquiry = ({ data }) => {
                     window.scrollTo(0, 0);
                 })
                 .catch(error => console.log(error));
-        } else if (recaptcha.length === 0 || recaptcha === null) {
+        } else if (!recaptcha) {
                    let errorObj = { ...errors };
                    errorObj.ReCAPTCHA =
                        "ReCAPTCHA Verification Needed to Submit Form.";
@@ -644,7 +644,7 @@ const ProjectEnquiry = ({ data }) => {
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="industryProductsAndServices">
-                                            What does your company do?{" "}
+                                            What does your company do?
                                             <span className="text-danger">
                                                 *
                                             </span>
@@ -1415,7 +1415,7 @@ const ProjectEnquiry = ({ data }) => {
                             <Row>
                                 <Col xs={12} className="my-2 py-0">
                                     <FormGroup>
-                                        <Recaptcha onChange={handleRecaptcha} />
+                                        <Recaptcha handleChange={handleRecaptcha} />
                                         <FormText
                                             color="danger"
                                             className="text-center"
