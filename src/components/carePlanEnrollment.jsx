@@ -74,7 +74,6 @@ export default class CarePlanEnrollment extends React.Component {
         };
 
         const recaptchaValue = this.state.formValues["g-recaptcha-response"];
-
         if (valid && recaptchaValue.length > 0) {
             // eslint-disable-next-line no-undef
             fetch("/", {
@@ -91,9 +90,6 @@ export default class CarePlanEnrollment extends React.Component {
                 // eslint-disable-next-line no-unused-vars
             })
                 .then(response => {
-                    if(response.ok===false) {
-                        throw Error(response.statusText);
-                    }
                     this.setState({
                         success: true,
                     });
@@ -208,6 +204,7 @@ export default class CarePlanEnrollment extends React.Component {
                 "Please tell us your current website host.";
         } 
 
+        console.log("validation", errors)
         if (isError) {
             this.setState({
                 ...this.state,
@@ -414,6 +411,7 @@ export default class CarePlanEnrollment extends React.Component {
                                                 onChange={e =>
                                                     this.handleFieldChange(e)
                                                 }
+                                                required
                                                 placeholder="Current Website Host"
                                             />
 
@@ -500,7 +498,7 @@ export default class CarePlanEnrollment extends React.Component {
                                 <FormGroup>
                                     <ReCAPTCHA
                                         className="recaptcha"
-                                        handlechange={this.handleRecaptcha}
+                                        handleChange={this.handleRecaptcha}
                                     />
                                     <FormText
                                         color="danger"
